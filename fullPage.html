@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FullPage</title>
+</head>
+
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+    }
+
+    section {
+        overflow: hidden;
+        position: relative;
+    }
+
+    .wrap {
+        width: 100vw;
+        height: 100vh;
+        position: relative;
+        transition: 1s;
+    }
+
+    .container {
+        width: 100vw;
+        height: 100vh;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 70px;
+        font-weight: 900;
+        font-family: Arial
+    }
+
+    .target {
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        text-align: center;
+        z-index: 100;
+        width: 30px;
+        height: 100px;
+    }
+
+    .target li {
+        width: 20px;
+        height: 20px;
+        margin: 5px auto;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .target li p {
+        width: 5px;
+        height: 5px;
+        background-color: #333;
+        border-radius: 50%;
+        cursor: pointer;
+    }
+
+    .target li p:hover {
+        width: 12px;
+        height: 12px;
+        transition: .1s;
+    }
+
+    .active {
+        width: 15px !important;
+        height: 15px !important;
+    }
+
+    header {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        position: fixed;
+        top: 20px;
+        z-index: 100;
+        font-size: 25px;
+        color: #fff;
+    }
+
+    header h2 {
+        font-family: Arial;
+        margin-left: 30px;
+    }
+
+    header ul {
+        width: 40%;
+        display: flex;
+        justify-content: space-around;
+    }
+
+    header ul li {
+        cursor: pointer;
+        padding-bottom: 5px;
+        font-weight: 600;
+        font-family: "微軟正黑體";
+        letter-spacing: 1px
+    }
+
+    .bottomLine {
+        border-bottom: 2px solid #fff;
+    }
+</style>
+
+<body>
+
+    <div id="app">
+        <section @mousewheel="move">
+            <!-- header -->
+            <header>
+                <h2>fullPage</h2>
+                <ul>
+                    <li v-for="(item,pageIndex) in header" :class="{bottomLine:pageIndex==index}"
+                        @click="index=pageIndex">{{ item }}</li>
+                </ul>
+            </header>
+            <!-- 目標黑點 -->
+            <ul class="target">
+                <li v-for="(item,pageIndex) in 3">
+                    <p :class="{active:pageIndex==index}" @click="index=pageIndex"></p>
+                </li>
+            </ul>
+            <!-- 父層(負責移動) -->
+            <div class="wrap" :style="{top:-moveRange*index+'px'}">
+                <!-- 內容 -->
+                <div class="container" style="background-color: #fc6c7c;">
+                    <h1>Section1</h1>
+                </div>
+                <!-- 內容 -->
+                <div class="container" style="background-color: #4169e1;">
+                    <h1>Section2</h1>
+                </div>
+                <!-- 內容 -->
+                <div class="container" style="background-color: #ffa500;">
+                    <h1>Section3</h1>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        const app = {
+            data() {
+                return {
+                    header: ["Section1", "Section2", "Section3"],
+                    index: 0,
+                    canMove: true,
+                    moveRange: 0,
+                    counter: 0,
+                    lastExecutedTime:Date.now()
+                }
+            },
+            methods: {
+                //移動
+                move(e) {
+                    // 每次移動的距離
+                    this.moveRange = window.innerHeight
+
+                    //判斷滾輪上下
+                    if (this.canMove) {
+                        if (e.wheelDelta > 0 && this.index > 0) {
+                            this.index--
+                        } else if (e.wheelDelta < 0 && this.index < 2) {
+                            this.index++
+                        }
+                    }
+                    this.canMove = false
+
+                    this.counter = this.counter + 1;
+
+                    // 每秒執行次數不能超過1次
+                    const now = Date.now();
+                    const timeDiff = now - this.lastExecutedTime;//滾動時取得現在時間-一進頁面得取的時間
+                    if (timeDiff > 1000 / 1) {
+                        // 在下一個動畫幀之前調用節流函數
+                        window.requestAnimationFrame(() => {
+                            // 設置標誌位為true，等待下一次執行
+                            this.canMove = true;
+
+                            // 更新時間戳記
+                            this.lastExecutedTime = Date.now();//更新執行時間
+                        });
+                    } else {
+                        // 沒有到達時間閾值，重置計數器變量
+                        this.counter = 0;
+                    }
+                },
+
+                //處理移動的距離(隨著瀏覽器視窗大小調整)
+                handleMoveHeight() {
+                    this.moveRange = window.innerHeight;
+                }
+            },
+            created() {
+                //隨著瀏覽器視窗大小調整高度
+                window.addEventListener("resize", this.handleMoveHeight, true)
+            },
+        }
+
+        Vue.createApp(app).mount('#app')
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>五子棋遊戲</title>
+</head>
+<style>
+    * {
+        padding: 0;
+        margin: 0;
+    }
+
+    html,
+    body {
+        width: 100%;
+        height: 100%;
+        background-color: #2c3e50;
+    }
+
+    body {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .game-area {
+        width: 550px;
+        display: flex;
+        flex-wrap: wrap;
+        margin: auto;
+        padding-right: 20px;
+        padding-bottom: 30px;
+        background-color: #C9815D;
+        position: relative;
+        border-radius: 5px;
+    }
+
+    .out-side {
+        position: absolute;
+        left: 20px;
+        top: 22px;
+        width: 530px;
+        height: 590px;
+        border: 1px solid black;
+    }
+
+    .column {
+        width: 30px;
+        height: 30px;
+        border: 1px solid black;
+        position: relative;
+        background-color: #C9815D;
+    }
+
+    .content {
+        width: 30px;
+        height: 30px;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        border-radius: 50%;
+        z-index: 1000;
+        cursor: pointer;
+    }
+
+    .player1 {
+        background-color: black;
+    }
+
+    .player2 {
+        background-color: white;
+    }
+
+    .cancleBorder {
+        border: none;
+        background-color: transparent;
+    }
+
+    .leftBorder {
+        border-left: 1px solid black;
+    }
+
+    .rightBorder {
+        border-right: 1px solid black;
+    }
+
+    .disabled {
+        pointer-events: none !important;
+
+    }
+
+    .notAllow {
+        cursor: not-allowed;
+    }
+</style>
+
+<body>
+
+    <div id="app">
+        <div class="container">
+            <!-- 棋盤區 -->
+            <div class="game-area" :class="{notAllow:disabled}">
+                <div class="column" v-for="item in 324" :class="{cancleBorder:cancleBorder(item),disabled:disabled}">
+                    <div class="content" :class="{player1:player1.includes(item),player2:player2.includes(item),}"
+                        @click="playChess(item)">
+                    </div>
+                </div>
+                <!-- 邊界線 -->
+                <div class="out-side"></div>
+            </div>
+        </div>
+    </div>
+
+
+        <script src="https://unpkg.com/vue@next"></script>
+        <script>
+            const app = {
+                data() {
+                    return {
+                        player1: [],
+                        player2: [],
+                        currentPlayer: '黑子',
+                        black: '黑子',
+                        white: '白子',
+                        disabled: false
+                    }
+                },
+                methods: {
+                    //下棋
+                    playChess(item) {
+                        let self = this;
+                        if (this.player1.includes(item) || this.player2.includes(item)) {
+                            alert("該位置已有棋子")
+                            return
+                        }
+                        if (this.currentPlayer == this.black) {
+                            this.player1.push(item)
+                            this.judgeWinner(this.player1, item, this.player2, function () {
+                                setTimeout(() => {
+                                    alert(self.currentPlayer + '贏了')
+                                    self.disabled = true
+                                }, 100)
+
+
+                            }, function () {
+                                self.currentPlayer = self.white
+                            })
+
+
+                        } else {
+                            this.player2.push(item)
+                            this.judgeWinner(this.player2, item, this.player1, function () {
+                                setTimeout(() => {
+                                    alert(self.currentPlayer + '贏了')
+                                    self.disabled = true
+                                }, 100)
+                            }, function () {
+                                self.currentPlayer = self.black
+                            })
+
+                        }
+                    },
+                    //隱藏部分格子
+                    cancleBorder(item) {
+                        if (item < 20) {
+                            return true
+                        }
+
+                        let result = []
+                        for (let i = 1; i < 20; i++) {
+                            result.push(19 + 17 * i)
+                        }
+
+                        return result.includes(item)
+                    },
+                    //找贏家
+                    judgeWinner(array, currentNum, array2, callBack1, callBack2) {
+                        let haswinner = false;
+                        //判斷左上、右下
+                        if (this.judgeStatus(18, array, currentNum, array2)) {
+                            haswinner = true
+                        }
+                        //判斷左下、右上
+                        if (this.judgeStatus(16, array, currentNum, array2) && !haswinner) {
+                            haswinner = true
+                        }
+                        //判斷左右
+                        if (this.judgeStatus(1, array, currentNum, array2) && !haswinner) {
+                            haswinner = true
+                        }
+                        //判斷上下
+                        if (this.judgeStatus(17, array, currentNum, array2) && !haswinner) {
+                            haswinner = true
+                        }
+
+                        if (haswinner) {
+                            callBack1()
+                        } else {
+                            callBack2()
+                        }
+                    },
+                    //判斷當前狀態是否勝出
+                    judgeStatus(range, array, currentNum, array2) {
+
+                        let later = []
+                        let front = []
+                        let result = [currentNum]
+                        //將該狀況的前後4格數字都蒐集起來
+                        for (let i = 1; i <= 4; i++) {
+                            later.push(currentNum + (range * i))
+                            front.push(currentNum - (range * i))
+                        }
+                        //如果被另一個對手下過的地方就停止繼續蒐集
+                        for (let i = 0; i < later.length; i++) {
+                            if (array2.includes(later[i])) {
+                                break
+                            }
+
+                            if (array.includes(later[i])) {
+                                result.push(later[i])
+                            }
+                        }
+                        //如果被另一個對手下過的地方就停止繼續蒐集
+                        for (let i = 0; i < front.length; i++) {
+                            if (array2.includes(front[i])) {
+                                break
+                            }
+
+                            if (array.includes(front[i])) {
+                                result.push(front[i])
+                            }
+                        }
+
+                        result = [...new Set(result)]
+                        result.sort((a, b) => a - b)
+
+                        if (result.length >= 5) {
+                            return this.judgeBorder(currentNum, result)
+                        }
+
+                        return false
+                    },
+                    //判斷邊界(如果結果同時在兩個邊界代表跨界)
+                    judgeBorder(currentNum, resultArr) {
+                        let activeArr = [...resultArr]
+                        let result = 0
+                        for (let i = 0; i < activeArr.length; i++) {
+                            if (this.leftBordder.includes(activeArr[i])) {
+                                result += 1
+                            }
+
+                            if (this.rightBordder.includes(activeArr[i])) {
+                                result += 1
+                            }
+                        }
+
+                        return result < 2
+                    }
+                },
+                computed: {
+                    //右側邊界
+                    rightBordder() {
+                        let result = []
+                        for (let i = 0; i < 20; i++) {
+                            result.push(18 + 17 * i)
+                        }
+                        return result
+                    },
+                    //左側邊界
+                    leftBordder() {
+                        let result = []
+                        for (let i = 0; i < 20; i++) {
+                            result.push(19 + 17 * i)
+                        }
+                        return result
+                    }
+                },
+                mounted() {
+
+                },
+            }
+
+            Vue.createApp(app).mount('#app')
+        </script>
+
+</body>
+
+</html>

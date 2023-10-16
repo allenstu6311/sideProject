@@ -1,0 +1,114 @@
+/* header */
+.navbar {
+    /* padding: 0 20px; */
+    justify-content: center !important;
+}
+
+.call-list {
+    position: absolute;
+    right: 20px;
+}
+
+/* 整體範圍 */
+.container {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.row {
+    width: 100%;
+    flex-wrap: nowrap;
+}
+
+/* 播放區 */
+
+.play-area {}
+
+.control {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.play {
+    margin: 0 10px;
+}
+
+.left,
+.right,
+.play {
+    margin: 0 10px;
+    border-radius: 50%;
+    border: 1px solid black;
+    padding: 10px;
+}
+
+.right:hover {
+    background-color: black;
+    color: #fff;
+}
+
+.left:hover {
+    background-color: black;
+    color: #fff;
+}
+
+.play:hover {
+    background-color: black;
+    color: #fff;
+}
+
+.right {
+    transform: rotate(180deg);
+}
+
+svg {
+    cursor: pointer;
+}
+
+/* 進度條 */
+.slot-area {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.slot {
+    width: 94%;
+    height: 5px;
+    /* background: red; */
+    /* background-color: blue; */
+    /* background: linear-gradient(to right, red 0%, blue 100%); */
+    /* background-size: 100% 100%; */
+    /* 設定背景重複為不可重複，以免填滿整個元素 */
+    /* background-repeat: no-repeat; */
+    position: relative;
+    display: flex;
+}
+
+.slot-node {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background-color: red;
+    border-radius: 50%;
+    left: 0;
+    top: -5px;
+}
+
+
+
+.list-area {
+    width: 0;
+    /* overflow: hidden; */
+    opacity: 0;
+    transition: .5s;
+}
+
+.list-area.col {
+    opacity: 1;
+}
+
+/* add Class */

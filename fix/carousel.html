@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            user-select: none;
+        }
+
+        body {
+            background-color: #fffaf0
+        }
+
+        .container {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .slider {
+            position: relative;
+            display: flex;
+            margin-bottom: 50px;
+            transition: .5s;
+        }
+
+        .sliders {
+            width: 33.33333%;
+            height: 400px;
+            position: relative;
+            margin: 0 100px;
+            flex-shrink: 0;
+            border-radius: 400px;
+            overflow: hidden;
+        }
+
+        .sliders img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .target {
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        .target li {
+            width: 15px;
+            height: 15px;
+            background-color: #d3d3d3;
+            border-radius: 50%;
+            margin: 0 10px;
+        }
+
+        .targetActive {
+            background-color: #ff4500 !important;
+        }
+
+        .control {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .left {
+            transform: rotate(180deg);
+            margin: 10px;
+        }
+
+        .right {
+            margin: 10px;
+            width: 125px;
+            height: 125px;
+            border-radius: 50%;
+            transition: .5s;
+        }
+
+        .left {
+            margin: 10px;
+            width: 125px;
+            height: 125px;
+            border-radius: 50%;
+            transition: .5s;
+        }
+
+        .right:hover {
+            background-color: #ff4500;
+        }
+
+        .left:hover {
+            background-color: #ff4500;
+        }
+
+        /* @media screen and (min-width:1280px) {
+            .slider {
+                left: -315px;
+            }
+        }
+
+        @media screen and (min-width:1980px) {
+            .slider {
+                left: -300px;
+            }
+        } */
+    </style>
+</head>
+
+<body>
+
+    <div id="app">
+        <div class="container">
+
+            <div class="" @mousedown.native="catchTure($event)">
+                <div class="slider" id="slider"
+                    :style="{transform:'translateX(' + (-currentSlide * range+xPos) + 'px)'}" ref="slider">
+                    <div class="sliders">
+                        <img src="https://picsum.photos/500/400?random=4" alt="">
+                    </div>
+                    <div class="sliders" ref="sliderPic" v-for="(item,index) in imgBox"
+                        :class="{active:index==currentSlide-1}">
+                        <img :src="item.pic" alt="">
+                    </div>
+                </div>
+            </div>
+
+            <ul class="target">
+                <li v-for="(item,index) in imgBox.length-2" class="target-li"
+                    :class="{targetActive:index == currentPage}" @click="specify(index)"></li>
+            </ul>
+            <div class="control" ref="control">
+                <div class="left" id="left" @click="move(-1);turn(-1)">
+                    <img src="https://cdn-icons-png.flaticon.com/128/1549/1549454.png" alt="">
+                </div>
+                <div class="right" @click="move(1);turn(1)">
+                    <img src="https://cdn-icons-png.flaticon.com/128/1549/1549454.png" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script>
+        const app = {
+            data() {
+                return {
+                    imgBox: [
+                        {
+                            pic: "https://picsum.photos/500/400?random=1"
+                        },
+                        {
+                            pic: "https://picsum.photos/500/400?random=2"
+                        },
+                        {
+                            pic: "https://picsum.photos/500/400?random=3"
+                        },
+                        {
+                            pic: "https://picsum.photos/500/400?random=4"
+                        },
+                        {
+                            pic: "https://picsum.photos/500/400?random=1"
+                        },
+                        {
+                            pic: "https://picsum.photos/500/400?random=2"
+                        },
+
+                    ],
+                    currentSlide: 0,
+                    range: 0,
+                    xPos: 0,
+                    currently: 0,
+                    clickPosition: 0,
+                    afterPosition: 0,
+                    currentPage: 0
+                }
+            },
+            methods: {
+                specify(index) {
+                    this.currentPage = index
+                    this.currentSlide = index
+                },
+                turn(num) {
+                    this.currentPage += num
+                    if (this.currentPage >= this.imgBox.length - 2) {
+                        this.currentPage = 0
+                    } else if (this.currentPage <= -1) {
+                        this.currentPage = this.imgBox.length - 3
+                    }
+                },
+                move(num) {
+                    let slider = document.getElementById("slider")
+                    this.currentSlide += num
+                    slider.style.transition = ".25s"
+
+                    if (this.currentSlide == this.imgBox.length - 1) {
+                        slider.style.transition = "none"
+                        this.currentSlide = 0
+                        setTimeout(() => {
+                            this.move(num)
+                        }, 0)
+                    } else if (this.currentSlide == -1) {
+                        slider.style.transition = "none";
+                        this.currentSlide = this.imgBox.length - 2
+
+                        setTimeout(() => {
+                            this.move(num)
+                        }, 0)
+                    }
+                },
+                catchTure(e) {
+                    //取消默認動作
+                    e.preventDefault();
+                    //抓到點擊的位置
+                    this.clickPosition = e.clientX - this.$refs.slider.offsetLeft
+                    //啟動滑鼠事件
+                    document.addEventListener("mousemove", this.updateCoordinates)
+                    document.addEventListener("mouseup", this.currentPosition)
+
+                },
+                //移動過程
+                updateCoordinates(e) {
+                    //移動整體幻燈片
+                    this.xPos = this.afterPosition - this.clickPosition
+
+                    //紀錄移動後的數字
+                    this.afterPosition = e.clientX - this.$refs.slider.offsetLeft
+
+                },
+                //停止移動
+                currentPosition() {
+                    //關閉滑鼠事件
+                    document.removeEventListener('mousemove', this.updateCoordinates);
+                    document.removeEventListener("mouseup", this.currentPosition)
+
+                    //儲存放下滑鼠後的值
+                    this.currently = this.xPos
+
+                    //如果只是點擊沒有移動就不做下去
+                    if (this.currently == 0) return
+
+                    if (this.clickPosition > this.afterPosition) {
+                        this.move(1)
+                        this.turn(1)
+                    }
+                    else if (this.clickPosition < this.afterPosition) {
+                        this.move(-1)
+                        this.turn(-1)
+                    }
+                    //清空移動值
+                    this.xPos = 0
+
+                },
+                handleWidth() {
+                    this.$nextTick(() => {
+                        let width = this.$refs.sliderPic[0].clientWidth
+                        this.range = width + 200 //計算margin空間所以額外+200
+                    })
+                },
+                initPostition() {
+                    console.log(this.$refs.sliderPic[0].clientWidth / 2 + 50)
+                    this.$refs.slider.style.left = - this.$refs.sliderPic[0].clientWidth / 2 + 'px';
+                }
+
+            },
+            mounted() {
+                window.addEventListener("resize", () => {
+                    this.handleWidth()
+                    this.initPostition()
+                })
+                window.onload = () => {
+                    this.handleWidth()
+                    this.initPostition()
+                }
+            },
+        }
+
+        Vue.createApp(app).mount('#app')
+    </script>
+
+</body>
+
+</html>

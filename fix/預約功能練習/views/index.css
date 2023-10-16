@@ -1,0 +1,192 @@
+* {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+body{
+    font-family: 微軟正黑體;
+}
+
+.container {
+    width: 1200px;
+    display: flex;
+    margin: auto;
+}
+
+.clendar {
+    width: 400px;
+    margin: 20px auto;
+    height: 400px;
+    background-color: antiquewhite;
+    color: brown;
+    font-weight: 800;
+    border-radius: 20px;
+    padding: 10px;
+    user-select: none;
+}
+
+.year {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    font-size: 22px;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.month {
+    text-align: center;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+span {
+    margin: 0 20px;
+}
+
+.today {
+    color: red;
+}
+
+.week li {
+    width: 14%;
+    text-align: center;
+}
+
+.week {
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    margin: 10px 0;
+}
+
+.day-list {
+    width: 100%;
+    display: flex;
+    flex-flow: row wrap;
+    margin: auto 0;
+    line-height: 2;
+}
+
+.day-list li {
+    width: 14%;
+    text-align: center;
+    cursor: pointer;
+}
+
+.day-list li p {
+    font-size: 20px;
+}
+
+pre {
+    cursor: pointer;
+}
+
+/* 預約列表 */
+.reserve-list{
+  
+}
+.reserve-day{}
+
+.reserve-list table th,td{
+    width: 100px;
+    text-align: center;
+    padding: 5px 10px;
+}
+
+/* header */
+header{}
+.login-status{
+    padding: 10px;
+}
+
+
+/* table */
+table {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    /* border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 10px; */
+    overflow: hidden;
+    margin-bottom: 50px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+
+}
+
+thead {
+    background-color: #3F51B5;
+}
+
+th, td {
+    padding: 15px;
+    text-align: center;
+    border: none;
+}
+
+th {
+    color: #9b9898;
+    border: none;
+    
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #e0e0e0;
+}
+/* button */
+.custom-button {
+    background-color: #3F51B5;
+    border: none;
+    color: white;
+    padding: 12px 24px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+.custom-button:hover {
+    background-color: #283593;
+}
+
+.custom-button:active {
+    transform: scale(0.95);
+}
+
+.date-display {
+    background-color: #3F51B5;
+    color: white;
+    padding: 12px 24px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    font-size: 24px;
+    font-weight: bold;
+}
+/* add class */
+.disabled{
+    opacity: .5;
+    cursor: not-allowed !important;
+}
+
+.disabled p{
+    pointer-events:none;
+}
+.targetToday{
+    color:blue;
+}
+.margin{
+    margin: 50px 0;
+}

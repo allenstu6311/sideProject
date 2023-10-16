@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>預約頁面</title>
+    <link rel="stylesheet" href="./index.css">
+</head>
+
+<body>
+
+    <div id="app">
+        <header>
+            <div class="login-status">
+                <div class="name" v-show="!showInputBox" @click="logout">{{ userName }}</div>
+                <label for="" v-show="showInputBox">請輸入姓名:</label>
+                <input type="text" v-show="showInputBox" v-model="enterName" @keyup.enter="userName = enterName">
+            </div>
+        </header>
+        <div class="container">
+            <!-- 月曆 -->
+            <div class="clendar">
+                <div class="year">
+                    <pre @click="preNum(1)"><</pre>
+                    <span>{{year}}</span>
+                    <pre @click="nextNum(1)">></pre>
+                </div>
+                <div class="month">
+
+                    <pre @click="preNum(2)"><</pre>
+                    <span>{{month}}月</span>
+                    <pre @click="nextNum(2)">></pre>
+                </div>
+
+                <ul class="week">
+                    <li>日</li>
+                    <li>一</li>
+                    <li>二</li>
+                    <li>三</li>
+                    <li>四</li>
+                    <li>五</li>
+                    <li>六</li>
+                </ul>
+
+                <ul class="day-list">
+                    <li v-for="item in day" :class="{disabled:showCanReserve(item)}">
+                        <p v-if="item>0 " :class="{today:new Date().getDate()==item && year==new Date().getFullYear() && new Date().getMonth()+1==month,
+                                targetToday:item==targetDay }" @click="showReserveList(item)">
+                            {{item}}</p>
+                    </li>
+                </ul>
+
+                <div class="margin"></div>
+
+                <!-- 預約清單 -->
+                <div class="user-reserve">
+                    <div class="reserve-day date-display">{{userName}}先生/小姐 預約紀錄</div>
+                    <table border="1">
+                        <tr>
+                            <th>日期</th>
+                            <th>時間</th>
+                            <th>取消</th>
+                        </tr>
+                        <tr v-for="(item,index) in userReserve">
+                            <td>{{item.date}}</td>
+                            <td>{{item.time}}</td>
+                            <td><button class="custom-button" :class="{disabled:notAllow(item)}"
+                                    :disabled="notAllow(item)" @click="cancleReserve(item,index)">取消</button></td>
+                            </td>
+
+                        </tr>
+                        <tr v-show="!userReserve.length">
+                            <td colspan="4">尚無預約</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- 預約列表 -->
+            <div class="reserve-list">
+                <div class="reserve-day date-display">{{reserveDay}}</div>
+                {{reserve.user}}
+                <table border="1">
+                    <tr>
+                        <th>時間</th>
+                        <th>目前組數</th>
+                        <th>預約</th>
+                        <th>取消</th>
+                    </tr>
+                    <tr v-for="(item,index) in reserve">
+                        <td>{{item.time}}</td>
+                        <td>尚餘{{3-item.user.length}}組</td>
+                        <td><button class="custom-button" :class="{disabled:notAllow(item)}" :disabled="notAllow(item)"
+                                @click="startReserve(index)">預約</button></td>
+                        <td><button class="custom-button" :class="{disabled:notAllow(item)}" :disabled="notAllow(item)"
+                                @click="cancleReserve(item,index)">取消</button></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.3.4/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
+    <script src="./index.js"></script>
+
+</body>
+
+</html>
