@@ -28,6 +28,12 @@
             position: relative;
         }
 
+        .slider-box{
+            position: absolute;
+            /* left: 0; */
+            transform: translate(50%,50%);
+        }
+
         .slider {
             position: relative;
             display: flex;
@@ -120,7 +126,7 @@
     <div id="app">
         <div class="container">
 
-            <div class="" @mousedown.native="catchTure($event)">
+            <div class="slider-box" @mousedown.native="catchTure($event)" @touchstart.native="catchTure($event)">
                 <div class="slider" id="slider"
                     :style="{transform:'translateX(' + (-currentSlide * range+xPos) + 'px)'}" ref="slider">
                     <div class="sliders">
