@@ -94,7 +94,6 @@
         watch: {
           player1: {
             handler(newVal) {
-              console.log(newVal);
               if (this.checkEWin(newVal)) {
                 alert("player1勝利");
                 this.over = true;
@@ -157,6 +156,7 @@
             }
           },
           countScore() {
+            console.log('call')
             let selected = this.block
               .filter((item) => !item.select)
               .map((item) => item.val);
@@ -238,6 +238,9 @@
               this.over = false;
               this.player1 = [];
               this.player2 = [];
+              this.block.forEach(element => {
+                element.select = false
+              });
             }
           },
         },
