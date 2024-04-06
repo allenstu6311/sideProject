@@ -12,37 +12,61 @@
       box-sizing: border-box;
       margin: auto;
     }
+    html,body{
+      /* background-color: #111 */
+    }
     .container {
-      width: 600px;
+      width: 602px;
       display: flex;
       flex-wrap: wrap;
+      border: 1px solid #000;
     }
     .lattice {
       width: 200px;
       height: 200px;
-      border: 1px solid black;
+      border: 1px solid #000;
+      position: relative;
     }
-    .player1,
-    .player2 {
-      text-align: center;
-      line-height: 200px;
+    .lattice::before,
+    .lattice:after {
+      content: "";
+      transition: 0.5s;
+      transform-origin: center center;
+      position: absolute;
+      transform: translate(-50%, -50%);
+      left: 50%;
+      top: 50%;
     }
-    .player1 {
-      background-color: blue;
-    }
+
     .player1::before {
-      content: "O";
-      color: white;
-      font-size: 200px;
-    }
-    .player2 {
+      content: "";
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
       background-color: red;
     }
-    .player2::before {
-      content: "X";
-      color: white;
-      font-size: 200px;
+    .player1::after {
+      content: "";
+      background-color: white;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
     }
+    .player2::before {
+      content: "";
+      width: 150px;
+      height: 20px;
+      background-color: blue;
+      transform: translate(-50%,-50%) rotate(135deg)
+    }
+    .player2::after {
+      content: "";
+      width: 150px;
+      height: 20px;
+      transform: translate(-50%,-50%) rotate(45deg);
+      background-color: blue;
+    }
+    
     .button {
       text-align: center;
       margin: 10px;
@@ -50,6 +74,7 @@
     .button button {
       padding: 10px;
       font-size: 18px;
+      cursor: pointer;
     }
   </style>
   <body>
@@ -66,7 +91,8 @@
         <button @click="reset">重開開始</button>
       </div>
     </div>
-
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="./vue.js"></script>
     <script>
       const app = Vue.createApp({
@@ -126,9 +152,7 @@
             this.playing = true;
             setTimeout(() => {
               this.countScore();
-            }, 500);
-
-            this.currPlayer = this.currPlayer == 1 ? -1 : 1;
+            }, 300);
           },
           checkEWin(player) {
             let win = this.condition.split(",");
@@ -156,7 +180,6 @@
             }
           },
           countScore() {
-            console.log('call')
             let selected = this.block
               .filter((item) => !item.select)
               .map((item) => item.val);
@@ -164,8 +187,8 @@
             let bestScore = -Infinity;
             let bestMove;
 
-            let offensiveWeight = 1.5; // 进攻权重
-            let defensiveWeight = 1.0; // 防守权重
+            let offensiveWeight = 1.5; // 進攻權重
+            let defensiveWeight = 1.0; // 防守權重
 
             for (let i = 0; i < this.block.length; i++) {
               if (!selected.includes(this.block[i].val)) continue;
@@ -220,7 +243,7 @@
               }
 
               if (!blocked) {
-                // 如果当前玩家即将完成这一获胜条件，给予高分
+                // 如果目前玩家即將完成這項獲勝條件，給予高分(連續佔領兩個位置)
                 if (conditionMet == win[i].length - 1) {
                   score += 100;
                 } else {
@@ -238,14 +261,13 @@
               this.over = false;
               this.player1 = [];
               this.player2 = [];
-              this.block.forEach(element => {
-                element.select = false
+              this.block.forEach((element) => {
+                element.select = false;
               });
             }
           },
         },
-        mounted() {
-        },
+        mounted() {},
       }).mount("#app");
     </script>
   </body>
