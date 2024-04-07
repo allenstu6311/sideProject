@@ -123,6 +123,9 @@
               if (this.checkEWin(newVal)) {
                 alert("player1勝利");
                 this.over = true;
+  
+              }else{
+                
               }
             },
             deep: true,
@@ -150,11 +153,13 @@
             item.select = true;
             this.player1.push(item.val);
             this.playing = true;
+ 
             setTimeout(() => {
               this.countScore();
             }, 300);
           },
           checkEWin(player) {
+            if(this.over) return
             let win = this.condition.split(",");
             let conditionMet = 0;
             for (let i = 0; i < win.length; i++) {
@@ -180,6 +185,7 @@
             }
           },
           countScore() {
+            if(this.over) return
             let selected = this.block
               .filter((item) => !item.select)
               .map((item) => item.val);

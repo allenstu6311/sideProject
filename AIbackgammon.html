@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+    .container {
+      width: 540px;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin: auto;
+      background-color: orange;
+      padding: 10px;
+    }
+    .cell {
+      width: 30px;
+      height: 30px;
+      border: 1px solid black;
+      position: relative;
+    }
+    .player1::before,
+    .player2::before {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      position: absolute;
+      left: 5px;
+      top: 5px;
+    }
+    .player1.cell::before {
+      content: "";
+      background-color: black;
+    }
+    .player2.cell::before {
+      content: "";
+      background-color: white;
+    }
+  </style>
+  <body>
+    <div id="app">
+      <div class="container">
+        <div
+          class="cell"
+          v-for="i in blocks"
+          :class="{player1:player1.includes(i.val),player2:player2.includes(i.val)}"
+          @click="playChess(i)"
+        ></div>
+      </div>
+    </div>
+
+    <script src="./vue.js"></script>
+    <script>
+      var worker = new Worker("./worker.js");
+
+      const app = Vue.createApp({
+        data() {
+          return {
+            blocks: [],
+            player1: [],
+            player2: [],
+            player: 1,
+            test:[]
+          };
+        },
+        methods: {
+          playChess(item) {
+            this.player1.push(item.val);
+            item.select = true;
+            // console.log(this.player1);
+            this.checkWin(this.player1, item.val);
+            this.chagePlayer();
+          },
+          chagePlayer() {
+            let bestScore = -Infinity;
+            let bestMove;
+
+            let canSelect = this.blocks.filter((item) => !item.select);
+
+            // console.log(worker);
+
+            // worker.addEventListener(
+            //   "message",
+            //   function (e) {
+            //     console.log("Worker said: ", e.data);
+            //   },
+            //   false
+            // );
+
+            for (let i = 0; i < canSelect.length; i++) {
+              //   let score = this.minimax(0, true, canSelect[i].val);
+
+                let score = this.minimax(
+                  0,
+                  true,
+                  canSelect[i].val,
+                  -Infinity,
+                  +Infinity
+                );
+                
+            //    worker.postMessage({
+            //     depth: 0,
+            //     isMax: true,
+            //     position: canSelect[i].val, // 当前的位置
+            //     alpha: -Infinity,
+            //     beta: +Infinity,
+            //     player1:this.player1.slice(),
+            //     player2:this.player2.slice(),
+            //     blocks:JSON.parse(JSON.stringify( this.blocks)),
+            //   })
+
+              if (score > bestScore) {
+                bestScore = score;
+                bestMove = canSelect[i];
+              }
+            }
+            if (bestMove) {
+              bestMove.select = true;
+              this.player2.push(bestMove.val);
+
+              //   this.checkWin(this.player2,bestMove.val)
+            }
+          },
+          minimax(depth, isMax, position, alpha, beta) {
+            // console.log("alpha", alpha, "beta", beta);
+            // console.log(
+            //   `Depth: ${depth}, isMax: ${isMax}, position: ${position}`
+            // );
+
+            if (
+              depth >= 2 ||
+              this.checkWin(this.player1, position) ||
+              this.checkWin(this.player2, position)
+            ) {
+              return this.evaluateBoard(position, isMax);
+            }
+            let bestScore = isMax ? -Infinity : Infinity;
+            let canSelect = this.blocks.filter((item) => !item.select);
+
+            if (isMax) {
+              let maxEval = -Infinity;
+              for (let i = 0; i < canSelect.length; i++) {
+                this.player2.push(canSelect[i].val);
+                canSelect[i].select = true;
+
+                let eval = this.minimax(
+                  depth + 1,
+                  false,
+                  canSelect[i].val,
+                  alpha,
+                  beta
+                );
+                // console.log('eval',eval)
+
+                this.player2.pop();
+                canSelect[i].select = false;
+
+                maxEval = Math.max(maxEval, eval);
+                alpha = Math.max(alpha, eval);
+                if (beta <= alpha) {
+                  break; // Alpha-Beta 剪枝
+                }
+              }
+              return maxEval;
+            } else {
+              let minEval = Infinity;
+              for (let i = 0; i < canSelect.length; i++) {
+                this.player1.push(canSelect[i].val);
+                canSelect[i].select = true;
+
+                let eval = this.minimax(
+                  depth + 1,
+                  true,
+                  canSelect[i].val,
+                  alpha,
+                  beta
+                );
+
+                this.player1.pop();
+                canSelect[i].select = false;
+
+                minEval = Math.min(minEval, eval);
+                beta = Math.min(beta, eval);
+                if (beta <= alpha) {
+                  break; // Alpha-Beta 剪枝
+                }
+              }
+              return minEval;
+            }
+          },
+
+          evaluateBoard(position, isMax) {
+            // console.log('evaluateBoard','position : ',position,'isMax',isMax)
+            // 根据位置评估棋盘
+            if (this.checkWin(this.player2, position)) {
+              return isMax ? 10 : -10; // 如果是AI赢了，返回正值，否则返回负值
+            }
+            if (this.checkWin(this.player1, position)) {
+              return isMax ? -10 : 10; // 如果是玩家赢了，返回负值，否则返回正值
+            }
+            // 更多评估逻辑...
+            return 0;
+          },
+          
+          checkWin(player, position) {
+       
+            //當前位置也要計算，所以設定1
+            let horizontal = 1; //水平
+            let vertical = 1; //垂直
+            let leftOblique = 1; //左斜
+            let rightOblique = 1; //右斜
+
+            // 水平
+            for (let i = 1; i <= 4; i++) {
+              if (player.includes(position + i)) horizontal++;
+              else break;
+            }
+            for (let i = 1; i <= 4; i++) {
+              if (player.includes(position - i)) horizontal++;
+              else break;
+            }
+
+            // 垂直
+            for (let i = 1; i <= 4; i++) {
+              if (player.includes(position + i * 17)) vertical++;
+              else break;
+            }
+            for (let i = 1; i <= 4; i++) {
+              if (player.includes(position - i * 17)) vertical++;
+              else break;
+            }
+
+            // 左斜
+            for (let i = 1; i <= 4; i++) {
+              if (player.includes(position + i * 18)) leftOblique++;
+              else break;
+            }
+            for (let i = 1; i <= 4; i++) {
+              if (player.includes(position - i * 18)) leftOblique++;
+              else break;
+            }
+
+            // 右斜
+            for (let i = 1; i <= 4; i++) {
+              if (player.includes(position + i * 16)) rightOblique++;
+              else break;
+            }
+            for (let i = 1; i <= 4; i++) {
+              if (player.includes(position - i * 16)) rightOblique++;
+              else break;
+            }
+
+            if (
+              horizontal >= 5 ||
+              vertical >= 5 ||
+              leftOblique >= 5 ||
+              rightOblique >= 5
+            ) {
+              //   console.log("獲勝");
+              return true;
+            }
+
+            return false;
+          },
+        },
+        mounted() {
+          for (let i = 1; i <= 255; i++) {
+            this.blocks.push({
+              val: i,
+              select: false,
+            });
+          }
+        },
+      }).mount("#app");
+    </script>
+  </body>
+</html>
