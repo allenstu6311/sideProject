@@ -12,7 +12,7 @@
       box-sizing: border-box;
     }
     .container {
-      width: 540px;
+      width: 480px;
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
@@ -56,10 +56,9 @@
       </div>
     </div>
 
+    <script src="./rule.js"></script>
     <script src="./vue.js"></script>
     <script>
-      var worker = new Worker("./worker.js");
-
       const app = Vue.createApp({
         data() {
           return {
@@ -67,8 +66,13 @@
             player1: [],
             player2: [],
             player: 1,
-            test:[]
+            test: [],
           };
+        },
+        computed: {
+          canSelect() {
+            return this.blocks.filter((item) => !item.select);
+          },
         },
         methods: {
           playChess(item) {
@@ -79,138 +83,162 @@
             this.chagePlayer();
           },
           chagePlayer() {
-            let bestScore = -Infinity;
-            let bestMove;
+            let self = this;
+            let bestMove = { val: null };
 
-            let canSelect = this.blocks.filter((item) => !item.select);
-
-            // console.log(worker);
-
-            // worker.addEventListener(
-            //   "message",
-            //   function (e) {
-            //     console.log("Worker said: ", e.data);
-            //   },
-            //   false
-            // );
-
-            for (let i = 0; i < canSelect.length; i++) {
-              //   let score = this.minimax(0, true, canSelect[i].val);
-
-                let score = this.minimax(
-                  0,
-                  true,
-                  canSelect[i].val,
-                  -Infinity,
-                  +Infinity
-                );
-                
-            //    worker.postMessage({
-            //     depth: 0,
-            //     isMax: true,
-            //     position: canSelect[i].val, // 当前的位置
-            //     alpha: -Infinity,
-            //     beta: +Infinity,
-            //     player1:this.player1.slice(),
-            //     player2:this.player2.slice(),
-            //     blocks:JSON.parse(JSON.stringify( this.blocks)),
-            //   })
-
-              if (score > bestScore) {
-                bestScore = score;
-                bestMove = canSelect[i];
+            function minimax(depth, isMax, position, move, alpha, beta) {
+              if (
+                depth >= 2 ||
+                self.checkWin(self.player2, position) ||
+                self.checkWin(self.player1, position)
+              ) {
+                return self.evaluateBoard(position, isMax);
               }
-            }
-            if (bestMove) {
-              bestMove.select = true;
-              this.player2.push(bestMove.val);
+              let value = isMax ? -Infinity : Infinity;
 
-              //   this.checkWin(this.player2,bestMove.val)
-            }
-          },
-          minimax(depth, isMax, position, alpha, beta) {
-            // console.log("alpha", alpha, "beta", beta);
-            // console.log(
-            //   `Depth: ${depth}, isMax: ${isMax}, position: ${position}`
-            // );
+              for (let i = 0; i < self.canSelect.length; i++) {
+                let item = self.canSelect[i];
 
-            if (
-              depth >= 2 ||
-              this.checkWin(this.player1, position) ||
-              this.checkWin(this.player2, position)
-            ) {
-              return this.evaluateBoard(position, isMax);
-            }
-            let bestScore = isMax ? -Infinity : Infinity;
-            let canSelect = this.blocks.filter((item) => !item.select);
-
-            if (isMax) {
-              let maxEval = -Infinity;
-              for (let i = 0; i < canSelect.length; i++) {
-                this.player2.push(canSelect[i].val);
-                canSelect[i].select = true;
-
-                let eval = this.minimax(
-                  depth + 1,
-                  false,
-                  canSelect[i].val,
-                  alpha,
-                  beta
-                );
-                // console.log('eval',eval)
-
-                this.player2.pop();
-                canSelect[i].select = false;
-
-                maxEval = Math.max(maxEval, eval);
-                alpha = Math.max(alpha, eval);
-                if (beta <= alpha) {
-                  break; // Alpha-Beta 剪枝
+                if (isMax) {
+                  self.player2.push(item.val);
+                  // console.log(
+                  //   "self.player2 push",
+                  //   [...self.player2],
+                  //   "depth",
+                  //   depth
+                  // );
+                } else {
+                  self.player1.push(item.val);
+                  // console.log("self.player1 push", [...self.player1]);
                 }
-              }
-              return maxEval;
-            } else {
-              let minEval = Infinity;
-              for (let i = 0; i < canSelect.length; i++) {
-                this.player1.push(canSelect[i].val);
-                canSelect[i].select = true;
+                item.select = true;
 
-                let eval = this.minimax(
+                let eval = minimax(
                   depth + 1,
-                  true,
-                  canSelect[i].val,
+                  !isMax,
+                  item.val,
+                  move,
                   alpha,
                   beta
                 );
 
-                this.player1.pop();
-                canSelect[i].select = false;
+                if (isMax) {
+                  self.player2.pop(); // 恢复AI的走法状态。
+                } else {
+                  self.player1.pop(); // 恢复玩家的走法状态。
+                }
+                item.select = false;
 
-                minEval = Math.min(minEval, eval);
-                beta = Math.min(beta, eval);
-                if (beta <= alpha) {
-                  break; // Alpha-Beta 剪枝
+                if (isMax) {
+                  // console.log(
+                  //   "if",
+                  //   "eval",
+                  //   eval,
+                  //   "value",
+                  //   value,
+                  //   "isMax",
+                  //   isMax,
+                  //   "item.val",
+                  //   item.val,
+                  //   "depth",
+                  //   depth
+                  // );
+                  if (eval > value) {
+                    value = eval;
+                    alpha = eval;
+
+                    if (depth == 0) {
+                      move.val = item;
+                      // console.log("move", { ...move });
+                    }
+
+                    if (beta <= alpha) break;
+                  }
+                } else {
+                  // console.log(
+                  //   "else",
+                  //   "eval",
+                  //   eval,
+                  //   "value",
+                  //   value,
+                  //   "isMax",
+                  //   isMax,
+                  //   "item.val",
+                  //   item.val,
+                  //   "depth",
+                  //   depth
+                  // );
+                  if (eval < value) {
+                    value = eval;
+                    beta = eval;
+
+                    if (beta <= alpha) break;
+                  }
                 }
               }
-              return minEval;
+              return value;
+            }
+
+            minimax(0, true, this.canSelect[0], bestMove, -Infinity, Infinity);
+            if (bestMove.val) {
+              // console.log("bestMove", bestMove.val);
+              this.player2.push(bestMove.val.val);
+              bestMove.val.select = true;
             }
           },
 
-          evaluateBoard(position, isMax) {
-            // console.log('evaluateBoard','position : ',position,'isMax',isMax)
-            // 根据位置评估棋盘
+          evaluateBoard(position, isMax, depth) {
+            if (!position) return 0;
+
+            //因為獲勝時會不會走到下面得判斷，所以直接返回正值
             if (this.checkWin(this.player2, position)) {
-              return isMax ? 10 : -10; // 如果是AI赢了，返回正值，否则返回负值
+              console.log("checkWin player2", isMax);
+              // return isMax ? 200 : -200;
+              return 200;
             }
+
             if (this.checkWin(this.player1, position)) {
-              return isMax ? -10 : 10; // 如果是玩家赢了，返回负值，否则返回正值
+              console.log("checkWin player1", isMax);
+              // return isMax ? -150 : 150;
+              return 100;
             }
+
+            // 判断是否阻挡了活三
+            let liveThree = checkLiveThree(this.player1, position);
+            if (liveThree) {
+              // console.log("liveThree");
+              if (
+                this.player2.includes(liveThree.head) ||
+                this.player2.includes(liveThree.tail)
+              ) {
+                return 0; // 如果活三被阻挡，返回较小的负值
+              } else {
+                return -100; // 未被阻挡的活三
+              }
+            }
+
+            //一開始先占領中間
+            if (position == 113) {
+              return -100;
+            }
+            // console.log("out");
+
+            // if (this.player2.length < 5) {
+            //   // console.log("position", position);
+            //   if (113 - position < 0) return 0;
+            //   let distance = 113 - position;
+            //   // console.log("distance", 50 - distance);
+            //   return 50 - distance;
+            // }
+            // console.log("out");
+
             // 更多评估逻辑...
             return 0;
           },
-          
+
           checkWin(player, position) {
-       
+            // console.log("position", position);
+            if (!position) return;
             //當前位置也要計算，所以設定1
             let horizontal = 1; //水平
             let vertical = 1; //垂直
@@ -229,21 +257,21 @@
 
             // 垂直
             for (let i = 1; i <= 4; i++) {
-              if (player.includes(position + i * 17)) vertical++;
+              if (player.includes(position + i * 15)) vertical++;
               else break;
             }
             for (let i = 1; i <= 4; i++) {
-              if (player.includes(position - i * 17)) vertical++;
+              if (player.includes(position - i * 15)) vertical++;
               else break;
             }
 
             // 左斜
             for (let i = 1; i <= 4; i++) {
-              if (player.includes(position + i * 18)) leftOblique++;
+              if (player.includes(position + i * 14)) leftOblique++;
               else break;
             }
             for (let i = 1; i <= 4; i++) {
-              if (player.includes(position - i * 18)) leftOblique++;
+              if (player.includes(position - i * 14)) leftOblique++;
               else break;
             }
 
@@ -256,14 +284,19 @@
               if (player.includes(position - i * 16)) rightOblique++;
               else break;
             }
-
+            // console.log(
+            //   "checkwin",
+            //   horizontal,
+            //   vertical,
+            //   leftOblique,
+            //   rightOblique
+            // );
             if (
               horizontal >= 5 ||
               vertical >= 5 ||
               leftOblique >= 5 ||
               rightOblique >= 5
             ) {
-              //   console.log("獲勝");
               return true;
             }
 
