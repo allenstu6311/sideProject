@@ -66,7 +66,7 @@
             player1: [],
             player2: [],
             player: 1,
-            test: [],
+            isBlocked: false,
           };
         },
         computed: {
@@ -85,6 +85,7 @@
           chagePlayer() {
             let self = this;
             let bestMove = { val: null };
+            this.isBlocked = false;
 
             function minimax(depth, isMax, position, move, alpha, beta) {
               if (
@@ -101,12 +102,12 @@
 
                 if (isMax) {
                   self.player2.push(item.val);
-                  // console.log(
-                  //   "self.player2 push",
-                  //   [...self.player2],
-                  //   "depth",
-                  //   depth
-                  // );
+                  console.log(
+                    "self.player2 push",
+                    [...self.player2],
+                    "depth",
+                    depth
+                  );
                 } else {
                   self.player1.push(item.val);
                   // console.log("self.player1 push", [...self.player1]);
@@ -152,7 +153,7 @@
                       // console.log("move", { ...move });
                     }
 
-                    if (beta <= alpha) break;
+                    // if (beta <= alpha) break;
                   }
                 } else {
                   // console.log(
@@ -172,7 +173,7 @@
                     value = eval;
                     beta = eval;
 
-                    if (beta <= alpha) break;
+                    // if (beta <= alpha) break;
                   }
                 }
               }
@@ -188,52 +189,65 @@
           },
 
           evaluateBoard(position, isMax, depth) {
-            if (!position) return 0;
+            let totalScore = 0;
+            if (!position) return totalScore;
 
             //因為獲勝時會不會走到下面得判斷，所以直接返回正值
             if (this.checkWin(this.player2, position)) {
-              console.log("checkWin player2", isMax);
-              // return isMax ? 200 : -200;
-              return 200;
+              totalScore += isMax ? 200 : -200;
+              // return 200;
             }
 
             if (this.checkWin(this.player1, position)) {
-              console.log("checkWin player1", isMax);
-              // return isMax ? -150 : 150;
-              return 100;
+              totalScore += isMax ? -150 : 150;
+              // return 100;
+            }
+
+            let liveTwo = checkLive(this.player1, position, 2);
+
+            if (liveTwo) {
+              if (
+                this.player2.includes(liveTwo.head) ||
+                this.player2.includes(liveTwo.tail)
+              ) {
+                totalScore += isMax ? 50 : -50;
+                this.isBlocked = true;
+              } else {
+                let liveTwoBlocked = checkBlocked(this.player1, this.player2, 2);
+                console.log('liveTwoBlocked',liveTwoBlocked)
+                if(!liveTwoBlocked){
+                  totalScore = isMax ? -80 : 80; // 未被阻挡的活三
+                }
+                // console.log('liveTwoBlocked',liveTwoBlocked)
+                // if (!this.isBlocked) {
+                //   totalScore = isMax ? -80 : 80; // 未被阻挡的活三
+                // }
+              }
             }
 
             // 判断是否阻挡了活三
-            let liveThree = checkLiveThree(this.player1, position);
+            let liveThree = checkLive(this.player1, position, 3);
             if (liveThree) {
-              // console.log("liveThree");
               if (
                 this.player2.includes(liveThree.head) ||
                 this.player2.includes(liveThree.tail)
               ) {
-                return 0; // 如果活三被阻挡，返回较小的负值
+                // console.log('以阻擋',isMax)
+                totalScore += isMax ? 50 : -50; // 如果活三被阻挡，返回较小的负值
               } else {
-                return -100; // 未被阻挡的活三
+                // console.log('未阻擋',isMax)
+                totalScore += isMax ? -100 : 100; // 未被阻挡的活三
+                // totalScore+= -100
               }
             }
 
             //一開始先占領中間
             if (position == 113) {
-              return -100;
+              totalScore += isMax ? 100 : -100;
             }
-            // console.log("out");
-
-            // if (this.player2.length < 5) {
-            //   // console.log("position", position);
-            //   if (113 - position < 0) return 0;
-            //   let distance = 113 - position;
-            //   // console.log("distance", 50 - distance);
-            //   return 50 - distance;
-            // }
-            // console.log("out");
-
-            // 更多评估逻辑...
-            return 0;
+            // console.log("totalScore", totalScore);
+            return totalScore ? totalScore : isMax ? Infinity : -Infinity;
+            // return 0
           },
 
           checkWin(player, position) {
@@ -265,7 +279,7 @@
               else break;
             }
 
-            // 左斜
+            // 右斜
             for (let i = 1; i <= 4; i++) {
               if (player.includes(position + i * 14)) leftOblique++;
               else break;
@@ -275,7 +289,7 @@
               else break;
             }
 
-            // 右斜
+            // 左斜
             for (let i = 1; i <= 4; i++) {
               if (player.includes(position + i * 16)) rightOblique++;
               else break;

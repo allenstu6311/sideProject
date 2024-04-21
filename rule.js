@@ -1,5 +1,5 @@
-//判斷活三
-function checkLiveThree(player, position) {
+//判斷活二,三
+function checkLive(player, position, length) {
   //當前位置也要計算，所以設定1
   let horizontal = 1; //水平
   let vertical = 1; //垂直
@@ -9,91 +9,115 @@ function checkLiveThree(player, position) {
   let list = [];
 
   // 水平
-  for (let i = 1; i <= 3; i++) {
+  for (let i = 1; i <= length; i++) {
     if (player.includes(position + i)) {
       horizontal++;
       list.push(position + i);
     } else break;
   }
-  for (let i = 1; i <= 3; i++) {
+  for (let i = 1; i <= length; i++) {
     if (player.includes(position - i)) {
       horizontal++;
       list.push(position - i);
     } else break;
   }
 
-  if (horizontal >= 4) {
+  if (horizontal >= length + 1) {
     list.sort();
     return { head: list[0] - 1, tail: list[list.length - 1] + 1 };
   }
   // console.log(player);
 
   // 垂直
-  for (let i = 1; i <= 3; i++) {
+  for (let i = 1; i <= length; i++) {
     if (player.includes(position + i * 15)) {
       vertical++;
       list.push(position + i * 15);
     } else break;
   }
-  for (let i = 1; i <= 3; i++) {
+  for (let i = 1; i <= length; i++) {
     if (player.includes(position - i * 15)) {
       vertical++;
       list.push(position - i * 15);
     } else break;
   }
 
-  if (vertical >= 4) {
+  if (vertical >= length + 1) {
     list.sort();
     return { head: list[0] - 15, tail: list[list.length - 1] + 15 };
   }
 
-  // 左斜
-  for (let i = 1; i <= 3; i++) {
+  // 右斜
+  for (let i = 1; i <= length; i++) {
     if (player.includes(position + i * 14)) {
       leftOblique++;
       list.push(position + i * 14);
     } else break;
   }
-  for (let i = 1; i <= 3; i++) {
+  for (let i = 1; i <= length; i++) {
     if (player.includes(position - i * 14)) {
       leftOblique++;
       list.push(position - i * 14);
     } else break;
   }
 
-  if (leftOblique >= 4) {
+  if (leftOblique >= length + 1) {
     list.sort();
     return { head: list[0] - 14, tail: list[list.length - 1] + 14 };
   }
 
-  // 右斜
-  for (let i = 1; i <= 3; i++) {
+  // 左斜
+  for (let i = 1; i <= length; i++) {
     if (player.includes(position + i * 16)) {
       rightOblique++;
       list.push(position + i * 16);
     } else break;
   }
-  for (let i = 1; i <= 3; i++) {
+  for (let i = 1; i <= length; i++) {
     if (player.includes(position - i * 16)) {
       rightOblique++;
       list.push(position - i * 16);
     } else break;
   }
 
-  if (rightOblique >= 4) {
+  if (rightOblique >= length + 1) {
     list.sort();
     return { head: list[0] - 16, tail: list[list.length - 1] + 16 };
   }
 
-  // if (
-  //   horizontal >= 4 ||
-  //   vertical >= 4 ||
-  //   leftOblique >= 4 ||
-  //   rightOblique >= 4
-  // ) {
-  //   // console.log("活三", position);
-  //   return true;
-  // }
-
   return false;
+}
+
+//是否已經有阻擋
+function checkBlocked(player1, player2, length) {
+  let AiPos = [...player2].pop();
+  console.log("AiPos", AiPos, "length", length, "player1", player1);
+  let isNotBlocked = true;
+  let index = 0;
+
+  while (isNotBlocked && index < player1.length - 1) {
+    let position = player1[index];
+    console.log("position", position, "index", index);
+
+    if (AiPos == position + 1 || AiPos == position - 1) {
+      isNotBlocked = false;
+      break;
+    }
+    if (AiPos == position + 15 || AiPos == position - 15) {
+      isNotBlocked = false;
+      break;
+    }
+    if (AiPos == position + 14 || AiPos == position - 14) {
+      isNotBlocked = false;
+      break;
+    }
+    if (AiPos == position + 16 || AiPos == position - 16) {
+      isNotBlocked = false;
+      break;
+    }
+
+    index++;
+  }
+
+  return !isNotBlocked;
 }
