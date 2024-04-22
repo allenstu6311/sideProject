@@ -131,49 +131,49 @@
                 item.select = false;
 
                 if (isMax) {
-                  // console.log(
-                  //   "if",
-                  //   "eval",
-                  //   eval,
-                  //   "value",
-                  //   value,
-                  //   "isMax",
-                  //   isMax,
-                  //   "item.val",
-                  //   item.val,
-                  //   "depth",
-                  //   depth
-                  // );
+                  console.log(
+                    "if",
+                    "eval",
+                    eval,
+                    "value",
+                    value,
+                    "isMax",
+                    isMax,
+                    "item.val",
+                    item.val,
+                    "depth",
+                    depth
+                  );
                   if (eval > value) {
                     value = eval;
                     alpha = eval;
 
                     if (depth == 0) {
                       move.val = item;
-                      // console.log("move", { ...move });
+                      console.log("move", { ...move });
                     }
 
-                    // if (beta <= alpha) break;
+                    if (beta <= alpha) break;
                   }
                 } else {
-                  // console.log(
-                  //   "else",
-                  //   "eval",
-                  //   eval,
-                  //   "value",
-                  //   value,
-                  //   "isMax",
-                  //   isMax,
-                  //   "item.val",
-                  //   item.val,
-                  //   "depth",
-                  //   depth
-                  // );
+                  console.log(
+                    "else",
+                    "eval",
+                    eval,
+                    "value",
+                    value,
+                    "isMax",
+                    isMax,
+                    "item.val",
+                    item.val,
+                    "depth",
+                    depth
+                  );
                   if (eval < value) {
                     value = eval;
                     beta = eval;
 
-                    // if (beta <= alpha) break;
+                    if (beta <= alpha) break;
                   }
                 }
               }
@@ -217,6 +217,8 @@
                 console.log('liveTwoBlocked',liveTwoBlocked)
                 if(!liveTwoBlocked){
                   totalScore = isMax ? -80 : 80; // 未被阻挡的活三
+                }else{
+                  totalScore = isMax ? 50 : -50;
                 }
                 // console.log('liveTwoBlocked',liveTwoBlocked)
                 // if (!this.isBlocked) {

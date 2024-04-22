@@ -91,27 +91,27 @@ function checkLive(player, position, length) {
 //是否已經有阻擋
 function checkBlocked(player1, player2, length) {
   let AiPos = [...player2].pop();
-  console.log("AiPos", AiPos, "length", length, "player1", player1);
+  // console.log("AiPos", AiPos, "length", length, "player1", player1);
   let isNotBlocked = true;
   let index = 0;
 
   while (isNotBlocked && index < player1.length - 1) {
     let position = player1[index];
-    console.log("position", position, "index", index);
+    // console.log("position", position, "index", index);
 
-    if (AiPos == position + 1 || AiPos == position - 1) {
+    if ((AiPos == position + 1 && player1.includes(position - 1))|| (AiPos == position - 1&& player1.includes(position + 1))) {
       isNotBlocked = false;
       break;
     }
-    if (AiPos == position + 15 || AiPos == position - 15) {
+    if ((AiPos == position + 15 && player1.includes(position - 15)) || (AiPos == position - 15 && player1.includes(position + 15))) {
       isNotBlocked = false;
       break;
     }
-    if (AiPos == position + 14 || AiPos == position - 14) {
+    if ((AiPos == position + 14 && player1.includes(position - 14)) || (AiPos == position - 14 && player1.includes(position + 14))) {
       isNotBlocked = false;
       break;
     }
-    if (AiPos == position + 16 || AiPos == position - 16) {
+    if ((AiPos == position + 16 && player1.includes(position - 16)) || (AiPos == position - 16  && player1.includes(position + 16))) {
       isNotBlocked = false;
       break;
     }
