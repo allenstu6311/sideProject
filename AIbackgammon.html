@@ -89,10 +89,13 @@
 
             function minimax(depth, isMax, position, move, alpha, beta) {
               if (
-                depth >= 2 ||
-                self.checkWin(self.player2, position) ||
-                self.checkWin(self.player1, position)
+                self.checkWin(self.player2, position) &&
+                [...self.player2].pop() == position
               ) {
+                return 10000;
+              }
+
+              if (depth >= 2 || self.checkWin(self.player1, position)) {
                 return self.evaluateBoard(position, isMax);
               }
               let value = isMax ? -Infinity : Infinity;
@@ -190,56 +193,103 @@
 
           evaluateBoard(position, isMax, depth) {
             let totalScore = 0;
+            let direction = [1, 14, 15, 16];
             if (!position) return totalScore;
 
-            //因為獲勝時會不會走到下面得判斷，所以直接返回正值
-            if (this.checkWin(this.player2, position)) {
-              totalScore += isMax ? 200 : -200;
-              // return 200;
-            }
-
-            if (this.checkWin(this.player1, position)) {
-              totalScore += isMax ? -150 : 150;
-              // return 100;
-            }
-
+            //對方活2
             let liveTwo = checkLive(this.player1, position, 2);
+            //判斷自己是否活三
+            let liveThreeSelf = checkLive(this.player2, position, 3);
+            // 判断是否阻挡了活三
+            let liveThree = checkLive(this.player1, position, 3);
 
-            if (liveTwo) {
-              if (
-                this.player2.includes(liveTwo.head) ||
-                this.player2.includes(liveTwo.tail)
-              ) {
-                totalScore += isMax ? 50 : -50;
-                this.isBlocked = true;
-              } else {
-                let liveTwoBlocked = checkBlocked(this.player1, this.player2, 2);
-                console.log('liveTwoBlocked',liveTwoBlocked)
-                if(!liveTwoBlocked){
-                  totalScore = isMax ? -80 : 80; // 未被阻挡的活三
-                }else{
-                  totalScore = isMax ? 50 : -50;
+            //AI贏
+            if (this.checkWin(this.player2, position)) {
+              console.log("player", this.player2, "position", position);
+              let checked = false;
+
+              for (let i = 0; i < direction.length; i++) {
+                if (
+                  this.player2.includes(position + direction[i]) &&
+                  this.player2.includes(position - direction[i])
+                ) {
+                  console.log(
+                    "1",
+                    isMax,
+                    position - direction[i],
+                    ":",
+                    position + direction[i]
+                  );
+                  totalScore += isMax ? 300 : -300;
+                  checked = true;
+                  break;
                 }
-                // console.log('liveTwoBlocked',liveTwoBlocked)
-                // if (!this.isBlocked) {
-                //   totalScore = isMax ? -80 : 80; // 未被阻挡的活三
-                // }
+              }
+
+              if (!checked) {
+                console.log("2", isMax, position);
+                totalScore += isMax ? 200 : -200;
               }
             }
 
-            // 判断是否阻挡了活三
-            let liveThree = checkLive(this.player1, position, 3);
-            if (liveThree) {
+            //玩家贏
+            if (this.checkWin(this.player1, position)) {
+              totalScore += isMax ? -150 : 150;
+            }
+
+            /**
+             * 進攻
+             */
+            if (liveThreeSelf) {
+              if (
+                this.player1.includes(liveThreeSelf.head) ||
+                this.player1.includes(liveThreeSelf.tail)
+              ) {
+                // console.log("liveThreeSelf 1", position);
+                totalScore += isMax ? 80 : -80; // 如果活三被阻挡，返回较小的负值
+              } else {
+                // console.log("liveThreeSelf 2", position);
+                totalScore += isMax ? 150 : -150; // 未被阻挡的活三
+              }
+            }
+
+            /**
+             * 防守
+             */
+            if (liveThree && !checkAIWin(this.canSelect, this.player2)) {
               if (
                 this.player2.includes(liveThree.head) ||
                 this.player2.includes(liveThree.tail)
               ) {
-                // console.log('以阻擋',isMax)
-                totalScore += isMax ? 50 : -50; // 如果活三被阻挡，返回较小的负值
+                totalScore += isMax ? -50 : 50; // 如果活三被阻挡，返回较小的负值
               } else {
-                // console.log('未阻擋',isMax)
                 totalScore += isMax ? -100 : 100; // 未被阻挡的活三
-                // totalScore+= -100
+              }
+            } else if (
+              liveTwo &&
+              !checkAILiveThree(this.canSelect, this.player2)
+            ) {
+              if (
+                this.player2.includes(liveTwo.head) ||
+                this.player2.includes(liveTwo.tail)
+              ) {
+                totalScore += isMax ? -30 : 30;
+                this.isBlocked = true;
+              } else {
+                //是否有阻擋到活2
+                let liveTwoBlocked = checkBlocked(
+                  this.player1,
+                  this.player2,
+                  2
+                );
+
+                if (!liveTwoBlocked) {
+                  // console.log("liveTwo 1", position);
+                  totalScore = isMax ? -50 : 50; // 未被阻挡的活二
+                } else {
+                  // console.log("liveTwo 2", position);
+                  totalScore = isMax ? -30 : 30;
+                }
               }
             }
 

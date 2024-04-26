@@ -99,19 +99,31 @@ function checkBlocked(player1, player2, length) {
     let position = player1[index];
     // console.log("position", position, "index", index);
 
-    if ((AiPos == position + 1 && player1.includes(position - 1))|| (AiPos == position - 1&& player1.includes(position + 1))) {
+    if (
+      (AiPos == position + 1 && player1.includes(position - 1)) ||
+      (AiPos == position - 1 && player1.includes(position + 1))
+    ) {
       isNotBlocked = false;
       break;
     }
-    if ((AiPos == position + 15 && player1.includes(position - 15)) || (AiPos == position - 15 && player1.includes(position + 15))) {
+    if (
+      (AiPos == position + 15 && player1.includes(position - 15)) ||
+      (AiPos == position - 15 && player1.includes(position + 15))
+    ) {
       isNotBlocked = false;
       break;
     }
-    if ((AiPos == position + 14 && player1.includes(position - 14)) || (AiPos == position - 14 && player1.includes(position + 14))) {
+    if (
+      (AiPos == position + 14 && player1.includes(position - 14)) ||
+      (AiPos == position - 14 && player1.includes(position + 14))
+    ) {
       isNotBlocked = false;
       break;
     }
-    if ((AiPos == position + 16 && player1.includes(position - 16)) || (AiPos == position - 16  && player1.includes(position + 16))) {
+    if (
+      (AiPos == position + 16 && player1.includes(position - 16)) ||
+      (AiPos == position - 16 && player1.includes(position + 16))
+    ) {
       isNotBlocked = false;
       break;
     }
@@ -120,4 +132,19 @@ function checkBlocked(player1, player2, length) {
   }
 
   return !isNotBlocked;
+}
+
+//檢查當前局勢AI當下是否有活三
+function checkAILiveThree(canSelect, player2) {
+  for (let i = 0; i < canSelect.length; i++) {
+    if (checkLive(player2, canSelect[i].val, 3)) return true;
+  }
+  return false;
+}
+
+function checkAIWin(canSelect, player2) {
+  for (let i = 0; i < canSelect.length; i++) {
+    if (checkLive(player2, canSelect[i].val, 4)) return true;
+  }
+  return false;
 }
