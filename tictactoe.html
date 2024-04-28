@@ -10,23 +10,33 @@
       padding: 0;
       margin: 0;
       box-sizing: border-box;
-      margin: auto;
     }
-    html,body{
-      /* background-color: #111 */
+    html,
+    body {
+      background-color: #2e8b57;
     }
     .container {
-      width: 602px;
+      width: 600px;
       display: flex;
       flex-wrap: wrap;
-      border: 1px solid #000;
+      margin: auto;
+      margin-top: 50px;
+      margin-bottom: 50px;
     }
     .lattice {
       width: 200px;
       height: 200px;
-      border: 1px solid #000;
       position: relative;
     }
+
+    .horizontalLine {
+      border-bottom: 10px solid #ffd700;
+    }
+
+    .verticalLine {
+      border-right: 10px solid #ffd700;
+    }
+
     .lattice::before,
     .lattice:after {
       content: "";
@@ -43,11 +53,11 @@
       width: 150px;
       height: 150px;
       border-radius: 50%;
-      background-color: red;
+      background-color: #dc143c;
     }
     .player1::after {
       content: "";
-      background-color: white;
+      background-color: #2e8b57;
       width: 120px;
       height: 120px;
       border-radius: 50%;
@@ -56,17 +66,17 @@
       content: "";
       width: 150px;
       height: 20px;
-      background-color: blue;
-      transform: translate(-50%,-50%) rotate(135deg)
+      background-color: #4169e1;
+      transform: translate(-50%, -50%) rotate(135deg);
     }
     .player2::after {
       content: "";
       width: 150px;
       height: 20px;
-      transform: translate(-50%,-50%) rotate(45deg);
-      background-color: blue;
+      transform: translate(-50%, -50%) rotate(45deg);
+      background-color: #4169e1;
     }
-    
+
     .button {
       text-align: center;
       margin: 10px;
@@ -75,6 +85,15 @@
       padding: 10px;
       font-size: 18px;
       cursor: pointer;
+      border: none;
+      background-color: transparent;
+      font-weight: 600;
+      color: #fff;
+      font-size: 30px;
+      transition: 0.3s;
+    }
+    .button button:hover {
+      color: #ffd700;
     }
   </style>
   <body>
@@ -82,8 +101,8 @@
       <div class="container">
         <div
           class="lattice"
-          v-for="item in block"
-          :class="{player1:player1.includes(item.val),player2:player2.includes(item.val)}"
+          v-for="(item,index) in block"
+          :class="{player1:player1.includes(item.val),player2:player2.includes(item.val),horizontalLine:horizontal.includes(index),verticalLine:vertical.includes(index)}"
           @click="playChess(item)"
         ></div>
       </div>
@@ -91,7 +110,7 @@
         <button @click="reset">重開開始</button>
       </div>
     </div>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="./vue.js"></script>
     <script>
@@ -115,17 +134,20 @@
             currPlayer: 1,
             playing: false,
             over: false,
+            horizontal: [0, 1, 2, 3, 4, 5],
+            vertical: [0, 3, 6, 1, 4, 7],
           };
         },
         watch: {
           player1: {
             handler(newVal) {
               if (this.checkEWin(newVal)) {
-                alert("player1勝利");
+                Swal.fire({
+                  icon: "success",
+                  title: "你贏了",
+                });
                 this.over = true;
-  
-              }else{
-                
+              } else {
               }
             },
             deep: true,
@@ -133,7 +155,10 @@
           player2: {
             handler(newVal) {
               if (this.checkEWin(newVal)) {
-                alert("player2勝利");
+                Swal.fire({
+                  icon: "error",
+                  title: "你輸了",
+                });
                 this.over = true;
               }
             },
@@ -147,19 +172,22 @@
               this.player1.includes(item.val) ||
               this.player2.includes(item.val)
             ) {
-              alert("不可重複下棋");
+              Swal.fire({
+                icon: "error",
+                title: "不可重複下棋",
+              });
               return;
             }
             item.select = true;
             this.player1.push(item.val);
             this.playing = true;
- 
+
             setTimeout(() => {
               this.countScore();
             }, 300);
           },
           checkEWin(player) {
-            if(this.over) return
+            if (this.over) return;
             let win = this.condition.split(",");
             let conditionMet = 0;
             for (let i = 0; i < win.length; i++) {
@@ -180,12 +208,15 @@
               this.player1.length + this.player2.length ==
               this.block.length
             ) {
-              alert("平局");
+              Swal.fire({
+                icon: "question",
+                title: "平局",
+              });
               this.over = true;
             }
           },
           countScore() {
-            if(this.over) return
+            if (this.over) return;
             let selected = this.block
               .filter((item) => !item.select)
               .map((item) => item.val);
@@ -261,16 +292,26 @@
             return score;
           },
           reset() {
-            let check = confirm("確定刷新?");
-            if (check) {
-              this.playing = false;
-              this.over = false;
-              this.player1 = [];
-              this.player2 = [];
-              this.block.forEach((element) => {
-                element.select = false;
-              });
-            }
+            Swal.fire({
+              title: "確定刷新?",
+              text: "清除後無法回復",
+              icon: "warning",
+              showCancelButton: true,
+              confirmButtonColor: "#3085d6",
+              cancelButtonColor: "#d33",
+              confirmButtonText: "是",
+              cancelButtonText: "否",
+            }).then((result) => {
+              if (result.isConfirmed) {
+                this.playing = false;
+                this.over = false;
+                this.player1 = [];
+                this.player2 = [];
+                this.block.forEach((element) => {
+                  element.select = false;
+                });
+              }
+            });
           },
         },
         mounted() {},
