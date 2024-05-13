@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    .table-area{
+        width: 500px;
+        height: 300px;
+        overflow-y: auto;
+        margin: auto;
+        border: 1px solid red;
+    }
+    td{
+       width: 200px;
+    }
+  </style>
+  <body>
+    <div id="app">
+      <div class="table-area" ref="box">
+        <table border="1">
+          <thead>
+            <tr>
+              <th>name</th>
+              <th>index</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="item in testData" :key="item.index">
+                <td>{{ item.name }}</td>
+                <td>{{ item.index }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <script src="./vue.js"></script>
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {};
+        },
+        methods: {
+
+        },
+        computed: {
+          testData() {
+            return new Array(1000).fill("test").map((item, index, arr) => {
+              return {
+                name: item + index,
+                index: index,
+              };
+            });
+          },
+        },
+        mounted() {
+            this.$refs.box.addEventListener("scroll",(e)=>{
+                console.log('e',e.target)
+            })
+        },
+      }).mount("#app");
+    </script>
+  </body>
+</html>

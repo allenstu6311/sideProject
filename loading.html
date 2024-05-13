@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    .spinner-box {
+      position: fixed;
+      margin: auto;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      top: 0;
+      background-color: #d5d8e359;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      /* display: none; */
+    }
+
+    .loader {
+      width: 48px;
+      height: 48px;
+      border: 5px solid #fff;
+      border-bottom-color: #ff3d00;
+      border-radius: 50%;
+      box-sizing: border-box;
+      animation: rotation 1s linear infinite;
+    }
+
+    @keyframes rotation {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+  <body>
+    <div class="spinner-box" id="spinner">
+      <div class="loader"></div>
+    </div>
+  </body>
+</html>

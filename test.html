@@ -1,253 +1,49 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <style>
-    * {
-      padding: 0;
-      margin: 0;
-      box-sizing: border-box;
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>loader</title>
+</head>
+<style>
+  .spinner{
+    position: fixed;
+    margin: auto;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    background-color: rgba(226, 226, 226, 0.486);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .loader{
+    width: 50px;
+    height: 50px;
+    border: 5px solid grey;
+    border-bottom: 5px solid red;
+    border-radius: 50%;
+    animation: rotate 1s linear infinite;
+  }
+
+  @keyframes rotate {
+    0%{
+      transform: rotate(0deg);
     }
-    .container {
-      width: 480px;
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin: auto;
-      background-color: orange;
-      padding: 10px;
+    100%{
+      transform: rotate(360deg);
     }
-    .cell {
-      width: 30px;
-      height: 30px;
-      border: 1px solid black;
-      position: relative;
-    }
-    .player1::before,
-    .player2::before {
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      position: absolute;
-      left: 5px;
-      top: 5px;
-    }
-    .player1.cell::before {
-      content: "";
-      background-color: black;
-    }
-    .player2.cell::before {
-      content: "";
-      background-color: white;
-    }
-  </style>
-  <body>
-    <div id="app">
-      <div class="container">
-        <div
-          class="cell"
-          v-for="i in blocks"
-          :class="{player1:player1.includes(i.val),player2:player2.includes(i.val)}"
-          @click="playChess(i)"
-        ></div>
-      </div>
-    </div>
+  }
+</style>
+<body>
 
-    <script src="./rule.js"></script>
-    <script src="./vue.js"></script>
-    <script>
-      const app = Vue.createApp({
-        data() {
-          return {
-            blocks: [],
-            player1: [],
-            player2: [],
-            player: 1,
-            test: [],
-          };
-        },
-        computed: {
-          canSelect() {
-            return this.blocks.filter((item) => !item.select);
-          },
-        },
-        methods: {
-          playChess(item) {
-            this.player1.push(item.val);
-            item.select = true;
-            // console.log(this.player1);
-            this.checkWin(this.player1, item.val);
-            this.chagePlayer();
-          },
-          chagePlayer() {
-            let bestScore = -Infinity;
-            let bestMove;
 
-            for (let i = 0; i < this.canSelect.length; i++) {
-              let item = this.canSelect[i];
 
-              let score = this.minimax(0, true, item.val, -Infinity, +Infinity);
-              // console.log("score", score);
-              if (score > bestScore) {
-                bestScore = score;
-                bestMove = item;
-              }
-            }
-            if (bestMove) {
-              bestMove.select = true;
-              this.player2.push(bestMove.val);
-              //   this.checkWin(this.player2,bestMove.val)
-            }
-          },
-          minimax(depth, isMax, position, alpha, beta) {
-            // console.log("alpha", alpha, "beta", beta);
-            // console.log(
-            //   `Depth: ${depth}, isMax: ${isMax}, position: ${position} alpha : ${alpha}, "beta": ${beta}`
-            // );
-
-            if (
-              depth >= 2 ||
-              this.checkWin(this.player1, position) ||
-              this.checkWin(this.player2, position)
-            ) {
-              return this.evaluateBoard(position, isMax);
-            }
-
-            let value = isMax ? -Infinity : Infinity;
-
-            if (isMax) {
-              this.player2.push(position);
-            } else {
-              this.player1.push(position);
-            }
-
-            let eval = this.minimax(depth + 1, !isMax, position, alpha, beta);
-
-            if (isMax) {
-              value = Math.max(value, eval);
-              alpha = Math.max(alpha, value);
-            } else {
-              value = Math.min(value, eval);
-              beta = Math.min(beta, value);
-            }
-
-            if (isMax) {
-              this.player2.pop();
-            } else {
-              this.player1.pop();
-            }
-            if (beta <= alpha) {
-              return value; // Alpha-Beta 剪枝
-            }
-            return value;
-          },
-          evaluateBoard(position, isMax) {
-            // console.log('evaluateBoard','position : ',position,'isMax',isMax)
-            // 根据位置评估棋盘
-            if (this.checkWin(this.player2, position)) {
-              return 250; // 如果是AI赢了，返回正值，否则返回负值
-            }
-            if (this.checkWin(this.player1, position)) {
-              return 200; // 如果是玩家赢了，返回负值，否则返回正值
-            }
-
-            if (checkLiveThree(this.player1, position)) {
-              console.log("call three");
-              if (this.player2.includes(position)) {
-                return 50;
-              }
-              return 100;
-            }
-            //一開始先占領中間
-            if (!this.player1.includes("113") && position == 113) {
-              return 100;
-            }
-
-            if (this.player2.length < 5) {
-              console.log("position", position);
-              if (113 - position < 0) return 0;
-              let distance = 113 - position;
-              console.log("distance", 150 - distance);
-              return 50 - distance;
-            }
-            // console.log("out");
-
-            // 更多评估逻辑...
-            return 0;
-          },
-
-          checkWin(player, position) {
-            //當前位置也要計算，所以設定1
-            let horizontal = 1; //水平
-            let vertical = 1; //垂直
-            let leftOblique = 1; //左斜
-            let rightOblique = 1; //右斜
-
-            // 水平
-            for (let i = 1; i <= 4; i++) {
-              if (player.includes(position + i)) horizontal++;
-              else break;
-            }
-            for (let i = 1; i <= 4; i++) {
-              if (player.includes(position - i)) horizontal++;
-              else break;
-            }
-
-            // 垂直
-            for (let i = 1; i <= 4; i++) {
-              if (player.includes(position + i * 17)) vertical++;
-              else break;
-            }
-            for (let i = 1; i <= 4; i++) {
-              if (player.includes(position - i * 17)) vertical++;
-              else break;
-            }
-
-            // 左斜
-            for (let i = 1; i <= 4; i++) {
-              if (player.includes(position + i * 18)) leftOblique++;
-              else break;
-            }
-            for (let i = 1; i <= 4; i++) {
-              if (player.includes(position - i * 18)) leftOblique++;
-              else break;
-            }
-
-            // 右斜
-            for (let i = 1; i <= 4; i++) {
-              if (player.includes(position + i * 16)) rightOblique++;
-              else break;
-            }
-            for (let i = 1; i <= 4; i++) {
-              if (player.includes(position - i * 16)) rightOblique++;
-              else break;
-            }
-
-            if (
-              horizontal >= 5 ||
-              vertical >= 5 ||
-              leftOblique >= 5 ||
-              rightOblique >= 5
-            ) {
-              //   console.log("獲勝");
-              return true;
-            }
-
-            return false;
-          },
-        },
-        mounted() {
-          for (let i = 1; i <= 255; i++) {
-            this.blocks.push({
-              val: i,
-              select: false,
-            });
-          }
-        },
-      }).mount("#app");
-    </script>
-  </body>
-</html> -->
+  <div class="spinner">
+    <div class="loader"></div>
+  </div>
+  
+</body>
+</html>
