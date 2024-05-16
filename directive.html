@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        .test{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: absolute;
+            bottom: -200px;
+        }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div class="table-area">
+        <table>
+          <thead>
+            <tr>
+              <th>name</th>
+              <th>index</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr >
+              <th>name</th>
+              <th>index</th>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="test" v-view></div>
+    </div>
+
+    <script src="./vue.js"></script>
+    <script>
+      const app = Vue.createApp({
+        data() {
+          return {};
+        },
+        methods: {
+            isInView(){
+                console.log("is")
+            }
+        },
+        mounted() {},
+      });
+
+      app.directive("view", (el, binding,vnode) => {
+        function observerEvent(entries) {
+          entries.forEach((entry) => {
+            console.log('entry.isIntersecting',entry.isIntersecting)
+            if (entry.isIntersecting) {
+            //   observer.unobserve(el);
+            console.log(binding)
+            }
+          });
+        }
+        let options = {
+          root: null, //默認瀏覽器視口
+          rootMargin: "0px",
+          threshold: 0.1, //判斷物件顯示多少範圍要觸發(1是完全)
+        };
+
+        const observer = new IntersectionObserver(observerEvent, options);
+        observer.observe(el);
+      });
+
+      app.mount("#app");
+    </script>
+  </body>
+</html>

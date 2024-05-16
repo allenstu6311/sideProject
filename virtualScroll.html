@@ -3,65 +3,83 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <style>
-    .table-area{
-        width: 500px;
+    <title>Virtual Scroll</title>
+    <style>
+      #scroll-container {
+        width: 300px;
         height: 300px;
         overflow-y: auto;
-        margin: auto;
-        border: 1px solid red;
-    }
-    td{
-       width: 200px;
-    }
-  </style>
+      }
+      .item {
+        /* height: 30px; */
+        position: absolute;
+      }
+
+      .space {
+        width: 100%;
+      }
+    </style>
+  </head>
   <body>
     <div id="app">
-      <div class="table-area" ref="box">
-        <table border="1">
-          <thead>
-            <tr>
-              <th>name</th>
-              <th>index</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="item in testData" :key="item.index">
-                <td>{{ item.name }}</td>
-                <td>{{ item.index }}</td>
-            </tr>
-          </tbody>
-        </table>
+      <div id="scroll-container" @scroll="handleScroll">
+        <template v-for="(item,index) in visibleItems" :key="item.id">
+          <div
+            class="item"
+            :style="{height:itemHeight +'px', top:30 * index + 'px'}"
+          >
+            <span> {{ item.text }}</span>
+          </div>
+        </template>
+        <div
+          class="space"
+          :style="{height:items.length * itemHeight + 'px'}"
+        ></div>
       </div>
     </div>
 
     <script src="./vue.js"></script>
     <script>
+      /**
+       * 虛擬滾動邏輯
+       *
+       * 利用卷軸高度除已項目高度取得開始位置，
+       * 利用容器高度去除以項目高度取出結束位置，
+       * 將項目設定絕對定位，因為項目不占空間，所
+       * 已需要額外設定一個空間去撐開卷軸。
+       *
+       */
       const app = Vue.createApp({
         data() {
-          return {};
-        },
-        methods: {
-
-        },
-        computed: {
-          testData() {
-            return new Array(1000).fill("test").map((item, index, arr) => {
-              return {
-                name: item + index,
-                index: index,
-              };
-            });
-          },
+          return {
+            items: Array.from({ length: 1000 }, (_, i) => ({
+              id: i,
+              text: `Item ${i}`,
+            })),
+            visibleItems: [],
+            itemHeight: 30,
+            containerHeight: 300,
+          };
         },
         mounted() {
-            this.$refs.box.addEventListener("scroll",(e)=>{
-                console.log('e',e.target)
-            })
+          this.updateVisibleItems(0);
         },
-      }).mount("#app");
+        methods: {
+          handleScroll(event) {
+            const scrollTop = event.target.scrollTop;
+            //利用卷軸高度除已項目高度取得開始位置
+            const startIndex = Math.floor(scrollTop / this.itemHeight);
+            this.updateVisibleItems(startIndex);
+          },
+          updateVisibleItems(startIndex) {
+            //利用容器高度去除以項目高度取出結束位置
+            const endIndex =
+              startIndex + Math.ceil(this.containerHeight / this.itemHeight);
+            this.visibleItems = this.items.slice(startIndex, endIndex);
+          },
+        },
+      });
+      app.mount("#app");
     </script>
   </body>
 </html>

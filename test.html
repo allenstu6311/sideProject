@@ -1,49 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>loader</title>
-</head>
-<style>
-  .spinner{
-    position: fixed;
-    margin: auto;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
-    background-color: rgba(226, 226, 226, 0.486);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .loader{
-    width: 50px;
-    height: 50px;
-    border: 5px solid grey;
-    border-bottom: 5px solid red;
-    border-radius: 50%;
-    animation: rotate 1s linear infinite;
-  }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      /* .test {
+        width: 100px;
+        height: 100px;
+        background-color: red;
+        position: absolute;
+        bottom: -200px;
+      } */
+      /* #scroll-container {
+        width: 300px;
+        height: 300px;
+        overflow-y: auto;
+      } */
+      .item {
+        height: 20px;
+        /* height: 30px; */
+        /* position: absolute; */
+      }
 
-  @keyframes rotate {
-    0%{
-      transform: rotate(0deg);
-    }
-    100%{
-      transform: rotate(360deg);
-    }
-  }
-</style>
-<body>
+      .space {
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app">
+      <div id="scroll-container">
+        <template v-for="item in items" :key="item.id">
+          <div class="item" v-view="{item:item}" v-if="item.show">
+            <span>{{item.text}}</span>
+          </div>
+        </template>
 
+        <div class="space" :style="{height:items.length*20}"></div>
+      </div>
 
+      <!-- <div class="test" v-view></div> -->
+    </div>
 
-  <div class="spinner">
-    <div class="loader"></div>
-  </div>
-  
-</body>
+    <script src="./vue.js"></script>
+    <script>
+      let self;
+      const app = Vue.createApp({
+        data() {
+          return {
+            items: Array.from({ length: 1000 }, (_, i) => ({
+              id: i,
+              text: `Item ${i}`,
+              show: true,
+            })),
+            showData: new Set(),
+          };
+        },
+        methods: {},
+        mounted() {
+          self = this;
+          console.log("app");
+        },
+      });
+
+      app.directive("view", (el, binding, vnode) => {
+        function observerEvent(entries) {
+          entries.forEach((entry) => {
+            // console.log("entry.isIntersecting", entry.isIntersecting);
+            const { item } = binding.value;
+            if (entry.isIntersecting) {
+              //   observer.unobserve(el);
+
+              item.show = true;
+            } else {
+              item.show = false;
+              console.log("item", item);
+            }
+          });
+        }
+        let options = {
+          root: null, //默認瀏覽器視口
+          rootMargin: "0px",
+          threshold: 0.1, //判斷物件顯示多少範圍要觸發(1是完全)
+        };
+
+        const observer = new IntersectionObserver(observerEvent, options);
+        observer.observe(el);
+      });
+
+      app.mount("#app");
+    </script>
+  </body>
 </html>
