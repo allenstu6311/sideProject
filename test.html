@@ -5,27 +5,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
   </head>
+  <style>
+    @keyframes light {
+      0% {
+        background-color: black;
+      }
+      50% {
+        background-color: yellow;
+      }
+      100% {
+        background-color: black;
+      }
+    }
+
+    .line-box {
+      display: flex;
+      gap: 3px;
+    }
+    .line {
+      width: 20px;
+      height: 5px;
+      background-color: black;
+    }
+
+    .line:nth-child(1) {
+      animation: light 5s infinite;
+      animation-delay: 2s;
+    }
+    .line:nth-child(2) {
+      animation: light 5s infinite;
+      animation-delay: 3s;
+    }
+    .line:nth-child(3) {
+      animation: light 5s infinite;
+      animation-delay: 4s;
+    }
+    .line:nth-child(4) {
+      animation: light 5s infinite;
+      animation-delay: 5s;
+    }
+  </style>
   <body>
-    <script>
-      var p1 = Promise.resolve(3);
-      var p2 = 1337;
-      var p3 = new Promise((resolve, reject) => {
-        setTimeout(resolve, 100, "foo");
-      });
-
-      // Promise.all([p1, p2, p3]).then((values) => {
-      //   console.log(values); // [3, 1337, "foo"]
-      // });
-      let test = new Promise((resolve, reject) => {
-        setTimeout(() => {
-          resolve("foo");
-        }, 100);
-        setTimeout(resolve, 100, "foo");
-      });
-
-      test.then((value) => {
-        console.log("test", value);
-      });
-    </script>
+    <div class="line-box">
+      <div class="line"></div>
+      <div class="line"></div>
+      <div class="line"></div>
+      <div class="line"></div>
+    </div>
   </body>
 </html>

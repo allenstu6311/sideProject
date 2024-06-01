@@ -1,10 +1,10 @@
+@@ -0,0 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="./style.css" />
   </head>
   <style>
     .table-area {
@@ -17,21 +17,9 @@
     td {
       width: 200px;
     }
-    .spinners {
-      display: flex;
-      justify-content: center;
-      padding: 10px 0;
-    }
-    .loader {
-      border: 2px solid transparent;
-      border-bottom-color: #ff3d00;
-      width: 35px;
-      height: 35px;
-    }
   </style>
   <body>
     <div id="app">
-      {{scrollEnd}}
       <div class="table-area" ref="box">
         <table border="1">
           <thead>
@@ -41,15 +29,12 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="item in testData.slice(start,end)" :key="item.index">
+            <tr v-for="item in testData" :key="item.index">
               <td>{{ item.name }}</td>
               <td>{{ item.index }}</td>
             </tr>
           </tbody>
         </table>
-        <div class="spinners" v-show="end < length">
-          <div class="loader"></div>
-        </div>
       </div>
     </div>
 
@@ -57,17 +42,12 @@
     <script>
       const app = Vue.createApp({
         data() {
-          return {
-            start: 0,
-            end: 20,
-            scrollEnd: false,
-            length:100
-          };
+          return {};
         },
         methods: {},
         computed: {
           testData() {
-            return new Array(this.length).fill("test").map((item, index, arr) => {
+            return new Array(1000).fill("test").map((item, index, arr) => {
               return {
                 name: item + index,
                 index: index,
@@ -77,22 +57,7 @@
         },
         mounted() {
           this.$refs.box.addEventListener("scroll", (e) => {
-            // console.log("e", e.target);
-            let item = this.$refs.box;
-
-            const height = item.clientHeight;
-            const scrollTop = item.scrollTop + 1;
-            const scrollHeight = item.scrollHeight;
-            this.scrollEnd = height + scrollTop >= scrollHeight;
-
-            if (this.scrollEnd) {
-              if (this.end < this.length) {
-                setTimeout(() => {
-                  this.end += 20;
-                  this.scrollEnd = false;
-                }, 500);
-              }
-            }
+            console.log("e", e.target);
           });
         },
       }).mount("#app");

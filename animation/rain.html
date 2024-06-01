@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    /* #rain {
+      width: 500px;
+      height: 500px;
+    } */
+  </style>
+  <body>
+    <!-- 大數據figma -->
+    <!-- https://www.figma.com/design/haXAYiLcnpUpp3DQxhmz74/ryan%E5%A4%A7%E6%95%B8%E6%93%9A?node-id=536-7807 -->
+    <!-- 正式區 -->
+    <!-- https://stat-moibd.moi.gov.tw/ -->
+
+    <canvas id="rain" width="500" height="500"></canvas>
+
+    <script>
+      let canvas = document.getElementById("rain");
+      let ctx = canvas.getContext("2d");
+      let width = canvas.offsetWidth;
+      let height = canvas.offsetHeight;
+
+      let rain_box = []; //執行動畫的對象
+
+      function radom(min, max) {
+        return Math.random() * (max - min) + min;
+      }
+
+      function rain() {}
+
+      rain.prototype = {
+        init: () => {
+          //下雨得相關
+          this.x = radom(0, width);
+          this.y = 0;
+          this.color = "red"; //雨的顏色
+          this.gravity = radom(4, 5); //降雨速度
+          this.rainW = 2; //寬
+          this.rainH = 10; //高
+          this.hitFloor = radom(height * 0.1, height * 0.8); //地板高度
+
+          //漣漪
+          this.rippleW = 2; //寬
+          this.rippleH = 1; //高
+          this.vw = 3; //每次增加寬度的比例
+          this.vh = 1; //每次增加寬度的比例
+          this.opacity = 1; //透明度
+          this.fade = 0.96; //每次淡化比例;
+        },
+        draw: () => {
+          //如果雨滴落地
+          if (this.y > this.hitFloor) {
+            ctx.beginPath();
+            //移動到雨水降落的位置減掉漣漪高度的一半(剛好是圓的頂端)
+            ctx.moveTo(this.x, this.y - this.rippleH / 2);
+
+            //畫出右半圓
+            ctx.bezierCurveTo(
+              this.x + width / 2,
+              this.y + height / 2,
+              this.x + width / 2,
+              this.y + height / 2,
+              this.x,
+              this.y - height / 2
+            );
+
+            //畫出左半圓
+            ctx.bezierCurveTo(
+              this.x + width / 2,
+              this.y + height / 2,
+              this.x - width / 2,
+              this.y - height / 2,
+              this.x,
+              this.y - height / 2
+            );
+
+            ctx.strokeStyle = `rgba(250,215,20, ${this.opacity})`;
+            ctx.stroke();
+            ctx.closePath();
+          } else {
+            ctx.fillStyle = this.color;
+            ctx.fillRect(this.x, this.y, this.rippleW, this.rippleH);
+          }
+        },
+        update: () => {
+          // if(this.y > 0.03){
+          //   this.w += this.vw
+          // }
+        },
+      };
+
+      window.onload = function () {
+        var rainFn = new rain();
+        rainFn.init();
+        for (let i = 0; i < 20; i++) {
+          rain_box.push(rainFn);
+        }
+
+        console.log("rain_box", rain_box);
+      };
+    </script>
+  </body>
+</html>
