@@ -27,8 +27,7 @@
         height: 100%;
       }
       .map-group {
-        transition: transform 0.5s ease-in-out;
-        /* will-change: transform; */
+        transition: all 0.5s;
         shape-rendering: crispEdges;
       }
     </style>
@@ -48,6 +47,8 @@
     <script src="../vue.js"></script>
     <script src="./utils.js"></script>
     <script src="./component/Taiwan.js"></script>
+    <script src="./component/Taoyuan/villages.js"></script>
+  
     <script src="./component/Taoyuan/index.js"></script>
     <script>
       const app = Vue.createApp({
