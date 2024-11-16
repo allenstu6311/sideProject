@@ -14,25 +14,36 @@ const taiwan = {
         x: 0,
         y: 0,
         scale: 0,
-        towns:'',
-        villages:''
+        townsName: "",
+        townsDom: "",
+        villagesName: "",
+        villagesDom: "",
       },
-      towns:{},
-      villages:{}
+      towns: {},
+      villages: {},
     };
   },
   watch: {
-    deepVal(newVal, oldVal) {      
+    deepVal(newVal, oldVal) {
       const { towns, villages } = this.$refs;
       if (newVal === 0) {
-        this.initMap()
+        this.initMap();
         this.removeChild(towns);
+        this.blurMap();
+      }
+
+      // 父層點擊返回
+      if (oldVal > newVal && newVal === 2) {
+        this.blurMap();
+        this.focusMap(this.position.villagesDom);
       }
 
       // 父層點擊返回
       if (oldVal > newVal && newVal === 1) {
         this.moveMap(this.position.x, this.position.y, this.position.scale);
         this.removeChild(villages);
+        this.blurMap();
+        this.focusMap(this.position.townsDom);
       }
     },
   },
@@ -44,9 +55,9 @@ const taiwan = {
       const { x, y, width, height } = map.getBBox();
 
       const mapCenterX = x + width / 2;
-      const mapCenterY = y + height /2;
+      const mapCenterY = y + height / 2;
 
-      svg.setAttribute('viewBox',`0 0 ${innerWidth} ${innerHeight}`)
+      svg.setAttribute("viewBox", `0 0 ${innerWidth} ${innerHeight}`);
 
       const centerX = innerWidth / 2 - mapCenterX;
       const centerY = innerHeight / 2 - mapCenterY;
@@ -65,73 +76,80 @@ const taiwan = {
       );
 
       if (parent && child) {
- 
         parent.insertAdjacentHTML("beforeend", child);
-        // parent.appendChild(child)
-        if (this.deepVal < 2) {
-          console.log('parent',parent);
-          
+        if (this.deepVal < 1) {
           this.addEvent(parent, 2);
+        } else {
+          this.addEvent(parent, 3);
         }
       }
+    },
+    focusMap(dom) {
+      const { map } = this.$refs;
+      const cloneDom = dom.cloneNode(true);
+      cloneDom.setAttribute("stroke", "yellow");
+      cloneDom.setAttribute("fill", "none");
+      map.appendChild(cloneDom);
+    },
+    blurMap(dom) {
+      const { map } = this.$refs;
+      map.removeChild(map.lastChild);
     },
     addEvent(el, deep) {
       const { towns, villages, map, svg } = this.$refs;
       Array.from(el.children).forEach((child) => {
         child.addEventListener("click", () => {
- 
-
           //更新父曾
           this.$emit("updateDeep", deep);
+          if (deep > 2) {
+            this.blurMap(this.position.villagesDom);
+          } else {
+            // <path>
+            const pathBox = child.getBBox();
+            const pathCenterX = pathBox.x + pathBox.width / 2;
+            const pathCenterY = pathBox.y + pathBox.height / 2;
 
-          // <path>
-          const pathBox = child.getBBox();
-          const pathCenterX = pathBox.x + pathBox.width / 2;
-          const pathCenterY = pathBox.y + pathBox.height / 2;
+            // viewBox
+            const svgSize = svg.getAttribute("viewBox").split(" ");
+            const svgWidth = svgSize[2];
+            const svgHeight = svgSize[3];
+            const zoomLevel =
+              pathBox.height > pathBox.width
+                ? 728 / pathBox.height
+                : 728 / pathBox.width;
 
-          // viewBox
-          const svgSize = svg.getAttribute('viewBox').split(' ');
-          const svgWidth = svgSize[2];
-          const svgHeight = svgSize[3];
-          const zoomLevel =
-            pathBox.height > pathBox.width
-              ? 728 / pathBox.height
-              : 728 / pathBox.width;
+            // 將目標 path 的中心點移動到 SVG 可視區域的中心
+            const translateX = svgWidth / 2 - pathCenterX * zoomLevel;
+            const translateY = svgHeight / 2 - pathCenterY * zoomLevel;
 
-          // 將目標 path 的中心點移動到 SVG 可視區域的中心
-          const translateX = svgWidth / 2 - pathCenterX * zoomLevel;
-          const translateY = svgHeight / 2 - pathCenterY * zoomLevel;
-          
-          // 紀錄城鎮的移動
-          if (deep === 1) {
-            this.position.x = translateX;
-            this.position.y = translateY;
-            this.position.scale = zoomLevel;
-            this.position.towns = child.getAttribute("name");
+            // 紀錄城鎮的移動
+            if (deep === 1) {
+              this.position.x = translateX;
+              this.position.y = translateY;
+              this.position.scale = zoomLevel;
+              this.position.townsName = child.getAttribute("name");
+              this.position.townsDom = child;
+            } else {
+              this.position.villagesName = child.getAttribute("name");
+              this.position.villagesDom = child;
+              this.blurMap(this.position.townsDom);
+            }
+
+            const areaName = child.getAttribute("name");
+            const template =
+              deep > 1
+                ? this.towns[this.position.townsName].villages[areaName]
+                : this.towns[areaName].towns;
+
+            this.moveMap(
+              translateX,
+              translateY,
+              zoomLevel,
+              deep > 1 ? villages : towns,
+              template
+            );
           }
-
-          
-          const areaName =  child.getAttribute("name");
-          // console.log('areaName',areaName);
-          // console.log('child',child);
-          
-          console.log('deep',deep);
-          
-          const template = deep > 1 ?  this.towns[this.position.towns].villages[areaName] : this.towns[areaName].towns;
-          console.log('this.towns[this.position.towns]',this.towns[this.position.towns]?.villages[areaName]);
-          
-          this.moveMap(
-            translateX,
-            translateY,
-            zoomLevel,
-            deep > 1 ? villages : towns,
-            // map,
-            template
-            // this.deepVal > 0 ? taoyuanVillages : taoyuanTowns
-            
-
-          );
-        
+          this.focusMap(child);
         });
       });
     },
@@ -141,9 +159,13 @@ const taiwan = {
     this.initMap();
     this.addEvent(country, 1);
 
+    window.addEventListener("resize", () => {
+      this.initMap();
+    });
+
     this.towns = {
       taoyuan,
-    }    
+    };
   },
   template: `
      <svg class="tw-geo svelte-ul8skc" viewBox="0 0 0 0" ref="svg">
@@ -289,9 +311,7 @@ const taiwan = {
               stroke="#fff"
             ></path>
           </g>
-          <g class="selected-county-towns" ref="towns">
-            
-          </g>
+          <g class="selected-county-towns" ref="towns"></g>
           <g class="selected-town-villages" ref="villages"></g>
         </g>
       </g>
