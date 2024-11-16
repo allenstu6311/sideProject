@@ -32,6 +32,7 @@ const taiwan = {
         name: "",
         dom: "",
       },
+      focusDom:''
     };
   },
   watch: {
@@ -56,34 +57,27 @@ const taiwan = {
       this.moveMap(centerX, centerY);
     },
     updateDeepVal(newVal, oldVal) {
-      console.log("newVal", newVal,'oldVal',oldVal);
-
+      // console.log("newVal", newVal,'oldVal',oldVal);
       const { towns, villages } = this.$refs;
       if (newVal === 0) {
         this.initMap();
         this.removeChild(towns);
-        this.blurMap()
+        this.focusMap()
       }
 
       if (newVal === 1) {
+        this.focusMap(this.townInfo.dom);
         if (oldVal > newVal) {
-          this.blurMap()
-          this.focusMap(this.townInfo.dom);
           this.moveMap(this.position.x, this.position.y, this.position.scale);
           this.removeChild(villages);
-          
-        } else {
-          this.focusMap(this.townInfo.dom);
         }
       }
 
       if (newVal === 2) {
-        this.blurMap()
         this.focusMap(this.villageInfo.dom);
       }
 
       if (newVal === 3) {
-        this.blurMap()
         this.focusMap(this.pathInfo.dom);
       }
     },
@@ -110,18 +104,19 @@ const taiwan = {
     },
     focusMap(dom) {
       const { map } = this.$refs;
-
-      if (!dom) return;
+      if (this.focusDom){
+        map.removeChild(this.focusDom);
+      }
+      if(!dom) {
+        this.focusDom = ''
+        return
+      }
       const cloneDom = dom.cloneNode(true);
       cloneDom.setAttribute("stroke", "yellow");
       cloneDom.setAttribute("stroke-width", "0.5");
       cloneDom.setAttribute("fill", "none");
+      this.focusDom = cloneDom;
       map.appendChild(cloneDom);
-    },
-    blurMap() {
-      const { map } = this.$refs;
-      map.removeChild(map.lastChild);
-  
     },
     addEvent(el, deep) {
       const { towns, villages, map, svg } = this.$refs;
@@ -130,7 +125,6 @@ const taiwan = {
           //更新父曾
           this.$emit("updateDeep", deep);
           if (deep > 2) {
-            // this.blurMap(this.position.villagesDom);
             this.pathInfo.dom = child;
           } else {
             // <path>
