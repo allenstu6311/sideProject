@@ -61,30 +61,28 @@ export const taiwan = {
       // console.log("newVal", newVal,'oldVal',oldVal);
       const { towns, villages } = this.$refs;
 
-      
-      if (newVal === 0) {
-        this.initMap();
-        this.removeChild(towns);
-        this.focusMap();
-      }
-
-      if (newVal === 1) {
-        this.focusMap(this.townInfo.dom);
-        this.$emit("getLocationData",this.townInfo)
-        if (oldVal > newVal) {
-          this.moveMap(this.position.x, this.position.y, this.position.scale);
-          this.removeChild(villages);
-        }
-      }
-
-      if (newVal === 2) {
-        this.$emit("getLocationData",this.villageInfo)
-        this.focusMap(this.villageInfo.dom);
-      }
-
-      if (newVal === 3) {
-        this.$emit("getLocationData",this.pathInfo)
-        this.focusMap(this.pathInfo.dom);
+      switch(newVal){
+        case 0:
+          this.initMap();
+          this.removeChild(towns);
+          this.focusMap();
+        break;
+        case 1:
+          this.focusMap(this.townInfo.dom);
+          this.$emit("getLocationData",this.townInfo);
+          if(oldVal > newVal){
+            this.moveMap(this.position.x, this.position.y, this.position.scale);
+            this.removeChild(villages);
+          }
+        break;
+        case 2:
+          this.$emit("getLocationData",this.villageInfo)
+          this.focusMap(this.villageInfo.dom);
+        break;
+        case 3:
+          this.$emit("getLocationData",this.pathInfo)
+          this.focusMap(this.pathInfo.dom);
+        break;
       }
     },
     removeChild(parent) {
