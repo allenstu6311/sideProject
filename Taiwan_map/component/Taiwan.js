@@ -19,32 +19,24 @@ const taiwan = {
         villagesName: "",
         villagesDom: "",
       },
-      towns: {},
-      villages: {},
+      towsList: {},
+      townInfo: {
+        name: "",
+        dom: "",
+      },
+      villageInfo: {
+        name: "",
+        dom: "",
+      },
+      pathInfo: {
+        name: "",
+        dom: "",
+      },
     };
   },
   watch: {
     deepVal(newVal, oldVal) {
-      const { towns, villages } = this.$refs;
-      if (newVal === 0) {
-        this.initMap();
-        this.removeChild(towns);
-        this.blurMap();
-      }
-
-      // 父層點擊返回
-      if (oldVal > newVal && newVal === 2) {
-        this.blurMap();
-        this.focusMap(this.position.villagesDom);
-      }
-
-      // 父層點擊返回
-      if (oldVal > newVal && newVal === 1) {
-        this.moveMap(this.position.x, this.position.y, this.position.scale);
-        this.removeChild(villages);
-        this.blurMap();
-        this.focusMap(this.position.townsDom);
-      }
+      this.updateDeepVal(newVal, oldVal);
     },
   },
   methods: {
@@ -62,6 +54,38 @@ const taiwan = {
       const centerX = innerWidth / 2 - mapCenterX;
       const centerY = innerHeight / 2 - mapCenterY;
       this.moveMap(centerX, centerY);
+    },
+    updateDeepVal(newVal, oldVal) {
+      console.log("newVal", newVal,'oldVal',oldVal);
+
+      const { towns, villages } = this.$refs;
+      if (newVal === 0) {
+        this.initMap();
+        this.removeChild(towns);
+        this.blurMap()
+      }
+
+      if (newVal === 1) {
+        if (oldVal > newVal) {
+          this.blurMap()
+          this.focusMap(this.townInfo.dom);
+          this.moveMap(this.position.x, this.position.y, this.position.scale);
+          this.removeChild(villages);
+          
+        } else {
+          this.focusMap(this.townInfo.dom);
+        }
+      }
+
+      if (newVal === 2) {
+        this.blurMap()
+        this.focusMap(this.villageInfo.dom);
+      }
+
+      if (newVal === 3) {
+        this.blurMap()
+        this.focusMap(this.pathInfo.dom);
+      }
     },
     removeChild(parent) {
       while (parent.firstChild) {
@@ -86,14 +110,18 @@ const taiwan = {
     },
     focusMap(dom) {
       const { map } = this.$refs;
+
+      if (!dom) return;
       const cloneDom = dom.cloneNode(true);
       cloneDom.setAttribute("stroke", "yellow");
+      cloneDom.setAttribute("stroke-width", "0.5");
       cloneDom.setAttribute("fill", "none");
       map.appendChild(cloneDom);
     },
-    blurMap(dom) {
+    blurMap() {
       const { map } = this.$refs;
       map.removeChild(map.lastChild);
+  
     },
     addEvent(el, deep) {
       const { towns, villages, map, svg } = this.$refs;
@@ -102,7 +130,8 @@ const taiwan = {
           //更新父曾
           this.$emit("updateDeep", deep);
           if (deep > 2) {
-            this.blurMap(this.position.villagesDom);
+            // this.blurMap(this.position.villagesDom);
+            this.pathInfo.dom = child;
           } else {
             // <path>
             const pathBox = child.getBBox();
@@ -127,19 +156,19 @@ const taiwan = {
               this.position.x = translateX;
               this.position.y = translateY;
               this.position.scale = zoomLevel;
-              this.position.townsName = child.getAttribute("name");
-              this.position.townsDom = child;
+
+              this.townInfo.name = child.getAttribute("name");
+              this.townInfo.dom = child;
             } else {
-              this.position.villagesName = child.getAttribute("name");
-              this.position.villagesDom = child;
-              this.blurMap(this.position.townsDom);
+              this.villageInfo.name = child.getAttribute("name");
+              this.villageInfo.dom = child;
             }
 
             const areaName = child.getAttribute("name");
             const template =
               deep > 1
-                ? this.towns[this.position.townsName].villages[areaName]
-                : this.towns[areaName].towns;
+                ? this.towsList[this.townInfo.name].villages[areaName]
+                : this.towsList[areaName].towns;
 
             this.moveMap(
               translateX,
@@ -149,7 +178,10 @@ const taiwan = {
               template
             );
           }
-          this.focusMap(child);
+
+          if (this.deepVal === deep) {
+            this.updateDeepVal(deep, this.deepVal);
+          }
         });
       });
     },
@@ -163,7 +195,7 @@ const taiwan = {
       this.initMap();
     });
 
-    this.towns = {
+    this.towsList = {
       taoyuan,
     };
   },
