@@ -17,18 +17,18 @@ export const taiwan = {
         scale: 0,
       },
       countryList: {},
-      townInfo: {
+      countryInfo: {
         name: "",
         dom: "",
         id: "",
         textContent: "",
       },
-      villageInfo: {
+      townInfo: {
         name: "",
         dom: "",
         textContent: "",
       },
-      pathInfo: {
+      villageInfo: {
         name: "",
         dom: "",
         textContent: "",
@@ -68,20 +68,20 @@ export const taiwan = {
           this.focusMap();
         break;
         case 1:
-          this.focusMap(this.townInfo.dom);
-          this.$emit("getLocationData",this.townInfo);
+          this.focusMap(this.countryInfo.dom);
+          this.$emit("getLocationData",this.countryInfo);
           if(oldVal > newVal){
             this.moveMap(this.position.x, this.position.y, this.position.scale);
             this.removeChild(villages);
           }
         break;
         case 2:
-          this.$emit("getLocationData",this.villageInfo)
-          this.focusMap(this.villageInfo.dom);
+          this.$emit("getLocationData",this.townInfo)
+          this.focusMap(this.townInfo.dom);
         break;
         case 3:
-          this.$emit("getLocationData",this.pathInfo)
-          this.focusMap(this.pathInfo.dom);
+          this.$emit("getLocationData",this.villageInfo)
+          this.focusMap(this.villageInfo.dom);
         break;
       }
     },
@@ -118,7 +118,7 @@ export const taiwan = {
       }
       const cloneDom = dom.cloneNode(true);
       cloneDom.setAttribute("stroke", "yellow");
-      cloneDom.setAttribute("stroke-width", "0.5");
+      cloneDom.setAttribute("stroke-width", `0.${ 4 - this.deepVal}`);
       cloneDom.setAttribute("fill", "none");
       this.focusDom = cloneDom;
       map.appendChild(cloneDom);
@@ -139,7 +139,7 @@ export const taiwan = {
 
           if (deep > 2) {
             console.log("call2");
-            this.pathInfo.dom = child;
+            this.villageInfo.dom = child;
           } else {
             // <path>
             const pathBox = child.getBBox();
@@ -159,28 +159,28 @@ export const taiwan = {
             const translateX = svgWidth / 2 - pathCenterX * zoomLevel;
             const translateY = svgHeight / 2 - pathCenterY * zoomLevel;
 
-            // 紀錄城鎮的移動
+            // 紀錄country的移動(桃園、台北...)
             if (deep === 1) {
               this.position.x = translateX;
               this.position.y = translateY;
               this.position.scale = zoomLevel;
 
-              this.townInfo.name = child.getAttribute("name");
-              this.townInfo.id = child.getAttribute("id");
-              this.townInfo.dom = child;
-              this.townInfo.textContent = await this.getCountryData(
-                this.townInfo.id
+              this.countryInfo.name = child.getAttribute("name");
+              this.countryInfo.id = child.getAttribute("id");
+              this.countryInfo.dom = child;
+              this.countryInfo.textContent = await this.getCountryData(
+                this.countryInfo.id
               );
             } else {
-              this.villageInfo.name = child.getAttribute("name");
-              this.villageInfo.dom = child;
+              this.townInfo.name = child.getAttribute("name");
+              this.townInfo.dom = child;
             }
 
             const areaName = child.getAttribute("name");
             const template =
               deep > 1
-                ? this.countryList[this.townInfo.name].villages[areaName]
-                : this.countryList[areaName].towns;
+                ? this.countryList[this.countryInfo.name].towns[areaName]
+                : this.countryList[areaName].country;
 
             this.moveMap(
               translateX,
