@@ -8,7 +8,7 @@
       * {
         padding: 0;
         margin: 0;
-        /* stroke-width: 0.1; */
+        shape-rendering: crispEdges;
       }
       html {
         overflow: hidden;
@@ -25,10 +25,11 @@
       svg {
         width: 100%;
         height: 100%;
+        image-rendering: crisp-edges;
       }
       .map-group {
         transition: all 0.5s;
-        shape-rendering: crispEdges;
+        will-change: transform;
       }
 
       .map-group g path {
@@ -65,16 +66,17 @@
         <div class="map">
           <Taiwan
             v-model:deep-val="deep"
-            @update-deep="updateDeep"
-            @get-location-data="getLocationData"
+            @update-deep="(val)=>deep = val"
+            @get-location-data="(val)=>locationData = val"
+            @update-address="(val)=>currAddress = val"
           />
         </div>
         <div class="window">
           <div class="title">
-            <h3>{{locationData.chName}}</h3>
+            <h3 v-if="deep > 0">{{currAddress}}</h3>
           </div>
           <div class="desc">
-            <p>{{ locationData.textContent }}</p>
+            <p v-if="deep > 0">{{ locationData.textContent }}</p>
           </div>
         </div>
       </div>
@@ -88,6 +90,7 @@
           return {
             deep: 0,
             locationData: {},
+            currAddress: "",
           };
         },
         methods: {
@@ -95,12 +98,6 @@
             if (this.deep > 0) {
               this.deep--;
             }
-          },
-          updateDeep(val) {            
-            this.deep = val;
-          },
-          getLocationData(data) {
-            this.locationData = data;
           },
         },
         mounted() {},
