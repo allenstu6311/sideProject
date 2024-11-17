@@ -31,26 +31,26 @@
         shape-rendering: crispEdges;
       }
 
-      .map-group g path{
+      .map-group g path {
         stroke-width: 0.1;
       }
-      .window{
+      .window {
         width: 300px;
 
         border-radius: 25px;
         position: absolute;
         right: 0;
-        top: 0;
+        bottom: 0;
         background-color: purple;
         padding: 20px;
       }
 
-      .window div{
+      .window div {
         background-color: #f4f4f4;
         margin: 20px;
       }
 
-      .window .desc{
+      .window .desc {
         overflow-y: scroll;
         height: 200px;
       }
@@ -63,11 +63,15 @@
           <p>返回上一層</p>
         </div>
         <div class="map">
-          <Taiwan v-model:deep-val="deep" @update-deep="updateDeep" @get-location-data="getLocationData"/>
+          <Taiwan
+            v-model:deep-val="deep"
+            @update-deep="updateDeep"
+            @get-location-data="getLocationData"
+          />
         </div>
         <div class="window">
           <div class="title">
-            <h3>{{locationData.name}}</h3>
+            <h3>{{locationData.chName}}</h3>
           </div>
           <div class="desc">
             <p>{{ locationData.textContent }}</p>
@@ -76,14 +80,14 @@
       </div>
     </div>
 
-    <script  src="../vue.js"></script>
+    <script src="../vue.js"></script>
     <script type="module">
-      import { taiwan } from "./component/Taiwan.js"
+      import { taiwan } from "./component/Taiwan.js";
       const app = Vue.createApp({
         data() {
           return {
             deep: 0,
-            locationData:{}
+            locationData: {},
           };
         },
         methods: {
@@ -92,16 +96,12 @@
               this.deep--;
             }
           },
-          updateDeep(val) {
-            console.log('val',val);
-            
+          updateDeep(val) {            
             this.deep = val;
           },
-          getLocationData(data){
-            console.log('data',data);
+          getLocationData(data) {
             this.locationData = data;
-            
-          }
+          },
         },
         mounted() {},
       });
