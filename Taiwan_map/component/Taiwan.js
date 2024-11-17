@@ -141,13 +141,10 @@ export const taiwan = {
         child.addEventListener("click", async () => {
           //更新父曾深度
           this.$emit("updateDeep", deep);
-          console.log("child", child);
 
           const areaName = child.getAttribute("name");
           const id = child.getAttribute("id");
           const dom = child;
-
-          console.log("areaName", areaName);
 
           if (deep > 2) {
             this.villageInfo = await assignValue(areaName, id, dom, deep);
