@@ -39,9 +39,9 @@ export const taiwan = {
   },
   computed: {
     currAddress() {
-      const countryName = this.countryInfo.chName || "";
-      const townName = this.townInfo.chName || "";
-      const villageName = this.villageInfo.chName || "";
+      const countryName = (this.deepVal && this.countryInfo.chName) || "";
+      const townName = (this.deepVal > 1 && this.townInfo.chName) || "";
+      const villageName = (this.deepVal > 2 && this.villageInfo.chName) || "";
 
       return countryName + townName + villageName;
     },
@@ -71,7 +71,7 @@ export const taiwan = {
       this.moveMap(centerX, centerY);
     },
     updateDeepVal(newVal, oldVal) {
-      // console.log("newVal", newVal,'oldVal',oldVal);
+      console.log("newVal", newVal, "oldVal", oldVal);
       const { towns, villages } = this.$refs;
 
       switch (newVal) {
@@ -91,6 +91,7 @@ export const taiwan = {
         case 2:
           this.$emit("getLocationData", this.townInfo);
           this.focusMap(this.townInfo.dom);
+
           break;
         case 3:
           this.$emit("getLocationData", this.villageInfo);
@@ -139,15 +140,14 @@ export const taiwan = {
       const { towns, villages, map, svg } = this.$refs;
       Array.from(el.children).forEach((child) => {
         child.addEventListener("click", async () => {
-          //更新父曾深度
-          this.$emit("updateDeep", deep);
-
           const areaName = child.getAttribute("name");
           const id = child.getAttribute("id");
           const dom = child;
 
-          if (deep > 2) {
+          if (deep === 3) {
             this.villageInfo = await assignValue(areaName, id, dom, deep);
+            this.$emit("updateDeep", deep);
+            return;
           } else {
             // <path>
             const pathBox = child.getBBox();
@@ -169,25 +169,41 @@ export const taiwan = {
 
             // 紀錄country的移動(桃園、台北...)
             if (deep === 1) {
+              const sameName = areaName !== this.countryInfo.name;
+
+              if (sameName) {
+                this.removeChild(towns);
+              }
+
               this.position.x = translateX;
               this.position.y = translateY;
               this.position.scale = zoomLevel;
               this.countryInfo = await assignValue(areaName, id, dom, deep);
             } else {
+              const sameName = areaName !== this.townInfo.name;
+
+              if (sameName) {
+                this.removeChild(villages);
+              }
               this.townInfo = await assignValue(areaName, id, dom, deep);
             }
 
+            /**
+             * 更新父曾深度，須確保子層的DOM已取得
+             */
+            this.$emit("updateDeep", deep);
+
             const template =
-              deep > 1
-                ? this.countryList[this.countryInfo.name]?.towns[areaName]
-                : this.countryList[areaName]?.country;
+              deep === 1
+                ? this.countryList[areaName]?.country
+                : this.countryList[this.countryInfo.name]?.towns[areaName];
 
             if (template) {
               this.moveMap(
                 translateX,
                 translateY,
                 zoomLevel,
-                deep > 1 ? villages : towns,
+                deep === 1 ? towns : villages,
                 template
               );
             }
