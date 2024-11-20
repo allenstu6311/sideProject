@@ -209,6 +209,7 @@ export const taiwan = {
             }
           }
 
+          // 在同一層移動也要確保觸發位移
           if (this.deepVal === deep) {
             this.updateDeepVal(deep, this.deepVal);
           }
