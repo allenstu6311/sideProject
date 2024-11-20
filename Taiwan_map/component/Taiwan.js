@@ -1,6 +1,6 @@
 import { Taoyuan } from "./Taoyuan/towns.js";
 import NewTaipei from "./NewTaipei/towns.js";
-import { assignValue } from "../utils.js";
+import { assignValue, getBBoxCenter } from "../utils.js";
 
 export const taiwan = {
   props: {
@@ -57,28 +57,25 @@ export const taiwan = {
   methods: {
     initMap() {
       const { map, svg } = this.$refs;
-
       const { innerWidth, innerHeight } = window;
-      const { x, y, width, height } = map.getBBox();
-
-      const mapCenterX = x + width / 2;
-      const mapCenterY = y + height / 2;
-
       svg.setAttribute("viewBox", `0 0 ${innerWidth} ${innerHeight}`);
 
-      const centerX = innerWidth / 2 - mapCenterX;
-      const centerY = innerHeight / 2 - mapCenterY;
-      this.moveMap(centerX, centerY);
+      const { centerX, centerY } = getBBoxCenter(map);
+      const translateX = innerWidth / 2 - centerX;
+      const translateY = innerHeight / 2 - centerY;
+
+      this.moveMap(translateX, translateY);
     },
     updateDeepVal(newVal, oldVal) {
       console.log("newVal", newVal, "oldVal", oldVal);
-      const { towns, villages } = this.$refs;
+      const { towns, villages, map } = this.$refs;
 
       switch (newVal) {
         case 0:
           this.initMap();
           this.removeChild(towns);
-          this.focusMap();
+          map.removeChild(this.focusDom);
+          this.focusDom = "";
           break;
         case 1:
           this.focusMap(this.countryInfo.dom);
@@ -104,31 +101,27 @@ export const taiwan = {
         parent.removeChild(parent.firstChild);
       }
     },
-    moveMap(translateX, translateY, scale = 1, parent, child) {
+    moveMap(translateX, translateY, scale = 1) {
       const { map } = this.$refs;
       map.setAttribute(
         "transform",
         `translate(${translateX}, ${translateY}) scale(${scale})`
       );
-
-      if (parent && child) {
-        parent.insertAdjacentHTML("beforeend", child);
-        this.$nextTick(() => {
-          if (this.deepVal <= 2) {
-            this.addEvent(parent, this.deepVal + 1);
-          }
-        });
-      }
+    },
+    insertMap(parent, child) {
+      parent.insertAdjacentHTML("beforeend", child);
+      this.$nextTick(() => {
+        if (this.deepVal <= 2) {
+          this.addEvent(parent, this.deepVal + 1);
+        }
+      });
     },
     focusMap(dom) {
       const { map } = this.$refs;
       if (this.focusDom) {
         map.removeChild(this.focusDom);
       }
-      if (!dom) {
-        this.focusDom = "";
-        return;
-      }
+
       const cloneDom = dom.cloneNode(true);
       cloneDom.setAttribute("stroke", "yellow");
       cloneDom.setAttribute("stroke-width", `0.${4 - this.deepVal}`);
@@ -147,21 +140,17 @@ export const taiwan = {
           if (deep === 3) {
             this.villageInfo = await assignValue(areaName, id, dom, deep);
             this.$emit("updateDeep", deep);
-            return;
           } else {
-            // <path>
-            const pathBox = child.getBBox();
-            const pathCenterX = pathBox.x + pathBox.width / 2;
-            const pathCenterY = pathBox.y + pathBox.height / 2;
+            const {
+              centerX: pathCenterX,
+              centerY: pathCenterY,
+              zoomLevel,
+            } = getBBoxCenter(child);
 
             // viewBox
             const svgSize = svg.getAttribute("viewBox").split(" ");
             const svgWidth = svgSize[2];
             const svgHeight = svgSize[3];
-            const zoomLevel =
-              pathBox.height > pathBox.width
-                ? 728 / pathBox.height
-                : 728 / pathBox.width;
 
             // 將目標 path 的中心點移動到 SVG 可視區域的中心
             const translateX = svgWidth / 2 - pathCenterX * zoomLevel;
@@ -170,7 +159,6 @@ export const taiwan = {
             // 紀錄country的移動(桃園、台北...)
             if (deep === 1) {
               const sameName = areaName !== this.countryInfo.name;
-
               if (sameName) {
                 this.removeChild(towns);
               }
@@ -181,7 +169,6 @@ export const taiwan = {
               this.countryInfo = await assignValue(areaName, id, dom, deep);
             } else {
               const sameName = areaName !== this.townInfo.name;
-
               if (sameName) {
                 this.removeChild(villages);
               }
@@ -199,13 +186,8 @@ export const taiwan = {
                 : this.countryList[this.countryInfo.name]?.towns[areaName];
 
             if (template) {
-              this.moveMap(
-                translateX,
-                translateY,
-                zoomLevel,
-                deep === 1 ? towns : villages,
-                template
-              );
+              this.moveMap(translateX, translateY, zoomLevel);
+              this.insertMap(deep === 1 ? towns : villages, template);
             }
           }
 
@@ -222,9 +204,9 @@ export const taiwan = {
     this.initMap();
     this.addEvent(country, 1);
 
-    window.addEventListener("resize", () => {
-      this.initMap();
-    });
+    // window.addEventListener("resize", () => {
+    //   this.initMap();
+    // });
 
     this.countryList = {
       Taoyuan,

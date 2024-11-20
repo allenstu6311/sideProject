@@ -13,6 +13,11 @@
       html {
         overflow: hidden;
       }
+      .svg-mapping {
+        position: absolute;
+        left: 0;
+        top: 0;
+      }
       .container {
         position: relative;
       }
@@ -36,29 +41,44 @@
         stroke-width: 0.1;
       }
       .window {
-        width: 300px;
-
-        border-radius: 25px;
+        box-sizing: border-box;
+        width: 250px;
+        border-radius: 8px;
         position: absolute;
-        right: 0;
-        bottom: 0;
-        background-color: purple;
-        padding: 20px;
+        top: 10%;
+        right: 10px;
+        background-color: #5a6be3;
+        padding: 16px 24px;
+      }
+
+      .title {
+        margin-bottom: 20px;
+        color: #fff;
       }
 
       .window div {
-        background-color: #f4f4f4;
-        margin: 20px;
+        background-color: rgba(244, 244, 244, 0.9);
+        margin-bottom: 20px;
+        border-radius: 8px;
+        padding: 16px;
       }
 
       .window .desc {
         overflow-y: scroll;
-        height: 200px;
+        height: 250px;
+      }
+      s .window .desc::-webkit-scrollbar {
+        width: 0;
       }
     </style>
   </head>
   <body>
     <div id="app">
+      <!-- <svg>
+        <use xlink:href="#63000"></use>
+      </svg> -->
+      <!-- <div class="" ref="svgMap"></div> -->
+
       <div class="container">
         <div class="back" @click="goBack">
           <p>返回上一層</p>
@@ -72,17 +92,19 @@
           />
         </div>
         <div class="window">
-          <div class="title">
-            <h3 v-if="deep > 0">{{currAddress}}</h3>
+          <h2 class="title">選情分析</h2>
+          <div class="address">
+            <p>{{currAddress}}</p>
           </div>
           <div class="desc">
-            <p v-if="deep > 0">{{ locationData.textContent }}</p>
+            <p>{{ locationData.textContent }}</p>
           </div>
         </div>
       </div>
     </div>
 
     <script src="../vue.js"></script>
+    <script src="./svg.js"></script>
     <script type="module">
       import { taiwan } from "./component/Taiwan.js";
       const app = Vue.createApp({
@@ -100,7 +122,10 @@
             }
           },
         },
-        mounted() {},
+        mounted() {
+          // console.log(svgList);
+          // this.$refs.svgMap.innerHTML = svgList;
+        },
       });
       app.component("Taiwan", taiwan);
       app.mount("#app");

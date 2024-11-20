@@ -55,3 +55,13 @@ export async function assignValue(name, id, dom, deep) {
   };
   return keys;
 }
+
+export function getBBoxCenter(svg) {
+  const svgBox = svg.getBBox();
+  const centerX = svgBox.x + svgBox.width / 2;
+  const centerY = svgBox.y + svgBox.height / 2;
+  const zoomLevel =
+    svgBox.height > svgBox.width ? 728 / svgBox.height : 728 / svgBox.width;
+
+  return { svgBox, centerX, centerY, zoomLevel };
+}
