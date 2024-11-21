@@ -67,7 +67,7 @@
       .window .search input {
         border: none;
         background-color: transparent;
-        font-size: 24px;
+        font-size: 16px;
         box-sizing: border-box;
         width: 100%;
       }
@@ -94,7 +94,6 @@
         <use xlink:href="#63000"></use>
       </svg> -->
       <div class="" ref="svgMap" class="svg-mapping"></div>
-
       <div class="container">
         <div class="back" @click="goBack">
           <p>返回上一層</p>
@@ -102,7 +101,8 @@
         <div class="map">
           <Taiwan
             v-model:deep-val="deep"
-            @update-deep="(val)=>deep = val"
+            v-model:search-param="searchParam"
+            @update-deep="updateDeep"
             @get-location-data="(val)=>locationData = val"
             @update-address="(val)=>currAddress = val"
           />
@@ -110,24 +110,30 @@
         <div class="window">
           <h2 class="title">選情分析</h2>
           <div class="search">
-            <input type="text" placeholder="查詢縣市" v-model="searchStr" />
+            <input
+              type="text"
+              placeholder="查詢縣市"
+              v-model="searchStr"
+              @focus="focusing = true"
+            />
             <ul>
               <li
                 v-for="item in filterLocationOptions"
                 :key="item.id"
-                @click=""
+                @click="chooseAddress(item)"
               >
                 {{ item.name }}
               </li>
             </ul>
           </div>
-
-          <div class="address">
-            <p>{{currAddress}}</p>
-          </div>
-          <div class="desc">
-            <p>{{ locationData.textContent }}</p>
-          </div>
+          <template v-if="currAddress">
+            <div class="address">
+              <p>{{currAddress}}</p>
+            </div>
+            <div class="desc">
+              <p>{{ locationData.textContent }}</p>
+            </div>
+          </template>
         </div>
       </div>
     </div>
@@ -145,33 +151,60 @@
             currAddress: "",
             locationOptions: [],
             searchStr: "",
+            searchParam: {},
+            focusing: true,
           };
         },
         methods: {
           goBack() {
             if (this.deep > 0) {
               this.deep--;
+              this.searchStr = "";
             }
+          },
+          chooseAddress(item) {
+            this.searchStr = item.name;
+            this.searchParam = item;
+            this.focusing = false;
+          },
+          createIdList(id) {
+            const countryId = id.length > 5 && id.slice(0, 5);
+            const townId = id.length > 8 && id.slice(0, 8);
+
+            return {
+              countryId,
+              townId,
+            };
+          },
+          mappingName(id) {
+            if (!id) return "";
+            const { countryId, townId } = this.createIdList(id);
+
+            const countryName = location[countryId] || "";
+            const townName = location[townId] || "";
+            const areaName = location[id];
+
+            return countryName + townName + areaName;
+          },
+          updateDeep(val) {
+            this.deep = val;
+            this.searchStr = "";
           },
         },
         computed: {
           filterLocationOptions() {
-            if (!this.searchStr) return [];
+            if (!this.searchStr || !this.focusing) return [];
             const matchOptions = this.locationOptions
               .map((item) => {
                 if (item.name.includes(this.searchStr)) {
-                  const id = item.id;
-                  const countryId = id.length > 5 && id.slice(0, 5);
-                  const townId = id.length > 8 && id.slice(0, 8);
-                  const idList = [countryId, townId, id].filter((item) => item);
-
-                  const countryName = location[countryId] || "";
-                  const townName = location[townId] || "";
-                  const areaName = location[id];
+                  const { countryId, townId } = this.createIdList(item.id);
+                  const idList = [countryId, townId, item.id].filter(
+                    (item) => item
+                  );
 
                   return {
-                    name: countryName + townName + areaName,
-                    id,
+                    name: item.name,
+                    id: item.id,
                     idList,
                   };
                 }
@@ -182,17 +215,16 @@
           },
         },
         mounted() {
-          // console.log(svgList);
           this.$refs.svgMap.innerHTML = svgList;
 
           for (let key in location) {
             this.locationOptions.push({
-              name: location[key],
+              name: this.mappingName(key),
               id: key,
             });
           }
 
-          console.log("location", this.locationOptions);
+          // console.log("location", this.locationOptions);
         },
       });
       app.component("Taiwan", taiwan);

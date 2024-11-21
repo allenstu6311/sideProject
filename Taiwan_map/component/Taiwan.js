@@ -8,6 +8,10 @@ export const taiwan = {
       type: Number,
       default: 0,
     },
+    searchParam: {
+      type: Object,
+      default: null,
+    },
   },
   emits: ["updateDeep", "getLocationData", "updateAddress"],
   data() {
@@ -52,6 +56,21 @@ export const taiwan = {
     },
     currAddress(val) {
       this.$emit("updateAddress", val);
+    },
+    // 父層查詢事件
+    searchParam(param) {
+      // let deep = this.deepVal || 1;
+      // const { idList } = param;
+      // console.log("idList", idList);
+
+      // for (let i = deep; i < idList.length; i++) {
+      //   this.handleEvent(idList[i], i + 1);
+      // }
+      let deep = 1;
+      param.idList.forEach((id) => {
+        this.handleEvent(id, deep);
+        deep++;
+      });
     },
   },
   methods: {
@@ -129,76 +148,72 @@ export const taiwan = {
       this.focusDom = cloneDom;
       map.appendChild(cloneDom);
     },
-    handleEvent(id, dom) {},
-    addEvent(el, deep) {
+    async handleEvent(id, deep) {
       const { towns, villages, map, svg } = this.$refs;
+      const dom = document.getElementById(id);
+      if (deep === 3) {
+        this.villageInfo = await assignValue(id, dom, deep);
+        this.$emit("updateDeep", deep);
+      } else {
+        const {
+          centerX: pathCenterX,
+          centerY: pathCenterY,
+          zoomLevel,
+        } = getBBoxCenter(dom);
+
+        // viewBox
+        const svgSize = svg.getAttribute("viewBox").split(" ");
+        const svgWidth = svgSize[2];
+        const svgHeight = svgSize[3];
+
+        // 將目標 path 的中心點移動到 SVG 可視區域的中心
+        const translateX = svgWidth / 2 - pathCenterX * zoomLevel;
+        const translateY = svgHeight / 2 - pathCenterY * zoomLevel;
+
+        // 紀錄country的移動(桃園、台北...)
+        if (deep === 1) {
+          const sameName = id !== this.countryInfo.id;
+          if (sameName) {
+            this.removeChild(towns);
+          }
+
+          this.position.x = translateX;
+          this.position.y = translateY;
+          this.position.scale = zoomLevel;
+          this.countryInfo = await assignValue(id, dom, deep);
+        } else {
+          const sameName = id !== this.townInfo.id;
+          if (sameName) {
+            this.removeChild(villages);
+          }
+          this.townInfo = await assignValue(id, dom, deep);
+        }
+
+        /**
+         * 更新父曾深度，須確保子層的DOM已取得
+         */
+        this.$emit("updateDeep", deep);
+
+        const template =
+          deep === 1
+            ? this.countryList[id]?.country
+            : this.countryList[this.countryInfo.id]?.towns[id];
+
+        this.moveMap(translateX, translateY, zoomLevel);
+        this.insertMap(deep === 1 ? towns : villages, template);
+      }
+
+      // 在同一層移動也要確保觸發位移
+      if (this.deepVal === deep) {
+        this.updateDeepVal(deep, this.deepVal);
+      }
+    },
+    // 地圖點擊事件
+    addEvent(el, deep) {
       Array.from(el.children).forEach((child) => {
         child.addEventListener("click", async () => {
           const id = child.getAttribute("xlink:href").substring(1);
-          const dom = document.getElementById(id);
-
-          if (deep === 3) {
-            this.villageInfo = await assignValue(id, dom, deep);
-            this.$emit("updateDeep", deep);
-          } else {
-            const {
-              centerX: pathCenterX,
-              centerY: pathCenterY,
-              zoomLevel,
-            } = getBBoxCenter(dom);
-
-            // viewBox
-            const svgSize = svg.getAttribute("viewBox").split(" ");
-            const svgWidth = svgSize[2];
-            const svgHeight = svgSize[3];
-
-            // 將目標 path 的中心點移動到 SVG 可視區域的中心
-            const translateX = svgWidth / 2 - pathCenterX * zoomLevel;
-            const translateY = svgHeight / 2 - pathCenterY * zoomLevel;
-
-            // 紀錄country的移動(桃園、台北...)
-            if (deep === 1) {
-              const sameName = id !== this.countryInfo.id;
-              if (sameName) {
-                this.removeChild(towns);
-              }
-
-              this.position.x = translateX;
-              this.position.y = translateY;
-              this.position.scale = zoomLevel;
-              this.countryInfo = await assignValue(id, dom, deep);
-            } else {
-              const sameName = id !== this.townInfo.id;
-              if (sameName) {
-                this.removeChild(villages);
-              }
-              this.townInfo = await assignValue(id, dom, deep);
-            }
-
-            /**
-             * 更新父曾深度，須確保子層的DOM已取得
-             */
-            this.$emit("updateDeep", deep);
-
-            const template =
-              deep === 1
-                ? this.countryList[id]?.country
-                : this.countryList[this.countryInfo.id]?.towns[id];
-
-            // console.log("template", template);
-
-            // if (template) {
-            //   this.moveMap(translateX, translateY, zoomLevel);
-            //   this.insertMap(deep === 1 ? towns : villages, template);
-            // }
-            this.moveMap(translateX, translateY, zoomLevel);
-            this.insertMap(deep === 1 ? towns : villages, template);
-          }
-
-          // 在同一層移動也要確保觸發位移
-          if (this.deepVal === deep) {
-            this.updateDeepVal(deep, this.deepVal);
-          }
+          await this.handleEvent(id, deep);
         });
       });
     },
