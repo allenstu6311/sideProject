@@ -30,7 +30,7 @@ async function getCsv(url, id, deep) {
   return textContent;
 }
 
-export async function assignValue(name, id, dom, deep) {
+export async function assignValue(id, dom, deep) {
   let textContent = "";
   switch (deep) {
     case 1:
@@ -44,10 +44,9 @@ export async function assignValue(name, id, dom, deep) {
       textContent = await getCsv(`village-${townsId}-gpt`, id);
       break;
   }
-  const chName = location[name] || "";
+  const chName = location[id] || "";
 
   const keys = {
-    name,
     id,
     dom,
     textContent,
