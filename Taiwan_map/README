@@ -1,4 +1,11 @@
-# assignValue、sameValue整合
 # v-html
-# 思考id, name的整理
-# 查詢篩選調整
+# 預設資訊不要沒資料就錯誤
+# 第二層開始應該不用集中管理了
+
+
+設置流程
+1.path移動至svgList，並寫入id
+2.將path換成use，並且設置xlink:href="id"
+3.key使用id
+4.下載對應csv資料放置data資料夾下
+5.如果不是最後一層需放入子層的svg

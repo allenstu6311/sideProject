@@ -4,6 +4,8 @@ let countryCsv = [];
 let townsCsv = [];
 let townsId = "";
 
+export const locationMap = {};
+
 export function pairId(textRow, id) {
   for (let i = 0; i < textRow.length; i++) {
     const item = textRow[i];
@@ -18,6 +20,7 @@ function parseCSV(text) {
   let matches = "";
   const rows = [];
   while ((matches = pattern.exec(text)) !== null) {
+    // console.log(`<symbol id="${matches[1]}"></symbol>`);
     rows.push(matches);
   }
   return rows;
@@ -43,7 +46,7 @@ export async function assignValue(id, dom, deep) {
       textContent = await getCsv(`village-${id.slice(0, 8)}-gpt`, id);
       break;
   }
-  const chName = location[id] || "";
+  const chName = locationMap[id] || "";
 
   const keys = {
     id,
