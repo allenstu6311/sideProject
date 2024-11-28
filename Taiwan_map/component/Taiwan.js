@@ -39,18 +39,17 @@ export const taiwan = {
         dom: "",
         textContent: "",
       },
+      defaultInfo: {
+        name: "尚無資料",
+        dom: "",
+        id: "",
+        textContent: "尚無資料",
+      },
       focusDom: "",
+      inValid: false,
     };
   },
-  computed: {
-    currAddress() {
-      const countryName = (this.deepVal && this.countryInfo.chName) || "";
-      const townName = (this.deepVal > 1 && this.townInfo.chName) || "";
-      const villageName = (this.deepVal > 2 && this.villageInfo.chName) || "";
-
-      return countryName + townName + villageName;
-    },
-  },
+  computed: {},
   watch: {
     deepVal(newVal, oldVal) {
       this.updateDeepVal(newVal, oldVal);
@@ -81,8 +80,6 @@ export const taiwan = {
       svg.setAttribute("viewBox", `0 0 ${innerWidth} ${innerHeight}`);
 
       const { centerX, centerY } = getBBoxCenter(map);
-      console.log(map);
-      console.log("centerX", centerX, "centerY", centerY);
 
       const translateX = innerWidth / 2 - centerX;
       const translateY = innerHeight / 2 - centerY;
@@ -90,7 +87,7 @@ export const taiwan = {
       this.moveMap(translateX, translateY);
     },
     updateDeepVal(newVal, oldVal) {
-      console.log("newVal", newVal, "oldVal", oldVal);
+      // console.log("newVal", newVal, "oldVal", oldVal);
       const { towns, villages, map } = this.$refs;
 
       switch (newVal) {
@@ -153,8 +150,15 @@ export const taiwan = {
       map.appendChild(cloneDom);
     },
     async handleEvent(id, deep) {
-      const { towns, villages, map, svg } = this.$refs;
       const dom = document.getElementById(id)?.children[0];
+      if (!id || !dom) {
+        this.$emit("getLocationData", this.defaultInfo);
+        this.inValid = true;
+        return;
+      }
+      this.inValid = false;
+      const { towns, villages, map, svg } = this.$refs;
+
       if (deep === 3) {
         this.villageInfo = await assignValue(id, dom, deep);
         this.$emit("updateDeep", deep);
@@ -227,13 +231,11 @@ export const taiwan = {
   },
   mounted() {
     const { country, map } = this.$refs;
-
     this.addEvent(country, 1);
 
     // window.addEventListener("resize", () => {
     //   this.initMap();
     // });
-
     this.countryList = {
       68000: Taoyuan,
       65000: NewTaipei,
