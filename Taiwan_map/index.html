@@ -82,6 +82,8 @@
       .window .desc {
         overflow-y: scroll;
         height: 250px;
+        display: flex;
+        justify-content: center;
       }
       .window .desc::-webkit-scrollbar {
         width: 0;
@@ -286,7 +288,7 @@
             handler(newVal, oldVal) {
               const { id: newId } = newVal;
               const { id: oldId } = oldVal;
-              console.log("newId", newId, "oldId", oldId);
+              // console.log("newId", newId, "oldId", oldId);
 
               if (!this.selectionInfo[newId]) {
                 if (this.deep === 1 && newId != oldId) {
@@ -302,6 +304,7 @@
         computed: {
           currAreaSelection() {
             const { id } = this.locationData;
+            if (!id) return {};
             return this.selectionInfo[id] || {};
           },
           currAreaName() {

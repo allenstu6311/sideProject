@@ -247,7 +247,7 @@ export const taiwan = {
     });
   },
   template: `
-     <svg class="tw-geo svelte-ul8skc" viewBox="0 0 0 0" ref="svg"   preserveAspectRatio="xMidYMid meet">
+     <svg class="tw-geo svelte-ul8skc" viewBox="0 0 960 910" ref="svg"  preserveAspectRatio="xMidYMid meet">
       <g class="map-container">
         <g
           class="map-group"
