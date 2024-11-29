@@ -77,7 +77,10 @@ export const taiwan = {
     initMap() {
       const { map, svg } = this.$refs;
       const { innerWidth, innerHeight } = window;
-      svg.setAttribute("viewBox", `0 0 ${innerWidth} ${innerHeight}`);
+      svg.setAttribute(
+        "viewBox",
+        `0 0 ${innerWidth > 400 ? innerWidth : 400} ${innerHeight}`
+      );
 
       const { centerX, centerY } = getBBoxCenter(map);
 
@@ -247,7 +250,7 @@ export const taiwan = {
     });
   },
   template: `
-     <svg class="tw-geo svelte-ul8skc" viewBox="0 0 960 910" ref="svg"  preserveAspectRatio="xMidYMid meet">
+     <svg class="tw-geo svelte-ul8skc" viewBox="0 0 960 910" ref="svg" preserveAspectRatio="xMidYMid meet">
       <g class="map-container">
         <g
           class="map-group"
