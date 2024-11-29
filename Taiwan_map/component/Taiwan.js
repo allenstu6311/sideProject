@@ -230,6 +230,16 @@ export const taiwan = {
           await this.handleEvent(id, deep);
         });
       });
+
+      Array.from(el.children).forEach((child) => {
+        child.addEventListener("touchstart", async () => {
+          const id =
+            child.getAttribute("xlink:href")?.substring(1) ||
+            child.getAttribute("id");
+
+          await this.handleEvent(id, deep);
+        });
+      });
     },
   },
   mounted() {
