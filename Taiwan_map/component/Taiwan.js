@@ -126,10 +126,11 @@ export const taiwan = {
     },
     moveMap(translateX, translateY, scale = 1) {
       const { map } = this.$refs;
-      map.setAttribute(
-        "transform",
-        `translate(${translateX}, ${translateY}) scale(${scale})`
-      );
+      // map.setAttribute(
+      //   "transform",
+      //   `translate(${translateX}, ${translateY}) scale(${scale})`
+      // );
+      map.style.transform = `translate(${translateX}px,${translateY}px) scale(${scale})`;
     },
     insertMap(parent, child) {
       parent.insertAdjacentHTML("beforeend", child);

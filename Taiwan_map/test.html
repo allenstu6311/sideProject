@@ -6,15 +6,16 @@
     <title>Document</title>
   </head>
   <style>
-    svg {
+    svg,
+    .map-group {
       transition: all 0.5s;
       /* transform: scale(1); */
     }
   </style>
   <body>
-    <svg class="tw-geo svelte-ul8skc" viewBox="0 0 375 667" id="svgBox">
+    <svg class="tw-geo svelte-ul8skc" viewBox="0 0 375 667">
       <g class="map-container">
-        <g class="map-group" stroke-width="0.5">
+        <g class="map-group" stroke-width="0.5" id="svgBox">
           <g filter="url(#border-shadow)">
             <path
               class="island-border"
