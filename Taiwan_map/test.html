@@ -8,12 +8,12 @@
   <style>
     svg {
       transition: all 0.5s;
-      transform: scale(1);
+      /* transform: scale(1); */
     }
   </style>
   <body>
     <svg class="tw-geo svelte-ul8skc" viewBox="0 0 375 667" id="svgBox">
-      <g class="map-container" transform="translate(72.2909090909091, 200.1)">
+      <g class="map-container">
         <g class="map-group" stroke-width="0.5">
           <g filter="url(#border-shadow)">
             <path
@@ -180,7 +180,8 @@
       const svg = document.getElementById("svgBox");
 
       svg.addEventListener("click", () => {
-        svg.style.transform = `translate(${100}, ${100}) scale(${scale})`;
+        // svg.style.transform = ` scale(5)`;
+        svg.setAttribute("transform", `translate(${200}, ${-100}) scale(${5})`);
       });
     </script>
   </body>
