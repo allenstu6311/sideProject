@@ -80,9 +80,10 @@
         stroke-width: 0.1;
       }
       .map-group {
-        transition: transform 0.5s;
+        /* transition: transform 0.5s;
         -webkit-transition: transform 0.5s;
-        -webkit-transition: -webkit-transform 0.5s;
+        -webkit-transition: -webkit-transform 0.5s; */
+        transition: all 0.5s;
         /* will-change: transform;
         backface-visibility: hidden; */
       }
@@ -166,19 +167,30 @@
               <div class="address">{{currAreaName}}</div>
               <div class="selection">
                 <div class="selection-item">
-                  <p>柯文哲
-                    <div class="">
-                      <span></span>
+                  <div>
+                    柯文哲
+                    <div class="party" :style="{backgroundColor:'#00C8C8'}">
+                      眾
                     </div>
-                  </p>
+                  </div>
                   <p>{{ currAreaSelection.cand_1 }}%</p>
                 </div>
                 <div class="selection-item">
-                  <p>賴清德</p>
+                  <div>
+                    賴清德
+                    <div class="party" :style="{backgroundColor:'#2DC46E'}">
+                      民
+                    </div>
+                  </div>
                   <p>{{ currAreaSelection.cand_2 }}%</p>
                 </div>
                 <div class="selection-item">
-                  <p>侯友宜</p>
+                  <div>
+                    侯友宜
+                    <div class="party" :style="{backgroundColor:'#4A8FE7'}">
+                      國
+                    </div>
+                  </div>
                   <p>{{ currAreaSelection.cand_3 }}%</p>
                 </div>
               </div>
@@ -192,15 +204,30 @@
             <div class="address">{{currAreaName}}</div>
             <div class="selection">
               <div class="selection-item">
-                <p>柯文哲</p>
+                <div>
+                  柯文哲
+                  <div class="party" :style="{backgroundColor:'#00C8C8'}">
+                    眾
+                  </div>
+                </div>
                 <p>{{ currAreaSelection.cand_1 }}%</p>
               </div>
               <div class="selection-item">
-                <p>賴清德</p>
+                <div>
+                  賴清德
+                  <div class="party" :style="{backgroundColor:'#2DC46E'}">
+                    民
+                  </div>
+                </div>
                 <p>{{ currAreaSelection.cand_2 }}%</p>
               </div>
               <div class="selection-item">
-                <p>侯友宜</p>
+                <div>
+                  侯友宜
+                  <div class="party" :style="{backgroundColor:'#4A8FE7'}">
+                    國
+                  </div>
+                </div>
                 <p>{{ currAreaSelection.cand_3 }}%</p>
               </div>
             </div>

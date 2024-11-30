@@ -52,7 +52,23 @@ ul::-webkit-scrollbar {
 .selection-item {
     display: flex;
     justify-content: space-between;
+}
 
+.selection-item div {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.party {
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    border-radius: 50%;
+    color: #fff;
 }
 
 .window-h5 {
@@ -63,6 +79,11 @@ ul::-webkit-scrollbar {
     left: 0;
     padding: 16px;
     background-color: rgba(244, 244, 244, 0.9);
+}
+
+.accordion-item,
+.accordion-button {
+    background-color: transparent;
 }
 
 
