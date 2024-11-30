@@ -1,6 +1,7 @@
 import Taoyuan from "./Taoyuan/towns.js";
 import NewTaipei from "./NewTaipei/towns.js";
 import Kaohsiung from "./Kaohsiung/towns.js";
+import Hsinchu from "./Hsinchu/towns.js";
 import { assignValue, getBBoxCenter } from "../utils.js";
 
 export const taiwan = {
@@ -58,19 +59,12 @@ export const taiwan = {
       this.$emit("updateAddress", val);
     },
     // 父層查詢事件
-    searchParam(param) {
-      // let deep = this.deepVal || 1;
-      // const { idList } = param;
-      // console.log("idList", idList);
-
-      // for (let i = deep; i < idList.length; i++) {
-      //   this.handleEvent(idList[i], i + 1);
-      // }
+    async searchParam(param) {
       let deep = 1;
-      param.idList.forEach((id) => {
-        this.handleEvent(id, deep);
+      for (const id of param.idList) {
+        await this.handleEvent(id, deep);
         deep++;
-      });
+      }
     },
   },
   methods: {
@@ -156,7 +150,10 @@ export const taiwan = {
       map.appendChild(cloneDom);
     },
     async handleEvent(id, deep) {
-      const dom = document.getElementById(id)?.children[0];
+      // await this.$nextTick(() => {});
+      const element = document.getElementById(id);
+      const dom = element?.children[0] || element;
+
       if (!id || !dom) {
         this.$emit("getLocationData", this.defaultInfo);
         this.inValid = true;
@@ -190,7 +187,6 @@ export const taiwan = {
           if (sameName) {
             this.removeChild(towns);
           }
-
           this.position.x = translateX;
           this.position.y = translateY;
           this.position.scale = zoomLevel;
@@ -207,7 +203,6 @@ export const taiwan = {
          * 更新父曾深度，須確保子層的DOM已取得
          */
         this.$emit("updateDeep", deep);
-
         const template =
           deep === 1
             ? this.countryList[id]?.country
@@ -230,6 +225,10 @@ export const taiwan = {
             child.getAttribute("xlink:href")?.substring(1) ||
             child.getAttribute("id");
 
+          console.log("child", child);
+
+          console.log("id", id);
+
           await this.handleEvent(id, deep);
         });
       });
@@ -246,6 +245,7 @@ export const taiwan = {
       68000: Taoyuan,
       65000: NewTaipei,
       64000: Kaohsiung,
+      10004: Hsinchu,
     };
 
     this.$nextTick(() => {
@@ -292,16 +292,8 @@ export const taiwan = {
         </g>
       </g>
       <defs>
-        <pattern
-          id="tpp-pattern"
-          x="0"
-          y="0"
-          width="8"
-          height="8"
-          patternUnits="userSpaceOnUse"
-          patternContentUnits="userSpaceOnUse"
-        >
-          <circle cx="4" cy="4" r="2" fill="#fff" opacity="0.5"></circle>
+        <pattern id="tpp-pattern" x="0" y="0" width="0.9055382649729705" height="0.9055382649729705" patternUnits="userSpaceOnUse" patternContentUnits="userSpaceOnUse">
+          <circle cx="0.45276913248648526" cy="0.45276913248648526" r="0.22638456624324263" fill="#fff" opacity="0.5"></circle>
         </pattern>
       </defs>
     </svg>`,

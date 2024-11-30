@@ -83,12 +83,7 @@
         stroke-width: 0.1;
       }
       .map-group {
-        /* transition: transform 0.5s;
-        -webkit-transition: transform 0.5s;
-        -webkit-transition: -webkit-transform 0.5s; */
         transition: all 0.5s;
-        /* will-change: transform;
-        backface-visibility: hidden; */
       }
 
       .map-group g path {
@@ -131,9 +126,7 @@
   <body>
     <div id="app">
       <div class="bg"></div>
-      <div ref="svgMap" class="svg-mapping"></div>
       <div ref="countryList" class="svg-mapping"></div>
-      <div ref="townsList" class="svg-mapping"></div>
 
       <div class="custom-container">
         <div class="back" @click="goBack">
@@ -453,10 +446,7 @@
           },
         },
         async mounted() {
-          this.$refs.svgMap.innerHTML = svgList;
           this.$refs.countryList.innerHTML = countryList;
-          this.$refs.townsList.innerHTML = townsList;
-
           await this.getLocationData();
 
           for (const id in locationMap) {
