@@ -122,9 +122,9 @@
   <body>
     <div id="app">
       <div class="bg"></div>
-      <div ref="svgMap" class="svg-mapping"></div>
+      <!-- <div ref="svgMap" class="svg-mapping"></div> -->
       <div ref="countryList" class="svg-mapping"></div>
-      <div ref="townsList" class="svg-mapping"></div>
+      <!-- <div ref="townsList" class="svg-mapping"></div> -->
 
       <div class="custom-container">
         <div class="back" @click="goBack">
@@ -292,8 +292,6 @@
         },
         methods: {
           goBack() {
-            console.log("this.deep", this.deep);
-
             if (this.deep > 0) {
               this.deep--;
               this.searchStr = "";
@@ -446,7 +444,7 @@
           },
         },
         async mounted() {
-          this.$refs.svgMap.innerHTML = svgList;
+          // this.$refs.svgMap.innerHTML = svgList;
           this.$refs.countryList.innerHTML = countryList;
           this.$refs.townsList.innerHTML = townsList;
 
