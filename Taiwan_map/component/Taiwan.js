@@ -138,12 +138,12 @@ export const taiwan = {
       });
     },
     insertMap(parent, child) {
-      parent.insertAdjacentHTML("beforeend", child);
-      this.$nextTick(() => {
-        if (this.deepVal <= 2) {
-          this.addEvent(parent, this.deepVal + 1);
-        }
-      });
+      // parent.insertAdjacentHTML("beforeend", child);
+      // this.$nextTick(() => {
+      //   if (this.deepVal <= 2) {
+      //     this.addEvent(parent, this.deepVal + 1);
+      //   }
+      // });
     },
     focusMap(dom) {
       const { map } = this.$refs;
