@@ -74,8 +74,8 @@ export const taiwan = {
     },
   },
   methods: {
-    initMap() {
-      const { map, svg } = this.$refs;
+    initMap(init) {
+      const { map, svg, towns, villages } = this.$refs;
       const { innerWidth, innerHeight } = window;
       svg.setAttribute(
         "viewBox",
@@ -88,6 +88,13 @@ export const taiwan = {
       const translateY = innerHeight / 2 - centerY;
 
       this.moveMap(translateX, translateY);
+
+      if (!init) {
+        this.removeChild(towns);
+        this.removeChild(villages);
+        this.$emit("updateDeep", 0);
+        this.$emit("getLocationData", this.defaultInfo);
+      }
     },
     updateDeepVal(newVal, oldVal) {
       // console.log("newVal", newVal, "oldVal", oldVal);
@@ -244,7 +251,7 @@ export const taiwan = {
     };
 
     this.$nextTick(() => {
-      this.initMap();
+      this.initMap(true);
     });
   },
   template: `
