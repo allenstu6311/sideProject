@@ -21,8 +21,10 @@
         box-sizing: border-box;
       }
       p,
-      ul {
+      ul,
+      h2 {
         margin: 0;
+        padding: 0;
       }
       html {
         overflow: hidden;
@@ -95,6 +97,25 @@
         border-radius: 8px;
         padding: 16px;
       }
+      .location-options {
+        max-height: 300px;
+        overflow-y: scroll;
+        background-color: #fff;
+        position: absolute;
+        width: 100%;
+        left: 0;
+        top: 90%;
+        border-bottom-left-radius: 8px;
+        border-bottom-right-radius: 8px;
+      }
+
+      .location-options li {
+        cursor: pointer;
+        font-weight: 500;
+      }
+      .location-options li:hover {
+        color: #3b4f7d;
+      }
     </style>
   </head>
   <body>
@@ -127,7 +148,10 @@
               v-model="searchStr"
               @focus="focusing = true"
             />
-            <ul style="max-height: 300px; overflow-y: scroll">
+            <ul
+              class="location-options"
+              :style="{padding: filterLocationOptions.length ? '8px 16px' : ''}"
+            >
               <li
                 v-for="item in filterLocationOptions"
                 :key="item.id"

@@ -10,7 +10,7 @@
 }
 
 .window-pc .title {
-    margin-bottom: 20px;
+    margin-bottom: 16px;
     color: #fff;
 }
 
@@ -21,6 +21,10 @@
     width: 100%;
 }
 
+.window-pc .search {
+    position: relative;
+}
+
 .desc {
     overflow-y: scroll;
     height: 200px;
@@ -28,7 +32,8 @@
     justify-content: center;
 }
 
-.desc::-webkit-scrollbar {
+.desc::-webkit-scrollbar,
+ul::-webkit-scrollbar {
     width: 0;
 }
 
