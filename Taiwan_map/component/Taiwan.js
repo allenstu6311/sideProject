@@ -144,16 +144,16 @@ export const taiwan = {
       });
     },
     focusMap(dom) {
-      // const { map } = this.$refs;
-      // if (this.focusDom) {
-      //   map.removeChild(this.focusDom);
-      // }
-      // const cloneDom = dom.cloneNode(true);
-      // cloneDom.setAttribute("stroke", "yellow");
-      // cloneDom.setAttribute("stroke-width", `0.${4 - this.deepVal}`);
-      // cloneDom.setAttribute("fill", "none");
-      // this.focusDom = cloneDom;
-      // map.appendChild(cloneDom);
+      const { map } = this.$refs;
+      if (this.focusDom) {
+        map.removeChild(this.focusDom);
+      }
+      const cloneDom = dom.cloneNode(true);
+      cloneDom.setAttribute("stroke", "yellow");
+      cloneDom.setAttribute("stroke-width", `0.${4 - this.deepVal}`);
+      cloneDom.setAttribute("fill", "none");
+      this.focusDom = cloneDom;
+      map.appendChild(cloneDom);
     },
     async handleEvent(id, deep) {
       const dom = document.getElementById(id)?.children[0];

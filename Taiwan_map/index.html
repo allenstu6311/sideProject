@@ -29,6 +29,9 @@
       html {
         overflow: hidden;
       }
+      body {
+        background-color: rgb(244, 244, 244);
+      }
       .bg {
         position: absolute;
         width: 100%;
@@ -117,12 +120,20 @@
       .location-options li:hover {
         color: #3b4f7d;
       }
+
+      @media screen and (max-width: 768px) {
+        .bg {
+          display: none;
+        }
+      }
     </style>
   </head>
   <body>
     <div id="app">
-      <!-- <div class="bg"></div> -->
+      <div class="bg"></div>
+      <div ref="svgMap" class="svg-mapping"></div>
       <div ref="countryList" class="svg-mapping"></div>
+      <div ref="townsList" class="svg-mapping"></div>
 
       <div class="custom-container">
         <div class="back" @click="goBack">
@@ -442,7 +453,9 @@
           },
         },
         async mounted() {
+          this.$refs.svgMap.innerHTML = svgList;
           this.$refs.countryList.innerHTML = countryList;
+          this.$refs.townsList.innerHTML = townsList;
 
           await this.getLocationData();
 
