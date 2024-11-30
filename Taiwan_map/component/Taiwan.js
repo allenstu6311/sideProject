@@ -138,25 +138,24 @@ export const taiwan = {
       });
     },
     insertMap(parent, child) {
-      // parent.insertAdjacentHTML("beforeend", child);
-      // this.$nextTick(() => {
-      //   if (this.deepVal <= 2) {
-      //     this.addEvent(parent, this.deepVal + 1);
-      //   }
-      // });
+      parent.insertAdjacentHTML("beforeend", child);
+      this.$nextTick(() => {
+        if (this.deepVal <= 2) {
+          this.addEvent(parent, this.deepVal + 1);
+        }
+      });
     },
     focusMap(dom) {
-      const { map } = this.$refs;
-      if (this.focusDom) {
-        map.removeChild(this.focusDom);
-      }
-
-      const cloneDom = dom.cloneNode(true);
-      cloneDom.setAttribute("stroke", "yellow");
-      cloneDom.setAttribute("stroke-width", `0.${4 - this.deepVal}`);
-      cloneDom.setAttribute("fill", "none");
-      this.focusDom = cloneDom;
-      map.appendChild(cloneDom);
+      // const { map } = this.$refs;
+      // if (this.focusDom) {
+      //   map.removeChild(this.focusDom);
+      // }
+      // const cloneDom = dom.cloneNode(true);
+      // cloneDom.setAttribute("stroke", "yellow");
+      // cloneDom.setAttribute("stroke-width", `0.${4 - this.deepVal}`);
+      // cloneDom.setAttribute("fill", "none");
+      // this.focusDom = cloneDom;
+      // map.appendChild(cloneDom);
     },
     async handleEvent(id, deep) {
       const dom = document.getElementById(id)?.children[0];
