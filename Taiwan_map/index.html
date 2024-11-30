@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>2024選情</title>
     <!-- CSS only -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
@@ -83,8 +83,8 @@
         transition: transform 0.5s;
         -webkit-transition: transform 0.5s;
         -webkit-transition: -webkit-transform 0.5s;
-        will-change: transform;
-        backface-visibility: hidden;
+        /* will-change: transform;
+        backface-visibility: hidden; */
       }
 
       .map-group g path {
@@ -166,7 +166,11 @@
               <div class="address">{{currAreaName}}</div>
               <div class="selection">
                 <div class="selection-item">
-                  <p>柯文哲</p>
+                  <p>柯文哲
+                    <div class="">
+                      <span></span>
+                    </div>
+                  </p>
                   <p>{{ currAreaSelection.cand_1 }}%</p>
                 </div>
                 <div class="selection-item">
