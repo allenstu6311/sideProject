@@ -1,0 +1,81 @@
+.window-pc {
+    box-sizing: border-box;
+    width: 250px;
+    border-radius: 8px;
+    position: absolute;
+    top: 10%;
+    right: 10px;
+    background-color: #5a6be3;
+    padding: 16px 24px;
+}
+
+.window-pc .title {
+    margin-bottom: 20px;
+    color: #fff;
+}
+
+.window-pc .search input {
+    border: none;
+    background-color: transparent;
+    font-size: 16px;
+    width: 100%;
+}
+
+.window-pc .desc {
+    overflow-y: scroll;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+}
+
+.window-pc .desc::-webkit-scrollbar {
+    width: 0;
+}
+
+.introduce .address {
+    text-align: center;
+}
+
+.selection {
+    border-top: 1px solid #c0c6d0;
+    border-bottom: 1px solid #c0c6d0;
+    padding: 10px 0;
+    margin: 10px 0;
+    line-height: 26px;
+}
+
+.selection-item {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.window-h5 {
+    display: none;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 16px;
+    background-color: rgba(244, 244, 244, 0.9);
+}
+
+
+
+
+@media screen and (max-width: 768px) {
+    .window-pc {
+        display: none;
+    }
+
+    .window-h5 {
+        display: block;
+    }
+
+    .selection {
+        border-top: 1px solid #c0c6d0;
+        border-bottom: 1px solid #c0c6d0;
+        padding: 5px 0;
+        margin: 5px 0;
+    }
+}
