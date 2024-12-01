@@ -1,11 +1,21 @@
 # v-html
-# 第二層開始應該不用集中管理了
 # 選情資料整理
+# defs 白點(會因深度不同改變大小)
 
 
 設置流程
-1.path移動至svgList，並寫入id
-2.將path換成use，並且設置xlink:href="id"
+(country)
+1.設置資料夾與檔案(建立towns.js)
+2.設置物件並設定一個key命名為country
+3.將城鎮資料去掉"g"標籤z放置到country中
+4.回到Taiwan.js設定countryList [id:countryName]
+
+(town)
+1.標籤設置id
+2.在地區的towns去註冊path
+3.回到
+
+
 3.key使用id
 4.下載對應csv資料放置data資料夾下
 5.如果不是最後一層需放入子層的svg

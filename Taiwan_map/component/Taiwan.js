@@ -23,7 +23,12 @@ export const taiwan = {
         y: 0,
         scale: 0,
       },
-      countryList: {},
+      countryList: {
+        68000: Taoyuan,
+        65000: NewTaipei,
+        64000: Kaohsiung,
+        10004: Hsinchu,
+      },
       countryInfo: {
         name: "",
         dom: "",
@@ -203,6 +208,7 @@ export const taiwan = {
          * 更新父曾深度，須確保子層的DOM已取得
          */
         this.$emit("updateDeep", deep);
+
         const template =
           deep === 1
             ? this.countryList[id]?.country
@@ -225,9 +231,46 @@ export const taiwan = {
             child.getAttribute("xlink:href")?.substring(1) ||
             child.getAttribute("id");
 
-          console.log("child", child);
+          if (deep > 1) {
+            function parsePathData(d) {
+              const points = [];
+              const commands = d.match(/[MLHVCSQTAZ][^MLHVCSQTAZ]*/gi);
+              commands.forEach((command) => {
+                const type = command[0];
+                const coords = command
+                  .slice(1)
+                  .trim()
+                  .split(/[\s,]+/)
+                  .map(Number);
+                if (type === "M" || type === "L") {
+                  for (let i = 0; i < coords.length; i += 2) {
+                    points.push([coords[i], coords[i + 1]]);
+                  }
+                }
+              });
+              return points;
+            }
 
-          console.log("id", id);
+            function calculateArcs(points) {
+              const arcs = [];
+              let currentArc = [];
+              for (let i = 1; i < points.length; i++) {
+                const [x1, y1] = points[i - 1];
+                const [x2, y2] = points[i];
+                const dx = x2 - x1;
+                const dy = y2 - y1;
+                currentArc.push([dx, dy]);
+              }
+              arcs.push(currentArc); // 將完整的邊界段作為一個 `arc` 加入到 `arcs` 中
+              return arcs;
+            }
+
+            const d = child.getAttribute("d");
+            const points = parsePathData(d);
+            const arcs = calculateArcs(points);
+
+            console.log(arcs);
+          }
 
           await this.handleEvent(id, deep);
         });
@@ -241,12 +284,6 @@ export const taiwan = {
     window.addEventListener("resize", () => {
       this.initMap();
     });
-    this.countryList = {
-      68000: Taoyuan,
-      65000: NewTaipei,
-      64000: Kaohsiung,
-      10004: Hsinchu,
-    };
 
     this.$nextTick(() => {
       this.initMap(true);

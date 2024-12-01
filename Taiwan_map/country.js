@@ -165,8 +165,6 @@ const countryList = `<svg class='svg-mapping'>
     stroke="#fff"
 ></path>
 </symbol>
-<symbol id="64000"></symbol>
-<symbol id="65000"></symbol>
 <symbol id="66000">
     <path
         class="tw-county-geo svelte-ul8skc"
