@@ -3,124 +3,76 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Decode TopoJSON</title>
+    <title>Document</title>
   </head>
+  <style>
+    #map {
+      width: 100%;
+      height: 100%;
+    }
+  </style>
   <body>
+    <div class="box">
+      <svg id="map" viewbox="0 0 960 910"></svg>
+    </div>
+
     <script src="https://d3js.org/d3.v6.min.js"></script>
     <script src="https://unpkg.com/topojson@3"></script>
-    <script>
-      // TopoJSON 数据
-      const topology = {
-        type: "Topology",
-        arcs: [
-          [
-            [0, 50560],
-            [0, 15218],
-            [10200, 0],
-            [0, -15218],
-            [-10200, 0],
-          ],
-        ],
-        transform: {
-          scale: [0.00882333570523043, 0.008542813820499722],
-          translate: [20.00000000000003, 3.0760617112916044],
-        },
-        objects: {
-          regions: {
-            type: "GeometryCollection",
-            geometries: [
-              {
-                arcs: [[0]],
-                type: "Polygon",
-                properties: {
-                  BORDERLEVEL: "COUNTY",
-                  NAME: "澎湖縣",
-                  ID: "X",
-                  CODE: "10016",
-                  ENG: "Penghu County",
-                },
-              },
-            ],
-          },
-        },
-      };
+    <script type="module">
+      fetch("./data/topoJson/towns-mercator.json")
+        .then((res) => res.json())
+        .then((data) => {
+          const svg = d3.select("#map");
+          const width = +svg.attr("width");
+          const height = +svg.attr("height");
+          console.log("data", data);
 
-      // 解码 arcs 为绝对坐标
-      function decodeArcs(arcs, transform) {
-        const { scale, translate } = transform;
-        const absoluteCoords = [];
+          // 定義投影
+          const projection = d3.geoMercator();
+          // .scale(1) // 根據需求調整比例
+          // .translate([width / 2, height / 2]);
 
-        arcs.forEach((arcIndex) => {
-          const arc = topology.arcs[arcIndex]; // 获取 arc
+          const path = d3.geoPath();
 
-          if (!arc) {
-            console.error(`未找到 arc 索引: ${arcIndex}`);
-            return;
-          }
+          // 解壓 TopoJSON 為 GeoJSON
+          const geojson = topojson.feature(data, data.objects.counties);
 
-          let x = 0,
-            y = 0; // 初始化绝对坐标起点
-
-          arc.forEach(([dx, dy]) => {
-            x += dx; // 计算相对坐标
-            y += dy;
-            // 转换为绝对坐标
-            absoluteCoords.push([
-              x * scale[0] + translate[0],
-              y * scale[1] + translate[1],
-            ]);
+          // 驗證 GeoJSON 數據
+          geojson.features.forEach((feature, index) => {
+            if (!feature.geometry || !feature.geometry.coordinates) {
+              console.error(`Feature ${index} 缺少幾何數據！`);
+            } else {
+              console.log(`Feature ${index} 幾何數據正常`);
+            }
           });
+
+          // 繪製地圖
+          svg
+            .selectAll("path")
+            .data(geojson.features)
+            .enter()
+            .append("path")
+            .attr("d", (d) => {
+              console.log("d", d);
+              console.log("path(d)", path(d));
+
+              try {
+                return path(d); // 生成路徑
+              } catch (e) {
+                console.error("錯誤的幾何數據：", d);
+                return null;
+              }
+            })
+            .attr("stroke", "black")
+            .attr("fill", "lightblue")
+            .attr("stroke-width", 0.5)
+            .on("click", (d, data) => {
+              console.log("d", data);
+            });
+        })
+        .catch((error) => {
+          console.error("加載或處理數據時出錯：", error);
         });
-
-        return absoluteCoords;
-      }
-
-      // 将坐标转换为 SVG 路径数据
-      function coordsToPath(coords) {
-        if (!coords || coords.length === 0) {
-          console.error("坐标数据为空，无法生成路径");
-          return "";
-        }
-        let d = `M${coords[0][0]},${coords[0][1]}`;
-        for (let i = 1; i < coords.length; i++) {
-          d += `L${coords[i][0]},${coords[i][1]}`;
-        }
-        d += "Z"; // 闭合路径
-        return d;
-      }
-
-      // 测试
-      try {
-        const regionArcs = topology.objects.regions.geometries[0].arcs[0];
-        console.log("处理的 regionArcs 数据:", regionArcs);
-
-        const decodedCoords = decodeArcs(regionArcs, topology.transform);
-        console.log("澎湖縣的绝对坐标：", decodedCoords);
-
-        const svgPath = coordsToPath(decodedCoords);
-        console.log("澎湖縣的 SVG 路径 (d)：", svgPath);
-
-        // 在页面中渲染路径（可视化验证）
-        const svg = document.createElementNS(
-          "http://www.w3.org/2000/svg",
-          "svg"
-        );
-        svg.setAttribute("viewBox", "0 0 1000 1000");
-        svg.setAttribute("xmlns", "http://www.w3.org/2000/svg");
-        svg.style.border = "1px solid black";
-        document.body.appendChild(svg);
-
-        const path = document.createElementNS(
-          "http://www.w3.org/2000/svg",
-          "path"
-        );
-        path.setAttribute("d", svgPath);
-        path.setAttribute("stroke", "black");
-        path.setAttribute("fill", "none");
-        svg.appendChild(path);
-      } catch (error) {
-        console.error("处理 arcs 时出错:", error);
-      }
     </script>
   </body>
 </html>

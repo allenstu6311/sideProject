@@ -53,12 +53,19 @@ export const taiwan = {
       },
       focusDom: "",
       inValid: false,
+      d3Svg: "",
+      countrySvg: "",
+      mapGroup: "",
+      townSvg: "",
+      villageSvg: "",
+      areaData: "",
+      villageData: "",
     };
   },
   computed: {},
   watch: {
     deepVal(newVal, oldVal) {
-      this.updateDeepVal(newVal, oldVal);
+      // this.updateDeepVal(newVal, oldVal);
     },
     currAddress(val) {
       this.$emit("updateAddress", val);
@@ -73,27 +80,170 @@ export const taiwan = {
     },
   },
   methods: {
-    initMap(init) {
-      const { map, svg, towns, villages } = this.$refs;
+    async initMap(init) {
+      const { map, svg, towns, villages, country } = this.$refs;
       const { innerWidth, innerHeight } = window;
-      svg.setAttribute(
-        "viewBox",
-        `0 0 ${innerWidth > 400 ? innerWidth : 400} ${innerHeight}`
-      );
 
-      const { centerX, centerY } = getBBoxCenter(map);
+      if (init) {
+        this.d3Svg = d3.select(svg);
+        this.mapGroup = this.d3Svg
+          .append("g")
+          .attr("class", "map-group")
+          .attr("translate", "map");
 
-      const translateX = innerWidth / 2 - centerX;
-      const translateY = innerHeight / 2 - centerY;
+        this.countrySvg = this.mapGroup
+          .append("g")
+          .attr("class", "selected-county-country");
+        this.townSvg = this.mapGroup
+          .append("g")
+          .attr("class", "selected-county-towns");
+        this.villageSvg = this.mapGroup
+          .append("g")
+          .attr("class", "selected-county-villages");
 
-      this.moveMap(translateX, translateY);
+        this.areaData = await this.getMapData();
+        this.appendMap();
 
-      if (!init) {
-        this.removeChild(towns);
-        this.removeChild(villages);
-        this.$emit("updateDeep", 0);
-        this.$emit("getLocationData", this.defaultInfo);
+        // fetch("./data/topoJson/towns-mercator.json")
+        //   .then((res) => res.json())
+        //   .then((data) => {
+        //     this.appendMap(data, this.countrySvg);
+        //     // const path = d3.geoPath();
+        //     // // 解壓 TopoJSON 為 GeoJSON
+        //     // const counties = topojson.feature(data, data.objects.counties);
+        //     // const towns = topojson.feature(data, data.objects.towns);
+        //     // this.countrySvg
+        //     //   .selectAll("path")
+        //     //   .data(counties.features)
+        //     //   .enter()
+        //     //   .append("path")
+        //     //   .attr("d", path)
+        //     //   .attr("stroke", "black")
+        //     //   .attr("fill", "lightblue")
+        //     //   .attr("stroke-width", 0.5)
+        //     //   .on("click", (d, data) => {
+        //     //     const countryId = data.id.slice(0, 5);
+        //     //     const towsData = towns.features.filter((item) =>
+        //     //       item.id.includes(countryId)
+        //     //     );
+
+        //     //     this.$nextTick(() => {
+        //     //       const { translateX, translateY, zoomLevel } =
+        //     //         this.getMoveRange(this.townSvg.node());
+        //     //       this.moveMap(translateX, translateY, zoomLevel);
+        //     //       console.log("translateX", translateX);
+        //     //     });
+
+        //     //     this.townSvg
+        //     //       .selectAll("path")
+        //     //       .data(towsData)
+        //     //       .enter()
+        //     //       .append("path")
+        //     //       .attr("d", path)
+        //     //       .attr("stroke", "black")
+        //     //       .attr("fill", "lightblue")
+        //     //       .attr("stroke-width", 0.5)
+        //     //       .on("click", (e, data) => {
+        //     //         // const { translateX, translateY } = this.getMoveRange(
+        //     //         //   this.townSvg.node()
+        //     //         // );
+        //     //         // console.log("translateX", translateX);
+        //     //         // this.moveMap(translateX, translateY);
+        //     //       });
+        //     //   });
+        //   });
       }
+
+      this.$nextTick(() => {
+        const { centerX, centerY } = getBBoxCenter(this.mapGroup.node());
+        const translateX = innerWidth / 2 - centerX;
+        const translateY = innerHeight / 2 - centerY;
+        // this.moveMap(translateX, translateY);
+        // this.moveMap(this.mapGroup.node());
+        this.mapGroup.attr(
+          "transform",
+          `translate(${translateX},${translateY})`
+        );
+      });
+    },
+    getMapData(id) {
+      let url = "./data/topoJson/towns-mercator.json";
+      if (id) {
+        url = `./data/topoJson/tw-village/${id}.json`;
+      }
+      return fetch(url)
+        .then((res) => res.json())
+        .then((data) => {
+          return data || {};
+        });
+    },
+    async appendMap(id) {
+      const path = d3.geoPath();
+      let dom;
+      let mapData;
+
+      // console.log("this.deepVal", this.deepVal);
+
+      switch (this.deepVal) {
+        case 1:
+          mapData = topojson.feature(
+            this.areaData,
+            this.areaData.objects.towns
+          ).features;
+
+          mapData = mapData.filter((item) => item.id.includes(id));
+          dom = this.townSvg;
+          break;
+        case 2:
+          mapData = topojson.feature(
+            this.villageData,
+            this.villageData.objects.village
+          ).features;
+
+          mapData = mapData.filter((item) =>
+            item.properties.TOWNCODE.includes(id)
+          );
+          dom = this.villageSvg;
+          break;
+
+        default:
+          mapData = topojson.feature(
+            this.areaData,
+            this.areaData.objects.counties
+          ).features;
+          dom = this.countrySvg;
+          break;
+      }
+      // console.log("dom", dom.node());
+      // console.log("mapData", mapData);
+
+      dom
+        .selectAll("path")
+        .data(mapData)
+        .enter()
+        .append("path")
+        .attr("d", path)
+        .attr("stroke", "black")
+        .attr("fill", "lightblue")
+        .attr("stroke-width", 0.5)
+        .on("click", async (d, data) => {
+          console.log("data", data);
+
+          const deep = this.deepVal + 1;
+          let moveDom = deep === 1 ? this.townSvg : this.villageSvg;
+
+          if (deep === 1) {
+            this.villageData = await this.getMapData(data.id);
+          }
+
+          if (deep < 3) {
+            this.$emit("updateDeep", deep);
+            this.$nextTick(() => {
+              this.appendMap(data.id);
+              this.moveMap(moveDom.node());
+            });
+          }
+        });
     },
     updateDeepVal(newVal, oldVal) {
       // console.log("newVal", newVal, "oldVal", oldVal);
@@ -130,9 +280,35 @@ export const taiwan = {
         parent.removeChild(parent.firstChild);
       }
     },
-    moveMap(translateX, translateY, scale = 1) {
-      const { map } = this.$refs;
-      map.style.transform = `translate(${translateX}px,${translateY}px) scale(${scale})`;
+    getMoveRange(dom) {
+      console.log("dom", dom);
+      // debugger;
+      const {
+        centerX: pathCenterX,
+        centerY: pathCenterY,
+        zoomLevel,
+      } = getBBoxCenter(dom);
+
+      // viewBox
+      const svgSize = this.d3Svg.node().getAttribute("viewBox").split(" ");
+      const svgWidth = svgSize[2];
+      const svgHeight = svgSize[3];
+
+      // 將目標 path 的中心點移動到 SVG 可視區域的中心
+      const translateX = svgWidth / 2 - pathCenterX * zoomLevel;
+      const translateY = svgHeight / 2 - pathCenterY * zoomLevel;
+
+      return { translateX, translateY, zoomLevel };
+    },
+    moveMap(dom) {
+      const { translateX, translateY, zoomLevel } = this.getMoveRange(dom);
+      console.log("translateX", translateX);
+      console.log("zoomLevel", zoomLevel);
+
+      this.mapGroup.attr(
+        "transform",
+        `translate(${translateX},${translateY}) scale(${zoomLevel})`
+      );
     },
     insertMap(parent, child) {
       parent.insertAdjacentHTML("beforeend", child);
@@ -215,7 +391,7 @@ export const taiwan = {
             : this.countryList[this.countryInfo.id]?.towns[id];
 
         this.moveMap(translateX, translateY, zoomLevel);
-        this.insertMap(deep === 1 ? towns : villages, template);
+        // this.insertMap(deep === 1 ? towns : villages, template);
       }
 
       // 在同一層移動也要確保觸發位移
@@ -231,55 +407,14 @@ export const taiwan = {
             child.getAttribute("xlink:href")?.substring(1) ||
             child.getAttribute("id");
 
-          if (deep > 1) {
-            function parsePathData(d) {
-              const points = [];
-              const commands = d.match(/[MLHVCSQTAZ][^MLHVCSQTAZ]*/gi);
-              commands.forEach((command) => {
-                const type = command[0];
-                const coords = command
-                  .slice(1)
-                  .trim()
-                  .split(/[\s,]+/)
-                  .map(Number);
-                if (type === "M" || type === "L") {
-                  for (let i = 0; i < coords.length; i += 2) {
-                    points.push([coords[i], coords[i + 1]]);
-                  }
-                }
-              });
-              return points;
-            }
-
-            function calculateArcs(points) {
-              const arcs = [];
-              let currentArc = [];
-              for (let i = 1; i < points.length; i++) {
-                const [x1, y1] = points[i - 1];
-                const [x2, y2] = points[i];
-                const dx = x2 - x1;
-                const dy = y2 - y1;
-                currentArc.push([dx, dy]);
-              }
-              arcs.push(currentArc); // 將完整的邊界段作為一個 `arc` 加入到 `arcs` 中
-              return arcs;
-            }
-
-            const d = child.getAttribute("d");
-            const points = parsePathData(d);
-            const arcs = calculateArcs(points);
-
-            console.log(arcs);
-          }
-
           await this.handleEvent(id, deep);
         });
       });
     },
   },
   mounted() {
-    const { country, map } = this.$refs;
-    this.addEvent(country, 1);
+    const { country, map, svg } = this.$refs;
+    // this.addEvent(country, 1);
 
     window.addEventListener("resize", () => {
       this.initMap();
@@ -290,48 +425,52 @@ export const taiwan = {
     });
   },
   template: `
-     <svg class="tw-geo svelte-ul8skc" viewBox="0 0 960 910" ref="svg" preserveAspectRatio="xMidYMid meet">
-      <g class="map-container">
-        <g
-          class="map-group"
-          stroke-width="0.5"
-          transform="translate(0,0) scale(1)"
-          ref="map"
-          shape-rendering="crispEdges"
-          vector-effect="non-scaling-stroke"
-        >
-          <g class="county" ref="country">
-            <use xlink:href="#64000"></use>
-            <use xlink:href="#09007"></use>
-            <use xlink:href="#10013"></use>
-            <use xlink:href="#10015"></use>
-            <use xlink:href="#10018"></use>
-            <use xlink:href="#10014"></use>
-            <use xlink:href="#66000"></use>
-            <use xlink:href="#10010"></use>
-            <use xlink:href="#68000"></use>
-            <use xlink:href="#10008"></use>
-            <use xlink:href="#10009"></use>
-            <use xlink:href="#10016"></use>
-            <use xlink:href="#67000"></use>      
-            <use xlink:href="#63000"></use>
-            <use xlink:href="#10007"></use>         
-            <use xlink:href="#10004"></use>
-            <use xlink:href="#10020"></use>
-            <use xlink:href="#10017"></use>
-            <use xlink:href="#10005"></use>
-            <use xlink:href="#10002"></use>
-            <use xlink:href="#65000"></use>
-            <use xlink:href="#9020"></use>
-          </g>
-          <g class="selected-county-towns" ref="towns"></g>
-          <g class="selected-town-villages" ref="villages"></g>
-        </g>
-      </g>
-      <defs>
-        <pattern id="tpp-pattern" x="0" y="0" width="0.9055382649729705" height="0.9055382649729705" patternUnits="userSpaceOnUse" patternContentUnits="userSpaceOnUse">
-          <circle cx="0.45276913248648526" cy="0.45276913248648526" r="0.22638456624324263" fill="#fff" opacity="0.5"></circle>
-        </pattern>
-      </defs>
+    
+ <svg class="tw-geo svelte-ul8skc" viewBox="0 0 960 910" ref="svg" preserveAspectRatio="xMidYMid meet">
     </svg>`,
+  // template: `
+  //    <svg class="tw-geo svelte-ul8skc" viewBox="0 0 960 910" ref="svg" preserveAspectRatio="xMidYMid meet">
+  //     <g class="map-container">
+  //       <g
+  //         class="map-group"
+  //         stroke-width="0.5"
+  //         transform="translate(0,0) scale(1)"
+  //         ref="map"
+  //         shape-rendering="crispEdges"
+  //         vector-effect="non-scaling-stroke"
+  //       >
+  //         <g class="county" ref="country">
+  //           <use xlink:href="#64000"></use>
+  //           <use xlink:href="#09007"></use>
+  //           <use xlink:href="#10013"></use>
+  //           <use xlink:href="#10015"></use>
+  //           <use xlink:href="#10018"></use>
+  //           <use xlink:href="#10014"></use>
+  //           <use xlink:href="#66000"></use>
+  //           <use xlink:href="#10010"></use>
+  //           <use xlink:href="#68000"></use>
+  //           <use xlink:href="#10008"></use>
+  //           <use xlink:href="#10009"></use>
+  //           <use xlink:href="#10016"></use>
+  //           <use xlink:href="#67000"></use>
+  //           <use xlink:href="#63000"></use>
+  //           <use xlink:href="#10007"></use>
+  //           <use xlink:href="#10004"></use>
+  //           <use xlink:href="#10020"></use>
+  //           <use xlink:href="#10017"></use>
+  //           <use xlink:href="#10005"></use>
+  //           <use xlink:href="#10002"></use>
+  //           <use xlink:href="#65000"></use>
+  //           <use xlink:href="#9020"></use>
+  //         </g>
+  //         <g class="selected-county-towns" ref="towns"></g>
+  //         <g class="selected-town-villages" ref="villages"></g>
+  //       </g>
+  //     </g>
+  //     <defs>
+  //       <pattern id="tpp-pattern" x="0" y="0" width="0.9055382649729705" height="0.9055382649729705" patternUnits="userSpaceOnUse" patternContentUnits="userSpaceOnUse">
+  //         <circle cx="0.45276913248648526" cy="0.45276913248648526" r="0.22638456624324263" fill="#fff" opacity="0.5"></circle>
+  //       </pattern>
+  //     </defs>
+  //   </svg>`,
 };

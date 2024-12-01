@@ -68,5 +68,7 @@ export function getBBoxCenter(svg) {
       ? (window.innerHeight / svgBox.height) * scaleFactor
       : (window.innerHeight / svgBox.width) * scaleFactor;
 
+  // let zoomLevel = window.innerWidth / svgBox.width;
+
   return { svgBox, centerX, centerY, zoomLevel };
 }
