@@ -59,6 +59,8 @@ export async function assignValue(id, dom, deep) {
 
 export function getBBoxCenter(svg) {
   const svgBox = svg.getBBox();
+  console.log("svgBox", svgBox);
+
   const centerX = svgBox.x + svgBox.width / 2;
   const centerY = svgBox.y + svgBox.height / 2;
 

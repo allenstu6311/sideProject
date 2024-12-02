@@ -60,12 +60,22 @@ export const taiwan = {
       villageSvg: "",
       areaData: "",
       villageData: "",
+      targetData: {},
+      changeArea: false,
+      isMapClick: false,
     };
   },
   computed: {},
   watch: {
     deepVal(newVal, oldVal) {
-      // this.updateDeepVal(newVal, oldVal);
+      if (newVal > 0 || oldVal > newVal) {
+        this.removeChild(newVal, oldVal);
+      }
+      const dom = this.getDomFromDeep(newVal);
+      this.appendMap(newVal, this.targetData.id);
+      this.$nextTick(() => {
+        this.moveMap(dom.node());
+      });
     },
     currAddress(val) {
       this.$emit("updateAddress", val);
@@ -81,8 +91,8 @@ export const taiwan = {
   },
   methods: {
     async initMap(init) {
-      const { map, svg, towns, villages, country } = this.$refs;
-      const { innerWidth, innerHeight } = window;
+      const { svg } = this.$refs;
+      // const { innerWidth, innerHeight } = window;
 
       if (init) {
         this.d3Svg = d3.select(svg);
@@ -102,69 +112,21 @@ export const taiwan = {
           .attr("class", "selected-county-villages");
 
         this.areaData = await this.getMapData();
-        this.appendMap();
-
-        // fetch("./data/topoJson/towns-mercator.json")
-        //   .then((res) => res.json())
-        //   .then((data) => {
-        //     this.appendMap(data, this.countrySvg);
-        //     // const path = d3.geoPath();
-        //     // // 解壓 TopoJSON 為 GeoJSON
-        //     // const counties = topojson.feature(data, data.objects.counties);
-        //     // const towns = topojson.feature(data, data.objects.towns);
-        //     // this.countrySvg
-        //     //   .selectAll("path")
-        //     //   .data(counties.features)
-        //     //   .enter()
-        //     //   .append("path")
-        //     //   .attr("d", path)
-        //     //   .attr("stroke", "black")
-        //     //   .attr("fill", "lightblue")
-        //     //   .attr("stroke-width", 0.5)
-        //     //   .on("click", (d, data) => {
-        //     //     const countryId = data.id.slice(0, 5);
-        //     //     const towsData = towns.features.filter((item) =>
-        //     //       item.id.includes(countryId)
-        //     //     );
-
-        //     //     this.$nextTick(() => {
-        //     //       const { translateX, translateY, zoomLevel } =
-        //     //         this.getMoveRange(this.townSvg.node());
-        //     //       this.moveMap(translateX, translateY, zoomLevel);
-        //     //       console.log("translateX", translateX);
-        //     //     });
-
-        //     //     this.townSvg
-        //     //       .selectAll("path")
-        //     //       .data(towsData)
-        //     //       .enter()
-        //     //       .append("path")
-        //     //       .attr("d", path)
-        //     //       .attr("stroke", "black")
-        //     //       .attr("fill", "lightblue")
-        //     //       .attr("stroke-width", 0.5)
-        //     //       .on("click", (e, data) => {
-        //     //         // const { translateX, translateY } = this.getMoveRange(
-        //     //         //   this.townSvg.node()
-        //     //         // );
-        //     //         // console.log("translateX", translateX);
-        //     //         // this.moveMap(translateX, translateY);
-        //     //       });
-        //     //   });
-        //   });
+        this.appendMap(0);
       }
 
       this.$nextTick(() => {
-        const { centerX, centerY } = getBBoxCenter(this.mapGroup.node());
-        const translateX = innerWidth / 2 - centerX;
-        const translateY = innerHeight / 2 - centerY;
-        // this.moveMap(translateX, translateY);
-        // this.moveMap(this.mapGroup.node());
-        this.mapGroup.attr(
-          "transform",
-          `translate(${translateX},${translateY})`
-        );
+        // this.moveMapInCenter();
+        this.moveMap(this.mapGroup.node());
       });
+    },
+    moveMapInCenter() {
+      const { centerX, centerY } = getBBoxCenter(this.mapGroup.node());
+      const translateX = innerWidth / 2 - centerX;
+      const translateY = innerHeight / 2 - centerY;
+      // this.moveMap(translateX, translateY);
+      // this.moveMap(this.mapGroup.node());
+      this.mapGroup.attr("transform", `translate(${translateX},${translateY})`);
     },
     getMapData(id) {
       let url = "./data/topoJson/towns-mercator.json";
@@ -177,33 +139,23 @@ export const taiwan = {
           return data || {};
         });
     },
-    async appendMap(id) {
+    async appendMap(deep, id) {
       const path = d3.geoPath();
-      let dom;
+      const dom = this.getDomFromDeep(deep);
+      // console.log("dom", dom.node());
       let mapData;
 
-      // console.log("this.deepVal", this.deepVal);
-
-      switch (this.deepVal) {
+      switch (deep) {
         case 1:
-          mapData = topojson.feature(
-            this.areaData,
-            this.areaData.objects.towns
-          ).features;
+          mapData = topojson
+            .feature(this.areaData, this.areaData.objects.towns)
+            .features.filter((item) => item.id.includes(id));
 
-          mapData = mapData.filter((item) => item.id.includes(id));
-          dom = this.townSvg;
           break;
         case 2:
-          mapData = topojson.feature(
-            this.villageData,
-            this.villageData.objects.village
-          ).features;
-
-          mapData = mapData.filter((item) =>
-            item.properties.TOWNCODE.includes(id)
-          );
-          dom = this.villageSvg;
+          mapData = topojson
+            .feature(this.villageData, this.villageData.objects.village)
+            .features.filter((item) => item.properties.TOWNCODE.includes(id));
           break;
 
         default:
@@ -211,7 +163,6 @@ export const taiwan = {
             this.areaData,
             this.areaData.objects.counties
           ).features;
-          dom = this.countrySvg;
           break;
       }
       // console.log("dom", dom.node());
@@ -227,61 +178,101 @@ export const taiwan = {
         .attr("fill", "lightblue")
         .attr("stroke-width", 0.5)
         .on("click", async (d, data) => {
-          console.log("data", data);
-
-          const deep = this.deepVal + 1;
-          let moveDom = deep === 1 ? this.townSvg : this.villageSvg;
-
-          if (deep === 1) {
-            this.villageData = await this.getMapData(data.id);
-          }
-
-          if (deep < 3) {
-            this.$emit("updateDeep", deep);
-            this.$nextTick(() => {
-              this.appendMap(data.id);
-              this.moveMap(moveDom.node());
-            });
-          }
+          //因為要設定到下一層所以+1
+          this.mapOnClick(deep + 1, data);
         });
     },
-    updateDeepVal(newVal, oldVal) {
-      // console.log("newVal", newVal, "oldVal", oldVal);
-      const { towns, villages, map } = this.$refs;
+    async mapOnClick(deep, data) {
+      this.isMapClick = true;
+      const moveDom = deep === 1 ? this.townSvg : this.villageSvg;
+      this.targetData = data;
 
-      switch (newVal) {
+      if (deep === 1) {
+        this.villageData = await this.getMapData(data.id);
+      }
+
+      // 深度不超過2
+      if (deep <= 2) {
+        this.$emit("updateDeep", deep);
+
+        if (deep === this.deepVal) {
+          this.removeChild(deep, this.deepVal);
+          this.appendMap(deep, data.id);
+          this.$nextTick(() => {
+            this.moveMap(moveDom.node());
+          });
+        }
+      }
+      this.$nextTick(() => {
+        this.isMapClick = false;
+      });
+    },
+    getDomFromDeep(deep) {
+      const useDeep = deep === undefined ? this.deepVal : deep;
+      switch (useDeep) {
         case 0:
-          this.initMap();
-          this.removeChild(towns);
-          map.removeChild(this.focusDom);
-          this.focusDom = "";
-          break;
+          return this.countrySvg;
         case 1:
-          this.focusMap(this.countryInfo.dom);
-          this.$emit("getLocationData", this.countryInfo);
-          if (oldVal > newVal) {
-            this.moveMap(this.position.x, this.position.y, this.position.scale);
-            this.removeChild(villages);
-          }
-          break;
+          return this.townSvg;
         case 2:
-          this.$emit("getLocationData", this.townInfo);
-          this.focusMap(this.townInfo.dom);
-
-          break;
-        case 3:
-          this.$emit("getLocationData", this.villageInfo);
-          this.focusMap(this.villageInfo.dom);
-          break;
+          return this.villageSvg;
+        default:
+          return this.mapGroup;
       }
     },
-    removeChild(parent) {
-      while (parent.firstChild) {
-        parent.removeChild(parent.firstChild);
+    updateDeepVal(newVal, oldVal) {
+      console.log("newVal", newVal, "oldVal", oldVal);
+      // const { towns, villages, map } = this.$refs;
+
+      // switch (newVal) {
+      //   case 0:
+      //     this.initMap();
+      //     this.removeChild(towns);
+      //     map.removeChild(this.focusDom);
+      //     this.focusDom = "";
+      //     break;
+      //   case 1:
+      //     this.focusMap(this.countryInfo.dom);
+      //     this.$emit("getLocationData", this.countryInfo);
+      //     if (oldVal > newVal) {
+      //       this.moveMap(this.position.x, this.position.y, this.position.scale);
+      //       this.removeChild(villages);
+      //     }
+      //     break;
+      //   case 2:
+      //     this.$emit("getLocationData", this.townInfo);
+      //     this.focusMap(this.townInfo.dom);
+
+      //     break;
+      //   case 3:
+      //     this.$emit("getLocationData", this.villageInfo);
+      //     this.focusMap(this.villageInfo.dom);
+      //     break;
+      // }
+    },
+    removeChild(newDeep, oldDeep) {
+      console.log(newDeep, oldDeep);
+
+      if (newDeep === oldDeep) {
+        // 同層移動
+        const dom = this.getDomFromDeep(newDeep);
+        dom.selectAll("path").remove();
+      } else if (oldDeep > newDeep) {
+        /**
+         * 子層的點擊需要清空兩層，父
+         * 層的點擊僅須返回一層
+         */
+        newDeep = this.isMapClick ? newDeep - 1 : newDeep;
+        // 跨縣市移動
+        while (oldDeep > newDeep) {
+          const dom = this.getDomFromDeep(oldDeep);
+          dom.selectAll("path").remove();
+          oldDeep--;
+        }
       }
+      // console.log("oldDeep", oldDeep);
     },
     getMoveRange(dom) {
-      console.log("dom", dom);
       // debugger;
       const {
         centerX: pathCenterX,
@@ -301,9 +292,11 @@ export const taiwan = {
       return { translateX, translateY, zoomLevel };
     },
     moveMap(dom) {
+      console.log("moveMap dom", dom);
+
       const { translateX, translateY, zoomLevel } = this.getMoveRange(dom);
-      console.log("translateX", translateX);
-      console.log("zoomLevel", zoomLevel);
+      // console.log("translateX", translateX);
+      // console.log("zoomLevel", zoomLevel);
 
       this.mapGroup.attr(
         "transform",
