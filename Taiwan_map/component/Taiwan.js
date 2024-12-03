@@ -74,12 +74,11 @@ export const taiwan = {
       const dom = this.getDomFromDeep(newVal);
       this.appendMap(newVal, this.targetData.id);
       this.$nextTick(() => {
-        if(newVal === 0){
+        if (newVal === 0) {
           this.moveMapInCenter();
-        }else{
+        } else {
           this.moveMap(dom.node());
         }
-        
       });
     },
     currAddress(val) {
@@ -183,20 +182,18 @@ export const taiwan = {
         .attr("stroke", "black")
         .attr("fill", "lightblue")
         .attr("stroke-width", 0.5)
-        .on("click", async (d, data) => { 
+        .on("click", async (d, data) => {
+          const foucsNode = this.mapGroup.select(".focus").node();
+          if (foucsNode) this.mapGroup.select(".focus").remove();
 
-          // if(deep > 0){
-          //   this.mapGroup
-          //   .selectAll("path")
-          //   .data(data)
-          //   .enter()
-          //   .append("path")
-          //   .attr("d", path)
-          //   .attr("stroke", "red")
-          //   .attr("fill", "lightblue")
-          //   .attr("stroke-width", 0.5)
-
-          // }
+          this.mapGroup
+            .datum(data)
+            .append("path")
+            .attr("d", path)
+            .attr("stroke", "red")
+            .attr("fill", "none")
+            .attr("class", "focus")
+            .attr("stroke-width", 0.5);
 
           //因為要設定到下一層所以+1
           this.mapOnClick(deep + 1, data);
