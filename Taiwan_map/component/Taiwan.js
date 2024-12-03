@@ -61,25 +61,14 @@ export const taiwan = {
       areaData: "",
       villageData: "",
       targetData: {},
-      changeArea: false,
       isMapClick: false,
+      stack: [],
     };
   },
   computed: {},
   watch: {
     deepVal(newVal, oldVal) {
-      if (newVal > 0 || oldVal > newVal) {
-        this.removeChild(newVal, oldVal);
-      }
-      const dom = this.getDomFromDeep(newVal);
-      this.appendMap(newVal, this.targetData.id);
-      this.$nextTick(() => {
-        if (newVal === 0) {
-          this.moveMapInCenter();
-        } else {
-          this.moveMap(dom.node());
-        }
-      });
+      this.updateDeepVal(newVal, oldVal);
     },
     currAddress(val) {
       this.$emit("updateAddress", val);
@@ -154,13 +143,15 @@ export const taiwan = {
         case 1:
           mapData = topojson
             .feature(this.areaData, this.areaData.objects.towns)
-            .features.filter((item) => item.id.includes(id));
+            .features.filter((item) => id && item.id.includes(id));
 
           break;
         case 2:
           mapData = topojson
             .feature(this.villageData, this.villageData.objects.village)
-            .features.filter((item) => item.properties.TOWNCODE.includes(id));
+            .features.filter(
+              (item) => id && item.properties.TOWNCODE.includes(id)
+            );
           break;
 
         default:
@@ -183,45 +174,32 @@ export const taiwan = {
         .attr("fill", "lightblue")
         .attr("stroke-width", 0.5)
         .on("click", async (d, data) => {
-          const foucsNode = this.mapGroup.select(".focus").node();
-          if (foucsNode) this.mapGroup.select(".focus").remove();
-
-          this.mapGroup
-            .datum(data)
-            .append("path")
-            .attr("d", path)
-            .attr("stroke", "red")
-            .attr("fill", "none")
-            .attr("class", "focus")
-            .attr("stroke-width", 0.5);
-
           //因為要設定到下一層所以+1
           this.mapOnClick(deep + 1, data);
         });
     },
     async mapOnClick(deep, data) {
       this.isMapClick = true;
-      const moveDom = deep === 1 ? this.townSvg : this.villageSvg;
-      this.targetData = data;
+      const id = data.id ? data.id : data.properties.VILLCODE;
+      // console.log("id", id, "deep", deep);
+      let currInfo = this.getInfoFromDeep(deep);
+      Object.assign(currInfo, await assignValue(id, deep));
+      currInfo.data = data;
+      console.log("currInfo", currInfo);
+      this.$emit("getLocationData", currInfo);
 
       if (deep === 1) {
-        this.villageData = await this.getMapData(data.id);
-        // this.countryInfo = await assignValue(data.id, moveDom.node(), deep);
+        this.villageData = await this.getMapData(id);
+        // 切換縣市
+        this.townSvg.selectAll("path").remove();
+        this.villageSvg.selectAll("path").remove();
       }
 
-      // 深度不超過2
-      if (deep <= 2) {
-        this.$emit("updateDeep", deep);
-
-        if (deep === this.deepVal) {
-          this.removeChild(deep, this.deepVal);
-          this.appendMap(deep, data.id);
-          this.$nextTick(() => {
-            this.moveMap(moveDom.node());
-          });
-        }
-      } else if (deep === 3) {
+      if (deep === this.deepVal) {
+        this.updateDeepVal(deep, this.deepVal);
       }
+      this.$emit("updateDeep", deep);
+
       this.$nextTick(() => {
         this.isMapClick = false;
       });
@@ -236,12 +214,51 @@ export const taiwan = {
         case 2:
           return this.villageSvg;
         default:
-          return this.mapGroup;
+          return this.villageSvg;
       }
     },
-    updateDeepVal(newVal, oldVal) {
-      console.log("newVal", newVal, "oldVal", oldVal);
-      // const { towns, villages, map } = this.$refs;
+    getInfoFromDeep(deep) {
+      const useDeep = deep === undefined ? this.deepVal : deep;
+      switch (useDeep) {
+        case 1:
+          return this.countryInfo;
+        case 2:
+          return this.townInfo;
+        case 3:
+          return this.villageInfo;
+
+        default:
+          return {};
+      }
+    },
+    updateDeepVal(newDeep, oldDeep) {
+      console.log("newDeep", newDeep);
+
+      if (newDeep > 0 || oldDeep > newDeep) {
+        this.removeChild(newDeep, oldDeep);
+      }
+
+      this.focusMap();
+      const currInfo = this.getInfoFromDeep(newDeep);
+
+      // 父層控制
+      if (!this.isMapClick) {
+        this.$emit("getLocationData", currInfo);
+      }
+      const dom = this.getDomFromDeep(newDeep);
+      if (newDeep < 3) {
+        this.appendMap(newDeep, currInfo.id);
+      }
+
+      this.$nextTick(() => {
+        if (newDeep === 0) {
+          this.moveMapInCenter();
+        } else if (newDeep < 3) {
+          console.log("move", dom.node());
+
+          this.moveMap(dom.node());
+        }
+      });
 
       // switch (newVal) {
       //   case 0:
@@ -270,8 +287,8 @@ export const taiwan = {
       // }
     },
     removeChild(newDeep, oldDeep) {
-      console.log(newDeep, oldDeep);
-
+      // console.log("newDeep", newDeep, "oldDeep", oldDeep);
+      if (newDeep === 3 && oldDeep === 3) return;
       if (newDeep === oldDeep) {
         // 同層移動
         const dom = this.getDomFromDeep(newDeep);
@@ -281,7 +298,7 @@ export const taiwan = {
          * 子層的點擊需要清空兩層，父
          * 層的點擊僅須返回一層
          */
-        newDeep = this.isMapClick ? newDeep - 1 : newDeep;
+        // newDeep = this.isMapClick ? newDeep - 1 : newDeep;
         // 跨縣市移動
         while (oldDeep > newDeep) {
           const dom = this.getDomFromDeep(oldDeep);
@@ -310,6 +327,8 @@ export const taiwan = {
       return { translateX, translateY, zoomLevel };
     },
     moveMap(dom) {
+      console.log("dom", dom.children);
+
       const { translateX, translateY, zoomLevel } = this.getMoveRange(dom);
       // console.log("translateX", translateX);
       // console.log("zoomLevel", zoomLevel);
@@ -326,17 +345,25 @@ export const taiwan = {
         }
       });
     },
-    focusMap(dom) {
-      const { map } = this.$refs;
-      if (this.focusDom) {
-        map.removeChild(this.focusDom);
-      }
-      const cloneDom = dom.cloneNode(true);
-      cloneDom.setAttribute("stroke", "yellow");
-      cloneDom.setAttribute("stroke-width", `0.${4 - this.deepVal}`);
-      cloneDom.setAttribute("fill", "none");
-      this.focusDom = cloneDom;
-      map.appendChild(cloneDom);
+    focusMap(deep) {
+      const useDeep = deep === undefined ? this.deepVal : deep;
+      // console.log("useDeep", useDeep);
+
+      const foucsNode = this.mapGroup.select(".focus").node();
+      // console.log("foucsNode", foucsNode);
+
+      if (foucsNode) this.mapGroup.select(".focus").remove();
+      const path = d3.geoPath();
+      let currInfo = this.getInfoFromDeep(useDeep);
+
+      this.mapGroup
+        .datum(currInfo.data)
+        .append("path")
+        .attr("d", path)
+        .attr("stroke", "red")
+        .attr("fill", "none")
+        .attr("class", "focus")
+        .attr("stroke-width", 0.5);
     },
     async handleEvent(id, deep) {
       // await this.$nextTick(() => {});

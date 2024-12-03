@@ -33,7 +33,7 @@ async function getCsv(url, id, deep) {
   return textContent;
 }
 
-export async function assignValue(id, dom, deep) {
+export async function assignValue(id, deep) {
   let textContent = "";
   switch (deep) {
     case 1:
@@ -50,7 +50,6 @@ export async function assignValue(id, dom, deep) {
 
   const keys = {
     id,
-    dom,
     textContent,
     chName,
   };
@@ -59,7 +58,6 @@ export async function assignValue(id, dom, deep) {
 
 export function getBBoxCenter(svg) {
   const svgBox = svg.getBBox();
-  console.log("svgBox", svgBox);
 
   const centerX = svgBox.x + svgBox.width / 2;
   const centerY = svgBox.y + svgBox.height / 2;

@@ -395,14 +395,13 @@
             handler(newVal, oldVal) {
               const { id: newId } = newVal;
               const { id: oldId } = oldVal;
-              // console.log("newId", newId, "oldId", oldId);
-
               if (!this.selectionInfo[newId]) {
-                if (this.deep === 1 && newId != oldId) {
+                if (this.deep <= 1 && newId != oldId) {
                   this.getSelectionData(newId);
                 } else {
                   this.calauteSelectionRate();
                 }
+              } else {
               }
             },
             deep: true,
