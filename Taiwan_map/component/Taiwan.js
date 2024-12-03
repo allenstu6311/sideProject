@@ -189,6 +189,7 @@ export const taiwan = {
 
       if (deep === 1) {
         this.villageData = await this.getMapData(data.id);
+        // this.countryInfo = await assignValue(data.id, moveDom.node(), deep);
       }
 
       // 深度不超過2
@@ -202,6 +203,7 @@ export const taiwan = {
             this.moveMap(moveDom.node());
           });
         }
+      } else if (deep === 3) {
       }
       this.$nextTick(() => {
         this.isMapClick = false;
@@ -270,7 +272,6 @@ export const taiwan = {
           oldDeep--;
         }
       }
-      // console.log("oldDeep", oldDeep);
     },
     getMoveRange(dom) {
       // debugger;

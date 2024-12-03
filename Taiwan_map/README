@@ -1,21 +1,5 @@
-# v-html
-# 選情資料整理
+# 是否需要將goBack事件放置子層，目前使用isMapClick控制縮放
+# 初始化的移動
 # defs 白點(會因深度不同改變大小)
 
-
-設置流程
-(country)
-1.設置資料夾與檔案(建立towns.js)
-2.設置物件並設定一個key命名為country
-3.將城鎮資料去掉"g"標籤z放置到country中
-4.回到Taiwan.js設定countryList [id:countryName]
-
-(town)
-1.標籤設置id
-2.在地區的towns去註冊path
-3.回到
-
-
-3.key使用id
-4.下載對應csv資料放置data資料夾下
-5.如果不是最後一層需放入子層的svg
+1.準備focus dom
