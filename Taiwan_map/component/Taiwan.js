@@ -74,7 +74,12 @@ export const taiwan = {
       const dom = this.getDomFromDeep(newVal);
       this.appendMap(newVal, this.targetData.id);
       this.$nextTick(() => {
-        this.moveMap(dom.node());
+        if(newVal === 0){
+          this.moveMapInCenter();
+        }else{
+          this.moveMap(dom.node());
+        }
+        
       });
     },
     currAddress(val) {
@@ -92,7 +97,11 @@ export const taiwan = {
   methods: {
     async initMap(init) {
       const { svg } = this.$refs;
-      // const { innerWidth, innerHeight } = window;
+      const { innerWidth, innerHeight } = window;
+      svg.setAttribute(
+        "viewBox",
+        `0 0 ${innerWidth > 400 ? innerWidth : 400} ${innerHeight}`
+      );
 
       if (init) {
         this.d3Svg = d3.select(svg);
@@ -116,16 +125,13 @@ export const taiwan = {
       }
 
       this.$nextTick(() => {
-        // this.moveMapInCenter();
-        this.moveMap(this.mapGroup.node());
+        this.moveMapInCenter();
       });
     },
     moveMapInCenter() {
       const { centerX, centerY } = getBBoxCenter(this.mapGroup.node());
       const translateX = innerWidth / 2 - centerX;
       const translateY = innerHeight / 2 - centerY;
-      // this.moveMap(translateX, translateY);
-      // this.moveMap(this.mapGroup.node());
       this.mapGroup.attr("transform", `translate(${translateX},${translateY})`);
     },
     getMapData(id) {
@@ -177,7 +183,21 @@ export const taiwan = {
         .attr("stroke", "black")
         .attr("fill", "lightblue")
         .attr("stroke-width", 0.5)
-        .on("click", async (d, data) => {
+        .on("click", async (d, data) => { 
+
+          // if(deep > 0){
+          //   this.mapGroup
+          //   .selectAll("path")
+          //   .data(data)
+          //   .enter()
+          //   .append("path")
+          //   .attr("d", path)
+          //   .attr("stroke", "red")
+          //   .attr("fill", "lightblue")
+          //   .attr("stroke-width", 0.5)
+
+          // }
+
           //因為要設定到下一層所以+1
           this.mapOnClick(deep + 1, data);
         });
@@ -293,12 +313,9 @@ export const taiwan = {
       return { translateX, translateY, zoomLevel };
     },
     moveMap(dom) {
-      console.log("moveMap dom", dom);
-
       const { translateX, translateY, zoomLevel } = this.getMoveRange(dom);
       // console.log("translateX", translateX);
       // console.log("zoomLevel", zoomLevel);
-
       this.mapGroup.attr(
         "transform",
         `translate(${translateX},${translateY}) scale(${zoomLevel})`
@@ -421,6 +438,7 @@ export const taiwan = {
   template: `
     
  <svg class="tw-geo svelte-ul8skc" viewBox="0 0 960 910" ref="svg" preserveAspectRatio="xMidYMid meet">
+ 
     </svg>`,
   // template: `
   //    <svg class="tw-geo svelte-ul8skc" viewBox="0 0 960 910" ref="svg" preserveAspectRatio="xMidYMid meet">
