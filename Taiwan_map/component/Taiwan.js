@@ -75,10 +75,20 @@ export const taiwan = {
     },
     // 父層查詢事件
     async searchParam(param) {
-      let deep = 1;
-      for (const id of param.idList) {
-        await this.handleEvent(id, deep);
-        deep++;
+      const { idList, id } = param;
+      console.log("param", param);
+
+      this.villageData = await this.getMapData(idList[0]);
+      for (let i = 1; i <= idList.length; i++) {
+        // this.appendMap(i, idList[i - 1]);
+        // let currInfo = this.getInfoFromDeep(i);
+        // Object.assign(currInfo, await assignValue(idList[i - 1], i));
+
+        this.$emit("updateDeep", i);
+
+        // if (i === this.deepVal) {
+        //   this.updateDeepVal(i, this.deepVal);
+        // }
       }
     },
   },
@@ -133,36 +143,36 @@ export const taiwan = {
           return data || {};
         });
     },
-    async appendMap(deep, id) {
+    appendMap(deep, id) {
       const path = d3.geoPath();
       const dom = this.getDomFromDeep(deep);
       // console.log("dom", dom.node());
       let mapData;
 
       switch (deep) {
-        case 1:
+        case 0:
+          mapData = topojson.feature(
+            this.areaData,
+            this.areaData.objects.counties
+          ).features;
+          break;
+        case 1: // 68000
           mapData = topojson
             .feature(this.areaData, this.areaData.objects.towns)
             .features.filter((item) => id && item.id.includes(id));
 
           break;
-        case 2:
+        default:
           mapData = topojson
             .feature(this.villageData, this.villageData.objects.village)
             .features.filter(
               (item) => id && item.properties.TOWNCODE.includes(id)
             );
           break;
-
-        default:
-          mapData = topojson.feature(
-            this.areaData,
-            this.areaData.objects.counties
-          ).features;
-          break;
       }
       // console.log("dom", dom.node());
-      // console.log("mapData", mapData);
+      console.log("deep", deep, "id", id);
+      console.log("mapData", mapData);
 
       dom
         .selectAll("path")
@@ -182,10 +192,10 @@ export const taiwan = {
       this.isMapClick = true;
       const id = data.id ? data.id : data.properties.VILLCODE;
       // console.log("id", id, "deep", deep);
+
       let currInfo = this.getInfoFromDeep(deep);
       Object.assign(currInfo, await assignValue(id, deep));
       currInfo.data = data;
-      console.log("currInfo", currInfo);
       this.$emit("getLocationData", currInfo);
 
       if (deep === 1) {
@@ -204,36 +214,7 @@ export const taiwan = {
         this.isMapClick = false;
       });
     },
-    getDomFromDeep(deep) {
-      const useDeep = deep === undefined ? this.deepVal : deep;
-      switch (useDeep) {
-        case 0:
-          return this.countrySvg;
-        case 1:
-          return this.townSvg;
-        case 2:
-          return this.villageSvg;
-        default:
-          return this.villageSvg;
-      }
-    },
-    getInfoFromDeep(deep) {
-      const useDeep = deep === undefined ? this.deepVal : deep;
-      switch (useDeep) {
-        case 1:
-          return this.countryInfo;
-        case 2:
-          return this.townInfo;
-        case 3:
-          return this.villageInfo;
-
-        default:
-          return {};
-      }
-    },
     updateDeepVal(newDeep, oldDeep) {
-      console.log("newDeep", newDeep);
-
       if (newDeep > 0 || oldDeep > newDeep) {
         this.removeChild(newDeep, oldDeep);
       }
@@ -254,37 +235,9 @@ export const taiwan = {
         if (newDeep === 0) {
           this.moveMapInCenter();
         } else if (newDeep < 3) {
-          console.log("move", dom.node());
-
           this.moveMap(dom.node());
         }
       });
-
-      // switch (newVal) {
-      //   case 0:
-      //     this.initMap();
-      //     this.removeChild(towns);
-      //     map.removeChild(this.focusDom);
-      //     this.focusDom = "";
-      //     break;
-      //   case 1:
-      //     this.focusMap(this.countryInfo.dom);
-      //     this.$emit("getLocationData", this.countryInfo);
-      //     if (oldVal > newVal) {
-      //       this.moveMap(this.position.x, this.position.y, this.position.scale);
-      //       this.removeChild(villages);
-      //     }
-      //     break;
-      //   case 2:
-      //     this.$emit("getLocationData", this.townInfo);
-      //     this.focusMap(this.townInfo.dom);
-
-      //     break;
-      //   case 3:
-      //     this.$emit("getLocationData", this.villageInfo);
-      //     this.focusMap(this.villageInfo.dom);
-      //     break;
-      // }
     },
     removeChild(newDeep, oldDeep) {
       // console.log("newDeep", newDeep, "oldDeep", oldDeep);
@@ -327,8 +280,6 @@ export const taiwan = {
       return { translateX, translateY, zoomLevel };
     },
     moveMap(dom) {
-      console.log("dom", dom.children);
-
       const { translateX, translateY, zoomLevel } = this.getMoveRange(dom);
       // console.log("translateX", translateX);
       // console.log("zoomLevel", zoomLevel);
@@ -336,6 +287,33 @@ export const taiwan = {
         "transform",
         `translate(${translateX},${translateY}) scale(${zoomLevel})`
       );
+    },
+    getDomFromDeep(deep) {
+      const useDeep = deep === undefined ? this.deepVal : deep;
+      switch (useDeep) {
+        case 0:
+          return this.countrySvg;
+        case 1:
+          return this.townSvg;
+        case 2:
+          return this.villageSvg;
+        default:
+          return this.villageSvg;
+      }
+    },
+    getInfoFromDeep(deep) {
+      const useDeep = deep === undefined ? this.deepVal : deep;
+      switch (useDeep) {
+        case 1:
+          return this.countryInfo;
+        case 2:
+          return this.townInfo;
+        case 3:
+          return this.villageInfo;
+
+        default:
+          return {};
+      }
     },
     insertMap(parent, child) {
       parent.insertAdjacentHTML("beforeend", child);
@@ -355,6 +333,7 @@ export const taiwan = {
       if (foucsNode) this.mapGroup.select(".focus").remove();
       const path = d3.geoPath();
       let currInfo = this.getInfoFromDeep(useDeep);
+      console.log("border");
 
       this.mapGroup
         .datum(currInfo.data)
