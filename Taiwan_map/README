@@ -1,5 +1,1 @@
-# 是否需要將goBack事件放置子層，目前使用isMapClick控制縮放
-# 初始化的移動
-# defs 白點(會因深度不同改變大小)
-
-1.準備focus dom
+# 父層文字搜尋要能focus

@@ -62,13 +62,17 @@ export const taiwan = {
       villageData: "",
       targetData: {},
       isMapClick: false,
-      stack: [],
+      strSearchParam: {},
+      currMapData: [],
     };
   },
   computed: {},
   watch: {
-    deepVal(newVal, oldVal) {
-      this.updateDeepVal(newVal, oldVal);
+    deepVal: {
+      handler(newVal, oldVal) {
+        this.updateDeepVal(newVal, oldVal);
+      },
+      deep: true,
     },
     currAddress(val) {
       this.$emit("updateAddress", val);
@@ -76,15 +80,22 @@ export const taiwan = {
     // 父層查詢事件
     async searchParam(param) {
       const { idList, id } = param;
-      console.log("param", param);
+
+      this.strSearchParam = {
+        id,
+        deep: idList.length,
+      };
 
       this.villageData = await this.getMapData(idList[0]);
       for (let i = 1; i <= idList.length; i++) {
         // this.appendMap(i, idList[i - 1]);
         // let currInfo = this.getInfoFromDeep(i);
-        // Object.assign(currInfo, await assignValue(idList[i - 1], i));
+
+        const currInfo = this.getInfoFromDeep(i);
+        Object.assign(currInfo, await assignValue(idList[i - 1], i));
 
         this.$emit("updateDeep", i);
+        await this.$nextTick();
 
         // if (i === this.deepVal) {
         //   this.updateDeepVal(i, this.deepVal);
@@ -170,9 +181,10 @@ export const taiwan = {
             );
           break;
       }
+
+      this.currMapData = mapData;
       // console.log("dom", dom.node());
-      console.log("deep", deep, "id", id);
-      console.log("mapData", mapData);
+      // console.log("mapData", mapData);
 
       dom
         .selectAll("path")
@@ -195,7 +207,7 @@ export const taiwan = {
 
       let currInfo = this.getInfoFromDeep(deep);
       Object.assign(currInfo, await assignValue(id, deep));
-      currInfo.data = data;
+      currInfo.targetData = data;
       this.$emit("getLocationData", currInfo);
 
       if (deep === 1) {
@@ -219,8 +231,8 @@ export const taiwan = {
         this.removeChild(newDeep, oldDeep);
       }
 
-      this.focusMap();
       const currInfo = this.getInfoFromDeep(newDeep);
+      console.log("newDeep", newDeep);
 
       // 父層控制
       if (!this.isMapClick) {
@@ -237,6 +249,7 @@ export const taiwan = {
         } else if (newDeep < 3) {
           this.moveMap(dom.node());
         }
+        this.focusMap();
       });
     },
     removeChild(newDeep, oldDeep) {
@@ -335,8 +348,17 @@ export const taiwan = {
       let currInfo = this.getInfoFromDeep(useDeep);
       console.log("border");
 
+      if (!currInfo.data) {
+        const key = useDeep === 3 ? "properties.VILLCODE" : "id";
+        // console.log(" currInfo", currInfo);
+        let data = this.currMapData.find(
+          (item) => item[key] === this.strSearchParam.id
+        );
+        console.log("data", data);
+      }
+
       this.mapGroup
-        .datum(currInfo.data)
+        .datum(currInfo.targetData)
         .append("path")
         .attr("d", path)
         .attr("stroke", "red")
