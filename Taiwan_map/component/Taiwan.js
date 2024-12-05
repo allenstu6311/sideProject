@@ -154,35 +154,48 @@ export const taiwan = {
           return data || {};
         });
     },
-    appendMap(deep, id) {
-      const path = d3.geoPath();
-      const dom = this.getDomFromDeep(deep);
-      // console.log("dom", dom.node());
-      let mapData;
+    getFeatureById(deep, id, type) {
+      let data;
 
       switch (deep) {
         case 0:
-          mapData = topojson.feature(
+          data = topojson.feature(
             this.areaData,
             this.areaData.objects.counties
           ).features;
           break;
-        case 1: // 68000
-          mapData = topojson
-            .feature(this.areaData, this.areaData.objects.towns)
-            .features.filter((item) => id && item.id.includes(id));
-
+        case 1:
+          data = topojson.feature(
+            this.areaData,
+            this.areaData.objects.towns
+          ).features;
           break;
         default:
-          mapData = topojson
-            .feature(this.villageData, this.villageData.objects.village)
-            .features.filter(
-              (item) => id && item.properties.TOWNCODE.includes(id)
-            );
+          data = topojson.feature(
+            this.villageData,
+            this.villageData.objects.village
+          ).features;
           break;
       }
 
-      this.currMapData = mapData;
+      if (type === "find") {
+        if (deep === 0) return data;
+        if (deep === 1) return data.find((item) => item.id.includes(id));
+        if (deep === 2)
+          return data.find((item) => item.properties.TOWNCODE.includes(id));
+      }
+
+      if (deep === 0) return data;
+      if (deep === 1) return data.filter((item) => item.id.includes(id));
+      if (deep === 2)
+        return data.filter((item) => item.properties.TOWNCODE.includes(id));
+    },
+    appendMap(deep, id) {
+      const path = d3.geoPath();
+      const dom = this.getDomFromDeep(deep);
+      // console.log("dom", dom.node());
+      let mapData = this.getFeatureById(deep, id);
+
       // console.log("dom", dom.node());
       // console.log("mapData", mapData);
 
@@ -226,6 +239,12 @@ export const taiwan = {
         this.isMapClick = false;
       });
     },
+    async updateCurrInfo(id, deep) {
+      let currInfo = this.getInfoFromDeep(deep);
+      Object.assign(currInfo, await assignValue(id, deep));
+      currInfo.targetData = data;
+      this.$emit("getLocationData", currInfo);
+    },
     updateDeepVal(newDeep, oldDeep) {
       if (newDeep > 0 || oldDeep > newDeep) {
         this.removeChild(newDeep, oldDeep);
@@ -233,7 +252,7 @@ export const taiwan = {
 
       const currInfo = this.getInfoFromDeep(newDeep);
       console.log("newDeep", newDeep);
-
+      this.focusMap();
       // 父層控制
       if (!this.isMapClick) {
         this.$emit("getLocationData", currInfo);
@@ -249,7 +268,6 @@ export const taiwan = {
         } else if (newDeep < 3) {
           this.moveMap(dom.node());
         }
-        this.focusMap();
       });
     },
     removeChild(newDeep, oldDeep) {
@@ -338,24 +356,16 @@ export const taiwan = {
     },
     focusMap(deep) {
       const useDeep = deep === undefined ? this.deepVal : deep;
-      // console.log("useDeep", useDeep);
-
       const foucsNode = this.mapGroup.select(".focus").node();
       // console.log("foucsNode", foucsNode);
 
       if (foucsNode) this.mapGroup.select(".focus").remove();
       const path = d3.geoPath();
       let currInfo = this.getInfoFromDeep(useDeep);
-      console.log("border");
+      console.log("useDeep", useDeep);
+      console.log("currInfo", currInfo);
 
-      if (!currInfo.data) {
-        const key = useDeep === 3 ? "properties.VILLCODE" : "id";
-        // console.log(" currInfo", currInfo);
-        let data = this.currMapData.find(
-          (item) => item[key] === this.strSearchParam.id
-        );
-        console.log("data", data);
-      }
+      console.log(this.getFeatureById(useDeep, currInfo.id, "find"));
 
       this.mapGroup
         .datum(currInfo.targetData)
