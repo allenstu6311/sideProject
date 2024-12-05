@@ -81,9 +81,7 @@ export const taiwan = {
 
       this.villageData = await this.getMapData(idList[0]);
       for (let i = 1; i <= idList.length; i++) {
-        const currInfo = this.getInfoFromDeep(i);
-        currInfo.targetData = this.getFeatureById(i - 1, idList[i - 1], "find");
-        Object.assign(currInfo, await assignValue(idList[i - 1], i));
+        await this.updateCurrInfo(idList[i - 1], i);
         this.$emit("updateDeep", i);
         await this.$nextTick();
       }
@@ -199,10 +197,11 @@ export const taiwan = {
       this.isMapClick = true;
       const id = data.id ? data.id : data.properties.VILLCODE;
 
-      let currInfo = this.getInfoFromDeep(deep);
-      Object.assign(currInfo, await assignValue(id, deep));
-      currInfo.targetData = data;
-      this.$emit("getLocationData", currInfo);
+      // let currInfo = this.getInfoFromDeep(deep);
+      // Object.assign(currInfo, await assignValue(id, deep));
+      // currInfo.targetData = data;
+      // this.$emit("getLocationData", currInfo);
+      await this.updateCurrInfo(id, deep);
 
       if (deep === 1) {
         this.villageData = await this.getMapData(id);
@@ -221,9 +220,10 @@ export const taiwan = {
       });
     },
     async updateCurrInfo(id, deep) {
-      let currInfo = this.getInfoFromDeep(deep);
+      const DATA_INDEX = 1; //資料跟地圖深度距離1
+      const currInfo = this.getInfoFromDeep(deep);
       Object.assign(currInfo, await assignValue(id, deep));
-      currInfo.targetData = data;
+      currInfo.targetData = this.getFeatureById(deep - DATA_INDEX, id, "find");
       this.$emit("getLocationData", currInfo);
     },
     updateDeepVal(newDeep, oldDeep) {
@@ -235,9 +235,9 @@ export const taiwan = {
       this.focusMap();
 
       // 父層控制
-      if (!this.isMapClick) {
-        this.$emit("getLocationData", currInfo);
-      }
+      // if (!this.isMapClick) {
+      //   this.$emit("getLocationData", currInfo);
+      // }
       const dom = this.getDomFromDeep(newDeep);
       if (newDeep < 3) {
         this.appendMap(newDeep, currInfo.id);
