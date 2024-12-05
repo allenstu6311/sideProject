@@ -14,6 +14,10 @@ export const taiwan = {
       type: Object,
       default: null,
     },
+    // selectionData: {
+    //   type: Array,
+    //   default: [],
+    // },
   },
   emits: ["updateDeep", "getLocationData", "updateAddress"],
   data() {
@@ -62,6 +66,8 @@ export const taiwan = {
       villageData: "",
       targetData: {},
       isMapClick: false,
+      maxDeep: 3,
+      selectionData: [],
     };
   },
   computed: {},
@@ -114,6 +120,24 @@ export const taiwan = {
           .attr("class", "selected-county-villages");
 
         this.areaData = await this.getMapData();
+        const { counties } = this.areaData.objects;
+        // console.log("counties", counties);
+
+        const countryIdList = [];
+        for (let i = 0; i < counties.geometries.length; i++) {
+          countryIdList.push(counties.geometries[i].id);
+          await this.getSelectionData(counties.geometries[i].id);
+        }
+
+        // for (let i = 0; i < countryIdList.length; i++) {
+        //   const id = countryIdList[i];
+        //   const data = this.selectionData.filter((item) => {
+        //     return item.village_id.includes(id);
+        //   });
+
+        //   // console.log("data", data);；
+        // }
+
         this.appendMap(0);
       }
 
@@ -185,9 +209,21 @@ export const taiwan = {
         .enter()
         .append("path")
         .attr("d", path)
-        .attr("stroke", "black")
-        .attr("fill", "lightblue")
-        .attr("stroke-width", 0.5)
+        .attr("stroke", "#fff")
+        .attr("fill", (data, index) => {
+          const id = data.id ? data.id : data.properties.VILLCODE;
+          let range = 5;
+          if (deep === 1) range = 8;
+          if (deep === 2) range = 11;
+
+          const selectData = this.selectionData.filter((item) => {
+            return item.village_id.slice(0, range).includes(id);
+          });
+
+          if (!selectData.length) return "lightblue";
+          return this.calauteSelectionRate(selectData);
+        })
+        .attr("stroke-width", 0.1)
         .on("click", async (d, data) => {
           //因為要設定到下一層所以+1
           this.mapOnClick(deep + 1, data);
@@ -196,11 +232,6 @@ export const taiwan = {
     async mapOnClick(deep, data) {
       this.isMapClick = true;
       const id = data.id ? data.id : data.properties.VILLCODE;
-
-      // let currInfo = this.getInfoFromDeep(deep);
-      // Object.assign(currInfo, await assignValue(id, deep));
-      // currInfo.targetData = data;
-      // this.$emit("getLocationData", currInfo);
       await this.updateCurrInfo(id, deep);
 
       if (deep === 1) {
@@ -230,29 +261,21 @@ export const taiwan = {
       if (newDeep > 0 || oldDeep > newDeep) {
         this.removeChild(newDeep, oldDeep);
       }
-
       const currInfo = this.getInfoFromDeep(newDeep);
       this.focusMap();
 
-      // 父層控制
-      // if (!this.isMapClick) {
-      //   this.$emit("getLocationData", currInfo);
-      // }
       const dom = this.getDomFromDeep(newDeep);
       if (newDeep < 3) {
         this.appendMap(newDeep, currInfo.id);
       }
 
-      this.$nextTick(() => {
-        if (newDeep === 0) {
-          this.moveMapInCenter();
-        } else if (newDeep < 3) {
-          this.moveMap(dom.node());
-        }
-      });
+      if (newDeep === 0) {
+        this.moveMapInCenter();
+      } else if (newDeep < 3) {
+        this.moveMap(dom.node());
+      }
     },
     removeChild(newDeep, oldDeep) {
-      // console.log("newDeep", newDeep, "oldDeep", oldDeep);
       if (newDeep === 3 && oldDeep === 3) return;
       if (newDeep === oldDeep) {
         // 同層移動
@@ -263,7 +286,6 @@ export const taiwan = {
          * 子層的點擊需要清空兩層，父
          * 層的點擊僅須返回一層
          */
-        // newDeep = this.isMapClick ? newDeep - 1 : newDeep;
         // 跨縣市移動
         while (oldDeep > newDeep) {
           const dom = this.getDomFromDeep(oldDeep);
@@ -293,8 +315,6 @@ export const taiwan = {
     },
     moveMap(dom) {
       const { translateX, translateY, zoomLevel } = this.getMoveRange(dom);
-      // console.log("translateX", translateX);
-      // console.log("zoomLevel", zoomLevel);
       this.mapGroup.attr(
         "transform",
         `translate(${translateX},${translateY}) scale(${zoomLevel})`
@@ -327,14 +347,6 @@ export const taiwan = {
           return {};
       }
     },
-    insertMap(parent, child) {
-      parent.insertAdjacentHTML("beforeend", child);
-      this.$nextTick(() => {
-        if (this.deepVal <= 2) {
-          this.addEvent(parent, this.deepVal + 1);
-        }
-      });
-    },
     focusMap(deep) {
       const useDeep = deep === undefined ? this.deepVal : deep;
       const foucsNode = this.mapGroup.select(".focus").node();
@@ -347,10 +359,41 @@ export const taiwan = {
         .datum(currInfo.targetData)
         .append("path")
         .attr("d", path)
-        .attr("stroke", "red")
+        .attr("stroke", "#FFFA76")
         .attr("fill", "none")
         .attr("class", "focus")
-        .attr("stroke-width", 0.5);
+        .attr("stroke-width", `0.${4 - this.deepVal}`);
+    },
+    getSelectionData(id) {
+      if (!id) return;
+      // console.log("id", id);
+
+      return fetch(`./data/selection/${id}.json`)
+        .then((res) => res.json())
+        .then((data) => {
+          this.selectionData = this.selectionData.concat(data);
+        })
+        .catch(() => {});
+    },
+    calauteSelectionRate(data) {
+      let cand_1 = 0;
+      let cand_2 = 0;
+      let cand_3 = 0;
+
+      for (let i = 0; i < data.length; i++) {
+        const { village_id, cand_info } = data[i];
+        // const { townId } = this.findParentId(village_id);
+
+        cand_1 += cand_info[0].tks_rate;
+        cand_2 += cand_info[1].tks_rate;
+        cand_3 += cand_info[2].tks_rate;
+      }
+      const max = Math.max(...[cand_1, cand_2, cand_3]);
+
+      if (max === 0) return "lightblue";
+      if (max === cand_1) return "#00ffff";
+      if (max === cand_2) return "rgb(118, 231, 176)";
+      if (max === cand_3) return "rgb(118, 175, 237)";
     },
     async handleEvent(id, deep) {
       // await this.$nextTick(() => {});
@@ -421,6 +464,14 @@ export const taiwan = {
         this.updateDeepVal(deep, this.deepVal);
       }
     },
+    insertMap(parent, child) {
+      parent.insertAdjacentHTML("beforeend", child);
+      this.$nextTick(() => {
+        if (this.deepVal <= 2) {
+          this.addEvent(parent, this.deepVal + 1);
+        }
+      });
+    },
     // 地圖點擊事件
     addEvent(el, deep) {
       Array.from(el.children).forEach((child) => {
@@ -449,8 +500,12 @@ export const taiwan = {
   template: `
     
  <svg class="tw-geo svelte-ul8skc" viewBox="0 0 960 910" ref="svg" preserveAspectRatio="xMidYMid meet">
- 
-    </svg>`,
+  <defs>
+      <pattern id="tpp-pattern" x="0" y="0" width="0.9055382649729705" height="0.9055382649729705" patternUnits="userSpaceOnUse" patternContentUnits="userSpaceOnUse">
+        <circle cx="0.45276913248648526" cy="0.45276913248648526" r="0.22638456624324263" fill="#fff" opacity="0.5"></circle>
+      </pattern>
+  </defs>
+</svg>`,
   // template: `
   //    <svg class="tw-geo svelte-ul8skc" viewBox="0 0 960 910" ref="svg" preserveAspectRatio="xMidYMid meet">
   //     <g class="map-container">
@@ -490,10 +545,10 @@ export const taiwan = {
   //         <g class="selected-town-villages" ref="villages"></g>
   //       </g>
   //     </g>
-  //     <defs>
-  //       <pattern id="tpp-pattern" x="0" y="0" width="0.9055382649729705" height="0.9055382649729705" patternUnits="userSpaceOnUse" patternContentUnits="userSpaceOnUse">
-  //         <circle cx="0.45276913248648526" cy="0.45276913248648526" r="0.22638456624324263" fill="#fff" opacity="0.5"></circle>
-  //       </pattern>
-  //     </defs>
+  // <defs>
+  //   <pattern id="tpp-pattern" x="0" y="0" width="0.9055382649729705" height="0.9055382649729705" patternUnits="userSpaceOnUse" patternContentUnits="userSpaceOnUse">
+  //     <circle cx="0.45276913248648526" cy="0.45276913248648526" r="0.22638456624324263" fill="#fff" opacity="0.5"></circle>
+  //   </pattern>
+  // </defs>
   //   </svg>`,
 };
