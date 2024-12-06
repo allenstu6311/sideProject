@@ -14,12 +14,8 @@ export const taiwan = {
       type: Object,
       default: null,
     },
-    // selectionData: {
-    //   type: Array,
-    //   default: [],
-    // },
   },
-  emits: ["updateDeep", "getLocationData", "updateAddress"],
+  emits: ["updateDeep", "getLocationData", "updateAddress", "updateSelectionInfo"],
   data() {
     return {
       position: {
@@ -68,6 +64,7 @@ export const taiwan = {
       isMapClick: false,
       maxDeep: 3,
       selectionData: [],
+      selectionInfo: {},
     };
   },
   computed: {},
@@ -128,16 +125,6 @@ export const taiwan = {
           countryIdList.push(counties.geometries[i].id);
           await this.getSelectionData(counties.geometries[i].id);
         }
-
-        // for (let i = 0; i < countryIdList.length; i++) {
-        //   const id = countryIdList[i];
-        //   const data = this.selectionData.filter((item) => {
-        //     return item.village_id.includes(id);
-        //   });
-
-        //   // console.log("data", data);；
-        // }
-
         this.appendMap(0);
       }
 
@@ -185,7 +172,8 @@ export const taiwan = {
           ).features;
           break;
       }
-
+      // console.log('data',data.filter((item) => item.id.includes(id)),'id',id);
+      
       if (type === "find") {
         if (deep === 0) return data.find((item) => item.id.includes(id));
         if (deep === 1) return data.find((item) => item.id.includes(id));
@@ -194,14 +182,14 @@ export const taiwan = {
       }
 
       if (deep === 0) return data;
-      if (deep === 1) return data.filter((item) => item.id.includes(id));
+      if (deep === 1) return data.filter((item) => item.id.slice(0,id.length).includes(id));
       if (deep === 2)
         return data.filter((item) => item.properties.TOWNCODE.includes(id));
     },
     appendMap(deep, id) {
       const path = d3.geoPath();
       const dom = this.getDomFromDeep(deep);
-      let mapData = this.getFeatureById(deep, id);
+      const mapData = this.getFeatureById(deep, id);
 
       dom
         .selectAll("path")
@@ -221,7 +209,7 @@ export const taiwan = {
           });
 
           if (!selectData.length) return "lightblue";
-          return this.calauteSelectionRate(selectData);
+          return this.calauteSelectionRate(id, selectData);
         })
         .attr("stroke-width", 0.1)
         .on("click", async (d, data) => {
@@ -236,6 +224,7 @@ export const taiwan = {
 
       if (deep === 1) {
         this.villageData = await this.getMapData(id);
+
         // 切換縣市
         this.townSvg.selectAll("path").remove();
         this.villageSvg.selectAll("path").remove();
@@ -263,6 +252,10 @@ export const taiwan = {
       }
       const currInfo = this.getInfoFromDeep(newDeep);
       this.focusMap();
+
+      if(!this.isMapClick){
+        this.$emit("getLocationData", currInfo);
+      }
 
       const dom = this.getDomFromDeep(newDeep);
       if (newDeep < 3) {
@@ -295,7 +288,6 @@ export const taiwan = {
       }
     },
     getMoveRange(dom) {
-      // debugger;
       const {
         centerX: pathCenterX,
         centerY: pathCenterY,
@@ -313,7 +305,7 @@ export const taiwan = {
 
       return { translateX, translateY, zoomLevel };
     },
-    moveMap(dom) {
+    moveMap(dom) {      
       const { translateX, translateY, zoomLevel } = this.getMoveRange(dom);
       this.mapGroup.attr(
         "transform",
@@ -375,19 +367,26 @@ export const taiwan = {
         })
         .catch(() => {});
     },
-    calauteSelectionRate(data) {
+    calauteSelectionRate(id, data) {
       let cand_1 = 0;
       let cand_2 = 0;
       let cand_3 = 0;
 
       for (let i = 0; i < data.length; i++) {
-        const { village_id, cand_info } = data[i];
-        // const { townId } = this.findParentId(village_id);
+        const { cand_info } = data[i];
 
         cand_1 += cand_info[0].tks_rate;
         cand_2 += cand_info[1].tks_rate;
         cand_3 += cand_info[2].tks_rate;
       }
+
+      this.selectionInfo[id] = {
+        cand_1: (cand_1 / data.length).toFixed(2),
+        cand_2: (cand_2 / data.length).toFixed(2),
+        cand_3: (cand_3 / data.length).toFixed(2),
+      };
+
+      this.$emit("updateSelectionInfo",this.selectionInfo) 
       const max = Math.max(...[cand_1, cand_2, cand_3]);
 
       if (max === 0) return "lightblue";
@@ -395,100 +394,8 @@ export const taiwan = {
       if (max === cand_2) return "rgb(118, 231, 176)";
       if (max === cand_3) return "rgb(118, 175, 237)";
     },
-    async handleEvent(id, deep) {
-      // await this.$nextTick(() => {});
-      const element = document.getElementById(id);
-      const dom = element?.children[0] || element;
-
-      if (!id || !dom) {
-        this.$emit("getLocationData", this.defaultInfo);
-        this.inValid = true;
-        return;
-      }
-      this.inValid = false;
-      const { towns, villages, map, svg } = this.$refs;
-
-      if (deep === 3) {
-        this.villageInfo = await assignValue(id, dom, deep);
-        this.$emit("updateDeep", deep);
-      } else {
-        const {
-          centerX: pathCenterX,
-          centerY: pathCenterY,
-          zoomLevel,
-        } = getBBoxCenter(dom);
-
-        // viewBox
-        const svgSize = svg.getAttribute("viewBox").split(" ");
-        const svgWidth = svgSize[2];
-        const svgHeight = svgSize[3];
-
-        // 將目標 path 的中心點移動到 SVG 可視區域的中心
-        const translateX = svgWidth / 2 - pathCenterX * zoomLevel;
-        const translateY = svgHeight / 2 - pathCenterY * zoomLevel;
-
-        // 紀錄country的移動(桃園、台北...)
-        if (deep === 1) {
-          const sameName = id !== this.countryInfo.id;
-          if (sameName) {
-            this.removeChild(towns);
-          }
-          this.position.x = translateX;
-          this.position.y = translateY;
-          this.position.scale = zoomLevel;
-          this.countryInfo = await assignValue(id, dom, deep);
-        } else {
-          const sameName = id !== this.townInfo.id;
-          if (sameName) {
-            this.removeChild(villages);
-          }
-          this.townInfo = await assignValue(id, dom, deep);
-        }
-
-        /**
-         * 更新父曾深度，須確保子層的DOM已取得
-         */
-        this.$emit("updateDeep", deep);
-
-        const template =
-          deep === 1
-            ? this.countryList[id]?.country
-            : this.countryList[this.countryInfo.id]?.towns[id];
-
-        this.moveMap(translateX, translateY, zoomLevel);
-        // this.insertMap(deep === 1 ? towns : villages, template);
-      }
-
-      // 在同一層移動也要確保觸發位移
-      if (this.deepVal === deep) {
-        this.updateDeepVal(deep, this.deepVal);
-      }
-    },
-    insertMap(parent, child) {
-      parent.insertAdjacentHTML("beforeend", child);
-      this.$nextTick(() => {
-        if (this.deepVal <= 2) {
-          this.addEvent(parent, this.deepVal + 1);
-        }
-      });
-    },
-    // 地圖點擊事件
-    addEvent(el, deep) {
-      Array.from(el.children).forEach((child) => {
-        child.addEventListener("click", async () => {
-          const id =
-            child.getAttribute("xlink:href")?.substring(1) ||
-            child.getAttribute("id");
-
-          await this.handleEvent(id, deep);
-        });
-      });
-    },
   },
   mounted() {
-    const { country, map, svg } = this.$refs;
-    // this.addEvent(country, 1);
-
     window.addEventListener("resize", () => {
       this.initMap();
     });
@@ -497,58 +404,5 @@ export const taiwan = {
       this.initMap(true);
     });
   },
-  template: `
-    
- <svg class="tw-geo svelte-ul8skc" viewBox="0 0 960 910" ref="svg" preserveAspectRatio="xMidYMid meet">
-  <defs>
-      <pattern id="tpp-pattern" x="0" y="0" width="0.9055382649729705" height="0.9055382649729705" patternUnits="userSpaceOnUse" patternContentUnits="userSpaceOnUse">
-        <circle cx="0.45276913248648526" cy="0.45276913248648526" r="0.22638456624324263" fill="#fff" opacity="0.5"></circle>
-      </pattern>
-  </defs>
-</svg>`,
-  // template: `
-  //    <svg class="tw-geo svelte-ul8skc" viewBox="0 0 960 910" ref="svg" preserveAspectRatio="xMidYMid meet">
-  //     <g class="map-container">
-  //       <g
-  //         class="map-group"
-  //         stroke-width="0.5"
-  //         transform="translate(0,0) scale(1)"
-  //         ref="map"
-  //         shape-rendering="crispEdges"
-  //         vector-effect="non-scaling-stroke"
-  //       >
-  //         <g class="county" ref="country">
-  //           <use xlink:href="#64000"></use>
-  //           <use xlink:href="#09007"></use>
-  //           <use xlink:href="#10013"></use>
-  //           <use xlink:href="#10015"></use>
-  //           <use xlink:href="#10018"></use>
-  //           <use xlink:href="#10014"></use>
-  //           <use xlink:href="#66000"></use>
-  //           <use xlink:href="#10010"></use>
-  //           <use xlink:href="#68000"></use>
-  //           <use xlink:href="#10008"></use>
-  //           <use xlink:href="#10009"></use>
-  //           <use xlink:href="#10016"></use>
-  //           <use xlink:href="#67000"></use>
-  //           <use xlink:href="#63000"></use>
-  //           <use xlink:href="#10007"></use>
-  //           <use xlink:href="#10004"></use>
-  //           <use xlink:href="#10020"></use>
-  //           <use xlink:href="#10017"></use>
-  //           <use xlink:href="#10005"></use>
-  //           <use xlink:href="#10002"></use>
-  //           <use xlink:href="#65000"></use>
-  //           <use xlink:href="#9020"></use>
-  //         </g>
-  //         <g class="selected-county-towns" ref="towns"></g>
-  //         <g class="selected-town-villages" ref="villages"></g>
-  //       </g>
-  //     </g>
-  // <defs>
-  //   <pattern id="tpp-pattern" x="0" y="0" width="0.9055382649729705" height="0.9055382649729705" patternUnits="userSpaceOnUse" patternContentUnits="userSpaceOnUse">
-  //     <circle cx="0.45276913248648526" cy="0.45276913248648526" r="0.22638456624324263" fill="#fff" opacity="0.5"></circle>
-  //   </pattern>
-  // </defs>
-  //   </svg>`,
+  template: `<svg class="tw-geo svelte-ul8skc" viewBox="0 0 960 910" ref="svg" preserveAspectRatio="xMidYMid meet"></svg>`,
 };

@@ -139,7 +139,9 @@
             v-model:search-param="searchParam"
             @update-deep="updateDeep"
             @get-location-data="(val)=>locationData = val"
+            @update-selection-info="(val)=>selectionInfo = val"
           />
+       
         </div>
         <!-- 電腦版視窗 -->
         <div class="window-pc">
@@ -354,58 +356,58 @@
                 this.handleLocationMap(rows);
               });
           },
-          calauteSelectionRate(res) {
-            let data = res ? res : this.selectionData;
-            const { id } = this.locationData;
+          // calauteSelectionRate(res) {
+          //   let data = res ? res : this.selectionData;
+          //   const { id } = this.locationData;
 
-            if (this.deep !== 1) {
-              data = data.filter((item) => item.village_id.includes(id));
-            }
-            let cand_1 = 0;
-            let cand_2 = 0;
-            let cand_3 = 0;
+          //   if (this.deep !== 1) {
+          //     data = data.filter((item) => item.village_id.includes(id));
+          //   }
+          //   let cand_1 = 0;
+          //   let cand_2 = 0;
+          //   let cand_3 = 0;
 
-            for (let i = 0; i < data.length; i++) {
-              const { village_id, cand_info } = data[i];
-              const { townId } = this.findParentId(village_id);
+          //   for (let i = 0; i < data.length; i++) {
+          //     const { village_id, cand_info } = data[i];
+          //     const { townId } = this.findParentId(village_id);
 
-              cand_1 += cand_info[0].tks_rate;
-              cand_2 += cand_info[1].tks_rate;
-              cand_3 += cand_info[2].tks_rate;
-            }
+          //     cand_1 += cand_info[0].tks_rate;
+          //     cand_2 += cand_info[1].tks_rate;
+          //     cand_3 += cand_info[2].tks_rate;
+          //   }
 
-            this.selectionInfo[id] = {
-              cand_1: (cand_1 / data.length).toFixed(2),
-              cand_2: (cand_2 / data.length).toFixed(2),
-              cand_3: (cand_3 / data.length).toFixed(2),
-            };
-          },
-          getSelectionData(id) {
-            if (!id) return;
-            fetch(`./data/selection/${id}.json`)
-              .then((res) => res.json())
-              .then((data) => {
-                this.calauteSelectionRate(data);
-                this.selectionData = data;
-              });
-          },
+          //   this.selectionInfo[id] = {
+          //     cand_1: (cand_1 / data.length).toFixed(2),
+          //     cand_2: (cand_2 / data.length).toFixed(2),
+          //     cand_3: (cand_3 / data.length).toFixed(2),
+          //   };
+          // },
+          // getSelectionData(id) {
+          //   if (!id) return;
+          //   fetch(`./data/selection/${id}.json`)
+          //     .then((res) => res.json())
+          //     .then((data) => {
+          //       this.calauteSelectionRate(data);
+          //       this.selectionData = data;
+          //     });
+          // },
         },
         watch: {
-          locationData: {
-            handler(newVal, oldVal) {
-              const { id: newId } = newVal;
-              const { id: oldId } = oldVal;
-              if (!this.selectionInfo[newId]) {
-                if (this.deep <= 1 && newId != oldId) {
-                  this.getSelectionData(newId);
-                } else {
-                  this.calauteSelectionRate();
-                }
-              } else {
-              }
-            },
-            deep: true,
-          },
+          // locationData: {
+          //   handler(newVal, oldVal) {
+          //     const { id: newId } = newVal;
+          //     const { id: oldId } = oldVal;
+          //     if (!this.selectionInfo[newId]) {
+          //       if (this.deep <= 1 && newId != oldId) {
+          //         this.getSelectionData(newId);
+          //       } else {
+          //         this.calauteSelectionRate();
+          //       }
+          //     } else {
+          //     }
+          //   },
+          //   deep: true,
+          // },
         },
         computed: {
           currAreaSelection() {
