@@ -307,9 +307,16 @@ export const taiwan = {
     },
     moveMap(dom) {      
       const { translateX, translateY, zoomLevel } = this.getMoveRange(dom);
-      this.mapGroup.attr(
+      // this.mapGroup.attr(
+      //   "transform",
+      //   `translate(${translateX},${translateY}) scale(${zoomLevel})`
+      // );
+      this.mapGroup
+      .ease(d3.easeCubic)
+      .duration(750)
+      .style(
         "transform",
-        `translate(${translateX},${translateY}) scale(${zoomLevel})`
+        `translate(${translateX}px,${translateY}px) scale(${zoomLevel})`
       );
     },
     getDomFromDeep(deep) {
