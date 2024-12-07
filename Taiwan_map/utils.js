@@ -61,7 +61,18 @@ export function getBBoxCenter(svg) {
   const centerX = svgBox.x + svgBox.width / 2;
   const centerY = svgBox.y + svgBox.height / 2;
 
-  const scaleFactor = 0.6;
+  const { innerWidth, innerHeight } = window;
+
+  let scaleFactor = 0.9;
+
+  if (innerWidth < 500) {
+    scaleFactor = 0.5;
+  } else if (innerWidth < 968) {
+    scaleFactor = 0.7;
+  }
+
+  console.log("scaleFactor", scaleFactor);
+
   const scaleX = window.innerHeight / svgBox.width;
   const scaleY = window.innerHeight / svgBox.height;
   const zoomLevel = Math.min(scaleX, scaleY) * scaleFactor; // 選擇較小的縮放比例

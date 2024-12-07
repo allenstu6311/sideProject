@@ -120,17 +120,29 @@ export const taiwan = {
       }
 
       this.$nextTick(() => {
-        this.moveMapInCenter();
+        // this.moveMapInCenter();
+        this.moveMap(this.mapGroup.node())
       });
     },
     moveMapInCenter() {
-      const { centerX, centerY } = getBBoxCenter(this.mapGroup.node());
-      const translateX = innerWidth / 2 - centerX;
-      const translateY = innerHeight / 2 - centerY;
+      const { centerX, centerY, zoomLevel } = getBBoxCenter(this.mapGroup.node());
+
+      // const RWD = innerWidth < 500;
+      // const scale = RWD ? 0.7 : 1
+      // const xZoom = RWD ? 0.5 : 1
+      // const yZoom = RWD ? 0.3 : 1
+
+      // const translateX = innerWidth / 2 - centerX * xZoom
+      // const translateY = innerHeight / 2 - centerY * yZoom;
+      const translateX = innerWidth / 2 - centerX * zoomLevel;
+      const translateY = innerHeight / 2 - centerY * zoomLevel;
+      // const scale = 1;
+      console.log('zoomLevel',zoomLevel);
+      
       this.mapGroup
         .transition()
         .duration(500)
-        .attr("transform", `translate(${translateX},${translateY})`);
+        .attr("transform", `translate(${translateX * zoomLevel},${translateY * zoomLevel}) scale(${zoomLevel})`);
     },
     getMapData(id) {
       let url = "./data/topoJson/towns-mercator.json";
