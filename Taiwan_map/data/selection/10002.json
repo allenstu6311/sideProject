@@ -1,1017 +1,218 @@
 [
     {
-        "village_id": "10004010002",
+        "village_id": "10002010036",
         "cand_info": [
             {
                 "cand_no": 1,
-                "tks_rate": 37.85
+                "tks_rate": 22.67
             },
             {
                 "cand_no": 2,
-                "tks_rate": 31.81
+                "tks_rate": 38.46
             },
             {
                 "cand_no": 3,
-                "tks_rate": 30.34
+                "tks_rate": 38.87
             }
         ]
     },
     {
-        "village_id": "10004010003",
+        "village_id": "10002010037",
         "cand_info": [
             {
                 "cand_no": 1,
-                "tks_rate": 38.74
+                "tks_rate": 26.23
             },
             {
                 "cand_no": 2,
-                "tks_rate": 34.71
+                "tks_rate": 40.26
             },
             {
                 "cand_no": 3,
-                "tks_rate": 26.55
+                "tks_rate": 33.52
             }
         ]
     },
     {
-        "village_id": "10004010004",
+        "village_id": "10002010044",
         "cand_info": [
             {
                 "cand_no": 1,
-                "tks_rate": 36.31
+                "tks_rate": 28.61
             },
             {
                 "cand_no": 2,
-                "tks_rate": 33.24
+                "tks_rate": 36.21
             },
             {
                 "cand_no": 3,
-                "tks_rate": 30.45
+                "tks_rate": 35.18
             }
         ]
     },
     {
-        "village_id": "10004010005",
+        "village_id": "10002010035",
         "cand_info": [
             {
                 "cand_no": 1,
-                "tks_rate": 39.96
+                "tks_rate": 25.15
             },
             {
                 "cand_no": 2,
-                "tks_rate": 31.87
+                "tks_rate": 42.5
             },
             {
                 "cand_no": 3,
-                "tks_rate": 28.18
+                "tks_rate": 32.35
             }
         ]
     },
     {
-        "village_id": "10004010006",
+        "village_id": "10002010038",
         "cand_info": [
             {
                 "cand_no": 1,
-                "tks_rate": 34.85
+                "tks_rate": 27.94
             },
             {
                 "cand_no": 2,
-                "tks_rate": 23.67
+                "tks_rate": 36.05
             },
             {
                 "cand_no": 3,
-                "tks_rate": 41.47
+                "tks_rate": 36.02
             }
         ]
     },
     {
-        "village_id": "10004010027",
+        "village_id": "10002010043",
         "cand_info": [
             {
                 "cand_no": 1,
-                "tks_rate": 43.38
+                "tks_rate": 28.02
             },
             {
                 "cand_no": 2,
-                "tks_rate": 31.8
+                "tks_rate": 36.32
             },
             {
                 "cand_no": 3,
-                "tks_rate": 24.82
+                "tks_rate": 35.66
             }
         ]
     },
     {
-        "village_id": "10004010028",
+        "village_id": "10002010039",
         "cand_info": [
             {
                 "cand_no": 1,
-                "tks_rate": 46.09
+                "tks_rate": 26.54
             },
             {
                 "cand_no": 2,
-                "tks_rate": 31.41
+                "tks_rate": 39.5
             },
             {
                 "cand_no": 3,
-                "tks_rate": 22.5
+                "tks_rate": 33.96
             }
         ]
     },
     {
-        "village_id": "10004010021",
+        "village_id": "10002010040",
         "cand_info": [
             {
                 "cand_no": 1,
-                "tks_rate": 37.43
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 33.4
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 29.17
-            }
-        ]
-    },
-    {
-        "village_id": "10004010029",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 38.44
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 27.01
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 34.55
-            }
-        ]
-    },
-    {
-        "village_id": "10004010030",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 36.78
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 27.99
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 35.23
-            }
-        ]
-    },
-    {
-        "village_id": "10004010001",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 39.74
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 30.06
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 30.2
-            }
-        ]
-    },
-    {
-        "village_id": "10004010031",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 39.36
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 29.3
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 31.34
-            }
-        ]
-    },
-    {
-        "village_id": "10004010024",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 37.91
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 26.79
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 35.3
-            }
-        ]
-    },
-    {
-        "village_id": "10004010025",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 40.47
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 28.92
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 30.61
-            }
-        ]
-    },
-    {
-        "village_id": "10004010007",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 42.62
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 26.98
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 30.4
-            }
-        ]
-    },
-    {
-        "village_id": "10004010008",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 36.08
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 26.9
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 37.02
-            }
-        ]
-    },
-    {
-        "village_id": "10004010026",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 33.93
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 27.76
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 38.3
-            }
-        ]
-    },
-    {
-        "village_id": "10004010009",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 36.48
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 28.93
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 34.58
-            }
-        ]
-    },
-    {
-        "village_id": "10004010010",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 37.31
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 26.77
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 35.92
-            }
-        ]
-    },
-    {
-        "village_id": "10004010011",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 37.89
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 28.91
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 33.2
-            }
-        ]
-    },
-    {
-        "village_id": "10004010022",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 40.89
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 30.45
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 28.65
-            }
-        ]
-    },
-    {
-        "village_id": "10004010012",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 35.74
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 30.59
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 33.68
-            }
-        ]
-    },
-    {
-        "village_id": "10004010013",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 34.17
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 35.47
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 30.36
-            }
-        ]
-    },
-    {
-        "village_id": "10004010014",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 33.74
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 34.01
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 32.24
-            }
-        ]
-    },
-    {
-        "village_id": "10004010023",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 36.75
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 32.22
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 31.03
-            }
-        ]
-    },
-    {
-        "village_id": "10004010015",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 34.13
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 36.59
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 29.27
-            }
-        ]
-    },
-    {
-        "village_id": "10004010016",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 31.1
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 48.38
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 20.51
-            }
-        ]
-    },
-    {
-        "village_id": "10004010019",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 34.97
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 32.01
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 33.02
-            }
-        ]
-    },
-    {
-        "village_id": "10004010017",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 31.8
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 46.54
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 21.66
-            }
-        ]
-    },
-    {
-        "village_id": "10004010020",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 31.96
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 44.09
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 23.95
-            }
-        ]
-    },
-    {
-        "village_id": "10004010018",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 29.34
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 44.5
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 26.16
-            }
-        ]
-    },
-    {
-        "village_id": "10004020001",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 25.76
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 22.22
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 52.02
-            }
-        ]
-    },
-    {
-        "village_id": "10004020002",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 19.17
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 32.71
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 48.12
-            }
-        ]
-    },
-    {
-        "village_id": "10004020003",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 28.8
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 26
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 45.2
-            }
-        ]
-    },
-    {
-        "village_id": "10004020004",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 34.49
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 19.51
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 45.99
-            }
-        ]
-    },
-    {
-        "village_id": "10004020006",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 36.24
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 20.75
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 43.01
-            }
-        ]
-    },
-    {
-        "village_id": "10004020005",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 33.76
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 21.22
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 45.02
-            }
-        ]
-    },
-    {
-        "village_id": "10004020021",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 36.13
-            },
-            {
-                "cand_no": 2,
                 "tks_rate": 23.65
             },
             {
+                "cand_no": 2,
+                "tks_rate": 35.85
+            },
+            {
                 "cand_no": 3,
-                "tks_rate": 40.22
+                "tks_rate": 40.5
             }
         ]
     },
     {
-        "village_id": "10004020007",
+        "village_id": "10002010002",
         "cand_info": [
             {
                 "cand_no": 1,
-                "tks_rate": 35.7
+                "tks_rate": 23.16
             },
             {
                 "cand_no": 2,
-                "tks_rate": 22.14
+                "tks_rate": 36.17
             },
             {
                 "cand_no": 3,
-                "tks_rate": 42.16
+                "tks_rate": 40.67
             }
         ]
     },
     {
-        "village_id": "10004020020",
+        "village_id": "10002010001",
         "cand_info": [
             {
                 "cand_no": 1,
-                "tks_rate": 32.25
+                "tks_rate": 23.36
             },
             {
                 "cand_no": 2,
-                "tks_rate": 20.07
+                "tks_rate": 38.97
             },
             {
                 "cand_no": 3,
-                "tks_rate": 47.68
+                "tks_rate": 37.67
             }
         ]
     },
     {
-        "village_id": "10004020022",
+        "village_id": "10002010045",
         "cand_info": [
             {
                 "cand_no": 1,
-                "tks_rate": 28.08
+                "tks_rate": 26.13
             },
             {
                 "cand_no": 2,
-                "tks_rate": 26.69
+                "tks_rate": 44.36
             },
             {
                 "cand_no": 3,
-                "tks_rate": 45.23
+                "tks_rate": 29.51
             }
         ]
     },
     {
-        "village_id": "10004020008",
+        "village_id": "10002010018",
         "cand_info": [
             {
                 "cand_no": 1,
-                "tks_rate": 26.78
+                "tks_rate": 21.59
             },
             {
                 "cand_no": 2,
-                "tks_rate": 25.73
+                "tks_rate": 49.45
             },
             {
                 "cand_no": 3,
-                "tks_rate": 47.49
+                "tks_rate": 28.96
             }
         ]
     },
     {
-        "village_id": "10004020009",
+        "village_id": "10002010008",
         "cand_info": [
             {
                 "cand_no": 1,
-                "tks_rate": 31.57
+                "tks_rate": 27.3
             },
             {
                 "cand_no": 2,
-                "tks_rate": 21.81
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 46.62
-            }
-        ]
-    },
-    {
-        "village_id": "10004020010",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 24.3
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 30.37
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 45.33
-            }
-        ]
-    },
-    {
-        "village_id": "10004020024",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 32.61
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 20.79
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 46.6
-            }
-        ]
-    },
-    {
-        "village_id": "10004020012",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 33.52
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 21.34
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 45.14
-            }
-        ]
-    },
-    {
-        "village_id": "10004020013",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 34.21
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 24.48
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 41.31
-            }
-        ]
-    },
-    {
-        "village_id": "10004020011",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 32.73
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 21.72
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 45.55
-            }
-        ]
-    },
-    {
-        "village_id": "10004020023",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 35.77
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 21.74
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 42.49
-            }
-        ]
-    },
-    {
-        "village_id": "10004020014",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 38.6
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 20.83
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 40.57
-            }
-        ]
-    },
-    {
-        "village_id": "10004020025",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 31.37
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 21.57
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 47.06
-            }
-        ]
-    },
-    {
-        "village_id": "10004020015",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 38.49
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 23
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 38.51
-            }
-        ]
-    },
-    {
-        "village_id": "10004020019",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 40.01
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 25.31
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 34.68
-            }
-        ]
-    },
-    {
-        "village_id": "10004020016",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 34.49
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 26.83
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 38.68
-            }
-        ]
-    },
-    {
-        "village_id": "10004020017",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 32.63
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 26.77
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 40.61
-            }
-        ]
-    },
-    {
-        "village_id": "10004020018",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 30.81
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 28.44
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 40.76
-            }
-        ]
-    },
-    {
-        "village_id": "10004030008",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 31.15
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 26.72
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 42.14
-            }
-        ]
-    },
-    {
-        "village_id": "10004030009",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 29.95
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 34.01
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 36.04
-            }
-        ]
-    },
-    {
-        "village_id": "10004030010",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 33.19
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 26.01
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 40.8
-            }
-        ]
-    },
-    {
-        "village_id": "10004030007",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 41.03
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 24.9
+                "tks_rate": 38.63
             },
             {
                 "cand_no": 3,
@@ -1020,347 +221,636 @@
         ]
     },
     {
-        "village_id": "10004030006",
+        "village_id": "10002010009",
         "cand_info": [
             {
                 "cand_no": 1,
-                "tks_rate": 28.84
+                "tks_rate": 25.14
             },
             {
                 "cand_no": 2,
-                "tks_rate": 29.37
+                "tks_rate": 44.57
             },
             {
                 "cand_no": 3,
-                "tks_rate": 41.79
+                "tks_rate": 30.3
             }
         ]
     },
     {
-        "village_id": "10004030004",
+        "village_id": "10002010012",
         "cand_info": [
             {
                 "cand_no": 1,
-                "tks_rate": 31.76
+                "tks_rate": 31.78
             },
             {
                 "cand_no": 2,
-                "tks_rate": 26.89
+                "tks_rate": 44.24
             },
             {
                 "cand_no": 3,
-                "tks_rate": 41.34
+                "tks_rate": 23.99
             }
         ]
     },
     {
-        "village_id": "10004030005",
+        "village_id": "10002010011",
         "cand_info": [
             {
                 "cand_no": 1,
-                "tks_rate": 32.45
+                "tks_rate": 26.79
             },
             {
                 "cand_no": 2,
-                "tks_rate": 32.1
+                "tks_rate": 35.47
             },
             {
                 "cand_no": 3,
-                "tks_rate": 35.45
+                "tks_rate": 37.74
             }
         ]
     },
     {
-        "village_id": "10004030016",
+        "village_id": "10002010010",
         "cand_info": [
             {
                 "cand_no": 1,
-                "tks_rate": 24.05
+                "tks_rate": 27.68
             },
             {
                 "cand_no": 2,
-                "tks_rate": 34.59
+                "tks_rate": 42.25
             },
             {
                 "cand_no": 3,
-                "tks_rate": 41.35
+                "tks_rate": 30.07
             }
         ]
     },
     {
-        "village_id": "10004030017",
+        "village_id": "10002010047",
         "cand_info": [
             {
                 "cand_no": 1,
-                "tks_rate": 17.77
+                "tks_rate": 25.67
             },
             {
                 "cand_no": 2,
-                "tks_rate": 44.6
+                "tks_rate": 40.28
             },
             {
                 "cand_no": 3,
-                "tks_rate": 37.63
+                "tks_rate": 34.06
             }
         ]
     },
     {
-        "village_id": "10004030018",
+        "village_id": "10002010015",
         "cand_info": [
             {
                 "cand_no": 1,
-                "tks_rate": 25.05
+                "tks_rate": 29.65
             },
             {
                 "cand_no": 2,
-                "tks_rate": 43.31
+                "tks_rate": 37.99
             },
             {
                 "cand_no": 3,
-                "tks_rate": 31.63
+                "tks_rate": 32.36
             }
         ]
     },
     {
-        "village_id": "10004030019",
+        "village_id": "10002010041",
         "cand_info": [
             {
                 "cand_no": 1,
-                "tks_rate": 25.62
+                "tks_rate": 29.8
             },
             {
                 "cand_no": 2,
-                "tks_rate": 36.07
+                "tks_rate": 37.83
             },
             {
                 "cand_no": 3,
-                "tks_rate": 38.31
+                "tks_rate": 32.37
             }
         ]
     },
     {
-        "village_id": "10004030015",
+        "village_id": "10002010014",
         "cand_info": [
             {
                 "cand_no": 1,
-                "tks_rate": 26.99
+                "tks_rate": 27.67
             },
             {
                 "cand_no": 2,
-                "tks_rate": 39.81
+                "tks_rate": 41.15
             },
             {
                 "cand_no": 3,
-                "tks_rate": 33.2
+                "tks_rate": 31.18
             }
         ]
     },
     {
-        "village_id": "10004030001",
+        "village_id": "10002010042",
         "cand_info": [
             {
                 "cand_no": 1,
-                "tks_rate": 29.66
+                "tks_rate": 29.99
             },
             {
                 "cand_no": 2,
-                "tks_rate": 30.48
+                "tks_rate": 38.75
             },
             {
                 "cand_no": 3,
-                "tks_rate": 39.86
+                "tks_rate": 31.26
             }
         ]
     },
     {
-        "village_id": "10004030002",
+        "village_id": "10002010013",
         "cand_info": [
             {
                 "cand_no": 1,
-                "tks_rate": 26.38
+                "tks_rate": 28.24
             },
             {
                 "cand_no": 2,
-                "tks_rate": 32.59
+                "tks_rate": 44.63
             },
             {
                 "cand_no": 3,
-                "tks_rate": 41.03
+                "tks_rate": 27.13
             }
         ]
     },
     {
-        "village_id": "10004030003",
+        "village_id": "10002010016",
         "cand_info": [
             {
                 "cand_no": 1,
-                "tks_rate": 35.76
+                "tks_rate": 27.7
             },
             {
                 "cand_no": 2,
-                "tks_rate": 26.85
+                "tks_rate": 47.52
             },
             {
                 "cand_no": 3,
-                "tks_rate": 37.39
+                "tks_rate": 24.78
             }
         ]
     },
     {
-        "village_id": "10004030011",
+        "village_id": "10002010023",
         "cand_info": [
             {
                 "cand_no": 1,
-                "tks_rate": 33.36
+                "tks_rate": 23.73
             },
             {
                 "cand_no": 2,
-                "tks_rate": 30.72
+                "tks_rate": 47.73
             },
             {
                 "cand_no": 3,
-                "tks_rate": 35.92
+                "tks_rate": 28.53
             }
         ]
     },
     {
-        "village_id": "10004030012",
+        "village_id": "10002010019",
         "cand_info": [
             {
                 "cand_no": 1,
-                "tks_rate": 34.28
+                "tks_rate": 21.14
             },
             {
                 "cand_no": 2,
-                "tks_rate": 28.67
+                "tks_rate": 51.58
             },
             {
                 "cand_no": 3,
-                "tks_rate": 37.05
+                "tks_rate": 27.29
             }
         ]
     },
     {
-        "village_id": "10004030013",
+        "village_id": "10002010021",
         "cand_info": [
             {
                 "cand_no": 1,
-                "tks_rate": 31.05
+                "tks_rate": 25.02
             },
             {
                 "cand_no": 2,
-                "tks_rate": 31.35
+                "tks_rate": 42.22
             },
             {
                 "cand_no": 3,
-                "tks_rate": 37.59
+                "tks_rate": 32.76
             }
         ]
     },
     {
-        "village_id": "10004030014",
+        "village_id": "10002010022",
         "cand_info": [
             {
                 "cand_no": 1,
-                "tks_rate": 28.93
+                "tks_rate": 25.46
             },
             {
                 "cand_no": 2,
-                "tks_rate": 37.13
+                "tks_rate": 40.66
             },
             {
                 "cand_no": 3,
-                "tks_rate": 33.94
+                "tks_rate": 33.88
             }
         ]
     },
     {
-        "village_id": "10004040001",
+        "village_id": "10002010017",
         "cand_info": [
             {
                 "cand_no": 1,
-                "tks_rate": 25.07
+                "tks_rate": 29.57
             },
             {
                 "cand_no": 2,
-                "tks_rate": 24.2
+                "tks_rate": 36.87
             },
             {
                 "cand_no": 3,
-                "tks_rate": 50.73
+                "tks_rate": 33.57
             }
         ]
     },
     {
-        "village_id": "10004040002",
+        "village_id": "10002010046",
         "cand_info": [
             {
                 "cand_no": 1,
-                "tks_rate": 28.01
+                "tks_rate": 28.5
             },
             {
                 "cand_no": 2,
-                "tks_rate": 22.52
+                "tks_rate": 38.44
             },
             {
                 "cand_no": 3,
-                "tks_rate": 49.47
+                "tks_rate": 33.05
             }
         ]
     },
     {
-        "village_id": "10004040003",
+        "village_id": "10002010024",
         "cand_info": [
             {
                 "cand_no": 1,
-                "tks_rate": 27.77
+                "tks_rate": 29.96
             },
             {
                 "cand_no": 2,
-                "tks_rate": 25.35
+                "tks_rate": 45.01
             },
             {
                 "cand_no": 3,
-                "tks_rate": 46.88
+                "tks_rate": 25.04
             }
         ]
     },
     {
-        "village_id": "10004040004",
+        "village_id": "10002010025",
         "cand_info": [
             {
                 "cand_no": 1,
-                "tks_rate": 29.92
+                "tks_rate": 29.17
             },
             {
                 "cand_no": 2,
-                "tks_rate": 27.11
+                "tks_rate": 42.74
             },
             {
                 "cand_no": 3,
+                "tks_rate": 28.09
+            }
+        ]
+    },
+    {
+        "village_id": "10002010026",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 27.88
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 45.42
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 26.71
+            }
+        ]
+    },
+    {
+        "village_id": "10002010027",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 28.82
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 45.02
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 26.15
+            }
+        ]
+    },
+    {
+        "village_id": "10002010034",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 27.18
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 44.73
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 28.09
+            }
+        ]
+    },
+    {
+        "village_id": "10002010031",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 25.59
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 42.2
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 32.2
+            }
+        ]
+    },
+    {
+        "village_id": "10002010032",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 26.65
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 47.77
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 25.59
+            }
+        ]
+    },
+    {
+        "village_id": "10002010028",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 26.54
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 45.6
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 27.86
+            }
+        ]
+    },
+    {
+        "village_id": "10002020028",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 25.34
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 48.25
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 26.41
+            }
+        ]
+    },
+    {
+        "village_id": "10002020004",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 27.67
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 45.12
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 27.2
+            }
+        ]
+    },
+    {
+        "village_id": "10002020005",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 28.17
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 46.13
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 25.7
+            }
+        ]
+    },
+    {
+        "village_id": "10002020006",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 27.9
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 47.9
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 24.21
+            }
+        ]
+    },
+    {
+        "village_id": "10002020007",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 29.38
+            },
+            {
+                "cand_no": 2,
                 "tks_rate": 42.97
-            }
-        ]
-    },
-    {
-        "village_id": "10004040006",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 23.67
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 32.35
             },
             {
                 "cand_no": 3,
-                "tks_rate": 43.98
+                "tks_rate": 27.65
             }
         ]
     },
     {
-        "village_id": "10004040005",
+        "village_id": "10002020008",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 28.5
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 43.18
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 28.32
+            }
+        ]
+    },
+    {
+        "village_id": "10002020009",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 24
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 47.21
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 28.79
+            }
+        ]
+    },
+    {
+        "village_id": "10002020010",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 23.64
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 47
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 29.36
+            }
+        ]
+    },
+    {
+        "village_id": "10002020011",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 22.02
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 46.66
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 31.32
+            }
+        ]
+    },
+    {
+        "village_id": "10002020030",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 24.25
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 46.54
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 29.22
+            }
+        ]
+    },
+    {
+        "village_id": "10002020029",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 21.43
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 53.15
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 25.42
+            }
+        ]
+    },
+    {
+        "village_id": "10002020016",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 27.67
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 42.97
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 29.36
+            }
+        ]
+    },
+    {
+        "village_id": "10002020027",
         "cand_info": [
             {
                 "cand_no": 1,
@@ -1368,789 +858,670 @@
             },
             {
                 "cand_no": 2,
-                "tks_rate": 32.18
+                "tks_rate": 44.38
             },
             {
                 "cand_no": 3,
-                "tks_rate": 42.11
+                "tks_rate": 29.91
             }
         ]
     },
     {
-        "village_id": "10004040007",
+        "village_id": "10002020017",
         "cand_info": [
             {
                 "cand_no": 1,
-                "tks_rate": 27.3
+                "tks_rate": 26.11
             },
             {
                 "cand_no": 2,
-                "tks_rate": 30.22
+                "tks_rate": 45.82
             },
             {
                 "cand_no": 3,
-                "tks_rate": 42.48
-            }
-        ]
-    },
-    {
-        "village_id": "10004040008",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 31.06
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 25.82
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 43.12
-            }
-        ]
-    },
-    {
-        "village_id": "10004040019",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 25.68
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 34.79
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 39.53
-            }
-        ]
-    },
-    {
-        "village_id": "10004040009",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 29.63
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 30
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 40.37
-            }
-        ]
-    },
-    {
-        "village_id": "10004040020",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 20.31
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 29.34
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 50.35
-            }
-        ]
-    },
-    {
-        "village_id": "10004040010",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 22.32
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 38.23
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 39.45
-            }
-        ]
-    },
-    {
-        "village_id": "10004040013",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 23.28
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 32.44
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 44.27
-            }
-        ]
-    },
-    {
-        "village_id": "10004040011",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 25
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 26.47
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 48.53
-            }
-        ]
-    },
-    {
-        "village_id": "10004040012",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 28.29
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 27.4
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 44.31
-            }
-        ]
-    },
-    {
-        "village_id": "10004040014",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 21.18
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 41.07
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 37.75
-            }
-        ]
-    },
-    {
-        "village_id": "10004040015",
-        "cand_info": [
-            {
-                "cand_no": 1,
                 "tks_rate": 28.07
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 27.67
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 44.26
             }
         ]
     },
     {
-        "village_id": "10004040021",
+        "village_id": "10002020018",
         "cand_info": [
             {
                 "cand_no": 1,
-                "tks_rate": 25.15
+                "tks_rate": 29.83
             },
             {
                 "cand_no": 2,
-                "tks_rate": 32.1
+                "tks_rate": 44.48
             },
             {
                 "cand_no": 3,
-                "tks_rate": 42.75
+                "tks_rate": 25.69
             }
         ]
     },
     {
-        "village_id": "10004040016",
+        "village_id": "10002020026",
         "cand_info": [
             {
                 "cand_no": 1,
-                "tks_rate": 25.37
+                "tks_rate": 28.28
             },
             {
                 "cand_no": 2,
-                "tks_rate": 28.68
+                "tks_rate": 43.84
             },
             {
                 "cand_no": 3,
-                "tks_rate": 45.96
+                "tks_rate": 27.89
             }
         ]
     },
     {
-        "village_id": "10004040017",
+        "village_id": "10002020019",
         "cand_info": [
             {
                 "cand_no": 1,
-                "tks_rate": 27.94
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 25.25
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 46.81
-            }
-        ]
-    },
-    {
-        "village_id": "10004040018",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 32.8
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 26.95
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 40.25
-            }
-        ]
-    },
-    {
-        "village_id": "10004050007",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 30.74
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 30.44
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 38.81
-            }
-        ]
-    },
-    {
-        "village_id": "10004050019",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 39.04
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 26.46
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 34.51
-            }
-        ]
-    },
-    {
-        "village_id": "10004050006",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 36.37
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 26.88
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 36.74
-            }
-        ]
-    },
-    {
-        "village_id": "10004050003",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 34.16
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 26.65
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 39.19
-            }
-        ]
-    },
-    {
-        "village_id": "10004050002",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 28.99
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 28.34
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 42.67
-            }
-        ]
-    },
-    {
-        "village_id": "10004050001",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 32.76
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 24.57
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 42.66
-            }
-        ]
-    },
-    {
-        "village_id": "10004050005",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 37.61
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 25.31
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 37.08
-            }
-        ]
-    },
-    {
-        "village_id": "10004050018",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 38.96
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 26.09
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 34.95
-            }
-        ]
-    },
-    {
-        "village_id": "10004050004",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 35.95
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 26.07
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 37.98
-            }
-        ]
-    },
-    {
-        "village_id": "10004050017",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 40.17
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 24.11
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 35.73
-            }
-        ]
-    },
-    {
-        "village_id": "10004050013",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 35.66
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 29.21
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 35.13
-            }
-        ]
-    },
-    {
-        "village_id": "10004050008",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 36.4
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 24.52
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 39.08
-            }
-        ]
-    },
-    {
-        "village_id": "10004050009",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 32.81
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 31.65
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 35.54
-            }
-        ]
-    },
-    {
-        "village_id": "10004050010",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 32.43
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 25.34
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 42.22
-            }
-        ]
-    },
-    {
-        "village_id": "10004050011",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 32.49
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 21.79
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 45.73
-            }
-        ]
-    },
-    {
-        "village_id": "10004050012",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 32.68
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 23.6
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 43.73
-            }
-        ]
-    },
-    {
-        "village_id": "10004050016",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 39.03
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 20.41
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 40.56
-            }
-        ]
-    },
-    {
-        "village_id": "10004050014",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 37.64
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 24.34
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 38.02
-            }
-        ]
-    },
-    {
-        "village_id": "10004050020",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 35.52
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 21.57
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 42.9
-            }
-        ]
-    },
-    {
-        "village_id": "10004050015",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 34.04
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 21.5
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 44.46
-            }
-        ]
-    },
-    {
-        "village_id": "10004060001",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 32.55
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 30.05
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 37.4
-            }
-        ]
-    },
-    {
-        "village_id": "10004060003",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 35.66
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 27.1
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 37.24
-            }
-        ]
-    },
-    {
-        "village_id": "10004060007",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 36.3
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 26.37
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 37.33
-            }
-        ]
-    },
-    {
-        "village_id": "10004060005",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 33.85
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 32.48
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 33.68
-            }
-        ]
-    },
-    {
-        "village_id": "10004060002",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 32.63
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 30.02
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 37.35
-            }
-        ]
-    },
-    {
-        "village_id": "10004060006",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 30.23
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 41.65
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 28.12
-            }
-        ]
-    },
-    {
-        "village_id": "10004060004",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 32.69
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 40.61
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 26.7
-            }
-        ]
-    },
-    {
-        "village_id": "10004060009",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 30.57
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 41.18
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 28.25
-            }
-        ]
-    },
-    {
-        "village_id": "10004060010",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 39.18
-            },
-            {
-                "cand_no": 2,
                 "tks_rate": 24.94
             },
             {
+                "cand_no": 2,
+                "tks_rate": 42.39
+            },
+            {
                 "cand_no": 3,
-                "tks_rate": 35.88
+                "tks_rate": 32.67
             }
         ]
     },
     {
-        "village_id": "10004060014",
+        "village_id": "10002020020",
         "cand_info": [
             {
                 "cand_no": 1,
-                "tks_rate": 37.21
+                "tks_rate": 24.04
             },
             {
                 "cand_no": 2,
-                "tks_rate": 23.33
+                "tks_rate": 47.32
             },
             {
                 "cand_no": 3,
-                "tks_rate": 39.46
+                "tks_rate": 28.64
             }
         ]
     },
     {
-        "village_id": "10004060015",
+        "village_id": "10002020021",
         "cand_info": [
             {
                 "cand_no": 1,
-                "tks_rate": 36.86
+                "tks_rate": 23.74
             },
             {
                 "cand_no": 2,
-                "tks_rate": 26.02
+                "tks_rate": 46.18
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 30.08
+            }
+        ]
+    },
+    {
+        "village_id": "10002020022",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 26.01
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 45.42
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 28.56
+            }
+        ]
+    },
+    {
+        "village_id": "10002020025",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 26.08
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 42.28
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 31.65
+            }
+        ]
+    },
+    {
+        "village_id": "10002020023",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 26.17
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 47.67
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 26.17
+            }
+        ]
+    },
+    {
+        "village_id": "10002020024",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 25.66
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 47.26
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 27.09
+            }
+        ]
+    },
+    {
+        "village_id": "10002030001",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 26.62
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 47.4
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 25.98
+            }
+        ]
+    },
+    {
+        "village_id": "10002030002",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 32.91
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 46.5
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 20.59
+            }
+        ]
+    },
+    {
+        "village_id": "10002030003",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 27.54
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 46.91
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 25.55
+            }
+        ]
+    },
+    {
+        "village_id": "10002030004",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 21.55
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 53.45
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 25
+            }
+        ]
+    },
+    {
+        "village_id": "10002030005",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 22.4
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 51.31
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 26.28
+            }
+        ]
+    },
+    {
+        "village_id": "10002030007",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 29.41
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 44.28
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 26.31
+            }
+        ]
+    },
+    {
+        "village_id": "10002030008",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 28.61
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 44.95
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 26.44
+            }
+        ]
+    },
+    {
+        "village_id": "10002030027",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 24.79
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 44.48
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 30.73
+            }
+        ]
+    },
+    {
+        "village_id": "10002030009",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 23.35
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 38.12
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 38.53
+            }
+        ]
+    },
+    {
+        "village_id": "10002030010",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 24.56
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 42.11
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 33.33
+            }
+        ]
+    },
+    {
+        "village_id": "10002030011",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 23.36
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 38.72
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 37.92
+            }
+        ]
+    },
+    {
+        "village_id": "10002030012",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 21.84
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 47.1
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 31.06
+            }
+        ]
+    },
+    {
+        "village_id": "10002030013",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 25.83
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 41.39
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 32.78
+            }
+        ]
+    },
+    {
+        "village_id": "10002030014",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 22.59
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 44.9
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 32.51
+            }
+        ]
+    },
+    {
+        "village_id": "10002030015",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 24.73
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 39.64
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 35.64
+            }
+        ]
+    },
+    {
+        "village_id": "10002030016",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 21.69
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 47.29
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 31.02
+            }
+        ]
+    },
+    {
+        "village_id": "10002030017",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 24.31
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 43.75
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 31.94
+            }
+        ]
+    },
+    {
+        "village_id": "10002030018",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 21.35
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 46.47
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 32.18
+            }
+        ]
+    },
+    {
+        "village_id": "10002030019",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 19.71
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 52.55
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 27.74
+            }
+        ]
+    },
+    {
+        "village_id": "10002030020",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 19.93
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 53.32
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 26.74
+            }
+        ]
+    },
+    {
+        "village_id": "10002030021",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 23.39
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 43.88
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 32.73
+            }
+        ]
+    },
+    {
+        "village_id": "10002030022",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 20.14
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 48.29
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 31.57
+            }
+        ]
+    },
+    {
+        "village_id": "10002030023",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 21.98
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 52.21
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 25.81
+            }
+        ]
+    },
+    {
+        "village_id": "10002030024",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 17
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 45
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 38
+            }
+        ]
+    },
+    {
+        "village_id": "10002030025",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 16.83
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 53.66
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 29.51
+            }
+        ]
+    },
+    {
+        "village_id": "10002030026",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 13.17
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 62.57
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 24.25
+            }
+        ]
+    },
+    {
+        "village_id": "10002040001",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 20.77
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 47.54
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 31.69
+            }
+        ]
+    },
+    {
+        "village_id": "10002040002",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 29.08
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 34.95
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 35.97
+            }
+        ]
+    },
+    {
+        "village_id": "10002040024",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 37.35
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 25.52
             },
             {
                 "cand_no": 3,
@@ -2159,466 +1530,296 @@
         ]
     },
     {
-        "village_id": "10004060012",
+        "village_id": "10002040003",
         "cand_info": [
             {
                 "cand_no": 1,
-                "tks_rate": 35.26
+                "tks_rate": 27.97
             },
             {
                 "cand_no": 2,
-                "tks_rate": 27.98
+                "tks_rate": 43.49
             },
             {
                 "cand_no": 3,
-                "tks_rate": 36.77
+                "tks_rate": 28.54
             }
         ]
     },
     {
-        "village_id": "10004060013",
+        "village_id": "10002040004",
         "cand_info": [
             {
                 "cand_no": 1,
-                "tks_rate": 35.25
+                "tks_rate": 24.49
             },
             {
                 "cand_no": 2,
-                "tks_rate": 28.26
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 36.49
-            }
-        ]
-    },
-    {
-        "village_id": "10004060008",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 38.15
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 24.64
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 37.2
-            }
-        ]
-    },
-    {
-        "village_id": "10004060017",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 36.5
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 25.57
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 37.93
-            }
-        ]
-    },
-    {
-        "village_id": "10004060011",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 38.02
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 24.92
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 37.06
-            }
-        ]
-    },
-    {
-        "village_id": "10004060016",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 45.08
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 24.42
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 30.5
-            }
-        ]
-    },
-    {
-        "village_id": "10004070002",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 17.11
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 29.66
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 53.23
-            }
-        ]
-    },
-    {
-        "village_id": "10004070001",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 30.45
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 21.79
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 47.77
-            }
-        ]
-    },
-    {
-        "village_id": "10004070003",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 34.2
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 17.34
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 48.46
-            }
-        ]
-    },
-    {
-        "village_id": "10004070004",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 35.13
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 15.77
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 49.1
-            }
-        ]
-    },
-    {
-        "village_id": "10004070005",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 31.83
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 24.97
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 43.2
-            }
-        ]
-    },
-    {
-        "village_id": "10004070006",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 31.49
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 25.14
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 43.37
-            }
-        ]
-    },
-    {
-        "village_id": "10004070007",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 30.92
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 16.43
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 52.66
-            }
-        ]
-    },
-    {
-        "village_id": "10004070008",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 31.93
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 25.81
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 42.26
-            }
-        ]
-    },
-    {
-        "village_id": "10004070009",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 32.18
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 23.56
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 44.26
-            }
-        ]
-    },
-    {
-        "village_id": "10004070010",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 30.38
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 27.88
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 41.74
-            }
-        ]
-    },
-    {
-        "village_id": "10004070011",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 37.14
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 27.23
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 35.63
-            }
-        ]
-    },
-    {
-        "village_id": "10004070012",
-        "cand_info": [
-            {
-                "cand_no": 1,
                 "tks_rate": 34.69
             },
             {
-                "cand_no": 2,
-                "tks_rate": 27.22
-            },
-            {
                 "cand_no": 3,
-                "tks_rate": 38.09
+                "tks_rate": 40.82
             }
         ]
     },
     {
-        "village_id": "10004080001",
+        "village_id": "10002040005",
         "cand_info": [
             {
                 "cand_no": 1,
-                "tks_rate": 31.13
+                "tks_rate": 25.4
             },
             {
                 "cand_no": 2,
-                "tks_rate": 21.39
+                "tks_rate": 38.59
             },
             {
                 "cand_no": 3,
-                "tks_rate": 47.49
+                "tks_rate": 36
             }
         ]
     },
     {
-        "village_id": "10004080002",
+        "village_id": "10002040006",
         "cand_info": [
             {
                 "cand_no": 1,
-                "tks_rate": 27.7
+                "tks_rate": 26.32
             },
             {
                 "cand_no": 2,
-                "tks_rate": 26.48
+                "tks_rate": 40.55
             },
             {
                 "cand_no": 3,
-                "tks_rate": 45.82
+                "tks_rate": 33.14
             }
         ]
     },
     {
-        "village_id": "10004080003",
+        "village_id": "10002040007",
         "cand_info": [
             {
                 "cand_no": 1,
-                "tks_rate": 20
+                "tks_rate": 23.31
             },
             {
                 "cand_no": 2,
-                "tks_rate": 24.76
+                "tks_rate": 45.97
             },
             {
                 "cand_no": 3,
-                "tks_rate": 55.24
+                "tks_rate": 30.72
             }
         ]
     },
     {
-        "village_id": "10004080004",
+        "village_id": "10002040008",
         "cand_info": [
             {
                 "cand_no": 1,
-                "tks_rate": 20.15
+                "tks_rate": 29.92
             },
             {
                 "cand_no": 2,
-                "tks_rate": 32.84
+                "tks_rate": 34.81
             },
             {
                 "cand_no": 3,
-                "tks_rate": 47.01
+                "tks_rate": 35.27
             }
         ]
     },
     {
-        "village_id": "10004080005",
+        "village_id": "10002040009",
         "cand_info": [
             {
                 "cand_no": 1,
-                "tks_rate": 23.5
+                "tks_rate": 27.34
             },
             {
                 "cand_no": 2,
-                "tks_rate": 29.95
+                "tks_rate": 38.06
             },
             {
                 "cand_no": 3,
-                "tks_rate": 46.54
+                "tks_rate": 34.6
             }
         ]
     },
     {
-        "village_id": "10004080006",
+        "village_id": "10002040010",
         "cand_info": [
             {
                 "cand_no": 1,
-                "tks_rate": 26.99
+                "tks_rate": 20.54
             },
             {
                 "cand_no": 2,
-                "tks_rate": 25.13
+                "tks_rate": 37.21
             },
             {
                 "cand_no": 3,
-                "tks_rate": 47.88
+                "tks_rate": 42.25
             }
         ]
     },
     {
-        "village_id": "10004080011",
+        "village_id": "10002040011",
         "cand_info": [
             {
                 "cand_no": 1,
-                "tks_rate": 27.07
+                "tks_rate": 27.14
             },
             {
                 "cand_no": 2,
-                "tks_rate": 21.27
+                "tks_rate": 33.33
             },
             {
                 "cand_no": 3,
-                "tks_rate": 51.67
+                "tks_rate": 39.53
             }
         ]
     },
     {
-        "village_id": "10004080007",
+        "village_id": "10002040012",
         "cand_info": [
             {
                 "cand_no": 1,
-                "tks_rate": 23.89
+                "tks_rate": 26.11
             },
             {
                 "cand_no": 2,
-                "tks_rate": 33.45
+                "tks_rate": 35.56
             },
             {
                 "cand_no": 3,
-                "tks_rate": 42.66
+                "tks_rate": 38.33
             }
         ]
     },
     {
-        "village_id": "10004080008",
+        "village_id": "10002040013",
         "cand_info": [
             {
                 "cand_no": 1,
-                "tks_rate": 24.16
+                "tks_rate": 25.74
             },
             {
                 "cand_no": 2,
-                "tks_rate": 31.19
+                "tks_rate": 37.36
             },
             {
                 "cand_no": 3,
-                "tks_rate": 44.65
+                "tks_rate": 36.9
             }
         ]
     },
     {
-        "village_id": "10004080009",
+        "village_id": "10002040014",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 26.3
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 39.72
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 33.97
+            }
+        ]
+    },
+    {
+        "village_id": "10002040015",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 26.77
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 39.23
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 34
+            }
+        ]
+    },
+    {
+        "village_id": "10002040016",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 31.31
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 36.83
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 31.86
+            }
+        ]
+    },
+    {
+        "village_id": "10002040017",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 30.05
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 41.49
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 28.46
+            }
+        ]
+    },
+    {
+        "village_id": "10002040018",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 28.57
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 35.89
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 35.54
+            }
+        ]
+    },
+    {
+        "village_id": "10002040019",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 29.26
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 33.41
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 37.34
+            }
+        ]
+    },
+    {
+        "village_id": "10002040020",
         "cand_info": [
             {
                 "cand_no": 1,
@@ -2626,152 +1827,1002 @@
             },
             {
                 "cand_no": 2,
-                "tks_rate": 20.78
+                "tks_rate": 39.29
             },
             {
                 "cand_no": 3,
-                "tks_rate": 52.52
+                "tks_rate": 34.02
             }
         ]
     },
     {
-        "village_id": "10004080010",
+        "village_id": "10002040021",
         "cand_info": [
             {
                 "cand_no": 1,
-                "tks_rate": 34.34
+                "tks_rate": 27.32
             },
             {
                 "cand_no": 2,
-                "tks_rate": 17.72
+                "tks_rate": 40.03
             },
             {
                 "cand_no": 3,
+                "tks_rate": 32.65
+            }
+        ]
+    },
+    {
+        "village_id": "10002040022",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 26.54
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 41.51
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 31.94
+            }
+        ]
+    },
+    {
+        "village_id": "10002040023",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 25.38
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 43.55
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 31.07
+            }
+        ]
+    },
+    {
+        "village_id": "10002050001",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 25.3
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 42.94
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 31.76
+            }
+        ]
+    },
+    {
+        "village_id": "10002050002",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 21.94
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 43.8
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 34.27
+            }
+        ]
+    },
+    {
+        "village_id": "10002050003",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 26.32
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 38.3
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 35.38
+            }
+        ]
+    },
+    {
+        "village_id": "10002050004",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 24.76
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 39.96
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 35.28
+            }
+        ]
+    },
+    {
+        "village_id": "10002050005",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 25.18
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 45.52
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 29.3
+            }
+        ]
+    },
+    {
+        "village_id": "10002050006",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 25.73
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 39.02
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 35.25
+            }
+        ]
+    },
+    {
+        "village_id": "10002050007",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 26.92
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 46.9
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 26.18
+            }
+        ]
+    },
+    {
+        "village_id": "10002050008",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 25.33
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 52.37
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 22.3
+            }
+        ]
+    },
+    {
+        "village_id": "10002050009",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 24.31
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 54.84
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 20.85
+            }
+        ]
+    },
+    {
+        "village_id": "10002050010",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 23.77
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 46.92
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 29.31
+            }
+        ]
+    },
+    {
+        "village_id": "10002050011",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 25.48
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 48.09
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 26.43
+            }
+        ]
+    },
+    {
+        "village_id": "10002050012",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 25
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 48.04
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 26.96
+            }
+        ]
+    },
+    {
+        "village_id": "10002050013",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 23.98
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 49.74
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 26.28
+            }
+        ]
+    },
+    {
+        "village_id": "10002050014",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 28.05
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 49.95
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 21.99
+            }
+        ]
+    },
+    {
+        "village_id": "10002050015",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 26.1
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 48.56
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 25.34
+            }
+        ]
+    },
+    {
+        "village_id": "10002050016",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 27.69
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 50.39
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 21.93
+            }
+        ]
+    },
+    {
+        "village_id": "10002050017",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 24.88
+            },
+            {
+                "cand_no": 2,
                 "tks_rate": 47.94
-            }
-        ]
-    },
-    {
-        "village_id": "10004090001",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 31.52
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 25.94
             },
             {
                 "cand_no": 3,
-                "tks_rate": 42.54
+                "tks_rate": 27.18
             }
         ]
     },
     {
-        "village_id": "10004090002",
+        "village_id": "10002050018",
         "cand_info": [
             {
                 "cand_no": 1,
-                "tks_rate": 29.35
+                "tks_rate": 26.44
             },
             {
                 "cand_no": 2,
-                "tks_rate": 19.9
+                "tks_rate": 55.93
             },
             {
                 "cand_no": 3,
-                "tks_rate": 50.76
+                "tks_rate": 17.63
             }
         ]
     },
     {
-        "village_id": "10004090007",
+        "village_id": "10002060001",
         "cand_info": [
             {
                 "cand_no": 1,
-                "tks_rate": 27.53
+                "tks_rate": 28.68
             },
             {
                 "cand_no": 2,
-                "tks_rate": 21.35
+                "tks_rate": 43.94
             },
             {
                 "cand_no": 3,
-                "tks_rate": 51.12
+                "tks_rate": 27.38
             }
         ]
     },
     {
-        "village_id": "10004090003",
+        "village_id": "10002060014",
         "cand_info": [
             {
                 "cand_no": 1,
-                "tks_rate": 30.71
+                "tks_rate": 31.39
             },
             {
                 "cand_no": 2,
-                "tks_rate": 23.81
+                "tks_rate": 42.82
             },
             {
                 "cand_no": 3,
-                "tks_rate": 45.49
+                "tks_rate": 25.79
             }
         ]
     },
     {
-        "village_id": "10004090004",
+        "village_id": "10002060002",
         "cand_info": [
             {
                 "cand_no": 1,
-                "tks_rate": 32.76
+                "tks_rate": 25.6
             },
             {
                 "cand_no": 2,
-                "tks_rate": 28
+                "tks_rate": 46.02
             },
             {
                 "cand_no": 3,
-                "tks_rate": 39.24
+                "tks_rate": 28.38
             }
         ]
     },
     {
-        "village_id": "10004090005",
+        "village_id": "10002060003",
         "cand_info": [
             {
                 "cand_no": 1,
-                "tks_rate": 27.61
+                "tks_rate": 26.75
             },
             {
                 "cand_no": 2,
-                "tks_rate": 20.15
+                "tks_rate": 47.29
             },
             {
                 "cand_no": 3,
-                "tks_rate": 52.24
+                "tks_rate": 25.96
             }
         ]
     },
     {
-        "village_id": "10004090006",
+        "village_id": "10002060004",
         "cand_info": [
             {
                 "cand_no": 1,
-                "tks_rate": 32.75
+                "tks_rate": 22.22
             },
             {
                 "cand_no": 2,
+                "tks_rate": 50.67
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 27.1
+            }
+        ]
+    },
+    {
+        "village_id": "10002060005",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 26.49
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 49.59
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 23.92
+            }
+        ]
+    },
+    {
+        "village_id": "10002060006",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 20.41
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 55.05
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 24.54
+            }
+        ]
+    },
+    {
+        "village_id": "10002060007",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 23.23
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 53.53
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 23.23
+            }
+        ]
+    },
+    {
+        "village_id": "10002060008",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 25.75
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 49.29
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 24.95
+            }
+        ]
+    },
+    {
+        "village_id": "10002060009",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 25.76
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 49.4
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 24.84
+            }
+        ]
+    },
+    {
+        "village_id": "10002060010",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 25.44
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 49.44
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 25.11
+            }
+        ]
+    },
+    {
+        "village_id": "10002060011",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 27.56
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 45
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 27.44
+            }
+        ]
+    },
+    {
+        "village_id": "10002060012",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 23.19
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 47.94
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 28.88
+            }
+        ]
+    },
+    {
+        "village_id": "10002060013",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 23.85
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 48.26
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 27.89
+            }
+        ]
+    },
+    {
+        "village_id": "10002070001",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 27.84
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 42.64
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 29.52
+            }
+        ]
+    },
+    {
+        "village_id": "10002070002",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 25.97
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 48.06
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 25.97
+            }
+        ]
+    },
+    {
+        "village_id": "10002070003",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 26.1
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 49.37
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 24.53
+            }
+        ]
+    },
+    {
+        "village_id": "10002070004",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 29.83
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 41.87
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 28.3
+            }
+        ]
+    },
+    {
+        "village_id": "10002070005",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 29.4
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 47.48
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 23.12
+            }
+        ]
+    },
+    {
+        "village_id": "10002070006",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 26.98
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 51.95
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 21.07
+            }
+        ]
+    },
+    {
+        "village_id": "10002070007",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 26.22
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 39.7
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 34.08
+            }
+        ]
+    },
+    {
+        "village_id": "10002070008",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 14.71
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 56.42
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 28.88
+            }
+        ]
+    },
+    {
+        "village_id": "10002070009",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 26.09
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 50.37
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 23.54
+            }
+        ]
+    },
+    {
+        "village_id": "10002070010",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 29.19
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 44
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 26.81
+            }
+        ]
+    },
+    {
+        "village_id": "10002070011",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 24.56
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 55.44
+            },
+            {
+                "cand_no": 3,
                 "tks_rate": 20
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 47.25
             }
         ]
     },
     {
-        "village_id": "10004090008",
+        "village_id": "10002070012",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 24.92
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 51.26
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 23.82
+            }
+        ]
+    },
+    {
+        "village_id": "10002070013",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 24.18
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 49.4
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 26.42
+            }
+        ]
+    },
+    {
+        "village_id": "10002070014",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 23.77
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 53.41
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 22.82
+            }
+        ]
+    },
+    {
+        "village_id": "10002070015",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 20.65
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 52.85
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 26.5
+            }
+        ]
+    },
+    {
+        "village_id": "10002070016",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 19.98
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 57.13
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 22.9
+            }
+        ]
+    },
+    {
+        "village_id": "10002080002",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 25.66
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 51.23
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 23.11
+            }
+        ]
+    },
+    {
+        "village_id": "10002080003",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 28.32
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 50.06
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 21.62
+            }
+        ]
+    },
+    {
+        "village_id": "10002080004",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 32.45
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 47.36
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 20.19
+            }
+        ]
+    },
+    {
+        "village_id": "10002080005",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 26.09
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 54.35
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 19.57
+            }
+        ]
+    },
+    {
+        "village_id": "10002080006",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 24.15
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 52.63
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 23.22
+            }
+        ]
+    },
+    {
+        "village_id": "10002080007",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 29.4
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 48.23
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 22.37
+            }
+        ]
+    },
+    {
+        "village_id": "10002080008",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 30.28
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 46.66
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 23.06
+            }
+        ]
+    },
+    {
+        "village_id": "10002080010",
         "cand_info": [
             {
                 "cand_no": 1,
@@ -2779,487 +2830,1133 @@
             },
             {
                 "cand_no": 2,
-                "tks_rate": 21.4
+                "tks_rate": 59.6
             },
             {
                 "cand_no": 3,
-                "tks_rate": 52.56
+                "tks_rate": 14.35
             }
         ]
     },
     {
-        "village_id": "10004090009",
+        "village_id": "10002080009",
         "cand_info": [
             {
                 "cand_no": 1,
-                "tks_rate": 15.08
+                "tks_rate": 21.82
             },
             {
                 "cand_no": 2,
-                "tks_rate": 36.87
+                "tks_rate": 50.1
             },
             {
                 "cand_no": 3,
-                "tks_rate": 48.04
+                "tks_rate": 28.08
             }
         ]
     },
     {
-        "village_id": "10004100010",
+        "village_id": "10002080011",
         "cand_info": [
             {
                 "cand_no": 1,
-                "tks_rate": 36.09
+                "tks_rate": 24.41
             },
             {
                 "cand_no": 2,
-                "tks_rate": 27.04
+                "tks_rate": 50.63
             },
             {
                 "cand_no": 3,
-                "tks_rate": 36.87
+                "tks_rate": 24.95
             }
         ]
     },
     {
-        "village_id": "10004100001",
+        "village_id": "10002080012",
         "cand_info": [
             {
                 "cand_no": 1,
-                "tks_rate": 39.32
+                "tks_rate": 27.3
             },
             {
                 "cand_no": 2,
-                "tks_rate": 27.51
+                "tks_rate": 51.05
             },
             {
                 "cand_no": 3,
-                "tks_rate": 33.18
+                "tks_rate": 21.65
             }
         ]
     },
     {
-        "village_id": "10004100002",
+        "village_id": "10002080013",
         "cand_info": [
             {
                 "cand_no": 1,
-                "tks_rate": 33.8
+                "tks_rate": 24.95
             },
             {
                 "cand_no": 2,
-                "tks_rate": 25.8
+                "tks_rate": 52.55
             },
             {
                 "cand_no": 3,
-                "tks_rate": 40.4
+                "tks_rate": 22.51
             }
         ]
     },
     {
-        "village_id": "10004100003",
+        "village_id": "10002080014",
         "cand_info": [
             {
                 "cand_no": 1,
-                "tks_rate": 25.17
+                "tks_rate": 22.16
             },
             {
                 "cand_no": 2,
-                "tks_rate": 29.6
+                "tks_rate": 58.6
             },
             {
                 "cand_no": 3,
-                "tks_rate": 45.23
+                "tks_rate": 19.24
             }
         ]
     },
     {
-        "village_id": "10004100004",
+        "village_id": "10002080015",
         "cand_info": [
             {
                 "cand_no": 1,
-                "tks_rate": 25.61
+                "tks_rate": 27.36
             },
             {
                 "cand_no": 2,
-                "tks_rate": 31.07
+                "tks_rate": 49.3
             },
             {
                 "cand_no": 3,
-                "tks_rate": 43.33
+                "tks_rate": 23.33
             }
         ]
     },
     {
-        "village_id": "10004100006",
+        "village_id": "10002080016",
         "cand_info": [
             {
                 "cand_no": 1,
-                "tks_rate": 27.24
+                "tks_rate": 28.33
             },
             {
                 "cand_no": 2,
-                "tks_rate": 32.11
+                "tks_rate": 48.84
             },
             {
                 "cand_no": 3,
-                "tks_rate": 40.65
+                "tks_rate": 22.83
             }
         ]
     },
     {
-        "village_id": "10004100005",
+        "village_id": "10002080001",
         "cand_info": [
             {
                 "cand_no": 1,
-                "tks_rate": 28.35
+                "tks_rate": 26.96
             },
             {
                 "cand_no": 2,
-                "tks_rate": 25.74
+                "tks_rate": 50.1
             },
             {
                 "cand_no": 3,
-                "tks_rate": 45.91
+                "tks_rate": 22.93
             }
         ]
     },
     {
-        "village_id": "10004100008",
+        "village_id": "10002080017",
         "cand_info": [
             {
                 "cand_no": 1,
-                "tks_rate": 32.73
+                "tks_rate": 25.48
             },
             {
                 "cand_no": 2,
-                "tks_rate": 25.17
+                "tks_rate": 49.23
             },
             {
                 "cand_no": 3,
-                "tks_rate": 42.1
+                "tks_rate": 25.29
             }
         ]
     },
     {
-        "village_id": "10004100009",
+        "village_id": "10002080018",
         "cand_info": [
             {
                 "cand_no": 1,
-                "tks_rate": 23.46
+                "tks_rate": 26.92
             },
             {
                 "cand_no": 2,
-                "tks_rate": 27.73
+                "tks_rate": 47.3
             },
             {
                 "cand_no": 3,
-                "tks_rate": 48.82
+                "tks_rate": 25.78
             }
         ]
     },
     {
-        "village_id": "10004100007",
+        "village_id": "10002080019",
         "cand_info": [
             {
                 "cand_no": 1,
-                "tks_rate": 29.52
+                "tks_rate": 25.96
             },
             {
                 "cand_no": 2,
-                "tks_rate": 25.95
+                "tks_rate": 52.09
             },
             {
                 "cand_no": 3,
-                "tks_rate": 44.53
-            }
-        ]
-    },
-    {
-        "village_id": "10004110001",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 25.99
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 22.89
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 51.12
-            }
-        ]
-    },
-    {
-        "village_id": "10004110002",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 28.48
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 34.3
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 37.21
-            }
-        ]
-    },
-    {
-        "village_id": "10004110003",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 24.26
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 30.45
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 45.3
-            }
-        ]
-    },
-    {
-        "village_id": "10004110005",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 18.91
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 35.22
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 45.86
-            }
-        ]
-    },
-    {
-        "village_id": "10004110004",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 27.48
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 28.27
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 44.26
-            }
-        ]
-    },
-    {
-        "village_id": "10004110006",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 21.05
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 33.06
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 45.89
-            }
-        ]
-    },
-    {
-        "village_id": "10004120002",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 26.68
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 17.39
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 55.93
-            }
-        ]
-    },
-    {
-        "village_id": "10004120001",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 24.62
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 18.34
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 57.04
-            }
-        ]
-    },
-    {
-        "village_id": "10004120003",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 31.81
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 13.07
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 55.12
-            }
-        ]
-    },
-    {
-        "village_id": "10004120005",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 25.72
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 9.71
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 64.57
-            }
-        ]
-    },
-    {
-        "village_id": "10004120004",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 21.88
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 14.18
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 63.94
-            }
-        ]
-    },
-    {
-        "village_id": "10004120006",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 30.17
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 24.7
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 45.13
-            }
-        ]
-    },
-    {
-        "village_id": "10004120007",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 33.21
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 22.1
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 44.69
-            }
-        ]
-    },
-    {
-        "village_id": "10004130001",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 24.05
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 10.71
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 65.24
-            }
-        ]
-    },
-    {
-        "village_id": "10004130004",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 22.12
-            },
-            {
-                "cand_no": 2,
-                "tks_rate": 20.33
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 57.55
-            }
-        ]
-    },
-    {
-        "village_id": "10004130002",
-        "cand_info": [
-            {
-                "cand_no": 1,
-                "tks_rate": 26.7
-            },
-            {
-                "cand_no": 2,
                 "tks_rate": 21.95
-            },
-            {
-                "cand_no": 3,
-                "tks_rate": 51.36
             }
         ]
     },
     {
-        "village_id": "10004130003",
+        "village_id": "10002080020",
         "cand_info": [
             {
                 "cand_no": 1,
-                "tks_rate": 20.96
+                "tks_rate": 26.96
             },
             {
                 "cand_no": 2,
-                "tks_rate": 15.72
+                "tks_rate": 43.22
             },
             {
                 "cand_no": 3,
-                "tks_rate": 63.32
+                "tks_rate": 29.81
+            }
+        ]
+    },
+    {
+        "village_id": "10002080021",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 24.89
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 50.34
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 24.77
+            }
+        ]
+    },
+    {
+        "village_id": "10002080022",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 26.12
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 46.81
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 27.08
+            }
+        ]
+    },
+    {
+        "village_id": "10002080023",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 28.33
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 47.8
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 23.86
+            }
+        ]
+    },
+    {
+        "village_id": "10002080024",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 19.63
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 59.07
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 21.31
+            }
+        ]
+    },
+    {
+        "village_id": "10002090001",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 26.82
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 52
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 21.18
+            }
+        ]
+    },
+    {
+        "village_id": "10002090002",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 27.89
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 44.22
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 27.89
+            }
+        ]
+    },
+    {
+        "village_id": "10002090003",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 28.76
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 47.29
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 23.95
+            }
+        ]
+    },
+    {
+        "village_id": "10002090004",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 26.79
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 47.19
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 26.02
+            }
+        ]
+    },
+    {
+        "village_id": "10002090005",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 26.35
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 51.49
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 22.16
+            }
+        ]
+    },
+    {
+        "village_id": "10002090006",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 25.59
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 45.73
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 28.69
+            }
+        ]
+    },
+    {
+        "village_id": "10002090007",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 24.74
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 50.04
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 25.22
+            }
+        ]
+    },
+    {
+        "village_id": "10002090008",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 27.3
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 44.61
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 28.09
+            }
+        ]
+    },
+    {
+        "village_id": "10002090010",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 27.2
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 49.47
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 23.33
+            }
+        ]
+    },
+    {
+        "village_id": "10002090009",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 29.08
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 45.21
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 25.71
+            }
+        ]
+    },
+    {
+        "village_id": "10002090011",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 26.47
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 52.76
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 20.78
+            }
+        ]
+    },
+    {
+        "village_id": "10002090012",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 23.19
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 52.09
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 24.72
+            }
+        ]
+    },
+    {
+        "village_id": "10002090013",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 24.32
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 51.92
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 23.76
+            }
+        ]
+    },
+    {
+        "village_id": "10002090014",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 31.11
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 49.98
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 18.92
+            }
+        ]
+    },
+    {
+        "village_id": "10002090015",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 25.9
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 49.89
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 24.21
+            }
+        ]
+    },
+    {
+        "village_id": "10002100001",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 21.48
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 48.15
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 30.37
+            }
+        ]
+    },
+    {
+        "village_id": "10002100002",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 19.42
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 42.09
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 38.49
+            }
+        ]
+    },
+    {
+        "village_id": "10002100003",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 22.54
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 50.33
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 27.13
+            }
+        ]
+    },
+    {
+        "village_id": "10002100012",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 22.51
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 48.69
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 28.8
+            }
+        ]
+    },
+    {
+        "village_id": "10002100013",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 24.01
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 42.11
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 33.88
+            }
+        ]
+    },
+    {
+        "village_id": "10002100014",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 22.72
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 50.29
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 26.99
+            }
+        ]
+    },
+    {
+        "village_id": "10002100004",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 16.83
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 56.49
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 26.68
+            }
+        ]
+    },
+    {
+        "village_id": "10002100005",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 17.15
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 47.9
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 34.95
+            }
+        ]
+    },
+    {
+        "village_id": "10002100006",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 20.31
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 46.45
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 33.24
+            }
+        ]
+    },
+    {
+        "village_id": "10002100007",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 23.06
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 44.91
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 32.04
+            }
+        ]
+    },
+    {
+        "village_id": "10002100008",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 24.01
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 47.86
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 28.13
+            }
+        ]
+    },
+    {
+        "village_id": "10002100009",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 20.68
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 52.04
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 27.29
+            }
+        ]
+    },
+    {
+        "village_id": "10002100011",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 20.28
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 55.54
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 24.18
+            }
+        ]
+    },
+    {
+        "village_id": "10002100010",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 25.53
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 49.04
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 25.43
+            }
+        ]
+    },
+    {
+        "village_id": "10002100015",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 21.58
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 54.87
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 23.55
+            }
+        ]
+    },
+    {
+        "village_id": "10002100016",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 19.96
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 51.62
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 28.42
+            }
+        ]
+    },
+    {
+        "village_id": "10002100017",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 22.95
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 55.44
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 21.6
+            }
+        ]
+    },
+    {
+        "village_id": "10002100018",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 27.62
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 51.71
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 20.67
+            }
+        ]
+    },
+    {
+        "village_id": "10002110001",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 25.73
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 10.19
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 64.08
+            }
+        ]
+    },
+    {
+        "village_id": "10002110002",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 30.11
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 7.59
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 62.3
+            }
+        ]
+    },
+    {
+        "village_id": "10002110003",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 22.29
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 22.7
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 55.01
+            }
+        ]
+    },
+    {
+        "village_id": "10002110004",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 21.43
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 38.46
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 40.11
+            }
+        ]
+    },
+    {
+        "village_id": "10002110005",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 18.72
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 22.17
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 59.11
+            }
+        ]
+    },
+    {
+        "village_id": "10002110006",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 24.9
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 7.91
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 67.19
+            }
+        ]
+    },
+    {
+        "village_id": "10002110007",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 22.58
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 38.71
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 38.71
+            }
+        ]
+    },
+    {
+        "village_id": "10002110010",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 25
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 6.82
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 68.18
+            }
+        ]
+    },
+    {
+        "village_id": "10002110008",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 24.13
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 9.61
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 66.26
+            }
+        ]
+    },
+    {
+        "village_id": "10002110009",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 27.43
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 19.7
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 52.87
+            }
+        ]
+    },
+    {
+        "village_id": "10002120003",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 27.18
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 8.09
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 64.72
+            }
+        ]
+    },
+    {
+        "village_id": "10002120001",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 23.23
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 10.19
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 66.58
+            }
+        ]
+    },
+    {
+        "village_id": "10002120002",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 24.14
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 7.67
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 68.19
+            }
+        ]
+    },
+    {
+        "village_id": "10002120004",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 22.37
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 5.94
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 71.69
+            }
+        ]
+    },
+    {
+        "village_id": "10002120005",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 21.26
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 16.94
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 61.79
+            }
+        ]
+    },
+    {
+        "village_id": "10002120006",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 29.49
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 7.12
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 63.39
+            }
+        ]
+    },
+    {
+        "village_id": "10002120007",
+        "cand_info": [
+            {
+                "cand_no": 1,
+                "tks_rate": 19.75
+            },
+            {
+                "cand_no": 2,
+                "tks_rate": 8.28
+            },
+            {
+                "cand_no": 3,
+                "tks_rate": 71.97
             }
         ]
     }
