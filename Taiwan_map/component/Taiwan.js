@@ -211,7 +211,7 @@ export const taiwan = {
           if (!selectData.length) return "lightblue";
           return this.calauteSelectionRate(id, selectData);
         })
-        .attr("stroke-width", 0.1)
+        .attr("stroke-width", 0.2)
         .on("click", async (d, data) => {
           //因為要設定到下一層所以+1
           this.mapOnClick(deep + 1, data);
@@ -358,8 +358,6 @@ export const taiwan = {
     },
     getSelectionData(id) {
       if (!id) return;
-      // console.log("id", id);
-
       return fetch(`./data/selection/${id}.json`)
         .then((res) => res.json())
         .then((data) => {
