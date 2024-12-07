@@ -55,6 +55,8 @@
       }
       .custom-container {
         position: relative;
+        max-width: 1440px;
+        margin: auto;
       }
       .back {
         position: absolute;
@@ -77,17 +79,6 @@
 
       .map {
         position: relative;
-      }
-
-      .svg-mapping path {
-        /* stroke-width: 0.1; */
-      }
-      .map-group {
-        /* transition: all 0.5s; */
-      }
-
-      .map-group g path {
-        /* stroke-width: 0.1; */
       }
 
       .wrap {
@@ -126,8 +117,6 @@
   <body>
     <div id="app">
       <div class="bg"></div>
-      <div ref="countryList" class="svg-mapping"></div>
-
       <div class="custom-container">
         <div class="back" @click="goBack">
           <img src="./image/arrow.svg" alt="" />
@@ -278,8 +267,6 @@
     <script src="../vue.js"></script>
     <script src="./svg.js"></script>
     <script type="module">
-      import countryList from "./country.js";
-      import townsList from "./towns.js";
       import { taiwan } from "./component/Taiwan.js";
       import { locationMap } from "./utils.js";
 
@@ -356,58 +343,6 @@
                 this.handleLocationMap(rows);
               });
           },
-          // calauteSelectionRate(res) {
-          //   let data = res ? res : this.selectionData;
-          //   const { id } = this.locationData;
-
-          //   if (this.deep !== 1) {
-          //     data = data.filter((item) => item.village_id.includes(id));
-          //   }
-          //   let cand_1 = 0;
-          //   let cand_2 = 0;
-          //   let cand_3 = 0;
-
-          //   for (let i = 0; i < data.length; i++) {
-          //     const { village_id, cand_info } = data[i];
-          //     const { townId } = this.findParentId(village_id);
-
-          //     cand_1 += cand_info[0].tks_rate;
-          //     cand_2 += cand_info[1].tks_rate;
-          //     cand_3 += cand_info[2].tks_rate;
-          //   }
-
-          //   this.selectionInfo[id] = {
-          //     cand_1: (cand_1 / data.length).toFixed(2),
-          //     cand_2: (cand_2 / data.length).toFixed(2),
-          //     cand_3: (cand_3 / data.length).toFixed(2),
-          //   };
-          // },
-          // getSelectionData(id) {
-          //   if (!id) return;
-          //   fetch(`./data/selection/${id}.json`)
-          //     .then((res) => res.json())
-          //     .then((data) => {
-          //       this.calauteSelectionRate(data);
-          //       this.selectionData = data;
-          //     });
-          // },
-        },
-        watch: {
-          // locationData: {
-          //   handler(newVal, oldVal) {
-          //     const { id: newId } = newVal;
-          //     const { id: oldId } = oldVal;
-          //     if (!this.selectionInfo[newId]) {
-          //       if (this.deep <= 1 && newId != oldId) {
-          //         this.getSelectionData(newId);
-          //       } else {
-          //         this.calauteSelectionRate();
-          //       }
-          //     } else {
-          //     }
-          //   },
-          //   deep: true,
-          // },
         },
         computed: {
           currAreaSelection() {
@@ -450,7 +385,6 @@
           },
         },
         async mounted() {
-          this.$refs.countryList.innerHTML = countryList;
           await this.getLocationData();
 
           for (const id in locationMap) {

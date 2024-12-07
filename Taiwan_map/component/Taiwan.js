@@ -137,9 +137,9 @@ export const taiwan = {
       const translateX = innerWidth / 2 - centerX;
       const translateY = innerHeight / 2 - centerY;
       this.mapGroup
-      .transition()
-      .duration(500)
-      .attr("transform", `translate(${translateX},${translateY})`);
+        .transition()
+        .duration(500)
+        .attr("transform", `translate(${translateX},${translateY})`);
       // this.mapGroup.style("transform", `translate(${translateX}px,${translateY}px)`);
     },
     getMapData(id) {
@@ -216,7 +216,7 @@ export const taiwan = {
           return this.calauteSelectionRate(id, selectData);
         })
         .attr("stroke-width", 0.2)
-        .on("click", async (d, data) => {
+        .on("click", async (e, data) => {
           //因為要設定到下一層所以+1
           this.mapOnClick(deep + 1, data);
         });
@@ -312,12 +312,12 @@ export const taiwan = {
     moveMap(dom) {      
       const { translateX, translateY, zoomLevel } = this.getMoveRange(dom);
       this.mapGroup
-      .transition()
-      .duration(500)
-      .attr(
-        "transform",
-        `translate(${translateX},${translateY}) scale(${zoomLevel})`
-      );
+        .transition()
+        .duration(500)
+        .attr(
+          "transform",
+          `translate(${translateX},${translateY}) scale(${zoomLevel})`
+        );
       // this.mapGroup
       // .transition()
       // .duration(500)
@@ -325,7 +325,6 @@ export const taiwan = {
       //   "transform",
       //   `translate(${translateX}px,${translateY}px) scale(${zoomLevel})`
       // );
-
     },
     getDomFromDeep(deep) {
       const useDeep = deep === undefined ? this.deepVal : deep;
@@ -369,7 +368,8 @@ export const taiwan = {
         .attr("stroke", "#FFFA76")
         .attr("fill", "none")
         .attr("class", "focus")
-        .attr("stroke-width", `0.${4 - this.deepVal}`);
+        // .attr("stroke-width", `0.${4 - this.deepVal}`);
+        .attr("stroke-width", `0.4`);
     },
     getSelectionData(id) {
       if (!id) return;
