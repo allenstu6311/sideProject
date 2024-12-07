@@ -417,5 +417,6 @@ export const taiwan = {
       this.initMap(true);
     });
   },
-  template: `<svg class="tw-geo svelte-ul8skc" viewBox="0 0 960 910" ref="svg" preserveAspectRatio="xMidYMid meet"></svg>`,
+  template: `
+  <svg class="tw-geo svelte-ul8skc" viewBox="0 0 960 910" ref="svg" preserveAspectRatio="xMidYMid meet"></svg>`,
 };
