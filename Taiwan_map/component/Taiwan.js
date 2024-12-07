@@ -1,7 +1,3 @@
-import Taoyuan from "./Taoyuan/towns.js";
-import NewTaipei from "./NewTaipei/towns.js";
-import Kaohsiung from "./Kaohsiung/towns.js";
-import Hsinchu from "./Hsinchu/towns.js";
 import { assignValue, getBBoxCenter } from "../utils.js";
 
 export const taiwan = {
@@ -14,25 +10,20 @@ export const taiwan = {
       type: Object,
       default: null,
     },
-    loading:{
-      type:Boolean,
-      default:true
-    }
+    loading: {
+      type: Boolean,
+      default: true,
+    },
   },
-  emits: ["updateDeep", "getLocationData", "updateAddress", "updateSelectionInfo","update:loading"],
+  emits: [
+    "updateDeep",
+    "getLocationData",
+    "updateAddress",
+    "updateSelectionInfo",
+    "update:loading",
+  ],
   data() {
     return {
-      position: {
-        x: 0,
-        y: 0,
-        scale: 0,
-      },
-      countryList: {
-        68000: Taoyuan,
-        65000: NewTaipei,
-        64000: Kaohsiung,
-        10004: Hsinchu,
-      },
       countryInfo: {
         name: "",
         dom: "",
@@ -55,8 +46,6 @@ export const taiwan = {
         id: "",
         textContent: "尚無資料",
       },
-      focusDom: "",
-      inValid: false,
       d3Svg: "",
       countrySvg: "",
       mapGroup: "",
@@ -64,14 +53,12 @@ export const taiwan = {
       villageSvg: "",
       areaData: "",
       villageData: "",
-      targetData: {},
       isMapClick: false,
       maxDeep: 3,
       selectionData: [],
       selectionInfo: {},
     };
   },
-  computed: {},
   watch: {
     deepVal: {
       handler(newVal, oldVal) {
@@ -122,14 +109,13 @@ export const taiwan = {
 
         this.areaData = await this.getMapData();
         const { counties } = this.areaData.objects;
-        // console.log("counties", counties);
 
         const countryIdList = [];
         for (let i = 0; i < counties.geometries.length; i++) {
           countryIdList.push(counties.geometries[i].id);
           await this.getSelectionData(counties.geometries[i].id);
         }
-        this.$emit('update:loading', false);
+        this.$emit("update:loading", false);
         this.appendMap(0);
       }
 
@@ -145,7 +131,6 @@ export const taiwan = {
         .transition()
         .duration(500)
         .attr("transform", `translate(${translateX},${translateY})`);
-      // this.mapGroup.style("transform", `translate(${translateX}px,${translateY}px)`);
     },
     getMapData(id) {
       let url = "./data/topoJson/towns-mercator.json";
@@ -182,7 +167,7 @@ export const taiwan = {
           break;
       }
       // console.log('data',data.filter((item) => item.id.includes(id)),'id',id);
-      
+
       if (type === "find") {
         if (deep === 0) return data.find((item) => item.id.includes(id));
         if (deep === 1) return data.find((item) => item.id.includes(id));
@@ -191,7 +176,8 @@ export const taiwan = {
       }
 
       if (deep === 0) return data;
-      if (deep === 1) return data.filter((item) => item.id.slice(0,id.length).includes(id));
+      if (deep === 1)
+        return data.filter((item) => item.id.slice(0, id.length).includes(id));
       if (deep === 2)
         return data.filter((item) => item.properties.TOWNCODE.includes(id));
     },
@@ -220,7 +206,7 @@ export const taiwan = {
           if (!selectData.length) return "lightblue";
           return this.calauteSelectionRate(id, selectData);
         })
-        .attr("stroke-width", 0.2)
+        .attr("stroke-width", `0.1`)
         .on("click", async (e, data) => {
           //因為要設定到下一層所以+1
           this.mapOnClick(deep + 1, data);
@@ -262,7 +248,7 @@ export const taiwan = {
       const currInfo = this.getInfoFromDeep(newDeep);
       this.focusMap();
 
-      if(!this.isMapClick){
+      if (!this.isMapClick) {
         this.$emit("getLocationData", currInfo);
       }
 
@@ -273,7 +259,7 @@ export const taiwan = {
 
       if (newDeep === 0) {
         this.moveMapInCenter();
-      } else if (newDeep < 3) {
+      } else {
         this.moveMap(dom.node());
       }
     },
@@ -314,7 +300,7 @@ export const taiwan = {
 
       return { translateX, translateY, zoomLevel };
     },
-    moveMap(dom) {      
+    moveMap(dom) {
       const { translateX, translateY, zoomLevel } = this.getMoveRange(dom);
       this.mapGroup
         .transition()
@@ -323,13 +309,6 @@ export const taiwan = {
           "transform",
           `translate(${translateX},${translateY}) scale(${zoomLevel})`
         );
-      // this.mapGroup
-      // .transition()
-      // .duration(500)
-      // .style(
-      //   "transform",
-      //   `translate(${translateX}px,${translateY}px) scale(${zoomLevel})`
-      // );
     },
     getDomFromDeep(deep) {
       const useDeep = deep === undefined ? this.deepVal : deep;
@@ -373,8 +352,8 @@ export const taiwan = {
         .attr("stroke", "#FFFA76")
         .attr("fill", "none")
         .attr("class", "focus")
-        // .attr("stroke-width", `0.${4 - this.deepVal}`);
-        .attr("stroke-width", `0.4`);
+        .attr("stroke-width", `0.2`);
+      // .attr("stroke-width", `0.4`);
     },
     getSelectionData(id) {
       if (!id) return;
@@ -385,10 +364,10 @@ export const taiwan = {
         })
         .catch(() => {});
     },
-    calauteSelectionRate(id, data) {
-      let cand_1 = 0;
-      let cand_2 = 0;
-      let cand_3 = 0;
+    calauteSelectionRate(id, data) {      
+      let cand_1 = 0; // 民眾黨
+      let cand_2 = 0; // 民進黨
+      let cand_3 = 0; // 國民黨
 
       for (let i = 0; i < data.length; i++) {
         const { cand_info } = data[i];
@@ -404,7 +383,7 @@ export const taiwan = {
         cand_3: (cand_3 / data.length).toFixed(2),
       };
 
-      this.$emit("updateSelectionInfo",this.selectionInfo) 
+      this.$emit("updateSelectionInfo", this.selectionInfo);
       const max = Math.max(...[cand_1, cand_2, cand_3]);
 
       if (max === 0) return "lightblue";

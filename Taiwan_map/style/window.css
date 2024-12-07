@@ -1,6 +1,6 @@
 .window-pc {
     box-sizing: border-box;
-    width: 250px;
+    width: 300px;
     border-radius: 8px;
     position: absolute;
     top: 10%;
@@ -10,6 +10,8 @@
 }
 
 .window-pc .title {
+    font-size: 24px;
+    font-weight: 700;
     margin-bottom: 16px;
     color: #fff;
 }

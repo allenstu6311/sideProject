@@ -55,8 +55,6 @@
       }
       .custom-container {
         position: relative;
-        max-width: 1440px;
-        margin: auto;
       }
       .back {
         position: absolute;
@@ -126,7 +124,6 @@
   </head>
   <body>
     <div id="app">
-      
       <div class="bg"></div>
       <div class="custom-container">
         <div class="d-flex justify-content-center custom-spinner" v-if="loading">
@@ -211,12 +208,11 @@
         <!-- 手機版視窗 -->
         <div class="window-h5" v-show="deep > 0">
           <div class="introduce">
-            <div class="address">{{currAreaName}}</div>
             <div class="accordion" id="accordionExample">
               <div class="accordion-item">
                 <h2 class="accordion-header" id="headingOne">
                   <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                    詳細資訊
+                    <div class="address">{{currAreaName}}</div>
                   </button>
                 </h2>
                 <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
@@ -250,7 +246,7 @@
                         <p>{{ currAreaSelection.cand_3 }}%</p>
                       </div>
                     </div>
-        
+                    <!-- AI分析 -->
                     <div class="accordion accordion-flush" id="accordionFlushExample">
                       <div class="accordion-item">
                         <h2 class="accordion-header" id="flush-headingOne">
@@ -281,10 +277,6 @@
                 </div>
               </div>
             </div>
-
-
-
-
           </div>
         </div>
       </div>
