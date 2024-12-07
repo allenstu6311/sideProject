@@ -14,8 +14,12 @@ export const taiwan = {
       type: Object,
       default: null,
     },
+    loading:{
+      type:Boolean,
+      default:true
+    }
   },
-  emits: ["updateDeep", "getLocationData", "updateAddress", "updateSelectionInfo"],
+  emits: ["updateDeep", "getLocationData", "updateAddress", "updateSelectionInfo","update:loading"],
   data() {
     return {
       position: {
@@ -125,6 +129,7 @@ export const taiwan = {
           countryIdList.push(counties.geometries[i].id);
           await this.getSelectionData(counties.geometries[i].id);
         }
+        this.$emit('update:loading', false);
         this.appendMap(0);
       }
 

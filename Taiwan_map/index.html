@@ -109,7 +109,7 @@
 
       .custom-spinner{
         width: 100%;
-        height: 100%;
+        height: 100vh;
         position: absolute;
         left: 0;
         top: 0;
@@ -142,6 +142,7 @@
           <Taiwan
             v-model:deep-val="deep"
             v-model:search-param="searchParam"
+            v-model:loading="loading"
             @update-deep="updateDeep"
             @get-location-data="(val)=>locationData = val"
             @update-selection-info="(val)=>selectionInfo = val"
@@ -427,7 +428,6 @@
               id,
             });
           }
-          this.loading = false;
         },
       });
       app.component("Taiwan", taiwan);
