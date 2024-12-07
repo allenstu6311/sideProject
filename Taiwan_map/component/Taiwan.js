@@ -136,7 +136,11 @@ export const taiwan = {
       const { centerX, centerY } = getBBoxCenter(this.mapGroup.node());
       const translateX = innerWidth / 2 - centerX;
       const translateY = innerHeight / 2 - centerY;
-      this.mapGroup.attr("transform", `translate(${translateX},${translateY})`);
+      this.mapGroup
+      .transition()
+      .duration(500)
+      .attr("transform", `translate(${translateX},${translateY})`);
+      // this.mapGroup.style("transform", `translate(${translateX}px,${translateY}px)`);
     },
     getMapData(id) {
       let url = "./data/topoJson/towns-mercator.json";
@@ -307,17 +311,21 @@ export const taiwan = {
     },
     moveMap(dom) {      
       const { translateX, translateY, zoomLevel } = this.getMoveRange(dom);
-      // this.mapGroup.attr(
-      //   "transform",
-      //   `translate(${translateX},${translateY}) scale(${zoomLevel})`
-      // );
       this.mapGroup
-      .ease(d3.easeCubic)
-      .duration(750)
-      .style(
+      .transition()
+      .duration(500)
+      .attr(
         "transform",
-        `translate(${translateX}px,${translateY}px) scale(${zoomLevel})`
+        `translate(${translateX},${translateY}) scale(${zoomLevel})`
       );
+      // this.mapGroup
+      // .transition()
+      // .duration(500)
+      // .style(
+      //   "transform",
+      //   `translate(${translateX}px,${translateY}px) scale(${zoomLevel})`
+      // );
+
     },
     getDomFromDeep(deep) {
       const useDeep = deep === undefined ? this.deepVal : deep;
