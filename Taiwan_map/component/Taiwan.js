@@ -144,6 +144,7 @@ export const taiwan = {
       // 应用过渡效果
       this.mapGroup
         .on("mousedown.zoom", () => null) //關閉拖拉事件
+        .on("touchmove.zoom", () => null) //關閉拖拉事件
         .transition()
         .duration(750)
         .call(
