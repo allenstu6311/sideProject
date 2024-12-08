@@ -72,7 +72,8 @@ export const taiwan = {
     // 父層查詢事件
     async searchParam(param) {
       const { idList, id } = param;
-
+      
+      this.$emit("updateDeep", 0); //reset map
       this.villageData = await this.getMapData(idList[0]);
       for (let i = 1; i <= idList.length; i++) {
         await this.updateCurrInfo(idList[i - 1], i);
@@ -126,19 +127,9 @@ export const taiwan = {
     },
     moveMapInCenter() {
       const { centerX, centerY, zoomLevel } = getBBoxCenter(this.mapGroup.node());
-
-      // const RWD = innerWidth < 500;
-      // const scale = RWD ? 0.7 : 1
-      // const xZoom = RWD ? 0.5 : 1
-      // const yZoom = RWD ? 0.3 : 1
-
-      // const translateX = innerWidth / 2 - centerX * xZoom
-      // const translateY = innerHeight / 2 - centerY * yZoom;
       const translateX = innerWidth / 2 - centerX * zoomLevel;
       const translateY = innerHeight / 2 - centerY * zoomLevel;
-      // const scale = 1;
-      console.log('zoomLevel',zoomLevel);
-      
+
       this.mapGroup
         .transition()
         .duration(500)
@@ -257,6 +248,7 @@ export const taiwan = {
       if (newDeep > 0 || oldDeep > newDeep) {
         this.removeChild(newDeep, oldDeep);
       }
+      
       const currInfo = this.getInfoFromDeep(newDeep);
       this.focusMap();
 
@@ -269,11 +261,7 @@ export const taiwan = {
         this.appendMap(newDeep, currInfo.id);
       }
 
-      if (newDeep === 0) {
-        this.moveMapInCenter();
-      } else {
-        this.moveMap(dom.node());
-      }
+      this.moveMap(dom.node());
     },
     removeChild(newDeep, oldDeep) {
       if (newDeep === 3 && oldDeep === 3) return;
