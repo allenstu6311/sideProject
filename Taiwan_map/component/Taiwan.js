@@ -57,6 +57,8 @@ export const taiwan = {
       maxDeep: 3,
       selectionData: [],
       selectionInfo: {},
+      zoom: null,
+      init: true,
     };
   },
   watch: {
@@ -72,7 +74,7 @@ export const taiwan = {
     // 父層查詢事件
     async searchParam(param) {
       const { idList, id } = param;
-      
+
       this.$emit("updateDeep", 0); //reset map
       this.villageData = await this.getMapData(idList[0]);
       for (let i = 1; i <= idList.length; i++) {
@@ -111,9 +113,7 @@ export const taiwan = {
         this.areaData = await this.getMapData();
         const { counties } = this.areaData.objects;
 
-        const countryIdList = [];
         for (let i = 0; i < counties.geometries.length; i++) {
-          countryIdList.push(counties.geometries[i].id);
           await this.getSelectionData(counties.geometries[i].id);
         }
         this.$emit("update:loading", false);
@@ -121,19 +121,36 @@ export const taiwan = {
       }
 
       this.$nextTick(() => {
-        // this.moveMapInCenter();
-        this.moveMap(this.mapGroup.node())
+        this.moveMapInCenter();
+        // this.moveMap(this.mapGroup.node());
       });
     },
+    initD3js() {
+      if (!this.zoom) {
+        this.zoom = d3
+          .zoom()
+          .scaleExtent([1, 8])
+          .on("zoom", (d, data) => {
+            this.zoomed(d, data);
+          });
+        this.mapGroup.call(this.zoom);
+      }
+    },
     moveMapInCenter() {
-      const { centerX, centerY, zoomLevel } = getBBoxCenter(this.mapGroup.node());
-      const translateX = innerWidth / 2 - centerX * zoomLevel;
-      const translateY = innerHeight / 2 - centerY * zoomLevel;
+      const { centerX, centerY,zoomLevel } = getBBoxCenter(this.mapGroup.node());
+      const { innerWidth, innerHeight } = window;
+      const translateX = innerWidth / 2 - centerX;
+      const translateY = innerHeight / 2 - centerY;
 
+      // 应用过渡效果
       this.mapGroup
+        .on("mousedown.zoom", () => null) //關閉拖拉事件
         .transition()
-        .duration(500)
-        .attr("transform", `translate(${translateX * zoomLevel},${translateY * zoomLevel}) scale(${zoomLevel})`);
+        .duration(750)
+        .call(
+          this.zoom.transform,
+          d3.zoomIdentity.translate(translateX, translateY).scale(1)
+        );
     },
     getMapData(id) {
       let url = "./data/topoJson/towns-mercator.json";
@@ -248,7 +265,7 @@ export const taiwan = {
       if (newDeep > 0 || oldDeep > newDeep) {
         this.removeChild(newDeep, oldDeep);
       }
-      
+
       const currInfo = this.getInfoFromDeep(newDeep);
       this.focusMap();
 
@@ -260,8 +277,11 @@ export const taiwan = {
       if (newDeep < 3) {
         this.appendMap(newDeep, currInfo.id);
       }
-
-      this.moveMap(dom.node());
+      if (newDeep === 0) {
+        this.moveMapInCenter();
+      } else {
+        this.moveMap(currInfo.targetData, dom.node());
+      }
     },
     removeChild(newDeep, oldDeep) {
       if (newDeep === 3 && oldDeep === 3) return;
@@ -300,14 +320,40 @@ export const taiwan = {
 
       return { translateX, translateY, zoomLevel };
     },
-    moveMap(dom) {
-      const { translateX, translateY, zoomLevel } = this.getMoveRange(dom);
+    zoomed(event) {
+      const { transform } = event;
+
+      this.mapGroup.attr("transform", transform);
+      this.mapGroup.attr("stroke-width", 1 / transform.k);
+    },
+    moveMap(d, dom) {
+      const path = d3.geoPath();
+      /**
+       * (x0, y0) 可以代表左上或左下
+       * (x1, y1) 可以代表右上或右下
+       * 
+       * x1 - x0 物件寬
+       * y1 - y0 五件高
+       */
+      const [[x0, y0], [x1, y1]] = path.bounds(d);
+      const { svgBox } = getBBoxCenter(this.mapGroup.node());
+
+      // 计算新的 transform
+      const scale = Math.min(
+        20,
+        0.9 / Math.max((x1 - x0) / svgBox.width, (y1 - y0) / svgBox.height)
+      );
+      const { innerWidth, innerHeight } = window;
+      const translateX = innerWidth / 2 - (scale * (x0 + x1)) / 2;
+      const translateY = innerHeight / 2 - (scale * (y0 + y1)) / 2;
+
+      // 应用过渡效果
       this.mapGroup
         .transition()
         .duration(500)
-        .attr(
-          "transform",
-          `translate(${translateX},${translateY}) scale(${zoomLevel})`
+        .call(
+          this.zoom.transform,
+          d3.zoomIdentity.translate(translateX, translateY).scale(scale)
         );
     },
     getDomFromDeep(deep) {
@@ -352,7 +398,7 @@ export const taiwan = {
         .attr("stroke", "#FFFA76")
         .attr("fill", "none")
         .attr("class", "focus")
-        .attr("stroke-width", `0.2`);
+        .attr("stroke-width", `0.${4 - useDeep}`);
       // .attr("stroke-width", `0.4`);
     },
     getSelectionData(id) {
@@ -364,7 +410,7 @@ export const taiwan = {
         })
         .catch(() => {});
     },
-    calauteSelectionRate(id, data) {      
+    calauteSelectionRate(id, data) {
       let cand_1 = 0; // 民眾黨
       let cand_2 = 0; // 民進黨
       let cand_3 = 0; // 國民黨
@@ -399,6 +445,7 @@ export const taiwan = {
 
     this.$nextTick(() => {
       this.initMap(true);
+      this.initD3js();
     });
   },
   template: `
