@@ -56,12 +56,29 @@
       .custom-container {
         position: relative;
       }
-      .back {
+
+      .page-title {
         position: absolute;
         left: 10px;
         top: 10%;
-        cursor: pointer;
         z-index: 10;
+      }
+
+      .page-title .year{
+        color: #a4aeef;
+        font-size: 56px;
+        font-weight: 500;
+        margin-right: 10px;
+      }
+
+      .page-title .text{
+        color: #3b4f7d;
+        font-size: 28px;
+        font-weight: 500;
+      }
+
+      .back {
+        cursor: pointer;
         display: flex;
         align-items: center;
         font-size: 16px;
@@ -129,7 +146,7 @@
         .bg {
           display: none;
         }
-        .control-box{
+        .control-box {
           top: 50px;
         }
       }
@@ -150,9 +167,17 @@
         <!-- 操作區域 -->
         <div class="control-box">
           <!-- 返回上一層 -->
-          <div class="back" @click="goBack">
-            <img src="./image/arrow.svg" alt="" />
-            <p>返回上一層</p>
+          <div class="page-title" >
+            <h1 class="svelte-ypi6vb" v-if="deep === 0">
+              <span class="year svelte-ypi6vb">2024</span
+              ><span class="text svelte-ypi6vb" data-svelte-h="svelte-1y3jmw7"
+                >總統大選</span
+              >
+            </h1>
+            <div class="back" @click="goBack" v-else>
+              <img src="./image/arrow.svg" alt="" />
+              <p>返回上一層</p>
+            </div>
           </div>
 
           <!-- 電腦版視窗 -->
