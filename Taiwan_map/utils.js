@@ -58,12 +58,9 @@ export async function assignValue(id, deep) {
 
 export function getBBoxCenter(svg) {
   const svgBox = svg.getBBox();
-  const centerX = svgBox.x + svgBox.width / 2;
-  const centerY = svgBox.y + svgBox.height / 2;
 
   const { innerWidth, innerHeight } = window;
-
-  let scaleFactor = 0.8;
+  let scaleFactor = 0.9;
 
   if (innerWidth < 500) {
     scaleFactor = 0.6;
@@ -74,6 +71,9 @@ export function getBBoxCenter(svg) {
   const scaleX = window.innerHeight / svgBox.width;
   const scaleY = window.innerHeight / svgBox.height;
   const zoomLevel = Math.min(scaleX, scaleY) * scaleFactor; // 選擇較小的縮放比例
+
+  const centerX = (svgBox.x + svgBox.width / 2) * zoomLevel;
+  const centerY = (svgBox.y + svgBox.height / 2) * zoomLevel;
 
   return { svgBox, centerX, centerY, zoomLevel };
 }

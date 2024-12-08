@@ -122,7 +122,6 @@ export const taiwan = {
 
       this.$nextTick(() => {
         this.moveMapInCenter();
-        // this.moveMap(this.mapGroup.node());
       });
     },
     initD3js() {
@@ -149,7 +148,7 @@ export const taiwan = {
         .duration(750)
         .call(
           this.zoom.transform,
-          d3.zoomIdentity.translate(translateX, translateY).scale(1)
+          d3.zoomIdentity.translate(translateX, translateY).scale(zoomLevel)
         );
     },
     getMapData(id) {
@@ -280,7 +279,7 @@ export const taiwan = {
       if (newDeep === 0) {
         this.moveMapInCenter();
       } else {
-        this.moveMap(currInfo.targetData, dom.node());
+        this.moveMap(currInfo.targetData);
       }
     },
     removeChild(newDeep, oldDeep) {
@@ -326,24 +325,23 @@ export const taiwan = {
       this.mapGroup.attr("transform", transform);
       this.mapGroup.attr("stroke-width", 1 / transform.k);
     },
-    moveMap(d, dom) {
+    moveMap(d) {
       const path = d3.geoPath();
       /**
        * (x0, y0) 可以代表左上或左下
        * (x1, y1) 可以代表右上或右下
        * 
        * x1 - x0 物件寬
-       * y1 - y0 五件高
+       * y1 - y0 物件高
        */
       const [[x0, y0], [x1, y1]] = path.bounds(d);
-      const { svgBox } = getBBoxCenter(this.mapGroup.node());
-
+      const { innerWidth, innerHeight } = window;
       // 计算新的 transform
       const scale = Math.min(
-        20,
-        0.9 / Math.max((x1 - x0) / svgBox.width, (y1 - y0) / svgBox.height)
+        30, // 最大縮放尺寸限制
+        0.9 / Math.max((x1 - x0) / innerWidth, (y1 - y0) / innerHeight)
       );
-      const { innerWidth, innerHeight } = window;
+
       const translateX = innerWidth / 2 - (scale * (x0 + x1)) / 2;
       const translateY = innerHeight / 2 - (scale * (y0 + y1)) / 2;
 
