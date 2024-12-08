@@ -144,7 +144,7 @@ export const taiwan = {
       // 应用过渡效果
       this.mapGroup
         .on("mousedown.zoom", () => null) //關閉拖拉事件
-        .on("touchmove.zoom", () => null) //關閉拖拉事件
+        .on("touchmove.zoom", () => null) //關閉拖拉事件(手機)
         .transition()
         .duration(750)
         .call(
@@ -226,7 +226,7 @@ export const taiwan = {
           if (!selectData.length) return "lightblue";
           return this.calauteSelectionRate(id, selectData);
         })
-        .attr("stroke-width", `0.1`)
+        .attr("stroke-width", `0.${ deep === 0 ? 3: 1 }`)
         .on("click", async (e, data) => {
           //因為要設定到下一層所以+1
           this.mapOnClick(deep + 1, data);
