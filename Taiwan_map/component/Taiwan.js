@@ -59,6 +59,8 @@ export const taiwan = {
       selectionInfo: {},
       zoom: null,
       init: true,
+      isWheel: false,
+      isMouseDown: false,
     };
   },
   watch: {
@@ -99,11 +101,15 @@ export const taiwan = {
           .append("g")
           .attr("class", "map-group")
           .attr("translate", "map")
-          .on("wheel", (e, data) => {
-            console.log("scroll");
-
-            this.setCenter(data);
+          .on("wheel", (e) => {
+            this.isWheel = true;
           });
+        // .on("mousedown", (e) => {
+        //   this.isMouseDown = true;
+        // })
+        // .on("mousemove", (event) => {
+        //   console.log("move");
+        // });
 
         this.countrySvg = this.mapGroup
           .append("g")
@@ -133,7 +139,7 @@ export const taiwan = {
       if (!this.zoom) {
         this.zoom = d3
           .zoom()
-          .scaleExtent([1, 8])
+          .scaleExtent([1, 30])
           .on("zoom", (d, data) => {
             this.zoomed(d, data);
           });
@@ -330,10 +336,28 @@ export const taiwan = {
     },
     zoomed(event) {
       const { transform } = event;
-      console.log("zoom", transform);
 
-      this.mapGroup.attr("transform", transform);
+      const { x, y, k } = transform;
+
+      if (this.isWheel) {
+        const dom = this.getDomFromDeep(this.deepVal);
+
+        const { translateX, translateY } = this.getCenter(dom.node());
+        this.mapGroup.attr(
+          "transform",
+          `translate(${translateX},${translateY}) scale(${transform.k})`
+        );
+      } else {
+        // this.mapGroup.attr("transform", transform);
+        this.mapGroup.attr(
+          "transform",
+          `translate(${x},${y}) scale(${transform.k})`
+        );
+      }
+
       this.mapGroup.attr("stroke-width", 1 / transform.k);
+      this.isWheel = false;
+      this.isMouseDown = false;
     },
     moveMap(data) {
       const path = d3.geoPath();
@@ -364,39 +388,31 @@ export const taiwan = {
           d3.zoomIdentity.translate(translateX, translateY).scale(scale)
         );
     },
-    setCenter() {
+    getCenter(dom) {
       // 获取元素的包围盒
-      const svgBox = this.mapGroup.node().getBBox();
-    
+      // const svgBox = this.mapGroup.node().getBBox();
+      const svgBox = dom.getBBox();
+
       // 获取当前变换矩阵
       const currentTransform = d3.zoomTransform(this.mapGroup.node());
       const currentScale = currentTransform.k; // 当前缩放值
-    
+
       // 计算包围盒中心点（未变换状态）
       const centerX = svgBox.x + svgBox.width / 2;
       const centerY = svgBox.y + svgBox.height / 2;
-    
+
       // 获取视口的中心点
       const { innerWidth, innerHeight } = window;
       const viewportCenterX = innerWidth / 2;
       const viewportCenterY = innerHeight / 2;
-    
+
       // 计算平移值
       const translateX = viewportCenterX - centerX * currentScale;
       const translateY = viewportCenterY - centerY * currentScale;
-    
-      console.log("translateX", translateX, "translateY", translateY, "scale", currentScale);
-    
-      // 应用过渡效果
-      this.mapGroup
-        .transition()
-        .duration(750)
-        .call(
-          this.zoom.transform,
-          d3.zoomIdentity.translate(translateX, translateY).scale(currentScale)
-        );
+
+      return { translateX, translateY };
     },
-    
+
     getDomFromDeep(deep) {
       const useDeep = deep === undefined ? this.deepVal : deep;
       switch (useDeep) {

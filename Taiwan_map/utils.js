@@ -60,7 +60,7 @@ export function getBBoxCenter(svg) {
   const svgBox = svg.getBBox();
 
   const { innerWidth, innerHeight } = window;
-  let scaleFactor = 0.9;
+  let scaleFactor = 0.7;
 
   if (innerWidth < 500) {
     scaleFactor = 0.6;
