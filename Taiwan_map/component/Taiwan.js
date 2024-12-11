@@ -65,6 +65,13 @@ export const taiwan = {
       init: true,
       isWheel: false,
       isMouseDown: false,
+      startX: 0,
+      startY: 0,
+      moveStatus: {
+        x: 0,
+        y: 0,
+        k: 0,
+      },
     };
   },
   watch: {
@@ -107,13 +114,61 @@ export const taiwan = {
           .attr("translate", "map")
           .on("wheel", (e) => {
             this.isWheel = true;
-          });
+          })
+          .call(
+            d3
+              .drag()
+              .on("start", (event) => {
+                // console.log("startX", this.startX, "startY", this.startY);
+                this.startX = event.x;
+                this.startY = event.y;
+                const { x, y, k } = d3.zoomTransform(this.mapGroup.node());
+
+                this.moveStatus = {
+                  x,
+                  y,
+                  k,
+                };
+                // console.log("moveStatus 1", this.moveStatus);
+                console.log("x", x);
+              })
+              .on("drag", (event) => {
+                // console.log("eventX", event.x, "eventY", event.y);
+                const dx = event.x - this.startX;
+                const dy = event.y - this.startY;
+                const currentTransform = d3.zoomTransform(this.mapGroup.node());
+                const currentScale = currentTransform.k; // 当前缩放值
+
+                this.mapGroup.attr(
+                  "transform",
+                  `translate(${this.moveStatus.x + dx}, ${
+                    this.moveStatus.y + dy
+                  }) scale(${currentScale})`
+                );
+                console.log("this.moveStatus.x + dx", this.moveStatus.x + dx);
+                const newTransform = d3.zoomIdentity
+                  .translate(this.moveStatus.x + dx, this.moveStatus.y + dy)
+                  .scale(currentScale);
+
+                this.mapGroup.call(this.zoom.transform, newTransform);
+              })
+              .on("end", (event) => {
+                // this.moveStatus.x = this.moveStatus.x + event.x;
+                // this.moveStatus.y = event.y;
+                // console.log("end", "eventX", event.x, "eventY", event.y);
+                // console.log("moveStatus 2", this.moveStatus);
+              })
+          );
         // .on("mousedown", (e) => {
-        //   this.isMouseDown = true;
+        //   // this.isMouseDown = true;
+        //   console.log("mousedown");
         // })
         // .on("mousemove", (event) => {
         //   console.log("move");
-        // });
+        // })
+        // .on("mouseup", () => {
+        //   console.log("mouseup");
+        // })
 
         this.countrySvg = this.mapGroup
           .append("g")

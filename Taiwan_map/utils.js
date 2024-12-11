@@ -79,10 +79,7 @@ export function getBBoxCenter(svg) {
 }
 
 export function getPartyColorBySupport(party, support) {
-  // support = Math.floor(support / 100);
   if (party === 2) {
-    console.log("support", support);
-
     if (support < 40) return "rgb(88, 220, 152)";
     else if (support < 60) return "rgb(49, 198, 114)";
     else return "rgb(39, 174, 97)";
