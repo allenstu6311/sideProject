@@ -1,4 +1,8 @@
-import { assignValue, getBBoxCenter } from "../utils.js";
+import {
+  assignValue,
+  getBBoxCenter,
+  getPartyColorBySupport,
+} from "../utils.js";
 
 export const taiwan = {
   props: {
@@ -491,8 +495,10 @@ export const taiwan = {
 
       if (max === 0) return "lightblue";
       if (max === cand_1) return "#00ffff";
-      if (max === cand_2) return "rgb(118, 231, 176)";
-      if (max === cand_3) return "rgb(118, 175, 237)";
+      if (max === cand_2)
+        return getPartyColorBySupport(2, (cand_2 / data.length).toFixed(2));
+      if (max === cand_3)
+        return getPartyColorBySupport(3, (cand_3 / data.length).toFixed(2));
     },
   },
   mounted() {

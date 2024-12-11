@@ -77,3 +77,20 @@ export function getBBoxCenter(svg) {
 
   return { svgBox, centerX, centerY, zoomLevel };
 }
+
+export function getPartyColorBySupport(party, support) {
+  // support = Math.floor(support / 100);
+  if (party === 2) {
+    console.log("support", support);
+
+    if (support < 40) return "rgb(88, 220, 152)";
+    else if (support < 60) return "rgb(49, 198, 114)";
+    else return "rgb(39, 174, 97)";
+  }
+
+  if (party === 3) {
+    if (support < 40) return "rgb(127, 182, 238)";
+    else if (support < 50) return "rgb(112, 171, 236)";
+    else return "rgb(56, 112, 189)";
+  }
+}
