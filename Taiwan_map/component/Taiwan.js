@@ -113,7 +113,7 @@ export const taiwan = {
           .on("mousedown.zoom", () => null) //關閉拖拉事件
           .on("touchmove.zoom", () => null) //關閉拖拉事件(手機)
           .on("wheel", (e, data) => {
-            console.log("d3Svg wheel");
+            console.log("d3Svg wheel", e.target);
 
             const dom = this.getDomFromDeep(this.deepVal);
             const { translateX, translateY } = getTransform(
@@ -126,7 +126,7 @@ export const taiwan = {
           .call(
             d3
               .drag()
-              .on("start", () => {
+              .on("start", (event) => {
                 console.log("d3Svg start");
                 this.startX = event.x;
                 this.startY = event.y;
@@ -156,7 +156,7 @@ export const taiwan = {
           .attr("class", "map-group")
           .attr("translate", "map")
           .on("wheel", (e, data) => {
-            console.log("mapGroup wheel");
+            console.log("mapGroup wheel", e.target);
             const dom = this.getDomFromDeep(this.deepVal);
             const { translateX, translateY } = getTransform(
               dom.node(),
@@ -415,6 +415,8 @@ export const taiwan = {
     //   return { translateX, translateY, zoomLevel };
     // },
     zoomed(event) {
+      // console.log(event);
+
       const { transform } = event;
       const { x, y, k } = transform;
       // console.log("zoomed", x);
