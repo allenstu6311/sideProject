@@ -110,65 +110,41 @@ export const taiwan = {
         this.d3Svg = d3.select(svg);
         this.mapGroup = this.d3Svg
           .append("g")
+          .on("mousedown.zoom", () => null) //關閉拖拉事件
+          .on("touchmove.zoom", () => null) //關閉拖拉事件(手機)
           .attr("class", "map-group")
           .attr("translate", "map")
-          .on("wheel", (e) => {
+          .on("wheel", (e, data) => {
+            const dom = this.getDomFromDeep(this.deepVal);
+            const { translateX, translateY } = this.getCenter(dom.node());
+            this.updateMoveGrap(translateX, translateY);
             this.isWheel = true;
           })
           .call(
             d3
               .drag()
               .on("start", (event) => {
-                // console.log("startX", this.startX, "startY", this.startY);
                 this.startX = event.x;
                 this.startY = event.y;
                 const { x, y, k } = d3.zoomTransform(this.mapGroup.node());
-
-                this.moveStatus = {
-                  x,
-                  y,
-                  k,
-                };
-                // console.log("moveStatus 1", this.moveStatus);
-                console.log("x", x);
+                this.moveStatus = { x, y, k };
               })
               .on("drag", (event) => {
-                // console.log("eventX", event.x, "eventY", event.y);
+                if (this.deepVal < 1) return;
                 const dx = event.x - this.startX;
                 const dy = event.y - this.startY;
                 const currentTransform = d3.zoomTransform(this.mapGroup.node());
                 const currentScale = currentTransform.k; // 当前缩放值
+                const translateX = this.moveStatus.x + dx;
+                const translateY = this.moveStatus.y + dy;
 
                 this.mapGroup.attr(
                   "transform",
-                  `translate(${this.moveStatus.x + dx}, ${
-                    this.moveStatus.y + dy
-                  }) scale(${currentScale})`
+                  `translate(${translateX}, ${translateY}) scale(${currentScale})`
                 );
-                console.log("this.moveStatus.x + dx", this.moveStatus.x + dx);
-                const newTransform = d3.zoomIdentity
-                  .translate(this.moveStatus.x + dx, this.moveStatus.y + dy)
-                  .scale(currentScale);
-
-                this.mapGroup.call(this.zoom.transform, newTransform);
-              })
-              .on("end", (event) => {
-                // this.moveStatus.x = this.moveStatus.x + event.x;
-                // this.moveStatus.y = event.y;
-                // console.log("end", "eventX", event.x, "eventY", event.y);
-                // console.log("moveStatus 2", this.moveStatus);
+                this.updateMoveGrap(translateX, translateY);
               })
           );
-        // .on("mousedown", (e) => {
-        //   // this.isMouseDown = true;
-        //   console.log("mousedown");
-        // })
-        // .on("mousemove", (event) => {
-        //   console.log("move");
-        // })
-        // .on("mouseup", () => {
-        //   console.log("mouseup");
-        // })
 
         this.countrySvg = this.mapGroup
           .append("g")
@@ -216,10 +192,8 @@ export const taiwan = {
 
       // 应用过渡效果
       this.mapGroup
-        .on("mousedown.zoom", () => null) //關閉拖拉事件
-        .on("touchmove.zoom", () => null) //關閉拖拉事件(手機)
         .transition()
-        .duration(750)
+        .duration(500)
         .call(
           this.zoom.transform,
           d3.zoomIdentity.translate(translateX, translateY).scale(zoomLevel)
@@ -346,7 +320,6 @@ export const taiwan = {
         this.$emit("getLocationData", currInfo);
       }
 
-      const dom = this.getDomFromDeep(newDeep);
       if (newDeep < 3) {
         this.appendMap(newDeep, currInfo.id);
       }
@@ -375,33 +348,34 @@ export const taiwan = {
         }
       }
     },
-    getMoveRange(dom) {
-      const {
-        centerX: pathCenterX,
-        centerY: pathCenterY,
-        zoomLevel,
-      } = getBBoxCenter(dom);
+    // getMoveRange(dom) {
+    //   const {
+    //     centerX: pathCenterX,
+    //     centerY: pathCenterY,
+    //     zoomLevel,
+    //   } = getBBoxCenter(dom);
 
-      // viewBox
-      const svgSize = this.d3Svg.node().getAttribute("viewBox").split(" ");
-      const svgWidth = svgSize[2];
-      const svgHeight = svgSize[3];
+    //   // viewBox
+    //   const svgSize = this.d3Svg.node().getAttribute("viewBox").split(" ");
+    //   const svgWidth = svgSize[2];
+    //   const svgHeight = svgSize[3];
 
-      // 將目標 path 的中心點移動到 SVG 可視區域的中心
-      const translateX = svgWidth / 2 - pathCenterX * zoomLevel;
-      const translateY = svgHeight / 2 - pathCenterY * zoomLevel;
+    //   // 將目標 path 的中心點移動到 SVG 可視區域的中心
+    //   const translateX = svgWidth / 2 - pathCenterX * zoomLevel;
+    //   const translateY = svgHeight / 2 - pathCenterY * zoomLevel;
 
-      return { translateX, translateY, zoomLevel };
-    },
+    //   return { translateX, translateY, zoomLevel };
+    // },
     zoomed(event) {
       const { transform } = event;
-
       const { x, y, k } = transform;
+      // console.log("zoomed", x);
 
       if (this.isWheel) {
         const dom = this.getDomFromDeep(this.deepVal);
-
         const { translateX, translateY } = this.getCenter(dom.node());
+        console.log("translateX", translateX);
+
         this.mapGroup.attr(
           "transform",
           `translate(${translateX},${translateY}) scale(${transform.k})`
@@ -416,7 +390,6 @@ export const taiwan = {
 
       this.mapGroup.attr("stroke-width", 1 / transform.k);
       this.isWheel = false;
-      this.isMouseDown = false;
     },
     moveMap(data) {
       const path = d3.geoPath();
@@ -471,7 +444,17 @@ export const taiwan = {
 
       return { translateX, translateY };
     },
+    // 觸發移動與更新transform
+    updateMoveGrap(translateX, translateY, scale) {
+      const currentTransform = d3.zoomTransform(this.mapGroup.node());
+      const currentScale = currentTransform.k; // 当前缩放值
+      const k = scale ? scale : currentScale;
 
+      this.mapGroup.call(
+        this.zoom.transform,
+        d3.zoomIdentity.translate(translateX, translateY).scale(k)
+      );
+    },
     getDomFromDeep(deep) {
       const useDeep = deep === undefined ? this.deepVal : deep;
       switch (useDeep) {

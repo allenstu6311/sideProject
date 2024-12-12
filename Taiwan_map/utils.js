@@ -68,8 +68,8 @@ export function getBBoxCenter(svg) {
     scaleFactor = 0.7;
   }
 
-  const scaleX = window.innerHeight / svgBox.width;
-  const scaleY = window.innerHeight / svgBox.height;
+  const scaleX = innerWidth / svgBox.width;
+  const scaleY = innerHeight / svgBox.height;
   const zoomLevel = Math.min(scaleX, scaleY) * scaleFactor; // 選擇較小的縮放比例
 
   const centerX = (svgBox.x + svgBox.width / 2) * zoomLevel;
@@ -91,3 +91,31 @@ export function getPartyColorBySupport(party, support) {
     else return "rgb(56, 112, 189)";
   }
 }
+
+export function getTransform(svg) {
+  const { innerWidth, innerHeight } = window;
+
+  const svgBox = svg.getBBox();
+  const centerX = svgBox.x + svgBox.width / 2;
+  const centerY = svgBox.y + svgBox.height / 2;
+
+  // 计算平移值
+  const translateX = innerWidth / 2 - centerX;
+  const translateY = innerHeight / 2 - centerY;
+
+  return { translateX, translateY };
+}
+
+/**
+ * 需要計算translateX, translateY
+ *
+ * moveMap
+ * getCenter
+ * zoomed
+ * moveMapInCenter
+ * drag
+ *
+ * 需要更新 mapfroup
+ * moveMapInCenter
+ * moveMap
+ */
