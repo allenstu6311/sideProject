@@ -2,6 +2,7 @@ import {
   assignValue,
   getBBoxCenter,
   getPartyColorBySupport,
+  getTransform,
 } from "../utils.js";
 
 export const taiwan = {
@@ -107,7 +108,47 @@ export const taiwan = {
       );
 
       if (init) {
-        this.d3Svg = d3.select(svg);
+        this.d3Svg = d3
+          .select(svg)
+          .on("mousedown.zoom", () => null) //關閉拖拉事件
+          .on("touchmove.zoom", () => null) //關閉拖拉事件(手機)
+          .on("wheel", (e, data) => {
+            console.log("d3Svg wheel");
+
+            const dom = this.getDomFromDeep(this.deepVal);
+            const { translateX, translateY } = getTransform(
+              dom.node(),
+              this.getZoomRatio()
+            );
+            this.updateMoveGrap(translateX, translateY);
+            this.isWheel = true;
+          })
+          .call(
+            d3
+              .drag()
+              .on("start", () => {
+                console.log("d3Svg start");
+                this.startX = event.x;
+                this.startY = event.y;
+                const { x, y, k } = d3.zoomTransform(this.mapGroup.node());
+                this.moveStatus = { x, y, k };
+              })
+              .on("drag", (event) => {
+                console.log("d3Svg drag");
+                if (this.deepVal < 1) return;
+                const dx = event.x - this.startX;
+                const dy = event.y - this.startY;
+                const translateX = this.moveStatus.x + dx;
+                const translateY = this.moveStatus.y + dy;
+
+                this.mapGroup.attr(
+                  "transform",
+                  `translate(${translateX}, ${translateY}) scale(${this.getZoomRatio()})`
+                );
+                this.updateMoveGrap(translateX, translateY);
+              })
+          );
+
         this.mapGroup = this.d3Svg
           .append("g")
           .on("mousedown.zoom", () => null) //關閉拖拉事件
@@ -115,8 +156,12 @@ export const taiwan = {
           .attr("class", "map-group")
           .attr("translate", "map")
           .on("wheel", (e, data) => {
+            console.log("mapGroup wheel");
             const dom = this.getDomFromDeep(this.deepVal);
-            const { translateX, translateY } = this.getCenter(dom.node());
+            const { translateX, translateY } = getTransform(
+              dom.node(),
+              this.getZoomRatio()
+            );
             this.updateMoveGrap(translateX, translateY);
             this.isWheel = true;
           })
@@ -130,17 +175,16 @@ export const taiwan = {
                 this.moveStatus = { x, y, k };
               })
               .on("drag", (event) => {
+                console.log("mapGroup drag");
                 if (this.deepVal < 1) return;
                 const dx = event.x - this.startX;
                 const dy = event.y - this.startY;
-                const currentTransform = d3.zoomTransform(this.mapGroup.node());
-                const currentScale = currentTransform.k; // 当前缩放值
                 const translateX = this.moveStatus.x + dx;
                 const translateY = this.moveStatus.y + dy;
 
                 this.mapGroup.attr(
                   "transform",
-                  `translate(${translateX}, ${translateY}) scale(${currentScale})`
+                  `translate(${translateX}, ${translateY}) scale(${this.getZoomRatio()})`
                 );
                 this.updateMoveGrap(translateX, translateY);
               })
@@ -180,15 +224,19 @@ export const taiwan = {
           });
 
         this.mapGroup.call(this.zoom);
+        this.d3Svg.call(this.zoom);
       }
     },
+    // 取得當前縮放值
+    getZoomRatio() {
+      const currentTransform = d3.zoomTransform(this.mapGroup.node());
+      const currentScale = currentTransform.k; // 当前缩放值
+      return currentScale;
+    },
     moveMapInCenter() {
-      const { centerX, centerY, zoomLevel } = getBBoxCenter(
-        this.mapGroup.node()
-      );
-      const { innerWidth, innerHeight } = window;
-      const translateX = innerWidth / 2 - centerX;
-      const translateY = innerHeight / 2 - centerY;
+      const dom = this.mapGroup.node();
+      const { zoomLevel } = getBBoxCenter(this.mapGroup.node());
+      const { translateX, translateY } = getTransform(dom, zoomLevel);
 
       // 应用过渡效果
       this.mapGroup
@@ -373,8 +421,7 @@ export const taiwan = {
 
       if (this.isWheel) {
         const dom = this.getDomFromDeep(this.deepVal);
-        const { translateX, translateY } = this.getCenter(dom.node());
-        console.log("translateX", translateX);
+        const { translateX, translateY } = getTransform(dom.node(), k);
 
         this.mapGroup.attr(
           "transform",
@@ -420,35 +467,32 @@ export const taiwan = {
           d3.zoomIdentity.translate(translateX, translateY).scale(scale)
         );
     },
-    getCenter(dom) {
-      // 获取元素的包围盒
-      // const svgBox = this.mapGroup.node().getBBox();
-      const svgBox = dom.getBBox();
+    // getCenter(dom) {
+    //   // 获取元素的包围盒
+    //   // const svgBox = this.mapGroup.node().getBBox();
+    //   const svgBox = dom.getBBox();
 
-      // 获取当前变换矩阵
-      const currentTransform = d3.zoomTransform(this.mapGroup.node());
-      const currentScale = currentTransform.k; // 当前缩放值
+    //   // 获取当前变换矩阵
+    //   const currentScale = this.getZoomRatio(); // 当前缩放值
 
-      // 计算包围盒中心点（未变换状态）
-      const centerX = svgBox.x + svgBox.width / 2;
-      const centerY = svgBox.y + svgBox.height / 2;
+    //   // 计算包围盒中心点（未变换状态）
+    //   const centerX = svgBox.x + svgBox.width / 2;
+    //   const centerY = svgBox.y + svgBox.height / 2;
 
-      // 获取视口的中心点
-      const { innerWidth, innerHeight } = window;
-      const viewportCenterX = innerWidth / 2;
-      const viewportCenterY = innerHeight / 2;
+    //   // 获取视口的中心点
+    //   const { innerWidth, innerHeight } = window;
+    //   const viewportCenterX = innerWidth / 2;
+    //   const viewportCenterY = innerHeight / 2;
 
-      // 计算平移值
-      const translateX = viewportCenterX - centerX * currentScale;
-      const translateY = viewportCenterY - centerY * currentScale;
+    //   // 计算平移值
+    //   const translateX = viewportCenterX - centerX * currentScale;
+    //   const translateY = viewportCenterY - centerY * currentScale;
 
-      return { translateX, translateY };
-    },
+    //   return { translateX, translateY };
+    // },
     // 觸發移動與更新transform
     updateMoveGrap(translateX, translateY, scale) {
-      const currentTransform = d3.zoomTransform(this.mapGroup.node());
-      const currentScale = currentTransform.k; // 当前缩放值
-      const k = scale ? scale : currentScale;
+      const k = scale ? scale : this.getZoomRatio();
 
       this.mapGroup.call(
         this.zoom.transform,

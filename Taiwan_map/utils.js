@@ -92,12 +92,12 @@ export function getPartyColorBySupport(party, support) {
   }
 }
 
-export function getTransform(svg) {
+export function getTransform(svg, scale = 1) {
   const { innerWidth, innerHeight } = window;
 
   const svgBox = svg.getBBox();
-  const centerX = svgBox.x + svgBox.width / 2;
-  const centerY = svgBox.y + svgBox.height / 2;
+  const centerX = (svgBox.x + svgBox.width / 2) * scale;
+  const centerY = (svgBox.y + svgBox.height / 2) * scale;
 
   // 计算平移值
   const translateX = innerWidth / 2 - centerX;
@@ -109,10 +109,9 @@ export function getTransform(svg) {
 /**
  * 需要計算translateX, translateY
  *
- * moveMap
- * getCenter
- * zoomed
- * moveMapInCenter
+ * moveMap X
+ * zoomed X
+ * moveMapInCenter O
  * drag
  *
  * 需要更新 mapfroup
