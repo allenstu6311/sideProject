@@ -58,6 +58,7 @@ export const taiwan = {
       villageSvg: "",
       areaData: "",
       villageData: "",
+      villageDataList:{},
       isMapClick: false,
       maxDeep: 3,
       selectionData: [],
@@ -179,11 +180,17 @@ export const taiwan = {
     getMapData(id) {
       let url = "./data/topoJson/towns-mercator.json";
       if (id) {
+        if(this.villageDataList[id]) return this.villageDataList[id];
         url = `./data/topoJson/tw-village/${id}.json`;
       }
+      this.$emit("update:loading", true);
       return fetch(url)
         .then((res) => res.json())
         .then((data) => {
+          if(id){
+            this.villageDataList[id] = data;
+          }
+          this.$emit("update:loading", false);
           return data || {};
         });
     },
