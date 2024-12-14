@@ -102,27 +102,16 @@ export const taiwan = {
     async initMap(init) {
       const { svg } = this.$refs;
       const { innerWidth, innerHeight } = window;
-      svg.setAttribute(
-        "viewBox",
-        `0 0 ${innerWidth > 400 ? innerWidth : 400} ${innerHeight}`
-      );
+      // svg.setAttribute(
+      //   "viewBox",
+      //   `0 0 ${innerWidth > 400 ? innerWidth : 400} ${innerHeight}`
+      // );
 
       if (init) {
         this.d3Svg = d3
           .select(svg)
           .on("mousedown.zoom", () => null) //關閉拖拉事件
           .on("touchmove.zoom", () => null) //關閉拖拉事件(手機)
-          .on("wheel", (e, data) => {
-            console.log("d3Svg wheel", e.target);
-
-            const dom = this.getDomFromDeep(this.deepVal);
-            const { translateX, translateY } = getTransform(
-              dom.node(),
-              this.getZoomRatio()
-            );
-            this.updateMoveGrap(translateX, translateY);
-            this.isWheel = true;
-          })
           .call(
             d3
               .drag()
@@ -155,16 +144,6 @@ export const taiwan = {
           .on("touchmove.zoom", () => null) //關閉拖拉事件(手機)
           .attr("class", "map-group")
           .attr("translate", "map")
-          .on("wheel", (e, data) => {
-            console.log("mapGroup wheel", e.target);
-            const dom = this.getDomFromDeep(this.deepVal);
-            const { translateX, translateY } = getTransform(
-              dom.node(),
-              this.getZoomRatio()
-            );
-            this.updateMoveGrap(translateX, translateY);
-            this.isWheel = true;
-          })
           .call(
             d3
               .drag()
@@ -220,10 +199,12 @@ export const taiwan = {
           .zoom()
           .scaleExtent([1, 30])
           .on("zoom", (d, data) => {
+            // console.log('d',d);
+
             this.zoomed(d, data);
           });
 
-        this.mapGroup.call(this.zoom);
+        // this.mapGroup.call(this.zoom);
         this.d3Svg.call(this.zoom);
       }
     },
@@ -239,13 +220,19 @@ export const taiwan = {
       const { translateX, translateY } = getTransform(dom, zoomLevel);
 
       // 应用过渡效果
-      this.mapGroup
+      this.d3Svg
         .transition()
         .duration(500)
         .call(
           this.zoom.transform,
           d3.zoomIdentity.translate(translateX, translateY).scale(zoomLevel)
         );
+
+      this.moveStatus = {
+        x: translateX,
+        y: translateY,
+        k: zoomLevel,
+      };
     },
     getMapData(id) {
       let url = "./data/topoJson/towns-mercator.json";
@@ -416,26 +403,9 @@ export const taiwan = {
     // },
     zoomed(event) {
       // console.log(event);
-
       const { transform } = event;
       const { x, y, k } = transform;
-      // console.log("zoomed", x);
-
-      if (this.isWheel) {
-        const dom = this.getDomFromDeep(this.deepVal);
-        const { translateX, translateY } = getTransform(dom.node(), k);
-
-        this.mapGroup.attr(
-          "transform",
-          `translate(${translateX},${translateY}) scale(${transform.k})`
-        );
-      } else {
-        // this.mapGroup.attr("transform", transform);
-        this.mapGroup.attr(
-          "transform",
-          `translate(${x},${y}) scale(${transform.k})`
-        );
-      }
+      this.mapGroup.attr("transform", `translate(${x},${y}) scale(${k})`);
 
       this.mapGroup.attr("stroke-width", 1 / transform.k);
       this.isWheel = false;
@@ -461,7 +431,7 @@ export const taiwan = {
       const translateY = innerHeight / 2 - (scale * (y0 + y1)) / 2;
 
       // 应用过渡效果
-      this.mapGroup
+      this.d3Svg
         .transition()
         .duration(500)
         .call(
@@ -496,7 +466,7 @@ export const taiwan = {
     updateMoveGrap(translateX, translateY, scale) {
       const k = scale ? scale : this.getZoomRatio();
 
-      this.mapGroup.call(
+      this.d3Svg.call(
         this.zoom.transform,
         d3.zoomIdentity.translate(translateX, translateY).scale(k)
       );
@@ -596,5 +566,5 @@ export const taiwan = {
     });
   },
   template: `
-  <svg class="tw-geo svelte-ul8skc" viewBox="0 0 960 910" ref="svg" preserveAspectRatio="xMidYMid meet"></svg>`,
+  <svg class="tw-geo svelte-ul8skc"  ref="svg" ></svg>`,
 };
