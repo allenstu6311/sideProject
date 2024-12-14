@@ -111,8 +111,10 @@ export const taiwan = {
         this.d3Svg = d3
           .select(svg)
           .on("mousedown.zoom", () => null) //關閉拖拉事件
-          .on("touchmove", () => {
+          .on("touchmove", (e) => {
             console.log('touch');
+
+            e.preventDefault()
             
           }) 
           // .call(
@@ -202,12 +204,11 @@ export const taiwan = {
           .zoom()
           .scaleExtent([1, 30])
           .on("zoom", (d, data) => {
-            // console.log('d',d);
-
-            this.zoomed(d, data);
+            if(this.init || this.deepVal > 0){
+              this.zoomed(d, data);
+            }
           });
 
-        // this.mapGroup.call(this.zoom);
         this.d3Svg.call(this.zoom);
       }
     },
@@ -230,12 +231,6 @@ export const taiwan = {
           this.zoom.transform,
           d3.zoomIdentity.translate(translateX, translateY).scale(zoomLevel)
         );
-
-      this.moveStatus = {
-        x: translateX,
-        y: translateY,
-        k: zoomLevel,
-      };
     },
     getMapData(id) {
       let url = "./data/topoJson/towns-mercator.json";
@@ -409,7 +404,6 @@ export const taiwan = {
       const { transform } = event;
       const { x, y, k } = transform;
       this.mapGroup.attr("transform", `translate(${x},${y}) scale(${k})`);
-
       this.mapGroup.attr("stroke-width", 1 / transform.k);
       this.isWheel = false;
     },
