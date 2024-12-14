@@ -141,7 +141,7 @@ export const taiwan = {
         this.mapGroup = this.d3Svg
           .append("g")
           .on("mousedown.zoom", () => null) //關閉拖拉事件
-          .on("touchmove.zoom", () => null) //關閉拖拉事件(手機)
+          // .on("touchmove.zoom", () => null) //關閉拖拉事件(手機)
           .attr("class", "map-group")
           .attr("translate", "map")
           // .call(
