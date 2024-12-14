@@ -64,16 +64,9 @@ export const taiwan = {
       selectionData: [],
       selectionInfo: {},
       zoom: null,
-      init: true,
-      isWheel: false,
       isMouseDown: false,
-      startX: 0,
-      startY: 0,
-      moveStatus: {
-        x: 0,
-        y: 0,
-        k: 0,
-      },
+      allowZoom: true,
+      maxDeep:0,
     };
   },
   watch: {
@@ -106,11 +99,9 @@ export const taiwan = {
       if (init) {
         this.d3Svg = d3
           .select(svg)
-          .on("mousedown.zoom", () => null) //關閉拖拉事件
 
         this.mapGroup = this.d3Svg
           .append("g")
-          .on("mousedown.zoom", () => null) //關閉拖拉事件
           .attr("class", "map-group")
           .attr("translate", "map")
 
@@ -133,10 +124,6 @@ export const taiwan = {
         this.appendMap(0);
       }
       this.moveMapInCenter();
-
-      this.$nextTick(() => {
-        this.$emit("update:loading", false);
-      });
     },
     initD3js() {
       if (!this.zoom) {
@@ -144,19 +131,20 @@ export const taiwan = {
           .zoom()
           .scaleExtent([1, 30])
           .on("zoom", (d, data) => {
-            if(this.init || this.deepVal > 0){
+            if(this.deepVal > 0 || this.allowZoom){
               this.zoomed(d, data);
             }
+           
           });
 
         this.d3Svg.call(this.zoom);
       }
     },
-    // 取得當前縮放值
-    getZoomRatio() {
-      const currentTransform = d3.zoomTransform(this.mapGroup.node());
-      const currentScale = currentTransform.k; // 当前缩放值
-      return currentScale;
+    zoomed(event) {
+      const { transform } = event;
+      const { x, y, k } = transform;
+      this.mapGroup.attr("transform", `translate(${x},${y}) scale(${k})`);
+      this.mapGroup.attr("stroke-width", 1 / transform.k);
     },
     moveMapInCenter() {
       const dom = this.mapGroup.node();
@@ -170,7 +158,10 @@ export const taiwan = {
         .call(
           this.zoom.transform,
           d3.zoomIdentity.translate(translateX, translateY).scale(zoomLevel)
-        );
+        ).on('end',()=>{
+          this.allowZoom = false;
+          this.$emit("update:loading", false);
+        })     
     },
     getMapData(id) {
       let url = "./data/topoJson/towns-mercator.json";
@@ -285,24 +276,21 @@ export const taiwan = {
       const currInfo = this.getInfoFromDeep(deep);
       Object.assign(currInfo, await assignValue(id, deep));
       currInfo.targetData = this.getFeatureById(deep - DATA_INDEX, id, "find");
-      this.$emit("getLocationData", currInfo);
     },
     updateDeepVal(newDeep, oldDeep) {
+      // console.log('newDeep',newDeep,'oldDeep',oldDeep);
       if (newDeep > 0 || oldDeep > newDeep) {
         this.removeChild(newDeep, oldDeep);
       }
-
       const currInfo = this.getInfoFromDeep(newDeep);
       this.focusMap();
+      this.$emit("getLocationData", currInfo);
 
-      if (!this.isMapClick) {
-        this.$emit("getLocationData", currInfo);
-      }
-
-      if (newDeep < 3) {
+      if (newDeep < 3) {        
         this.appendMap(newDeep, currInfo.id);
       }
       if (newDeep === 0) {
+        this.allowZoom = true;
         this.moveMapInCenter();
       } else {
         this.moveMap(currInfo.targetData);
@@ -310,30 +298,25 @@ export const taiwan = {
     },
     removeChild(newDeep, oldDeep) {
       if (newDeep === 3 && oldDeep === 3) return;
+
+      const delNode = (deep)=>{
+        const dom = this.getDomFromDeep(deep);        
+        dom.selectAll("path").remove();
+      }
       if (newDeep === oldDeep) {
         // 同層移動
-        const dom = this.getDomFromDeep(newDeep);
-        dom.selectAll("path").remove();
+        delNode(newDeep);
       } else if (oldDeep > newDeep) {
         /**
-         * 子層的點擊需要清空兩層，父
+         * 不同層移動(里=>縣 or 區=>里)
+         * 子層的點擊需要全部清空，父
          * 層的點擊僅須返回一層
          */
-        // 跨縣市移動
         while (oldDeep > newDeep) {
-          const dom = this.getDomFromDeep(oldDeep);
-          dom.selectAll("path").remove();
+          delNode(oldDeep);
           oldDeep--;
         }
       }
-    },
-    zoomed(event) {
-      // console.log(event);
-      const { transform } = event;
-      const { x, y, k } = transform;
-      this.mapGroup.attr("transform", `translate(${x},${y}) scale(${k})`);
-      this.mapGroup.attr("stroke-width", 1 / transform.k);
-      this.isWheel = false;
     },
     moveMap(data) {
       const path = d3.geoPath();
@@ -458,6 +441,5 @@ export const taiwan = {
       this.initD3js();      
     });
   },
-  template: `
-  <svg class="tw-geo svelte-ul8skc"  ref="svg" ></svg>`,
+  template: `<svg ref="svg" ></svg>`,
 };
