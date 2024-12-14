@@ -102,11 +102,6 @@ export const taiwan = {
   methods: {
     async initMap(init) {
       const { svg } = this.$refs;
-      const { innerWidth, innerHeight } = window;
-      // svg.setAttribute(
-      //   "viewBox",
-      //   `0 0 ${innerWidth > 400 ? innerWidth : 400} ${innerHeight}`
-      // );
 
       if (init) {
         this.d3Svg = d3
@@ -135,12 +130,12 @@ export const taiwan = {
         for (let i = 0; i < counties.geometries.length; i++) {
           await this.getSelectionData(counties.geometries[i].id);
         }
-        this.$emit("update:loading", false);
         this.appendMap(0);
       }
+      this.moveMapInCenter();
 
       this.$nextTick(() => {
-        this.moveMapInCenter();
+        this.$emit("update:loading", false);
       });
     },
     initD3js() {
@@ -332,24 +327,6 @@ export const taiwan = {
         }
       }
     },
-    // getMoveRange(dom) {
-    //   const {
-    //     centerX: pathCenterX,
-    //     centerY: pathCenterY,
-    //     zoomLevel,
-    //   } = getBBoxCenter(dom);
-
-    //   // viewBox
-    //   const svgSize = this.d3Svg.node().getAttribute("viewBox").split(" ");
-    //   const svgWidth = svgSize[2];
-    //   const svgHeight = svgSize[3];
-
-    //   // 將目標 path 的中心點移動到 SVG 可視區域的中心
-    //   const translateX = svgWidth / 2 - pathCenterX * zoomLevel;
-    //   const translateY = svgHeight / 2 - pathCenterY * zoomLevel;
-
-    //   return { translateX, translateY, zoomLevel };
-    // },
     zoomed(event) {
       // console.log(event);
       const { transform } = event;
@@ -386,38 +363,6 @@ export const taiwan = {
           this.zoom.transform,
           d3.zoomIdentity.translate(translateX, translateY).scale(scale)
         );
-    },
-    // getCenter(dom) {
-    //   // 获取元素的包围盒
-    //   // const svgBox = this.mapGroup.node().getBBox();
-    //   const svgBox = dom.getBBox();
-
-    //   // 获取当前变换矩阵
-    //   const currentScale = this.getZoomRatio(); // 当前缩放值
-
-    //   // 计算包围盒中心点（未变换状态）
-    //   const centerX = svgBox.x + svgBox.width / 2;
-    //   const centerY = svgBox.y + svgBox.height / 2;
-
-    //   // 获取视口的中心点
-    //   const { innerWidth, innerHeight } = window;
-    //   const viewportCenterX = innerWidth / 2;
-    //   const viewportCenterY = innerHeight / 2;
-
-    //   // 计算平移值
-    //   const translateX = viewportCenterX - centerX * currentScale;
-    //   const translateY = viewportCenterY - centerY * currentScale;
-
-    //   return { translateX, translateY };
-    // },
-    // 觸發移動與更新transform
-    updateMoveGrap(translateX, translateY, scale) {
-      const k = scale ? scale : this.getZoomRatio();
-
-      this.d3Svg.call(
-        this.zoom.transform,
-        d3.zoomIdentity.translate(translateX, translateY).scale(k)
-      );
     },
     getDomFromDeep(deep) {
       const useDeep = deep === undefined ? this.deepVal : deep;
