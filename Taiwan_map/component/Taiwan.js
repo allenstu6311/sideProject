@@ -58,7 +58,7 @@ export const taiwan = {
       villageSvg: "",
       areaData: "",
       villageData: "",
-      villageDataList:{},
+      villageDataList: {},
       isMapClick: false,
       maxDeep: 3,
       selectionData: [],
@@ -66,7 +66,7 @@ export const taiwan = {
       zoom: null,
       isMouseDown: false,
       allowZoom: true,
-      maxDeep:0,
+      maxDeep: 0,
     };
   },
   watch: {
@@ -97,13 +97,12 @@ export const taiwan = {
       const { svg } = this.$refs;
 
       if (init) {
-        this.d3Svg = d3
-          .select(svg)
+        this.d3Svg = d3.select(svg);
 
         this.mapGroup = this.d3Svg
           .append("g")
           .attr("class", "map-group")
-          .attr("translate", "map")
+          .attr("translate", "map");
 
         this.countrySvg = this.mapGroup
           .append("g")
@@ -131,18 +130,18 @@ export const taiwan = {
           .zoom()
           .scaleExtent([1, 30])
           .on("zoom", (d, data) => {
-            if(this.deepVal > 0 || this.allowZoom){
+            if (this.deepVal > 0 || this.allowZoom) {
               this.zoomed(d, data);
             }
-           
           });
-
         this.d3Svg.call(this.zoom);
       }
     },
     zoomed(event) {
       const { transform } = event;
       const { x, y, k } = transform;
+      console.log('k',k);
+
       this.mapGroup.attr("transform", `translate(${x},${y}) scale(${k})`);
       this.mapGroup.attr("stroke-width", 1 / transform.k);
     },
@@ -150,7 +149,8 @@ export const taiwan = {
       const dom = this.mapGroup.node();
       const { zoomLevel } = getBBoxCenter(this.mapGroup.node());
       const { translateX, translateY } = getTransform(dom, zoomLevel);
-
+      console.log('work');
+      
       // 应用过渡效果
       this.d3Svg
         .transition()
@@ -158,22 +158,23 @@ export const taiwan = {
         .call(
           this.zoom.transform,
           d3.zoomIdentity.translate(translateX, translateY).scale(zoomLevel)
-        ).on('end',()=>{
+        )
+        .on("end", () => {
           this.allowZoom = false;
           this.$emit("update:loading", false);
-        })     
+        });
     },
     getMapData(id) {
       let url = "./data/topoJson/towns-mercator.json";
       if (id) {
-        if(this.villageDataList[id]) return this.villageDataList[id];
+        if (this.villageDataList[id]) return this.villageDataList[id];
         url = `./data/topoJson/tw-village/${id}.json`;
       }
       this.$emit("update:loading", true);
       return fetch(url)
         .then((res) => res.json())
         .then((data) => {
-          if(id){
+          if (id) {
             this.villageDataList[id] = data;
           }
           this.$emit("update:loading", false);
@@ -203,7 +204,6 @@ export const taiwan = {
           ).features;
           break;
       }
-      // console.log('data',data.filter((item) => item.id.includes(id)),'id',id);
 
       if (type === "find") {
         if (deep === 0) return data.find((item) => item.id.includes(id));
@@ -278,7 +278,7 @@ export const taiwan = {
       currInfo.targetData = this.getFeatureById(deep - DATA_INDEX, id, "find");
     },
     updateDeepVal(newDeep, oldDeep) {
-      // console.log('newDeep',newDeep,'oldDeep',oldDeep);
+      console.log("newDeep", newDeep, "oldDeep", oldDeep);
       if (newDeep > 0 || oldDeep > newDeep) {
         this.removeChild(newDeep, oldDeep);
       }
@@ -286,7 +286,7 @@ export const taiwan = {
       this.focusMap();
       this.$emit("getLocationData", currInfo);
 
-      if (newDeep < 3) {        
+      if (newDeep < 3) {
         this.appendMap(newDeep, currInfo.id);
       }
       if (newDeep === 0) {
@@ -299,10 +299,10 @@ export const taiwan = {
     removeChild(newDeep, oldDeep) {
       if (newDeep === 3 && oldDeep === 3) return;
 
-      const delNode = (deep)=>{
-        const dom = this.getDomFromDeep(deep);        
+      const delNode = (deep) => {
+        const dom = this.getDomFromDeep(deep);
         dom.selectAll("path").remove();
-      }
+      };
       if (newDeep === oldDeep) {
         // 同層移動
         delNode(newDeep);
@@ -334,6 +334,7 @@ export const taiwan = {
         30, // 最大縮放尺寸限制
         0.9 / Math.max((x1 - x0) / innerWidth, (y1 - y0) / innerHeight)
       );
+      console.log("scale", scale);
 
       const translateX = innerWidth / 2 - (scale * (x0 + x1)) / 2;
       const translateY = innerHeight / 2 - (scale * (y0 + y1)) / 2;
@@ -432,13 +433,20 @@ export const taiwan = {
     },
   },
   mounted() {
-    window.addEventListener("resize", () => {
+    window.addEventListener("resize", async () => {
+      this.allowZoom = true;
       this.initMap();
+
+      const length = this.deepVal;
+      for (let i = 0; i <= length; i++) {
+        this.$emit("updateDeep", i);
+        await this.$nextTick();
+      }
     });
 
     this.$nextTick(() => {
       this.initMap(true);
-      this.initD3js();      
+      this.initD3js();
     });
   },
   template: `<svg ref="svg" ></svg>`,
