@@ -111,7 +111,7 @@ export const taiwan = {
         this.d3Svg = d3
           .select(svg)
           .on("mousedown.zoom", () => null) //關閉拖拉事件
-          .on("touchmove.zoom", () => null) //關閉拖拉事件(手機)
+          // .on("touchmove.zoom", () => null) //關閉拖拉事件(手機)
           .call(
             d3
               .drag()
@@ -124,7 +124,7 @@ export const taiwan = {
               })
               .on("drag", (event) => {
                 console.log("d3Svg drag");
-                if (this.deepVal < 1) return;
+                // if (this.deepVal < 1) return;
                 const dx = event.x - this.startX;
                 const dy = event.y - this.startY;
                 const translateX = this.moveStatus.x + dx;
@@ -144,30 +144,30 @@ export const taiwan = {
           .on("touchmove.zoom", () => null) //關閉拖拉事件(手機)
           .attr("class", "map-group")
           .attr("translate", "map")
-          .call(
-            d3
-              .drag()
-              .on("start", (event) => {
-                this.startX = event.x;
-                this.startY = event.y;
-                const { x, y, k } = d3.zoomTransform(this.mapGroup.node());
-                this.moveStatus = { x, y, k };
-              })
-              .on("drag", (event) => {
-                console.log("mapGroup drag");
-                if (this.deepVal < 1) return;
-                const dx = event.x - this.startX;
-                const dy = event.y - this.startY;
-                const translateX = this.moveStatus.x + dx;
-                const translateY = this.moveStatus.y + dy;
+          // .call(
+          //   d3
+          //     .drag()
+          //     .on("start", (event) => {
+          //       this.startX = event.x;
+          //       this.startY = event.y;
+          //       const { x, y, k } = d3.zoomTransform(this.mapGroup.node());
+          //       this.moveStatus = { x, y, k };
+          //     })
+          //     .on("drag", (event) => {
+          //       console.log("mapGroup drag");
+          //       if (this.deepVal < 1) return;
+          //       const dx = event.x - this.startX;
+          //       const dy = event.y - this.startY;
+          //       const translateX = this.moveStatus.x + dx;
+          //       const translateY = this.moveStatus.y + dy;
 
-                this.mapGroup.attr(
-                  "transform",
-                  `translate(${translateX}, ${translateY}) scale(${this.getZoomRatio()})`
-                );
-                this.updateMoveGrap(translateX, translateY);
-              })
-          );
+          //       this.mapGroup.attr(
+          //         "transform",
+          //         `translate(${translateX}, ${translateY}) scale(${this.getZoomRatio()})`
+          //       );
+          //       this.updateMoveGrap(translateX, translateY);
+          //     })
+          // );
 
         this.countrySvg = this.mapGroup
           .append("g")
@@ -562,7 +562,7 @@ export const taiwan = {
 
     this.$nextTick(() => {
       this.initMap(true);
-      this.initD3js();
+      this.initD3js();      
     });
   },
   template: `
