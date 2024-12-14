@@ -111,32 +111,35 @@ export const taiwan = {
         this.d3Svg = d3
           .select(svg)
           .on("mousedown.zoom", () => null) //關閉拖拉事件
-          // .on("touchmove.zoom", () => null) //關閉拖拉事件(手機)
-          .call(
-            d3
-              .drag()
-              .on("start", (event) => {
-                console.log("d3Svg start");
-                this.startX = event.x;
-                this.startY = event.y;
-                const { x, y, k } = d3.zoomTransform(this.mapGroup.node());
-                this.moveStatus = { x, y, k };
-              })
-              .on("drag", (event) => {
-                console.log("d3Svg drag");
-                // if (this.deepVal < 1) return;
-                const dx = event.x - this.startX;
-                const dy = event.y - this.startY;
-                const translateX = this.moveStatus.x + dx;
-                const translateY = this.moveStatus.y + dy;
+          .on("touchmove", () => {
+            console.log('touch');
+            
+          }) 
+          // .call(
+          //   d3
+          //     .drag()
+          //     .on("start", (event) => {
+          //       console.log("d3Svg start");
+          //       this.startX = event.x;
+          //       this.startY = event.y;
+          //       const { x, y, k } = d3.zoomTransform(this.mapGroup.node());
+          //       this.moveStatus = { x, y, k };
+          //     })
+          //     .on("drag", (event) => {
+          //       console.log("d3Svg drag");
+          //       // if (this.deepVal < 1) return;
+          //       const dx = event.x - this.startX;
+          //       const dy = event.y - this.startY;
+          //       const translateX = this.moveStatus.x + dx;
+          //       const translateY = this.moveStatus.y + dy;
 
-                this.mapGroup.attr(
-                  "transform",
-                  `translate(${translateX}, ${translateY}) scale(${this.getZoomRatio()})`
-                );
-                this.updateMoveGrap(translateX, translateY);
-              })
-          );
+          //       this.mapGroup.attr(
+          //         "transform",
+          //         `translate(${translateX}, ${translateY}) scale(${this.getZoomRatio()})`
+          //       );
+          //       this.updateMoveGrap(translateX, translateY);
+          //     })
+          // );
 
         this.mapGroup = this.d3Svg
           .append("g")
