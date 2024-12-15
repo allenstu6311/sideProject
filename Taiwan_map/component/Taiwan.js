@@ -433,6 +433,7 @@ export const taiwan = {
   },
   mounted() {
     window.addEventListener("resize", async () => {
+      alert();
       this.allowZoom = true;
       this.initMap();
 
