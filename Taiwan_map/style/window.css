@@ -86,7 +86,7 @@ ul::-webkit-scrollbar {
 
 @supports (-webkit-touch-callout: none) {
     .window-h5 {
-        bottom: 10%;
+        bottom: 0;
     }
 }
 
