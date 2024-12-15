@@ -134,6 +134,7 @@ export const taiwan = {
               this.zoomed(d, data);
             }
           });
+        // 註冊zoom事件
         this.d3Svg.call(this.zoom);
       }
     },
@@ -181,7 +182,7 @@ export const taiwan = {
           return data || {};
         });
     },
-    getFeatureById(deep, id, type) {
+    getFeatureById(deep, id, isSingle) {
       let data;
 
       switch (deep) {
@@ -205,18 +206,21 @@ export const taiwan = {
           break;
       }
 
-      if (type === "find") {
-        if (deep === 0) return data.find((item) => item.id.includes(id));
-        if (deep === 1) return data.find((item) => item.id.includes(id));
-        if (deep === 2)
-          return data.find((item) => item.properties.VILLCODE.includes(id));
+      if (isSingle) {
+        return data.find((item) =>
+          deep === 2
+            ? item.properties.VILLCODE.includes(id)
+            : item.id.includes(id)
+        );
       }
 
-      if (deep === 0) return data;
-      if (deep === 1)
-        return data.filter((item) => item.id.slice(0, id.length).includes(id));
-      if (deep === 2)
+      if (deep === 2) {
         return data.filter((item) => item.properties.TOWNCODE.includes(id));
+      }
+
+      return deep === 1
+        ? data.filter((item) => item.id.slice(0, id.length).includes(id))
+        : data; // deep === 0
     },
     appendMap(deep, id) {
       const path = d3.geoPath();
@@ -272,13 +276,17 @@ export const taiwan = {
       });
     },
     async updateCurrInfo(id, deep) {
-      const DATA_INDEX = 1; //資料跟地圖深度距離1
       const currInfo = this.getInfoFromDeep(deep);
       Object.assign(currInfo, await assignValue(id, deep));
-      currInfo.targetData = this.getFeatureById(deep - DATA_INDEX, id, "find");
+
+      /**
+       * deep為2時，通常對應資料1
+       */
+      const DATA_INDEX = 1; //資料跟地圖深度距離1
+      currInfo.targetData = this.getFeatureById(deep - DATA_INDEX, id, true);
     },
     updateDeepVal(newDeep, oldDeep) {
-      console.log("newDeep", newDeep, "oldDeep", oldDeep);
+      // console.log("newDeep", newDeep, "oldDeep", oldDeep);
       if (newDeep > 0 || oldDeep > newDeep) {
         this.removeChild(newDeep, oldDeep);
       }
