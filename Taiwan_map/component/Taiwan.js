@@ -140,7 +140,6 @@ export const taiwan = {
     zoomed(event) {
       const { transform } = event;
       const { x, y, k } = transform;
-      console.log('k',k);
 
       this.mapGroup.attr("transform", `translate(${x},${y}) scale(${k})`);
       this.mapGroup.attr("stroke-width", 1 / transform.k);
@@ -334,7 +333,6 @@ export const taiwan = {
         30, // 最大縮放尺寸限制
         0.9 / Math.max((x1 - x0) / innerWidth, (y1 - y0) / innerHeight)
       );
-      console.log("scale", scale);
 
       const translateX = innerWidth / 2 - (scale * (x0 + x1)) / 2;
       const translateY = innerHeight / 2 - (scale * (y0 + y1)) / 2;
