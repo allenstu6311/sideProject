@@ -84,6 +84,12 @@ ul::-webkit-scrollbar {
     background-color: rgba(244, 244, 244, 0.9);
 }
 
+@supports (-webkit-touch-callout: none) {
+    .window-h5 {
+        bottom: 10%;
+    }
+}
+
 .accordion-item,
 .accordion-button {
     background-color: transparent;
