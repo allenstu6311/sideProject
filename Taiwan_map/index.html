@@ -573,36 +573,52 @@
         async mounted() {
           await this.getLocationData();
 
-          const watchKeyBoard = (callback) => {
-            const isIOSByUA = () => {
-              return /iP(hone|od|ad)/i.test(navigator.userAgent);
-            };
-            //  IOS
-            if (isIOSByUA()) {
-              document.body.addEventListener("focusin", () => {
-                //软键盘弹出的事件处理
-                callback(true);
-              });
-              document.body.addEventListener("focusout", () => {
-                //软键盘收起的事件处理
-                callback(false);
-              });
-            }
-          };
-
-          watchKeyBoard((status) => {
+          const isIOSByUA = /iP(hone|od|ad)/i.test(navigator.userAgent);
+          if (isIOSByUA) {
             const { container } = this.$refs;
-            setTimeout(() => {
-              if (status) {
-                container.style.height = `${
-                  window.visualViewport.height || window.innerHeight
-                }px`;
-                window.scrollTo(0, 0);
-              } else {
-                container.style.height = `100vh`;
-              }
-            }, 100);
-          });
+            //软键盘弹出的事件处理
+            document.body.addEventListener("focusin", () => {
+              container.style.height = `${
+                window.visualViewport.height || window.innerHeight
+              }px`;
+              window.scrollTo(0, 0);
+            });
+            //软键盘收起的事件处理
+            document.body.addEventListener("focusout", () => {
+              container.style.height = `100vh`;
+            });
+          }
+
+          // const watchKeyBoard = (callback) => {
+          //   const isIOSByUA = () => {
+          //     return /iP(hone|od|ad)/i.test(navigator.userAgent);
+          //   };
+          //   //  IOS
+          //   if (isIOSByUA()) {
+          //     document.body.addEventListener("focusin", () => {
+          //       //软键盘弹出的事件处理
+          //       callback(true);
+          //     });
+          //     document.body.addEventListener("focusout", () => {
+          //       //软键盘收起的事件处理
+          //       callback(false);
+          //     });
+          //   }
+          // };
+
+          // watchKeyBoard((status) => {
+          //   const { container } = this.$refs;
+          //   setTimeout(() => {
+          //     if (status) {
+          //       container.style.height = `${
+          //         window.visualViewport.height || window.innerHeight
+          //       }px`;
+          //       window.scrollTo(0, 0);
+          //     } else {
+          //       container.style.height = `100vh`;
+          //     }
+          //   }, 100);
+          // });
 
           for (const id in locationMap) {
             this.locationOptions.push({
