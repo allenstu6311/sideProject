@@ -155,6 +155,7 @@
       }
 
       .search-h5 {
+        display: none;
         width: 100%;
         height: 0;
         position: absolute;
@@ -402,7 +403,7 @@
           </div>
         </div>
         <!-- 手機板查詢 -->
-        <div class="search-h5" :style="{height:isShow? '100vh': '0'}">
+        <div class="search-h5"  :style="{height:isShow? '100vh': '0'}">
           <div class="close" v-if="isShow" @click="isShow = false">
             <img class="close-icon svelte-losp1r" src="https://www.cw.com.tw/graphics/2024-taiwan-elections/close-icon.png" alt="close icon">
           </div>
