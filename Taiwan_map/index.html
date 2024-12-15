@@ -578,14 +578,18 @@
             const { container } = this.$refs;
             //软键盘弹出的事件处理
             document.body.addEventListener("focusin", () => {
-              container.style.height = `${
-                window.visualViewport.height || window.innerHeight
-              }px`;
-              window.scrollTo(0, 0);
+              setTimeout(() => {
+                container.style.height = `${
+                  window.visualViewport.height || window.innerHeight
+                }px`;
+                window.scrollTo(0, 0);
+              }, 100);
             });
             //软键盘收起的事件处理
             document.body.addEventListener("focusout", () => {
-              container.style.height = `100vh`;
+              setTimeout(() => {
+                container.style.height = `100vh`;
+              }, 100);
             });
           }
 
