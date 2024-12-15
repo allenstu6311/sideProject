@@ -579,9 +579,15 @@
           await this.getLocationData();
 
           const isIOSByUA = /iP(hone|od|ad)/i.test(navigator.userAgent);
+          /**
+           * safari瀏覽器在鍵盤出現時，
+           * 會將視窗往上移動避免蓋住內
+           * 容，但不會自動復原，導致畫
+           * 面跑掉，所以自訂義式見修復
+           */
           if (isIOSByUA) {
             const { container } = this.$refs;
-            //软键盘弹出的事件处理
+            //键盘弹出的事件处理
             document.body.addEventListener("focusin", () => {
               setTimeout(() => {
                 container.style.height = `${
@@ -590,7 +596,7 @@
                 window.scrollTo(0, 0);
               }, 100);
             });
-            //软键盘收起的事件处理
+            //键盘收起的事件处理
             document.body.addEventListener("focusout", () => {
               setTimeout(() => {
                 container.style.height = `100vh`;

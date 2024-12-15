@@ -1,5 +1,3 @@
-import location from "./location.js";
-
 let countryCsv = [];
 let townsCsv = [];
 let townsId = "";
@@ -10,7 +8,8 @@ export function pairId(textRow, id) {
   for (let i = 0; i < textRow.length; i++) {
     const item = textRow[i];
     if (item[1]?.trim() == id?.trim()) {
-      return item[2];
+      const content = item[2].trim();
+      return content.slice(0, content.length - 1); //去掉多餘的(")
     }
   }
 }
@@ -20,7 +19,6 @@ function parseCSV(text) {
   let matches = "";
   const rows = [];
   while ((matches = pattern.exec(text)) !== null) {
-    // console.log(`<symbol id="${matches[1]}"></symbol>`);
     rows.push(matches);
   }
   return rows;
