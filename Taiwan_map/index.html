@@ -594,13 +594,11 @@
             const { container } = this.$refs;
             setTimeout(() => {
               if (status) {
-                alert("打開");
                 container.style.height = `${
                   window.visualViewport.height || window.innerHeight
                 }px`;
                 window.scrollTo(0, 0);
               } else {
-                alert("關閉");
                 container.style.height = `100vh`;
               }
             }, 100);
