@@ -148,8 +148,7 @@ export const taiwan = {
       const dom = this.mapGroup.node();
       const { zoomLevel } = getBBoxCenter(this.mapGroup.node());
       const { translateX, translateY } = getTransform(dom, zoomLevel);
-      console.log('work');
-      
+
       // 应用过渡效果
       this.d3Svg
         .transition()
@@ -167,16 +166,18 @@ export const taiwan = {
       let url = "./data/topoJson/towns-mercator.json";
       if (id) {
         if (this.villageDataList[id]) return this.villageDataList[id];
+        this.$emit("update:loading", true);
         url = `./data/topoJson/tw-village/${id}.json`;
       }
-      this.$emit("update:loading", true);
+
       return fetch(url)
         .then((res) => res.json())
         .then((data) => {
           if (id) {
             this.villageDataList[id] = data;
+            this.$emit("update:loading", false);
           }
-          this.$emit("update:loading", false);
+
           return data || {};
         });
     },
