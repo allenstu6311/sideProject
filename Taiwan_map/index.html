@@ -205,7 +205,7 @@
   <body>
     <div id="app">
       <div class="bg"></div>
-      <div class="custom-container">
+      <div class="custom-container" ref="container">
         <!-- loading -->
         <div
           class="d-flex justify-content-center custom-spinner"
@@ -572,6 +572,39 @@
         },
         async mounted() {
           await this.getLocationData();
+
+          const watchKeyBoard = (callback) => {
+            const isIOSByUA = () => {
+              return /iP(hone|od|ad)/i.test(navigator.userAgent);
+            };
+            //  IOS
+            if (isIOSByUA()) {
+              document.body.addEventListener("focusin", () => {
+                //软键盘弹出的事件处理
+                callback(true);
+              });
+              document.body.addEventListener("focusout", () => {
+                //软键盘收起的事件处理
+                callback(false);
+              });
+            }
+          };
+
+          watchKeyBoard((status) => {
+            const { container } = this.$refs;
+            setTimeout(() => {
+              if (status) {
+                alert("打開");
+                container.style.height = `${
+                  window.visualViewport.height || window.innerHeight
+                }px`;
+                window.scrollTo(0, 0);
+              } else {
+                alert("關閉");
+                container.style.height = `100vh`;
+              }
+            }, 100);
+          });
 
           for (const id in locationMap) {
             this.locationOptions.push({
