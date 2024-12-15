@@ -142,12 +142,59 @@
         z-index: 10;
         background-color: rgba(240, 248, 255, 0.24);
       }
+
+      .search-button {
+        display: none;
+        color: #fff;
+        border-radius: 100px;
+        background-color: #5a6be3;
+        padding: 8px 12px;
+        font-size: 14px;
+        border: none;
+        margin-top: 10px;
+      }
+
+      .search-h5 {
+        width: 100%;
+        height: 0;
+        position: absolute;
+        left: 0;
+        top: 0;
+        background-color: #5a6be3;
+        z-index: 100;
+        align-items: center;
+        justify-content: center;
+        transition: all .3s;
+      }
+
+      .close{
+        display: none;
+        position: absolute;
+        top: 10%;
+        right: 10%;
+        width: 22px;
+        height: 22px;
+      }
+      .close img{
+        width: 100%;
+        height: 100%;
+      }
+
       @media screen and (max-width: 768px) {
         .bg {
           display: none;
         }
         .control-box {
           top: 50px;
+        }
+        .search-button {
+          display: block;
+        }
+        .search-h5{
+          display: flex;
+        }
+        .close{
+          display: block;
         }
       }
     </style>
@@ -156,6 +203,7 @@
     <div id="app">
       <div class="bg"></div>
       <div class="custom-container">
+        <!-- loading -->
         <div
           class="d-flex justify-content-center custom-spinner"
           v-if="loading"
@@ -178,6 +226,10 @@
               <img src="./image/arrow.svg" alt="" />
               <p>返回上一層</p>
             </div>
+            <!-- 手機板查詢按鈕 -->
+            <div class="">
+              <button class="search-button" @click="isShow = true">搜尋縣市</button>
+            </div>
           </div>
 
           <!-- 電腦版視窗 -->
@@ -186,7 +238,7 @@
             <div class="search wrap">
               <input
                 type="text"
-                placeholder="查詢縣市"
+                placeholder="請輸入縣市名稱"
                 v-model="searchStr"
                 @focus="focusing = true"
               />
@@ -349,6 +401,32 @@
             </div>
           </div>
         </div>
+        <!-- 手機板查詢 -->
+        <div class="search-h5" :style="{height:isShow? '100vh': '0'}">
+          <div class="close" v-if="isShow" @click="isShow = false">
+            <img class="close-icon svelte-losp1r" src="https://www.cw.com.tw/graphics/2024-taiwan-elections/close-icon.png" alt="close icon">
+          </div>
+            <div class="search wrap">
+              <input
+                type="text"
+                placeholder="查詢縣市"
+                v-model="searchStr"
+                @focus="focusing = true"
+              />
+              <ul
+                class="location-options"
+                :style="{padding: filterLocationOptions.length ? '8px 16px' : ''}"
+              >
+                <li
+                  v-for="item in filterLocationOptions"
+                  :key="item.id"
+                  @click="chooseAddress(item);isShow = false"
+                >
+                  {{ item.name }}
+                </li>
+              </ul>
+            </div>
+        </div>
       </div>
     </div>
     <!-- JavaScript Bundle with Popper -->
@@ -378,6 +456,7 @@
             selectionInfo: {},
             selectionData: [],
             loading: true,
+            isShow: false
           };
         },
         methods: {
