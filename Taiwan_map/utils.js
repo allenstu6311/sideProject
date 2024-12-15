@@ -44,12 +44,10 @@ export async function assignValue(id, deep) {
       textContent = await getCsv(`village-${id.slice(0, 8)}-gpt`, id);
       break;
   }
-  const chName = locationMap[id] || "";
 
   const keys = {
     id,
     textContent,
-    chName,
   };
   return keys;
 }
