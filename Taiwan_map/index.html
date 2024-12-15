@@ -168,6 +168,7 @@
         align-items: center;
         justify-content: center;
         transition: all 0.3s;
+        overflow: hidden;
       }
 
       .close {
@@ -416,26 +417,30 @@
               alt="close icon"
             />
           </div>
-          <div class="search wrap">
-            <input
-              type="text"
-              placeholder="請輸入縣市名稱"
-              v-model="searchStr"
-              @focus="focusing = true"
-              :disabled="loading"
-            />
-            <ul
-              class="location-options"
-              :style="{padding: filterLocationOptions.length ? '8px 16px' : ''}"
-            >
-              <li
-                v-for="item in filterLocationOptions"
-                :key="item.id"
-                @click="chooseAddress(item);isShow = false"
+
+          <div class="">
+            <h2 class="title">選情分析</h2>
+            <div class="search wrap">
+              <input
+                type="text"
+                placeholder="請輸入縣市名稱"
+                v-model="searchStr"
+                @focus="focusing = true"
+                :disabled="loading"
+              />
+              <ul
+                class="location-options"
+                :style="{padding: filterLocationOptions.length ? '8px 16px' : ''}"
               >
-                {{ item.name }}
-              </li>
-            </ul>
+                <li
+                  v-for="item in filterLocationOptions"
+                  :key="item.id"
+                  @click="chooseAddress(item);isShow = false"
+                >
+                  {{ item.name }}
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
@@ -593,37 +598,7 @@
             });
           }
 
-          // const watchKeyBoard = (callback) => {
-          //   const isIOSByUA = () => {
-          //     return /iP(hone|od|ad)/i.test(navigator.userAgent);
-          //   };
-          //   //  IOS
-          //   if (isIOSByUA()) {
-          //     document.body.addEventListener("focusin", () => {
-          //       //软键盘弹出的事件处理
-          //       callback(true);
-          //     });
-          //     document.body.addEventListener("focusout", () => {
-          //       //软键盘收起的事件处理
-          //       callback(false);
-          //     });
-          //   }
-          // };
-
-          // watchKeyBoard((status) => {
-          //   const { container } = this.$refs;
-          //   setTimeout(() => {
-          //     if (status) {
-          //       container.style.height = `${
-          //         window.visualViewport.height || window.innerHeight
-          //       }px`;
-          //       window.scrollTo(0, 0);
-          //     } else {
-          //       container.style.height = `100vh`;
-          //     }
-          //   }, 100);
-          // });
-
+          // 製作地圖名稱的雜湊表
           for (const id in locationMap) {
             this.locationOptions.push({
               name: this.mappingName(id),
