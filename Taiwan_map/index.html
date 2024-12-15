@@ -55,7 +55,7 @@
       }
       .custom-container {
         position: relative;
-        height: 100vh;
+        /* height: 100vh; */
       }
 
       .page-title {
@@ -166,10 +166,10 @@
         z-index: 100;
         align-items: center;
         justify-content: center;
-        transition: all .3s;
+        transition: all 0.3s;
       }
 
-      .close{
+      .close {
         display: none;
         position: absolute;
         top: 10%;
@@ -177,7 +177,7 @@
         width: 22px;
         height: 22px;
       }
-      .close img{
+      .close img {
         width: 100%;
         height: 100%;
       }
@@ -192,10 +192,10 @@
         .search-button {
           display: block;
         }
-        .search-h5{
+        .search-h5 {
           display: flex;
         }
-        .close{
+        .close {
           display: block;
         }
       }
@@ -230,7 +230,9 @@
             </div>
             <!-- 手機板查詢按鈕 -->
             <div class="">
-              <button class="search-button" @click="isShow = true">搜尋縣市</button>
+              <button class="search-button" @click="isShow = true">
+                搜尋縣市
+              </button>
             </div>
           </div>
 
@@ -243,6 +245,7 @@
                 placeholder="請輸入縣市名稱"
                 v-model="searchStr"
                 @focus="focusing = true"
+                :disabled="loading"
               />
               <ul
                 class="location-options"
@@ -404,30 +407,35 @@
           </div>
         </div>
         <!-- 手機板查詢 -->
-        <div class="search-h5"  :style="{height:isShow? '100vh': '0'}">
+        <div class="search-h5" :style="{height:isShow? '100vh': '0'}">
           <div class="close" v-if="isShow" @click="isShow = false">
-            <img class="close-icon svelte-losp1r" src="https://www.cw.com.tw/graphics/2024-taiwan-elections/close-icon.png" alt="close icon">
+            <img
+              class="close-icon svelte-losp1r"
+              src="https://www.cw.com.tw/graphics/2024-taiwan-elections/close-icon.png"
+              alt="close icon"
+            />
           </div>
-            <div class="search wrap">
-              <input
-                type="text"
-                placeholder="查詢縣市"
-                v-model="searchStr"
-                @focus="focusing = true"
-              />
-              <ul
-                class="location-options"
-                :style="{padding: filterLocationOptions.length ? '8px 16px' : ''}"
+          <div class="search wrap">
+            <input
+              type="text"
+              placeholder="請輸入縣市名稱"
+              v-model="searchStr"
+              @focus="focusing = true"
+              :disabled="loading"
+            />
+            <ul
+              class="location-options"
+              :style="{padding: filterLocationOptions.length ? '8px 16px' : ''}"
+            >
+              <li
+                v-for="item in filterLocationOptions"
+                :key="item.id"
+                @click="chooseAddress(item);isShow = false"
               >
-                <li
-                  v-for="item in filterLocationOptions"
-                  :key="item.id"
-                  @click="chooseAddress(item);isShow = false"
-                >
-                  {{ item.name }}
-                </li>
-              </ul>
-            </div>
+                {{ item.name }}
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
@@ -458,7 +466,7 @@
             selectionInfo: {},
             selectionData: [],
             loading: true,
-            isShow: false
+            isShow: false,
           };
         },
         methods: {
