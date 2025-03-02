@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button onclick="train()">trainOld</button>
+    <!-- <button onclick="test()">test</button> -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+
+    <script>
+      let model; // 讓 model 變成全域變數
+
+      async function loadModel() {
+        model = await tf.loadLayersModel("./chess_model.json"); // 正確載入模型
+        model.compile({
+          optimizer: "adam",
+          loss: "categoricalCrossentropy",
+          metrics: ["accuracy"],
+        });
+
+        console.log("模型加載完成");
+      }
+
+      loadModel();
+
+      async function loadTrainingData() {
+        const response = await fetch("./json/chessModel2.json");
+        const data = await response.json(); // 解析 JSON
+        return data;
+      }
+
+      async function preprocessData() {
+        const data = await loadTrainingData();
+
+        let trainingData = [];
+        let trainingLabels = [];
+
+        data.forEach((game) => {
+          const allMoves = decodeMoves(game.moves);
+
+          for (let i = 0; i < allMoves.length - 1; i++) {
+            const index = i;
+
+            let boardState = createBoard(allMoves.slice(0, index + 1)); // 生成當前局面
+            // console.log('boardState',boardState);
+
+            // console.log("玩家", allMoves[index]);
+            let nextMove = allMoves[index + 1]; // 轉換下一步成 Tensor
+            // console.log("AI", nextMove);
+
+            let label = new Array(225).fill(0); // 先初始化為全 0
+
+            let position = nextMove[0] * 14 + nextMove[1]; // 假設棋盤大小為 15x15
+            // console.log("position", position);
+
+            label[position] = 1; // 將下一步的位置標記為 1
+
+            trainingData.push(boardState);
+            trainingLabels.push(label);
+            i += 1; // 跳過下一步，避免白旗變成黑棋的下一步
+          }
+        });
+
+        // data.forEach((game) => {
+        //   const moves = decodeMoves(game.moves);
+
+        //   moves.forEach((move, index, allMoves) => {
+        //     if (index === allMoves.length - 1) return; // 最後一步沒辦法當訓練數據
+
+        //     let boardState = createBoard(allMoves.slice(0, index + 1)); // 生成當前局面
+        //     // console.log("boardState", boardState);
+
+        //     let nextMove = allMoves[index + 1]; // 轉換下一步成 Tensor
+        //     // console.log('nextMove',nextMove);
+
+        //     // Create 225-dimensional label for the next move
+        //     let label = new Array(225).fill(0); // 先初始化為全 0
+
+        //     let position = nextMove[0] * 14 + nextMove[1]; // 假設棋盤大小為 15x15
+        //     label[position] = 1; // 將下一步的位置標記為 1
+
+        //     trainingData.push(boardState);
+        //     trainingLabels.push(label);
+        //   });
+        // });
+
+        return {
+          xs: tf.tensor(trainingData).reshape([trainingData.length, 15, 15, 1]),
+          ys: tf.tensor(trainingLabels).reshape([trainingLabels.length, 225]),
+        };
+      }
+
+      function createBoard(moves) {
+        let board = Array(15)
+          .fill(0)
+          .map(() => Array(15).fill(0));
+        let player = 1; // 黑棋 = 1, 白棋 = -1
+
+        moves.forEach(([row, col]) => {
+          if (row < 0 || row >= 15 || col < 0 || col >= 15) return;
+          board[row][col] = player;
+          player *= -1; // 交替黑白棋
+        });
+
+        return board;
+      }
+
+      function decodeMoves(moves) {
+        let decoded = [];
+        for (let i = 0; i < moves.length; i += 2) {
+          let row = parseInt(moves[i], 16); // 假設是 16 進位
+          let col = parseInt(moves[i + 1], 16);
+          decoded.push([row, col]);
+        }
+        return decoded;
+      }
+
+      const earlyStopping = tf.callbacks.earlyStopping({
+        monitor: "loss",
+        patience: 5, // 5 次沒有改善則停止訓練
+      });
+
+      async function train() {
+        const { xs, ys } = await preprocessData();
+        console.log('xs',xs.dataSync());
+        console.log('ys',ys.dataSync());
+        
+
+        // 訓練
+        // model
+        //   .fit(xs, ys, {
+        //     epochs: 100, //訓練輪次
+        //     batchSize: 32,
+        //     // callbacks: [earlyStopping], // 自動停止過度訓練
+        //     callbacks: {
+        //       onEpochEnd: (epoch, logs) =>
+        //         console.log(
+        //           `Epoch ${epoch + 1}: loss=${logs.loss}, acc=${logs.acc}`
+        //         ),
+        //     },
+        //   })
+        //   .then(async () => {
+        //     console.log("訓練完成");
+
+        //     await model.save("downloads://chess_model");
+        //   });
+      }
+    </script>
+  </body>
+</html>

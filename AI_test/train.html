@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button onclick="train()">train</button>
+    <!-- <button onclick="test()">test</button> -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+
+    <script>
+      // https://mostovlyansky.narod.ru/iedown.html 下載網站
+      const model = tf.sequential();
+
+      // 加入卷積層（適合處理棋盤的 2D 圖像）
+      model.add(
+        tf.layers.conv2d({
+          inputShape: [15, 15, 1], // 五子棋 15x15 棋盤
+          filters: 32, //提取 32 个特征
+          kernelSize: 3, //使用 3×3 卷积核
+          activation: "relu", //ReLU 作为激活函数
+        })
+      );
+
+      // 加入更多神經網路層
+      model.add(tf.layers.flatten());
+      model.add(tf.layers.dense({ units: 64, activation: "relu" }));
+      model.add(tf.layers.dense({ units: 225, activation: "sigmoid" })); // 225 種可能位置
+
+      // 設定優化器與損失函數
+      model.compile({
+        optimizer: "adam",
+        loss: "categoricalCrossentropy",
+        /**
+         * 用來監測模型表現，不影響訓練過程。
+         */
+        metrics: ["accuracy"],
+      });
+
+      async function loadTrainingData() {
+        const response = await fetch("./json/chessModel2.json");
+        const data = await response.json(); // 解析 JSON
+        return data;
+      }
+
+      async function preprocessData() {
+        const data = await loadTrainingData();
+
+        let trainingData = [];
+        let trainingLabels = [];
+
+        data.forEach((game) => {
+          const allMoves = decodeMoves(game.moves);
+
+          for (let i = 0; i < allMoves.length - 1; i++) {
+            const index = i;
+
+            let boardState = createBoard(allMoves.slice(0, index + 1)); // 生成當前局面
+            // console.log('boardState',boardState);
+            
+            // console.log("玩家", allMoves[index]);
+            let nextMove = allMoves[index + 1]; // 轉換下一步成 Tensor
+            // console.log("AI", nextMove);
+
+            let label = new Array(225).fill(0); // 先初始化為全 0
+
+            let position = nextMove[0] * 14 + nextMove[1]; // 假設棋盤大小為 15x15
+            // console.log("position", position);
+
+            label[position] = 1; // 將下一步的位置標記為 1
+
+            trainingData.push(boardState);
+            trainingLabels.push(label);
+            i += 1; // 跳過下一步，避免白旗變成黑棋的下一步
+          }
+        });
+
+        // trainingLabels.forEach((label, index) => {
+        //   console.log("label", label.length);
+        // });
+        return {
+          xs: tf.tensor(trainingData).reshape([trainingData.length, 15, 15, 1]),
+          ys: tf.tensor(trainingLabels).reshape([trainingLabels.length, 225]),
+        };
+      }
+
+      function createBoard(moves) {
+        let board = Array(15)
+          .fill(0)
+          .map(() => Array(15).fill(0));
+        let player = 1; // 黑棋 = 1, 白棋 = -1
+
+        moves.forEach(([row, col]) => {
+          if (row < 0 || row >= 15 || col < 0 || col >= 15) return;
+          board[row][col] = player;
+          player *= -1; // 交替黑白棋
+        });
+
+        return board;
+      }
+
+      function decodeMoves(moves) {
+        let decoded = [];
+        for (let i = 0; i < moves.length; i += 2) {
+          let row = parseInt(moves[i], 16); // 假設是 16 進位
+          let col = parseInt(moves[i + 1], 16);
+          decoded.push([row, col]);
+        }
+        return decoded;
+      }
+
+      const earlyStopping = tf.callbacks.earlyStopping({
+        monitor: "loss",
+        patience: 5, // 5 次沒有改善則停止訓練
+      });
+
+      async function train() {
+        const { xs, ys } = await preprocessData();
+
+        // 訓練
+        model
+          .fit(xs, ys, {
+            epochs: 50, //訓練輪次
+            batchSize: 16,
+            // callbacks: [earlyStopping], // 自動停止過度訓練
+            callbacks: {
+              onEpochEnd: (epoch, logs) =>
+                console.log(
+                  `Epoch ${epoch + 1}: loss=${logs.loss}, acc=${logs.acc}`
+                ),
+            },
+          })
+          .then(async () => {
+            console.log("訓練完成");
+            await model.save("downloads://chess_model");
+          });
+      }
+    </script>
+  </body>
+</html>

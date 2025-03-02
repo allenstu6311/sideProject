@@ -1,0 +1,1082 @@
+[
+  {
+    "year": "2006",
+    "game_id": "a0104rhl06",
+    "player1": "Chingin",
+    "player2": "Artemjev",
+    "winner": "+",
+    "moves": "8899A679A889699897A77AB9A99A9C8BAB865AAA4A8ABA8D8C68573A4B3C494838277C",
+    "final_move": "K9"
+  },
+  {
+    "year": "2006",
+    "game_id": "a0105rhl06",
+    "player1": "Lysakov",
+    "player2": "Chingin",
+    "winner": "=",
+    "moves": "889977897997987886686785B7A6A59496B4A4B9BAA9",
+    "final_move": "K9"
+  },
+  {
+    "year": "2006",
+    "game_id": "a0106rhl06",
+    "player1": "Karasjov",
+    "player2": "Chingin",
+    "winner": "=",
+    "moves": "88997789799768989A8AA8A9A7BACB7B7678C98695858473576659476C4A46355A584969366364",
+    "final_move": "K9"
+  },
+  {
+    "year": "2006",
+    "game_id": "a0107rhl06",
+    "player1": "Nikonov",
+    "player2": "Chingin",
+    "winner": "-",
+    "moves": "889998877978A7A66A5B968967858A595A4A6B68776C397C9A7A5C9575B5C8B897B6B7A5C5C7",
+    "final_move": "G10"
+  },
+  {
+    "year": "2006",
+    "game_id": "a0109rhl06",
+    "player1": "Chingin",
+    "player2": "Kozhin",
+    "winner": "+",
+    "moves": "8899A6979886B7B87595A9A7779685876966567894655859B4A4B3B5C6D554556474364745636776342335",
+    "final_move": "H6"
+  },
+  {
+    "year": "2006",
+    "game_id": "a0112rhl06",
+    "player1": "Salnikov",
+    "player2": "Chingin",
+    "winner": "=",
+    "moves": "889998877978A7896A5B9AB8698A7B59587A94A674858464B6B4A583AB8B8C9CADAECBBCBAD8C8",
+    "final_move": "G10"
+  },
+  {
+    "year": "2006",
+    "game_id": "a0114rhl06",
+    "player1": "Filinov",
+    "player2": "Chingin",
+    "winner": "-",
+    "moves": "8889869A96997978AB97988AA876A9A7679CCB9B9DBAAAAC8C5A6A7B5B4C6968B75D6C3B2A7F6E4A5949487C",
+    "final_move": "J7"
+  },
+  {
+    "year": "2006",
+    "game_id": "a0116rhl06",
+    "player1": "Kraeva",
+    "player2": "Chingin",
+    "winner": "-",
+    "moves": "889998877978A7899AB8676A5AB9B7D8C8A596A9C9B6",
+    "final_move": "G10"
+  },
+  {
+    "year": "2006",
+    "game_id": "a0201rhl06",
+    "player1": "Savrasova",
+    "player2": "Chingin",
+    "winner": "-",
+    "moves": "8889869A96997978AB97988AA8B8A9AABA87679C8C66B7A66A7B49585A694A7A8B4C474838276C5BD79D9BC7757464365665593A7768A4B3C4B4B5C64553D6D8E93433292A",
+    "final_move": "J7"
+  },
+  {
+    "year": "2006",
+    "game_id": "a0203rhl06",
+    "player1": "Savrasova",
+    "player2": "Klimashin",
+    "winner": "-",
+    "moves": "8899A6979686A8A787789A7A798B9C6B5B6A6C8C8A7B9D9BAB68485A",
+    "final_move": "H6"
+  },
+  {
+    "year": "2006",
+    "game_id": "a0204rhl06",
+    "player1": "Savrasova",
+    "player2": "Artemjev",
+    "winner": "=",
+    "moves": "8889869A96997978AB9798B7A9BA8AA7C7686784A495A67787B6B8A8C6C5B593D4D6A375A2A56576745657CADA9DBB9B9C6BDBDCADBC5A5B",
+    "final_move": "J7"
+  },
+  {
+    "year": "2006",
+    "game_id": "a0205rhl06",
+    "player1": "Savrasova",
+    "player2": "Lysakov",
+    "winner": "+",
+    "moves": "8889AA99A8979ABA7998A9AB7A9CC98A8B8D7EB85B7B6C6A4A",
+    "final_move": "G9"
+  },
+  {
+    "year": "2006",
+    "game_id": "a0206rhl06",
+    "player1": "Savrasova",
+    "player2": "Karasjov",
+    "winner": "=",
+    "moves": "8899A679A889A9A79878768769B86785968695B797948466ABAC9B9C7B8B8CBBCAAACCCBBA6ADADB4A49",
+    "final_move": "K9"
+  },
+  {
+    "year": "2006",
+    "game_id": "a0209rhl06",
+    "player1": "Kozhin",
+    "player2": "Savrasova",
+    "winner": "-",
+    "moves": "8899969A798A6A977B8B7C7A8C599C6CABBAAAA9B9C8987DA7A885B8C7867595B7745B4C76675765566678776858C5B6B4A3A4C4496463444635545387A56283945A47482636374D4B5D6D5C3E3C2C5E",
+    "final_move": "H7"
+  },
+  {
+    "year": "2006",
+    "game_id": "a0214rhl06",
+    "player1": "Savrasova",
+    "player2": "Filinov",
+    "winner": "+",
+    "moves": "8899A69798A8B7B986A9898796B67A6B786867",
+    "final_move": "J6"
+  },
+  {
+    "year": "2006",
+    "game_id": "a0216rhl06",
+    "player1": "Kraeva",
+    "player2": "Savrasova",
+    "winner": "-",
+    "moves": "8889869A96997978AB97A79B98B9B8C9A985AAA8CA675676586A7B69685A4B778757487A8A6B6D7C3828BACBADAC8D75743A",
+    "final_move": "J7"
+  },
+  {
+    "year": "2006",
+    "game_id": "a0301rhl06",
+    "player1": "Klimashin",
+    "player2": "Chingin",
+    "winner": "=",
+    "moves": "8889AA999879A9A8BACBAB8A7BAC6878696756CA76879B8B8666B98C8D9CBCBBD9B7C6C9C8D7CD9A6CA7C7A5B49575C5B564A69777949383724A65B896475C6B5D4C6D7D4B3A5A5B4E",
+    "final_move": "G9"
+  },
+  {
+    "year": "2006",
+    "game_id": "a0304rhl06",
+    "player1": "Artemjev",
+    "player2": "Klimashin",
+    "winner": "-",
+    "moves": "8899778998A8A9878A68697A5B4B9B8CBACB8B7B6A797C9A577539484A6C5867595A5655294928172A2B6547462738AB78CA",
+    "final_move": "K9"
+  },
+  {
+    "year": "2006",
+    "game_id": "a0305rhl06",
+    "player1": "Klimashin",
+    "player2": "Lysakov",
+    "winner": "-",
+    "moves": "8889AA999879A9A8BACBAB8A7B9C9B69",
+    "final_move": "G9"
+  },
+  {
+    "year": "2006",
+    "game_id": "a0306rhl06",
+    "player1": "Karasjov",
+    "player2": "Klimashin",
+    "winner": "-",
+    "moves": "88997789A99A9878AB8769A87B6ABA9CBBCBACADBDBE8B9B9DCAB9BCB7B8DA95C9D8A584749383756694929796648667",
+    "final_move": "G9"
+  },
+  {
+    "year": "2006",
+    "game_id": "a0307rhl06",
+    "player1": "Nikonov",
+    "player2": "Klimashin",
+    "winner": "-",
+    "moves": "889998877978A7A6968967858A6AABC99BACAABA8C7D8B7B7C6D8D8E6B5A6958A9A89D9E59B995CA9794CBBBB89ABDD9E8D8DAF6",
+    "final_move": "G10"
+  },
+  {
+    "year": "2006",
+    "game_id": "a0309rhl06",
+    "player1": "Klimashin",
+    "player2": "Kozhin",
+    "winner": "+",
+    "moves": "8889AA999879A987697767688A7A78A886B7C6BAA7B8B9C8D8A5D9B4C3C5B5A392A4A6D6E7C4D4948483B6967395A1726156ACABBDCC9D9B8DADBBCA7C8E6D8B6B5A8C6CBC9CBEBFE9C9CB",
+    "final_move": "G9"
+  },
+  {
+    "year": "2006",
+    "game_id": "a0314rhl06",
+    "player1": "Filinov",
+    "player2": "Klimashin",
+    "winner": "-",
+    "moves": "8889879698768677A878B8C87597A99AABAABACB8584A595D8C9A6A7C7B67A645446565573454735254466536257",
+    "final_move": "G7"
+  },
+  {
+    "year": "2006",
+    "game_id": "a0316rhl06",
+    "player1": "Kraeva",
+    "player2": "Klimashin",
+    "winner": "-",
+    "moves": "889998877978A7A6B68996B895946757566648494534444635656354536273437674596A42C5848382269A6B5AC4C3B4D6B5D3D5E5A192B3A2A4",
+    "final_move": "G10"
+  },
+  {
+    "year": "2006",
+    "game_id": "a0407rhl06",
+    "player1": "Artemjev",
+    "player2": "Nikonov",
+    "winner": "-",
+    "moves": "8889869A96997978AB978A9B987667779CBAB7C8AAA9B8B57CC6C5A4D793827574C9B9C7CAA266B1",
+    "final_move": "J7"
+  },
+  {
+    "year": "2006",
+    "game_id": "a0409rhl06",
+    "player1": "Kozhin",
+    "player2": "Artemjev",
+    "winner": "-",
+    "moves": "8889869A96997978AB97A79B98B9C9B8B6A6BA9C9DC8D8E7D7A98B8CAAA5C5D4577C6CB7D9D6C7BCACC4D3A88AA4",
+    "final_move": "J7"
+  },
+  {
+    "year": "2006",
+    "game_id": "a0410rhl06",
+    "player1": "Kareev",
+    "player2": "Artemjev",
+    "winner": "+",
+    "moves": "8889869A96997978AB9798B7A9BA8AA7C7686784C8C6A8B8B67787ACBB9BA594746B65765683634564666261528553",
+    "final_move": "J7"
+  },
+  {
+    "year": "2006",
+    "game_id": "a0411rhl06",
+    "player1": "Vershinin",
+    "player2": "Artemjev",
+    "winner": "-",
+    "moves": "8889AA99A8A7977969867A96A6B8C9B5C5857476789887B6",
+    "final_move": "G9"
+  },
+  {
+    "year": "2006",
+    "game_id": "a0412rhl06",
+    "player1": "Artemjev",
+    "player2": "Salnikov",
+    "winner": "+",
+    "moves": "8889AA9979979A8A7BB77A7CA8A78798B67896A6C7C895A55658557548493A595A4A393B6857766684A3A464535493",
+    "final_move": "J8"
+  },
+  {
+    "year": "2006",
+    "game_id": "a0413rhl06",
+    "player1": "Nekrasov",
+    "player2": "Artemjev",
+    "winner": "-",
+    "moves": "8889869A96997978AB9798B87666A98777B7A8AA6859BA9B9CC95746B6A695A48D7E8CC4A7B5D3C6D7C5C75667B4",
+    "final_move": "J7"
+  },
+  {
+    "year": "2006",
+    "game_id": "a0415rhl06",
+    "player1": "Artemjev",
+    "player2": "Salnikova",
+    "winner": "+",
+    "moves": "8889AA999879A9A8BACBB7ABB8BB9BB9CA9A78BCCDDAAD8759587585676686B6C7C6D6E546454A483928383A6B6A5B7B6C7D7C4968773B2C2B4B5C4C7A",
+    "final_move": "G9"
+  },
+  {
+    "year": "2006",
+    "game_id": "a0416rhl06",
+    "player1": "Artemjev",
+    "player2": "Kraeva",
+    "winner": "+",
+    "moves": "8889869A96997978ABA79BA98B7B8AAC6A6756977A6987955465667657",
+    "final_move": "J7"
+  },
+  {
+    "year": "2006",
+    "game_id": "a0504rhl06",
+    "player1": "Artemjev",
+    "player2": "Lysakov",
+    "winner": "+",
+    "moves": "8889AA9979979A8A7BA87AB7C67C58688B695B6B6A4C8C",
+    "final_move": "J8"
+  },
+  {
+    "year": "2006",
+    "game_id": "a0506rhl06",
+    "player1": "Lysakov",
+    "player2": "Karasjov",
+    "winner": "=",
+    "moves": "8889AA999BB9A9A8CAAB8A9A7868BACB97A6B7A7A569DAEA59EBBDAC7A966A79575A67485556778764464737664465638594C6938C7D5B7345753525834B3A38283C",
+    "final_move": "G9"
+  },
+  {
+    "year": "2006",
+    "game_id": "a0507rhl06",
+    "player1": "Lysakov",
+    "player2": "Nikonov",
+    "winner": "+",
+    "moves": "8899A679A9A88A9A86897696988778675968576665743758486A6949554564735342261535",
+    "final_move": "K8"
+  },
+  {
+    "year": "2006",
+    "game_id": "a0509rhl06",
+    "player1": "Lysakov",
+    "player2": "Kozhin",
+    "winner": "+",
+    "moves": "8899A679A9A88A8998876967778658567868756466847476BAB85A7A4B3C5C5B6D3A7C39383D3B4C6A9C6E8E6B498D9E7E8F7D",
+    "final_move": "K8"
+  },
+  {
+    "year": "2006",
+    "game_id": "a0510rhl06",
+    "player1": "Lysakov",
+    "player2": "Kareev",
+    "winner": "+",
+    "moves": "8899A679A9A88A9A8789987678695958B78567B6C8D9C7C9D7A7B8",
+    "final_move": "K8"
+  },
+  {
+    "year": "2006",
+    "game_id": "a0512rhl06",
+    "player1": "Lysakov",
+    "player2": "Salnikov",
+    "winner": "+",
+    "moves": "8889AA999BB9A9A8CAAB8A9A78BAB868C9A7977969B6C5A5A69483C4A4657657465655756647774496865A874B3C387A983727495C6D5B5D7D6C3B6B6E8C292B58",
+    "final_move": "G9"
+  },
+  {
+    "year": "2006",
+    "game_id": "a0514rhl06",
+    "player1": "Filinov",
+    "player2": "Lysakov",
+    "winner": "+",
+    "moves": "8889869A96997978AB97988AA8B8A9AABA87679C766658498C6A7A4847695737595A4B746B947B5B5C",
+    "final_move": "J7"
+  },
+  {
+    "year": "2006",
+    "game_id": "a0604rhl06",
+    "player1": "Karasjov",
+    "player2": "Artemjev",
+    "winner": "-",
+    "moves": "8889869A96997978AB9798B776A6688AA8BA5666AAA9B8C8957785C9B987A774A5B558675755657538475A59C793844433464828646C7B6B7C7D8D4D4A295C82A4272A25264543153519",
+    "final_move": "J7"
+  },
+  {
+    "year": "2006",
+    "game_id": "a0607rhl06",
+    "player1": "Karasjov",
+    "player2": "Nikonov",
+    "winner": "=",
+    "moves": "8889869A96997978AB97988AA8B8A9AABA87679C8C6A7A769585B7A6D7D8C6A4A3C7746545CBDACCCD6C6BCAACDBEA5B4A5C5D4B5A",
+    "final_move": "J7"
+  },
+  {
+    "year": "2006",
+    "game_id": "a0609rhl06",
+    "player1": "Karasjov",
+    "player2": "Kozhin",
+    "winner": "+",
+    "moves": "8889869897A7B6A8A98A7AA6A585B8B799C8D9C7AABBC9B98B69AB9C5984957B5758486677",
+    "final_move": "K7"
+  },
+  {
+    "year": "2006",
+    "game_id": "a0610rhl06",
+    "player1": "Karasjov",
+    "player2": "Kareev",
+    "winner": "+",
+    "moves": "8889869A96997978AB9798B8A976B7BAAAAC8574A7A8B6C6A5",
+    "final_move": "J7"
+  },
+  {
+    "year": "2006",
+    "game_id": "a0611rhl06",
+    "player1": "Karasjov",
+    "player2": "Vershinin",
+    "winner": "+",
+    "moves": "88999689A99A9878ABBA8A766797778657476668A7CAAAA8B99B754864858493749473385845468253",
+    "final_move": "G9"
+  },
+  {
+    "year": "2006",
+    "game_id": "a0612rhl06",
+    "player1": "Karasjov",
+    "player2": "Salnikov",
+    "winner": "+",
+    "moves": "8889869A96997978AB979876BAC9A9CBC8B8A7A8C6B67B8B9567568558775759A4B5B7A6C4B394B4B293745548475B396C4A5D8A7C8C8D6A7E",
+    "final_move": "J7"
+  },
+  {
+    "year": "2006",
+    "game_id": "a0615rhl06",
+    "player1": "Salnikova",
+    "player2": "Karasjov",
+    "winner": "-",
+    "moves": "889998877978A7A6B6896A5B678A6968A8B8C5D4C7A5B4B79594C6C4D6E7B5A4A392C9C8D9B9E6F6BBCAAB9B8C9CAAA96C59586B7B9D9A5C7A9E9F477D7C5A4A3B74DADBBCECFDCBBDBECDDEDDEDEECCE986",
+    "final_move": "G10"
+  },
+  {
+    "year": "2006",
+    "game_id": "a0702rhl06",
+    "player1": "Nikonov",
+    "player2": "Savrasova",
+    "winner": "=",
+    "moves": "8889AA999879A987697767688A7A78A886B7C6B8BACAA6A797B5B696C9D87C9C745646644A496D6C8D7D4B5C6B5A8B9A9EAF5B7B9BACE8B9CBDCBBABBCADAEBECD3B583827D6D7B4C5C3A594B3535547296237286392C7C893B2A4A2C2957275",
+    "final_move": "G9"
+  },
+  {
+    "year": "2006",
+    "game_id": "a0708rhl06",
+    "player1": "Nikonov",
+    "player2": "Kadulin",
+    "winner": "+",
+    "moves": "8889AA999879A9A88ABA69586768577786AB7896C95A65755645748364",
+    "final_move": "G9"
+  },
+  {
+    "year": "2006",
+    "game_id": "a0710rhl06",
+    "player1": "Nikonov",
+    "player2": "Kareev",
+    "winner": "+",
+    "moves": "8889869A96997978AB9798B8A976BACB9C8DACAA8C7CBBBD9D",
+    "final_move": "J7"
+  },
+  {
+    "year": "2006",
+    "game_id": "a0711rhl06",
+    "player1": "Vershinin",
+    "player2": "Nikonov",
+    "winner": "-",
+    "moves": "8889AA999BB9798AA898A9A7B66A6B8B8C9697AB85BC9ABAB89C8DADBECBDACC",
+    "final_move": "G9"
+  },
+  {
+    "year": "2006",
+    "game_id": "a0712rhl06",
+    "player1": "Salnikov",
+    "player2": "Nikonov",
+    "winner": "=",
+    "moves": "8899969A798A6A977B8B7C7A8C599C6CABBAAAA9B9C8987DA7A8C685A5B4C5B6B5D5686758785647575575466484948386A695E8D8EA6676A477B3C2D793D9C7B85BC9DAE9F94ABDDBBC9DAEBB9F8ECBCEFCECFACAFDFB5C5D48454B3A6B4D6D6E7E",
+    "final_move": "H7"
+  },
+  {
+    "year": "2006",
+    "game_id": "a0713rhl06",
+    "player1": "Nikonov",
+    "player2": "Nekrasov",
+    "winner": "+",
+    "moves": "8889AA9979979A7AB99B98A8878B76A97B58698578966A6B59484A",
+    "final_move": "J8"
+  },
+  {
+    "year": "2006",
+    "game_id": "a0715rhl06",
+    "player1": "Salnikova",
+    "player2": "Nikonov",
+    "winner": "-",
+    "moves": "88899679697877668567566564A7867AB676878495A4759753428398",
+    "final_move": "J9"
+  },
+  {
+    "year": "2006",
+    "game_id": "a0716rhl06",
+    "player1": "Kraeva",
+    "player2": "Nikonov",
+    "winner": "-",
+    "moves": "8889AA999ABA796A6898A98B7B8A7A7896A6B7C7C985BCACDACB86A7A577566575769754874332A864534635442333254552",
+    "final_move": "K9"
+  },
+  {
+    "year": "2006",
+    "game_id": "a0801rhl06",
+    "player1": "Kadulin",
+    "player2": "Chingin",
+    "winner": "=",
+    "moves": "8889AA999AA8797A988A7B6A5AC9B9C8C6A6B7D8B8BAABA5A98BA4B569C5D5C7B6B4D678F6E685ADCB49677666657496875755444BBD9DACBE3C8C9BCEAE5C5B394635E4D3C3D2D4C284B395939245E5",
+    "final_move": "G9"
+  },
+  {
+    "year": "2006",
+    "game_id": "a0802rhl06",
+    "player1": "Kadulin",
+    "player2": "Savrasova",
+    "winner": "-",
+    "moves": "8889869A68997978AB6A7A7B8A9B9C8B597757467C76566B5B87977574A9",
+    "final_move": "J7"
+  },
+  {
+    "year": "2006",
+    "game_id": "a0803rhl06",
+    "player1": "Klimashin",
+    "player2": "Kadulin",
+    "winner": "=",
+    "moves": "8889AA999879A9A8BACBAB8A7B9C699BACAD9D7678586A8C8B6C5A7C5C4BB8C767685747B7B9DACA97C9C8958474756656454A3A445363B5A5A493B387778685C4EA",
+    "final_move": "G9"
+  },
+  {
+    "year": "2006",
+    "game_id": "a0804rhl06",
+    "player1": "Kadulin",
+    "player2": "Artemjev",
+    "winner": "-",
+    "moves": "8899A679898A9B6A7B5A9A7869588B6B7CA97A9C49765785756665946747978656B5A4C5A5A3B2A79D7DB6C9D6C6ABBBB8CCC8A8",
+    "final_move": "K9"
+  },
+  {
+    "year": "2006",
+    "game_id": "a0805rhl06",
+    "player1": "Kadulin",
+    "player2": "Lysakov",
+    "winner": "-",
+    "moves": "8889AA9979979A7AB99B98A8BACAB7B86B688D7C6C6A4A9D5B7D7B4BACC996765D4E756766584957392859695A5C291938274756464854DAEBCBCC8B9CABBBAD",
+    "final_move": "K9"
+  },
+  {
+    "year": "2006",
+    "game_id": "a0806rhl06",
+    "player1": "Kadulin",
+    "player2": "Karasjov",
+    "winner": "+",
+    "moves": "8899A69798A8B795B9B6AA9BBACAC8D9A987C7F7C6C5D7E6E8",
+    "final_move": "H6"
+  },
+  {
+    "year": "2006",
+    "game_id": "a0814rhl06",
+    "player1": "Kadulin",
+    "player2": "Filinov",
+    "winner": "+",
+    "moves": "8899A679A889A9A7987876876967B8C89AC797B9AA8A57C6C9AC9BA58B7C7BAB6A",
+    "final_move": "K9"
+  },
+  {
+    "year": "2006",
+    "game_id": "a0816rhl06",
+    "player1": "Kraeva",
+    "player2": "Kadulin",
+    "winner": "-",
+    "moves": "8889AA99A9A88A7A98BA696886769BABC98CBC5867595A7B6A7C7D5C6C6B4D4B",
+    "final_move": "G9"
+  },
+  {
+    "year": "2006",
+    "game_id": "a0907rhl06",
+    "player1": "Kozhin",
+    "player2": "Nikonov",
+    "winner": "+",
+    "moves": "8889AA999AA8797A8A9BA79786B8C8BAB99CAB9E7CA98BCBDC6D6B5B685787ADBC4A5A496C789577B5C5A4",
+    "final_move": "G9"
+  },
+  {
+    "year": "2006",
+    "game_id": "a0908rhl06",
+    "player1": "Kadulin",
+    "player2": "Kozhin",
+    "winner": "+",
+    "moves": "888998977778A98769AA9A8B5857494759394A683A",
+    "final_move": "G6"
+  },
+  {
+    "year": "2006",
+    "game_id": "a0910rhl06",
+    "player1": "Kareev",
+    "player2": "Kozhin",
+    "winner": "-",
+    "moves": "88899897AAA8B99BBACBABC9B7B8DACAC8A6CCBBACADA5B6867785876776756584544393635355748382C6D76958464738376B5A6A685B794B7B",
+    "final_move": "K9"
+  },
+  {
+    "year": "2006",
+    "game_id": "a0911rhl06",
+    "player1": "Vershinin",
+    "player2": "Kozhin",
+    "winner": "-",
+    "moves": "8889AA99A8A797796986B998B67A6B78779AABA9B8BACADB8767569B9C8A",
+    "final_move": "G9"
+  },
+  {
+    "year": "2006",
+    "game_id": "a0912rhl06",
+    "player1": "Salnikov",
+    "player2": "Kozhin",
+    "winner": "-",
+    "moves": "888998977778A9AA9A87698B8666C7C8B6B8A696A5D8A7A8E8A4C5D4B5D5D7D6C6F9C4C3D3E26758739574755747466894839B9CACADBEBDBBCAEAE9CBABBADC9D5B4B5A5C4A5537386C8E7F396A3A8A",
+    "final_move": "G6"
+  },
+  {
+    "year": "2006",
+    "game_id": "a0913rhl06",
+    "player1": "Nekrasov",
+    "player2": "Kozhin",
+    "winner": "-",
+    "moves": "88898A9A787999A85A586B69497C7A4A5D6CAABB5B5C8C8BA9AB9BBCCDB9BDDBCEACCADCCCCBEBDA",
+    "final_move": "J9"
+  },
+  {
+    "year": "2006",
+    "game_id": "a0915rhl06",
+    "player1": "Salnikova",
+    "player2": "Kozhin",
+    "winner": "-",
+    "moves": "88899AAAA998B8C77A8BA7969779A5A68675778769688A554565579585C884B9D7CACBBBD9CC99BA",
+    "final_move": "G9"
+  },
+  {
+    "year": "2006",
+    "game_id": "a0916rhl06",
+    "player1": "Kraeva",
+    "player2": "Kozhin",
+    "winner": "-",
+    "moves": "88898A9A99A8AB9BC9BAB8A7A697B9B6D9A9987787DACABB768584956554A5968657586778683746356A69637445",
+    "final_move": "G8"
+  },
+  {
+    "year": "2006",
+    "game_id": "a1001rhl06",
+    "player1": "Kareev",
+    "player2": "Chingin",
+    "winner": "-",
+    "moves": "8889AA999ABAB9A87B8C6B8B8D5A6A7969686D6C7D5D7C7AC8D7A75746595877866787662878",
+    "final_move": "G9"
+  },
+  {
+    "year": "2006",
+    "game_id": "a1002rhl06",
+    "player1": "Savrasova",
+    "player2": "Kareev",
+    "winner": "+",
+    "moves": "88899AAA9779A9B87798A78786A8665595A4769675",
+    "final_move": "G9"
+  },
+  {
+    "year": "2006",
+    "game_id": "a1003rhl06",
+    "player1": "Kareev",
+    "player2": "Klimashin",
+    "winner": "+",
+    "moves": "8889AA999879A9A8BACBAB8A7B9B687869ACBD6756767786BCBBCADA85B7C6B8CD9A9DADD8C9A7A5B6A66655596A5A",
+    "final_move": "K9"
+  },
+  {
+    "year": "2006",
+    "game_id": "a1008rhl06",
+    "player1": "Kadulin",
+    "player2": "Kareev",
+    "winner": "-",
+    "moves": "8889A9786787697A77666B6A5A49AAA8BA99B79AAB989B9697A7B6B8C9A5B4A4",
+    "final_move": "J10"
+  },
+  {
+    "year": "2006",
+    "game_id": "a1013rhl06",
+    "player1": "Nekrasov",
+    "player2": "Kareev",
+    "winner": "-",
+    "moves": "88998689A9A88A7A98876968B6C7C6A6A495849493B58583466664555342444535265754595A49394A486B24277263A56152",
+    "final_move": "G9"
+  },
+  {
+    "year": "2006",
+    "game_id": "a1015rhl06",
+    "player1": "Salnikova",
+    "player2": "Kareev",
+    "winner": "-",
+    "moves": "88997789A99A9878AB8769A87B6A9C8D584956554868364754454666595A6B8B7C7D8CAC6C5C5D4E2A282616383565B7C6CABBCBDACCCDB9DBB8",
+    "final_move": "G9"
+  },
+  {
+    "year": "2006",
+    "game_id": "a1101rhl06",
+    "player1": "Vershinin",
+    "player2": "Chingin",
+    "winner": "=",
+    "moves": "8889AA999BB9798AA89897A6A7B7B8AB9A96A98B957A697B5C8D8C7D6C7C7E6D5D5A6A5B6B6875857677576465",
+    "final_move": "G9"
+  },
+  {
+    "year": "2006",
+    "game_id": "a1102rhl06",
+    "player1": "Vershinin",
+    "player2": "Savrasova",
+    "winner": "-",
+    "moves": "8889AA9979979A8A7BA87A7C58B7C6877877A7688B696A6B5957678C493AB8C9A9C7868595CACBBA9CD8E7D9DBBBADBEACAB9EDABC8F9B9DC8FBEBEA",
+    "final_move": "G10"
+  },
+  {
+    "year": "2006",
+    "game_id": "a1103rhl06",
+    "player1": "Vershinin",
+    "player2": "Klimashin",
+    "winner": "-",
+    "moves": "8889AA999BB9798AA898A9A7B66A7A7B8C6C5D7D5B679A6968969585B86B6DC7775976785A74635645473883658486A49493B53748572775",
+    "final_move": "G9"
+  },
+  {
+    "year": "2006",
+    "game_id": "a1105rhl06",
+    "player1": "Vershinin",
+    "player2": "Lysakov",
+    "winner": "+",
+    "moves": "8889AA999BB9798AA89897A6A78776ABC9B8787758BABBA9CBC7D67A6A5B8B6B5C67CCCA9CAD486859574737494A396929193A187C",
+    "final_move": "G9"
+  },
+  {
+    "year": "2006",
+    "game_id": "a1108rhl06",
+    "player1": "Kadulin",
+    "player2": "Vershinin",
+    "winner": "+",
+    "moves": "88997789A99A9878AB8769A87B6A9C8D8A9B598656574797B97564856574488483669338464936",
+    "final_move": "G9"
+  },
+  {
+    "year": "2006",
+    "game_id": "a1011rhl06",
+    "player1": "Vershinin",
+    "player2": "Kareev",
+    "winner": "+",
+    "moves": "8889AA999BB9796AA9A88AAC78687A7B87BA69",
+    "final_move": "G9"
+  },
+  {
+    "year": "2006",
+    "game_id": "a1113rhl06",
+    "player1": "Nekrasov",
+    "player2": "Vershinin",
+    "winner": "-",
+    "moves": "8889AA9979979A7AB99B98A8B78B6B9CAD675868667757ABBBA7",
+    "final_move": "J8"
+  },
+  {
+    "year": "2006",
+    "game_id": "a1114rhl06",
+    "player1": "Filinov",
+    "player2": "Vershinin",
+    "winner": "-",
+    "moves": "8899A78796B8A6B694B7B9A8C6A4987995978A936667898B775558575464467586767345656B7C6A5968697D5B9C47364A39ABADBE9D8DD69ABCAABAC89BCBB4B5E7",
+    "final_move": "J8"
+  },
+  {
+    "year": "2006",
+    "game_id": "a1202rhl06",
+    "player1": "Salnikov",
+    "player2": "Savrasova",
+    "winner": "=",
+    "moves": "8889869A96997978AB97988AA8B8A9AABA87679C8C666A7B5B4C4A6C5D5A6949386B8D854737583656655557284839175C6D845443B7",
+    "final_move": "J7"
+  },
+  {
+    "year": "2006",
+    "game_id": "a1203rhl06",
+    "player1": "Klimashin",
+    "player2": "Salnikov",
+    "winner": "=",
+    "moves": "88878A767A7797986579867578674758494874382857395956836A5A5B8466A9BA6C8BB6A59C8C89997BA7B9B7C7B58594A6D6",
+    "final_move": "G9"
+  },
+  {
+    "year": "2006",
+    "game_id": "a1208rhl06",
+    "player1": "Kadulin",
+    "player2": "Salnikov",
+    "winner": "+",
+    "moves": "888998977778A9AABACB9A87698B59685758483999",
+    "final_move": "G6"
+  },
+  {
+    "year": "2006",
+    "game_id": "a1210rhl06",
+    "player1": "Salnikov",
+    "player2": "Kareev",
+    "winner": "+",
+    "moves": "8889869A96997978AB9798B8A987A7A88A6756686676585777CAB9ACBBCBC9B647366A4A7B596C698C3B2C9B9DAE7D",
+    "final_move": "J7"
+  },
+  {
+    "year": "2006",
+    "game_id": "a1211rhl06",
+    "player1": "Vershinin",
+    "player2": "Salnikov",
+    "winner": "-",
+    "moves": "88999887A6A8B795B9B5C5A5B6A7967585C677679B686649AAC86AB8D8798C7D7B59898B9C9DBCAC9AAB58CABBA4",
+    "final_move": "K7"
+  },
+  {
+    "year": "2006",
+    "game_id": "a1213rhl06",
+    "player1": "Nekrasov",
+    "player2": "Salnikov",
+    "winner": "+",
+    "moves": "88899897AAA8B99BB7BBCBA9C8C7D9EADA",
+    "final_move": "K9"
+  },
+  {
+    "year": "2006",
+    "game_id": "a1215rhl06",
+    "player1": "Salnikov",
+    "player2": "Salnikova",
+    "winner": "-",
+    "moves": "8889AA999ABAA9B8B7A796ABB6C9D8BBCB8B9C8DB99D",
+    "final_move": "G9"
+  },
+  {
+    "year": "2006",
+    "game_id": "a1216rhl06",
+    "player1": "Kraeva",
+    "player2": "Salnikov",
+    "winner": "=",
+    "moves": "88998789A998A7A8B7979A86759596A4B3B86869485979585A566657557A474567648B7CC3A3D8D7C6A5A2844477948C6CACCAAA7DBC9CBBBAABAECBDBBD5B4ABE8E9D6B5CCCDD9EADCFCEDCECE9EADAF8FD",
+    "final_move": "G9"
+  },
+  {
+    "year": "2006",
+    "game_id": "a1301rhl06",
+    "player1": "Nekrasov",
+    "player2": "Chingin",
+    "winner": "-",
+    "moves": "8889AA999879A9A8BACBB79AB8BB9BB9CAAB78BCCDDAAD87595895A69496A5B68675C5B5D6A4E7F8E9C79383A3B4B285D3C38C7DEBBE6CBDBF7C7B6A5D4E49689291667463655544434756465754346945676B36",
+    "final_move": "G9"
+  },
+  {
+    "year": "2006",
+    "game_id": "a1302rhl06",
+    "player1": "Nekrasov",
+    "player2": "Savrasova",
+    "winner": "-",
+    "moves": "8889AA999879A9A88ABA6958676857767548387786845A787A4A496B2716374739363B3A5D4C8C9B9C8B7B6CBBBCCAAB9A9DC75B3D6D6E5C29597C4D",
+    "final_move": "G9"
+  },
+  {
+    "year": "2006",
+    "game_id": "a1303rhl06",
+    "player1": "Nekrasov",
+    "player2": "Klimashin",
+    "winner": "+",
+    "moves": "8899A6979886B9B7A8B8A7A98B8969787A589A7BAA8AC89BC6E6C7C5D8",
+    "final_move": "H6"
+  },
+  {
+    "year": "2006",
+    "game_id": "a1305rhl06",
+    "player1": "Lysakov",
+    "player2": "Nekrasov",
+    "winner": "=",
+    "moves": "8889AA9979979A7AB99B98A8BACABBB8CBDCC9BCD8E7B7D9A58587A996B476866554666475748457C5B6A4A295A69CAB697856464455B5D537B3C4D6E6C7E593736B7B493836",
+    "final_move": "J10"
+  },
+  {
+    "year": "2006",
+    "game_id": "a1306rhl06",
+    "player1": "Nekrasov",
+    "player2": "Karasjov",
+    "winner": "-",
+    "moves": "8889AA999887A8B8B997C89BD9B7A7A9DADB9AD779786AB5C6C7B4A5",
+    "final_move": "G9"
+  },
+  {
+    "year": "2006",
+    "game_id": "a1308rhl06",
+    "player1": "Nekrasov",
+    "player2": "Kadulin",
+    "winner": "-",
+    "moves": "8889AA999879A9A88ABA6958676857778675769646563747486574593B5B5A7C4B3C55644C38292A4A496D7D7A6A9CAD7B4DB9C8D8849593A2A4B4C6B5A6B7B6D6C7",
+    "final_move": "G9"
+  },
+  {
+    "year": "2006",
+    "game_id": "a1314rhl06",
+    "player1": "Nekrasov",
+    "player2": "Filinov",
+    "winner": "+",
+    "moves": "8889AA999879A98778A88A9A9BACB9C8598C5A584A6A3B2C4B9CBC6C7C6968775B7A8B2B6B47366757493A5C3C392D1E5D",
+    "final_move": "G9"
+  },
+  {
+    "year": "2006",
+    "game_id": "a1404rhl06",
+    "player1": "Artemjev",
+    "player2": "Filinov",
+    "winner": "+",
+    "moves": "8889A9786777799668A7696A57464975587674",
+    "final_move": "J10"
+  },
+  {
+    "year": "2006",
+    "game_id": "a1406rhl06",
+    "player1": "Karasjov",
+    "player2": "Filinov",
+    "winner": "=",
+    "moves": "8889A9789879779A6787669969688A9CAB7A7B469685A8AA95A6577548594B4A3B3A5A6B5D4C5C5B6C4EBB9B9DB9C8B88C3D6AAEA4869497846453B47344455434436556B6C79392836362",
+    "final_move": "J10"
+  },
+  {
+    "year": "2006",
+    "game_id": "a1407rhl06",
+    "player1": "Nikonov",
+    "player2": "Filinov",
+    "winner": "+",
+    "moves": "88997689A98797A6675864597966758677",
+    "final_move": "G9"
+  },
+  {
+    "year": "2006",
+    "game_id": "a1409rhl06",
+    "player1": "Filinov",
+    "player2": "Kozhin",
+    "winner": "-",
+    "moves": "8889AA999879A98769A88A9A6758ABAC5A6A7B6B6C5DCA4D3D5E4B3C2B6D8D9CBCB7C6A5C8C7BAA7",
+    "final_move": "G9"
+  },
+  {
+    "year": "2006",
+    "game_id": "a1410rhl06",
+    "player1": "Filinov",
+    "player2": "Kareev",
+    "winner": "-",
+    "moves": "8889AA9998A879978AB9CA9AA968BACB8676ABAC676B5A4A4B9C693C598C7C7B9B57B78448394645543B3A4D586C5B5C7A3E2F3F3D5D",
+    "final_move": "G9"
+  },
+  {
+    "year": "2006",
+    "game_id": "a1412rhl06",
+    "player1": "Salnikov",
+    "player2": "Filinov",
+    "winner": "+",
+    "moves": "88899698879979A77A789AA6A86AB667B9C8A5948675B5B4D595B7B8C6E4C4",
+    "final_move": "K7"
+  },
+  {
+    "year": "2006",
+    "game_id": "a1415rhl06",
+    "player1": "Salnikova",
+    "player2": "Filinov",
+    "winner": "-",
+    "moves": "8889967969877667778666559AAAA9B87C587574845756466837284927484A59263A2B25",
+    "final_move": "J9"
+  },
+  {
+    "year": "2006",
+    "game_id": "a1501rhl06",
+    "player1": "Chingin",
+    "player2": "Salnikova",
+    "winner": "+",
+    "moves": "8889869997A8B7A7A9A6A5B698877574687966859659696758785676949555546453774446",
+    "final_move": "G9"
+  },
+  {
+    "year": "2006",
+    "game_id": "a1502rhl06",
+    "player1": "Salnikova",
+    "player2": "Savrasova",
+    "winner": "-",
+    "moves": "8889869A96997978AB979876678AA8C8A9AABACBC99C8C6A7AA565747555B6C6A7B8C5D4B4A3B3B5A495666884938587C494E69291D8D7CCF7D5DDBD9DDBEACECAAC9BBCDCDA",
+    "final_move": "J7"
+  },
+  {
+    "year": "2006",
+    "game_id": "a1503rhl06",
+    "player1": "Salnikova",
+    "player2": "Klimashin",
+    "winner": "-",
+    "moves": "8889869A96997978AB9798A9B8A776A6A8C8B79BB9BAAA7C8B5A6B5C5666696C8C5D5B7B8A4C3C4B",
+    "final_move": "J7"
+  },
+  {
+    "year": "2006",
+    "game_id": "a1505rhl06",
+    "player1": "Lysakov",
+    "player2": "Salnikova",
+    "winner": "+",
+    "moves": "8889869997A879A68A9B77A7A97A9887685978587576574666",
+    "final_move": "G9"
+  },
+  {
+    "year": "2006",
+    "game_id": "a1508rhl06",
+    "player1": "Salnikova",
+    "player2": "Kadulin",
+    "winner": "-",
+    "moves": "8889869A96997978AB9798B776A66856678AA8BAAAA9B8C89577C98565666A5A49585746696B8C7B5B4C39596C7D7CAC36DAD9C4B4BCCBC6C5A3A7A5A4B3C354373844CCDC9C9BBBBD4D4A285D4729B6E6638394E9E8D8D5D37452A2918272AD8E423433F9B94325265184BE8B5E5CB2C15564E2C217151A184B4EEEDECAEAECDBDD",
+    "final_move": "J7"
+  },
+  {
+    "year": "2006",
+    "game_id": "a1511rhl06",
+    "player1": "Vershinin",
+    "player2": "Salnikova",
+    "winner": "+",
+    "moves": "88898699A9A88A7A98876968A6B7C6C7B597A7A45766CABA5674ACBBB9CCAA9BB696E6D6D7C8E5",
+    "final_move": "G9"
+  },
+  {
+    "year": "2006",
+    "game_id": "a1513rhl06",
+    "player1": "Salnikova",
+    "player2": "Nekrasov",
+    "winner": "-",
+    "moves": "8889AA9979979A7AB99B98A88AB7C7CAC6C5A5B6B48777CBCCADBCBBAB6B5A9DAC9CCDDEBEAF7D6C",
+    "final_move": "J8"
+  },
+  {
+    "year": "2006",
+    "game_id": "a1605rhl06",
+    "player1": "Lysakov",
+    "player2": "Kraeva",
+    "winner": "+",
+    "moves": "8889AA999BB9A9A8CAACBADACBDCC9C88B",
+    "final_move": "G9"
+  },
+  {
+    "year": "2006",
+    "game_id": "a1606rhl06",
+    "player1": "Kraeva",
+    "player2": "Karasjov",
+    "winner": "-",
+    "moves": "8899A6979886B9B787A88A89697876A9A7A4B59565547794849396B3C2A383D5C6C4",
+    "final_move": "H6"
+  },
+  {
+    "year": "2006",
+    "game_id": "a1610rhl06",
+    "player1": "Kraeva",
+    "player2": "Kareev",
+    "winner": "-",
+    "moves": "8899A679A9A88A9A8689769698877875B795655859B5A547576936689CCBBBCAC9DABCDBB9BAAAFAEADC",
+    "final_move": "K8"
+  },
+  {
+    "year": "2006",
+    "game_id": "a1611rhl06",
+    "player1": "Vershinin",
+    "player2": "Kraeva",
+    "winner": "+",
+    "moves": "88997689A99796869887A8B86758A7A67475856364546878596947563757554666656A485B4A4C797B5D8C9D7C7D6C5C9CACABAA8D7E6D5A4B8B2B1BB5A4C5B6A595A394B4D6BAC9CBDCBB9BC3D2B3D3B2",
+    "final_move": "G9"
+  },
+  {
+    "year": "2006",
+    "game_id": "a1613rhl06",
+    "player1": "Nekrasov",
+    "player2": "Kraeva",
+    "winner": "+",
+    "moves": "8899A6979886B9B7A8B8A7A98B7A9B687B6B8CAA9D",
+    "final_move": "H6"
+  },
+  {
+    "year": "2006",
+    "game_id": "a1614rhl06",
+    "player1": "Kraeva",
+    "player2": "Filinov",
+    "winner": "+",
+    "moves": "888996987A7969A999AA8778ABBA58CBDC477B8B8A6CA777B885B7A8B6B5D87576A595A656C497C7575966865455654363",
+    "final_move": "K7"
+  },
+  {
+    "year": "2006",
+    "game_id": "a1615rhl06",
+    "player1": "Salnikova",
+    "player2": "Kraeva",
+    "winner": "+",
+    "moves": "88997689A9979887A8B8A7A656666758474565743929594A68786957ABAA9C8C9B8D6B6A8B7B9D9A7949AC8A7AADBB",
+    "final_move": "G9"
+  }
+]

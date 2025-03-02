@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- CSS only -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
+      crossorigin="anonymous"
+    />
+    <title>Document</title>
+  </head>
+  <body>
+    <style>
+      .grid {
+        width: 30px;
+        height: 30px;
+        border: 1px solid;
+        flex-shrink: 0;
+      }
+      .row {
+        display: flex;
+      }
+      .grid.player {
+        background-color: red;
+      }
+      .grid.AI {
+        background-color: blue;
+      }
+    </style>
+    <div id="app">
+      <div class="container">
+        <div class="row" v-for="(items, itemsIndex)  in board">
+          <div
+            class="col grid"
+            v-for="(item, itemIndex) in items"
+            :class="isFill(item)"
+            @click="play([itemsIndex, itemIndex])"
+          >{{ itemIndex  }}, {{itemsIndex }}</div>
+        </div>
+        <div class="spinner-border m-5" role="status" v-if="loading">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    </div>
+    <!-- JavaScript Bundle with Popper -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ"
+      crossorigin="anonymous"
+    ></script>
+    <script src="../vue.js"></script>
+    <script src="https://unpkg.com/ml5@1/dist/ml5.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script>
+      let model = null;
+      const app = Vue.createApp({
+        data() {
+          return {
+            board: new Array(15).fill(0).map((item) => new Array(15).fill(0)),
+            loading: false,
+          };
+        },
+        methods: {
+          async play(position) {
+            if (this.loading) return;
+            const [x, y] = position;
+            
+            this.board[x][y] = 1;
+            this.currentPlayer = "AI";
+            this.loading = true;
+            await this.AIPlayer();
+            this.loading = false;
+          },
+          async AIPlayer() {
+            const inputTensor = tf.tensor(this.board).reshape([1, 15, 15, 1]);
+            // 預測結果
+            const result = await model.predict(inputTensor); // 在這裡出錯
+            const resultArray = await result.dataSync(); // 獲得預測結果數據
+            const newResultArray = this.filterRepeatPos(resultArray)
+            
+            const maxIndex = newResultArray.indexOf(Math.max(...resultArray)); // 找出機率最高的位置
+            // console.log('newResultArray',newResultArray);
+            // console.log('maxIndex',maxIndex);
+            const x = Math.floor(maxIndex / 14); // 將索引轉換為棋盤的行
+            const y = maxIndex % 14; // 將索引轉換為棋盤的列
+            this.board[x][y] = -1;
+          },
+          filterRepeatPos(resultArray) {
+            for (let i = 0; i < 196; i++) {
+              const x = Math.floor(i / 14);
+              const y = i % 14;
+              if (this.board[x][y] !== 0) {
+                resultArray[i] = -Infinity; // 避免選擇已經有棋子的地方
+              }
+            }
+            return resultArray;
+          },
+          isFill(type) {
+            if (type === 1) return "player";
+            else if (type === -1) return "AI";
+          },
+        },
+        async mounted() {
+          this.loading = true;
+          await tf.ready();
+          // 加載模型
+          model = await tf.loadLayersModel("./chess_model.json");
+          this.loading = false;
+        },
+      }).mount("#app");
+    </script>
+  </body>
+</html>
